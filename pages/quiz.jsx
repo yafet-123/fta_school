@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { quiz } from './data.js';
+import { quiz } from '../data/data.js';
 
 const Quiz = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
