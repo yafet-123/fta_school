@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 const DynamicHandsontable = dynamic(() => import('handsontable'), { ssr: false });
 
 async function generateExcel() {
-  const buffer = await /* Your generateExcel logic here */;
+  const buffer = await workbook.xlsx.writeBuffer();/* Your generateExcel logic here */;
   return Handsontable.utils.json.parse(buffer.toString());
 }
 
