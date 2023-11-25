@@ -17,7 +17,7 @@ import {
 import { ImLocation } from 'react-icons/im';
 import { MdEmail } from 'react-icons/md';
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   const socialMediaLinks = [
     {
       icon: <FaFacebook size={30} color="white" />,
