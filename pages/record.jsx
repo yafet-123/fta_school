@@ -1,29 +1,21 @@
 import { MainHeader } from "../components/common/MainHeader";
 import React, { useEffect } from 'react';
-import ExcelJS from 'exceljs';
-import Handsontable from 'handsontable';
+import dynamic from 'next/dynamic';
+
+// Import Handsontable dynamically to ensure it's only loaded on the client side
+const DynamicHandsontable = dynamic(() => import('handsontable'), { ssr: false });
 
 async function generateExcel() {
-  const workbook = new ExcelJS.Workbook();
-  const sheet = workbook.addWorksheet('Sheet 1');
-
-  sheet.addRow(['Name', 'Age']);
-  sheet.addRow(['John Doe', 30]);
-  sheet.addRow(['Jane Smith', 25]);
-
-  return workbook.xlsx.writeBuffer();
+  const buffer = await /* Your generateExcel logic here */;
+  return Handsontable.utils.json.parse(buffer.toString());
 }
 
 export default function Record() {
   useEffect(() => {
-    const container = document.getElementById('excel-container');
-
-    generateExcel().then(buffer => {
-      // Convert Excel buffer to Handsontable data
-      const data = Handsontable.utils.json.parse(buffer.toString());
-
-      // Create Handsontable instance
-      const hot = new Handsontable(container, {
+    generateExcel().then(data => {
+      // Create Handsontable instance only on the client side
+      const container = document.getElementById('excel-container');
+      const hot = new DynamicHandsontable(container, {
         data,
         rowHeaders: true,
         colHeaders: ['Name', 'Age'],
@@ -31,7 +23,6 @@ export default function Record() {
         licenseKey: 'non-commercial-and-evaluation', // Add your commercial license key if applicable
       });
     });
-
   }, []); 
 
   return (
