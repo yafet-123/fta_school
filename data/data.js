@@ -25,12 +25,7 @@ export const quiz = {
         answers: ['English', 'Mandarin', 'Spanish', 'Hindi'],
         correctAnswer: 'Mandarin',
       },
-      {
-        id: 5,
-        question: 'Who is the founder of Microsoft?',
-        answers: ['Steve Jobs', 'Bill Gates', 'Elon Musk', 'Mark Zuckerberg'],
-        correctAnswer: 'Bill Gates',
-      },
+      
     ],
   };
   
