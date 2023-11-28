@@ -10,17 +10,17 @@ const Quiz = () => {
     {
       id:1,
       name:"HTML",
-      background_color:"#E95F21",
+      background_color:"bg-[#E95F21]",
     },
     {
       id:2,
       name:"CSS",
-      background_color:"#2862E9",
+      background_color:"bg-[#2862E9]",
     },
     {
       id:3,
       name:"Javascript",
-      background_color:"#EFD81D",
+      background_color:"bg-[#EFD81D]",
     },
 
   ]
@@ -30,7 +30,7 @@ const Quiz = () => {
         {QuizType.map((data,index)=>(
           <button 
             onClick={() => handleSeeQuiz(data.id)} 
-            className={`bg-[${data.background_color}] px-5 py-16 text-white font-bold text-xl lg:text-3xl rounded-lg`}
+            className={`${data.background_color} px-5 py-16 text-white font-bold text-xl lg:text-3xl rounded-lg`}
           >
             {data.name}
           </button>
