@@ -1,5 +1,5 @@
-export const quiz = {
-    totalQuestions: 5, 
+export const html = {
+    totalQuestions: 7, 
     questions: [
       {
         id: 1,
@@ -49,4 +49,11 @@ export const quiz = {
       },
     ],
   };
-  
+
+export function getAllTours() {
+  return html;
+}
+
+export function getTourById(id) {
+  return html.filter((quiz) => quiz.id === id);
+}

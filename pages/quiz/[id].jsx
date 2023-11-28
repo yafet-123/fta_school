@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
-import { quiz } from '../data/data.js';
+import { html } from '../../data/data.js';
+import { useRouter } from 'next/router';
 
 const Quiz = () => {
+  const router = useRouter();
+  const id = router.query.id;
+  let quiz;
+  if(id == 1){
+    quiz = html
+  }else if(id == 2){
+    quiz = html
+  }else{
+    quiz = html
+  }
+  console.log(router.query.id)
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [checked, setChecked] = useState(false);
@@ -12,7 +24,7 @@ const Quiz = () => {
     correctAnswers: 0,
     wrongAnswers: 0,
   });
-
+  console.log(html)
   const { questions } = quiz;
   const { question, answers, correctAnswer } = questions[activeQuestion];
 
