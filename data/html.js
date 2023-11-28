@@ -49,11 +49,3 @@ export const html = {
       },
     ],
   };
-
-export function getAllTours() {
-  return html;
-}
-
-export function getTourById(id) {
-  return html.filter((quiz) => quiz.id === id);
-}

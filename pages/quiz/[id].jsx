@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { html } from '../../data/data.js';
+import { html } from '../../data/html.js';
+import { css } from '../../data/css.js';
 import { useRouter } from 'next/router';
 
 const Quiz = () => {
@@ -9,7 +10,7 @@ const Quiz = () => {
   if(id == 1){
     quiz = html
   }else if(id == 2){
-    quiz = html
+    quiz = css
   }else{
     quiz = html
   }
@@ -66,15 +67,15 @@ const Quiz = () => {
   };
 
   return (
-    <div className='bg-[#E6E6E6] px-32 h-screen'>
-      <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-24">Quiz Page</h1>
-      <div className="px-20">
+    <div className='bg-[#E6E6E6] px-2 lg:px-32 h-full py-10'>
+      <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-24 mb-5">Quiz Page</h1>
+      <div className="lg:px-20">
         <h2 className={`font-bold text-[#00225F] text-lg md:text-xl ${!showResult ? "flex" : "hidden"}`}>
           Question: {activeQuestion + 1}
           <span>/{questions.length}</span>
         </h2>
       </div>
-      <div className="px-20">
+      <div className="lg:px-20">
         {!showResult ? (
           <div className='bg-[#f8f8f8] p-[1rem] mt-[1rem] rounded-xl'>
             <h3 className={` font-bold text-[#00225F] text-xl md:text-2xl mb-5 `}>
@@ -124,6 +125,19 @@ const Quiz = () => {
                 Wrong Answers: <span>{result.wrongAnswers}</span>
               </p>
             </div>
+
+            <div className="flex flex-col font-bold text-lg md:text-xl mb-5">
+              <h3 className="text-center font-bold text-[#00225F] text-2xl md:text-4xl mb-5">
+                Answers
+              </h3>
+              {questions.map((data,index)=>(
+                <h1 className="flex flex-col lg:flex-row justify-between lg:items-center border-b-2">
+                  <span className="text-center text-[#1A3E58]">Question: {data.id}</span>
+                  <span className="text-left">{data.correctAnswer}</span>
+                </h1>
+              ))}
+            </div>
+
             <div className="flex justify-center items-center w-full">
               <button 
                 className="font-bold text-xl lg:text-2xl text-center bg-[#00225F] text-white p-4 rounded-lg"
