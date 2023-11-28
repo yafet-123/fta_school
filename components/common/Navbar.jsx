@@ -15,7 +15,7 @@ export const Navbar = () => {
   const NavLinks = [
     { path: "/", name: "Home" },
     { path: "/quiz", name: "Quiz" },
-    { path: "/record", name: "Record" },
+    // { path: "/record", name: "Record" },
   ];
 
   useEffect(() => {

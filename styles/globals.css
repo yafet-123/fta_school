@@ -2,3 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+.home-1{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url('../public/heroImge1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.home-2{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url('../public/heroImge1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.home-3{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url('../public/heroImge1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.home-4{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url('../public/heroImge1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.home-5{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url('../public/heroImge1.jpg');
+  background-position: center;
+  background-size: cover;
+}

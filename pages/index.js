@@ -1,6 +1,16 @@
 import { MainHeader } from "../components/common/MainHeader";
-import { useRouter } from 'next/router';
-
+import CommonHeroSection from '../components/home/CommonHeroSection.jsx';
+// import PopularDestination from '../components/home/popularDestination';
+// import OurServices from '../components/home/OurServices';
+// import FeaturedTours from "../components/home/FeaturedTours1"
+// import Testimonials from "../components/home/Testimonials"
+// import PhotographyFocus from "../components/home/PhotographyFocus"
+// import WhyChooseUs from "../components/home/WhyChooseUs"
+// import ExploringUniqueDestinations from "../components/home/ExploringUniqueDestinations"
+import ContactInformation from "../components/home/ContactInformation"
+// import CapturingtheExtraordinary from "../components/home/CapturingtheExtraordinary"
+// import CommunityServiceatOurCore from "../components/home/CommunityServiceatOurCore"
+import {useRouter} from 'next/router'
 export default function Home() {
   const router = useRouter();
   const handleQuiz = () => {
@@ -9,15 +19,12 @@ export default function Home() {
   return (
     <div className="">
       <MainHeader title="Undiscovered: Discover Ethiopia's Hidden Treasures with Undiscovered Ethiopia Tours." />
-      <div className="flex flex-col justify-center items-center min-h-screen">
-        <div>
-          <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl my-5">Quiz</h1>
-          <button onClick={() => handleQuiz()}>
-            <h5 className={`font-bold font-monospace hover:border-black text-xl mt-1 w-40 items-center justify-center hover:scale-105 transition duration-400 p-2 text-white bg-gradient-to-r from-red-500 to-blue-500`}>
-              Start Quiz
-            </h5>
-          </button>
-        </div>
+      <div className="flex flex-col">
+        <CommonHeroSection  
+          Tag="Empowering minds and shaping futures at Future Talent Academy - where excellence meets opportunity."
+          Welcome_Message="At Future Talent Academy, we take pride in fostering an environment where every student is empowered to unleash their potential. Our commitment lies in the holistic development of young minds, providing a dynamic platform where academic excellence meets individualized opportunities."
+        />
+        <ContactInformation />
       </div>
     </div>
   );
