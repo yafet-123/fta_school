@@ -53,8 +53,8 @@ export const Footer = () => {
                 src={logo}
                 className=""
                 alt="Logo"
-                width={200}
-                height={200}
+                width={50}
+                height={50}
               />
             </Link>
           </div>
@@ -79,19 +79,10 @@ export const Footer = () => {
           <Link
             target="_blank"
             className="flex flex-row items-center gap-2 hover:text-gray-300"
-            href={`tel:${+251910140042}`}
+            href={`tel:${+251777940161}`}
           >
             <span className="flex items-center">
-              <FaPhone /> <p className="ml-2 md:ml-3 cursor-pointer">+251910140042</p>
-            </span>
-          </Link>
-          <Link
-            target="_blank"
-            className="flex flex-row items-center gap-2 hover:text-gray-300"
-            href={`tel:${+251938177562}`}
-          >
-            <span className="flex items-center">
-              <FaPhone /> <p className="ml-2 md:ml-3 cursor-pointer">+251938177562</p>
+              <FaPhone /> <p className="ml-2 md:ml-3 cursor-pointer">+251777940161</p>
             </span>
           </Link>
           <div>
@@ -101,7 +92,7 @@ export const Footer = () => {
               href="mailto:info@undiscoveredethiopia.com"
             >
               <span className="flex items-center">
-                <MdEmail /> <p className="ml-2 md:ml-3 cursor-pointer">info@undiscoveredethiopia.com</p>
+                <MdEmail /> <p className="ml-2 md:ml-3 cursor-pointer">info@fta.com</p>
               </span>
             </Link>
           </div>
@@ -139,7 +130,7 @@ export const Footer = () => {
       </div>
       <div className="flex flex-col md:flex-row justify-between items-center md:h-10  px-5 md:px-10 bg-white py-2">
         <p className="text-sm md:text-md text-[#1A3E58] md:block text-center md:text-left mb-5 md:mb-0 ">
-          &copy; 2023 Undiscovered Ethiopia Tours. All rights reserved.
+          &copy; 2023 FTA. All rights reserved.
         </p>
 
         <div className="text-sm md:text-md text-[#1A3E58] font-medium">
@@ -148,7 +139,7 @@ export const Footer = () => {
             className="flex flex-row items-center gap-2 hover:text-gray-300 "
             href="mailto:meetnatnaelkebede@gmail.com"
           >
-            <p className="underline cursor-pointer">Website made by Natnael K. </p>
+            <p className="underline cursor-pointer">Website made by Yafet A. </p>
           </Link>
         </div>
       </div>
