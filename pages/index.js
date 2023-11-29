@@ -18,7 +18,7 @@ export default function Home() {
   };
   return (
     <div className="">
-      <MainHeader title="Undiscovered: Discover Ethiopia's Hidden Treasures with Undiscovered Ethiopia Tours." />
+      <MainHeader title="Future Talent Academy" />
       <div className="flex flex-col">
         <CommonHeroSection  
           Tag="Empowering minds and shaping futures at Future Talent Academy - where excellence meets opportunity."

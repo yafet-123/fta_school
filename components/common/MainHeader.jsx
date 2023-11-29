@@ -8,7 +8,7 @@ export const MainHeader = ({ title }) => {
         <title>{title}</title>
         <meta
           name="description"
-          content="Welcome to Undiscovered Ethiopia Tours, where adventure, photography, and community service come together to create unforgettable travel experiences."
+          content="Future Talent Academy"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
