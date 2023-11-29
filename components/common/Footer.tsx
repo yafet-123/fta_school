@@ -53,7 +53,7 @@ export const Footer = () => {
                 src={logo}
                 className=""
                 alt="Logo"
-                width={500}
+                width={200}
                 height={200}
               />
             </Link>
