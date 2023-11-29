@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import logo from '../../public/LOGO_V0.1-01.jpg';
+import logo from '../../public/LOGO_V0.1-01.png';
 
 import {
   FaFacebook,
@@ -21,31 +21,26 @@ export const Footer = () => {
   const socialMediaLinks = [
     {
       icon: <FaFacebook size={30} color="white" />,
-      path: 'https://www.facebook.com/profile.php?id=100075647120196&mibextid=LQQJ4d',
+      path: '',
     },
     // { icon: <FaYoutube size={30} color="white" /> ,  path:""},
     {
       icon: <FaYoutube size={30} color="white" />,
-      path: 'https://www.youtube.com/@UndiscoveredAfrica',
+      path: '',
     },
     {
       icon: <FaInstagram size={30} color="white" />,
-      path: 'https://instagram.com/seya_ethiopia_official?igshid=YTQwZjQ0NmI0OA%3D%3D&utm_source=qr',
+      path: '',
     },
     {
       icon: <FaTelegram size={30} color="white" />,
-      path: 'https://t.me/undiscoverdethiopiatour',
+      path: '',
     },
   ];
 
   const quickLinks = [
     { url: "/", link: "Home" },
-    { url: "/tours", link: "Tours" },
-    { url: "/about", link: "About Us" },
-    { url: "/gallery", link: "Gallery" },
-    { url: "/contact", link: "Contact Us" },
-    { url: "/attraction", link: "Attraction" },
-    { url:"/hotelbooking", link:"Hotel Booking"},
+    { url: "/quiz", link: "Quiz" },
   ];
 
   return (
