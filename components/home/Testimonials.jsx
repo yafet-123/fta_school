@@ -5,19 +5,19 @@ export default function Testimonials() {
 	const testimonials = [
 		{
 			name: 'Sarah D',
-      		image: "/cherishe.jpg",
+      		image: "/Testimonals/cherishe.jpg",
       		star:5,
       		description:"Undiscovered Ethiopia Tours exceeded all our expectations. A truly life-changing experience!",
 		},
 		{
 			name: 'David M',
-      		image: "/maleone.jpg",
+      		image: "/Testimonals/maleone.jpg",
       		star:5,
       		description:"The photography opportunities were incredible. I returned home with a portfolio of stunning shots.",
 		},
 		{
 			name: 'Liya A',
-      		image: "/maletwo.jpg",
+      		image: "/Testimonals/maletwo.jpg",
       		star:5,
       		description:"Undiscovered Ethiopia Tours exceeded all our expectations. A truly life-changing experience!",
 		},
