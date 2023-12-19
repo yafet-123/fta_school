@@ -34,6 +34,7 @@ model Class {
   CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
   User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  ClassSubject ClassSubject[]
 }
 
 model Subject {
@@ -43,6 +44,7 @@ model Subject {
   CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
   User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  ClassSubject ClassSubject[]
 }
 
 model ClassSubject {
