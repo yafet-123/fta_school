@@ -11,17 +11,20 @@ datasource db {
 }
 
 model User {
-  user_id      Int           @id @default(autoincrement())
-  UserName     String        @unique @db.VarChar(255)
-  email        String?       @unique @db.VarChar(255)
-  resetToken   String?       @unique @db.VarChar(255)
-  Password     String        @db.VarChar(255)
-  role         String?       @db.VarChar(255)
-  CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
-  ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
-  Class        Class[]
-  Subject      Subject[]
-
+  user_id             Int           @id @default(autoincrement())
+  UserName            String        @unique @db.VarChar(255)
+  email               String?       @unique @db.VarChar(255)
+  resetToken          String?       @unique @db.VarChar(255)
+  Password            String        @db.VarChar(255)
+  role                String?       @db.VarChar(255)
+  CreatedDate         DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate        DateTime?     @default(now()) @db.Timestamptz(6)
+  Class               Class[]
+  Subject             Subject[]
+  Question            Question[]
+  ClassSubject        ClassSubject[]
+  QuestionCategory    QuestionCategory[]
+  Answer              Answer[]
 }
 
 model Class {
@@ -54,11 +57,31 @@ model ClassSubject {
   User              User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
 
+model QuestionCategory{
+  question_category_id  Int         @id @default(autoincrement())
+  user_id               Int?
+  questioncategoryName  String      @db.VarChar(255)
+  User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  Question              Question[]
+}
+
 model Question {
-  question_id      Int           @id @default(autoincrement())
-  totalQuestions   String        @db.VarChar(255)
-  user_id          Int?
-  CreatedDate      DateTime?     @default(now()) @db.Timestamptz(6)
-  ModifiedDate     DateTime?     @default(now()) @db.Timestamptz(6)
-  User             User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  question_id             Int                  @id @default(autoincrement())
+  question                String
+  correctAnswer           String
+  user_id                 Int?
+  question_category_id    Int
+  User                    User?                 @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuestionCategory        QuestionCategory?     @relation(fields: [question_category_id], references: [question_category_id], onUpdate: NoAction)
+  Answer                  Answer[]
+}
+
+model Answer {
+  answer_id      Int      @id @default(autoincrement())
+  answer         String
+  question_id    Int
+  user_id        Int?
+  isCorrect      Boolean
+  User           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  question       Question @relation(fields: [question_id], references: [question_id])
 }
