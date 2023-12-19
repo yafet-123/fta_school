@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id      Int           @id @default(autoincrement())
+  UserName     String        @unique @db.VarChar(255)
+  email        String?       @unique @db.VarChar(255)
+  resetToken   String?       @unique @db.VarChar(255)
+  Password     String        @db.VarChar(255)
+  role         String?       @db.VarChar(255)
+  CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
+  Class        Class[]
+  Subject      Subject[]
+
+}
+
+model Class {
+  class_id     Int           @id @default(autoincrement())
+  ClassName    String        @db.VarChar(255)
+  user_id      Int?
+  CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
+  User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Subject {
+  subject_id   Int           @id @default(autoincrement())
+  SubjectName  String        @db.VarChar(255)
+  user_id      Int?
+  CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
+  User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model ClassSubject {
+  class_subject_id  Int       @id @default(autoincrement())
+  user_id           Int?
+  class_id          Int
+  subject_id        Int
+  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
+  Class             Class     @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
+  Subject           Subject   @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
+  User              User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Question {
+  question_id      Int           @id @default(autoincrement())
+  totalQuestions   String        @db.VarChar(255)
+  user_id          Int?
+  CreatedDate      DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate     DateTime?     @default(now()) @db.Timestamptz(6)
+  User             User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
