@@ -171,10 +171,10 @@
   "resolved" "https://registry.npmjs.org/@panva/hkdf/-/hkdf-1.1.1.tgz"
   "version" "1.1.1"
 
-"@prisma/client@^5.7.0":
-  "integrity" "sha512-cZmglCrfNbYpzUtz7HscVHl38e9CrUs31nrVoGUK1nIPXGgt8hT4jj2s657UXcNdQ/jBUxDgGmHyu2Nyrq1txg=="
-  "resolved" "https://registry.npmjs.org/@prisma/client/-/client-5.7.0.tgz"
-  "version" "5.7.0"
+"@prisma/client@^5.7.1":
+  "integrity" "sha512-TUSa4nUcC4nf/e7X3jyO1pEd6XcI/TLRCA0KjkA46RDIpxUaRsBYEOqITwXRW2c0bMFyKcCRXrH4f7h4q9oOlg=="
+  "resolved" "https://registry.npmjs.org/@prisma/client/-/client-5.7.1.tgz"
+  "version" "5.7.1"
 
 "@prisma/debug@5.7.0":
   "integrity" "sha512-tZ+MOjWlVvz1kOEhNYMa4QUGURY+kgOUBqLHYIV8jmCsMuvA1tWcn7qtIMLzYWCbDcQT4ZS8xDgK0R2gl6/0wA=="

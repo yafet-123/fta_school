@@ -11,6 +11,8 @@ import ContactInformation from "../components/home/ContactInformation"
 // import CapturingtheExtraordinary from "../components/home/CapturingtheExtraordinary"
 // import CommunityServiceatOurCore from "../components/home/CommunityServiceatOurCore"
 import {useRouter} from 'next/router'
+
+
 export default function Home() {
   const router = useRouter();
   const handleQuiz = () => {
