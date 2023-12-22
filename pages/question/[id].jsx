@@ -2,6 +2,52 @@ import React, { useState } from 'react';
 import { html } from '../../data/html.js';
 import { css } from '../../data/css.js';
 import { useRouter } from 'next/router';
+import Hero from "../../components/question/Hero"
+
+export async function getServerSideProps(context) {
+  const {params,req,res,query} = context
+  const id = query.id
+  
+  const Subject = await prisma.Subject.findMany({
+      where:{
+        ClassSubject:{
+        some: {
+          Class:{
+            class_id: Number(id)
+          }
+        }
+      } 
+      },
+      include:{
+        User:{
+          select:{
+            UserName:true
+          }
+        },
+        ClassSubject:{
+          include:{
+            Class:{
+              select:{
+                class_id:true,
+                ClassName:true
+              }
+            }
+          }
+        },
+      }
+    })
+
+    const AllSubject = Subject.map((data)=>({
+      subject_id:data.subject_id,
+      SubjectName:data.SubjectName,
+    }))
+
+    return {
+      props: {
+        AllSubject,
+      }, // will be passed to the page component as props
+  }
+}
 
 const Quiz = () => {
   const router = useRouter();
@@ -67,8 +113,9 @@ const Quiz = () => {
   };
 
   return (
-    <div className='bg-[#E6E6E6] px-2 lg:px-32 h-full py-10'>
-      <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-24 mb-5">Quiz Page</h1>
+    <div className='bg-[#E6E6E6] px-2 lg:px-32 h-full py-32'>
+      <Hero />
+      <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
       <div className="lg:px-20">
         <h2 className={`font-bold text-[#00225F] text-lg md:text-xl ${!showResult ? "flex" : "hidden"}`}>
           Question: {activeQuestion + 1}

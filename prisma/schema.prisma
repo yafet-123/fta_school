@@ -28,6 +28,8 @@ model User {
   ClassSubject        ClassSubject[]
   QuestionCategory    QuestionCategory[]
   Answer              Answer[]
+  QuarterQuestionCategory QuarterQuestionCategory[]
+  Quarter    Quarter[]
 }
 
 model Students{
@@ -80,6 +82,27 @@ model QuestionCategory{
   questioncategoryName  String      @db.VarChar(255)
   User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   Question              Question[]
+  QuarterQuestionCategory QuarterQuestionCategory[]
+}
+
+model Quarter {
+  quarter_id            Int         @id @default(autoincrement())
+  user_id               Int?
+  quarterName           String      @db.VarChar(255)
+  User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuarterQuestionCategory QuarterQuestionCategory[]
+}
+
+model QuarterQuestionCategory {
+  quarter_category_id            Int       @id @default(autoincrement())
+  user_id                        Int?
+  quarter_id                     Int
+  question_category_id           Int
+  CreatedDate                    DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate                   DateTime? @default(now()) @db.Timestamptz(6)
+  Quarter                        Quarter   @relation(fields: [quarter_id], references: [quarter_id], onDelete: Cascade, onUpdate: Cascade)
+  QuestionCategory               QuestionCategory   @relation(fields: [question_category_id], references: [question_category_id], onDelete: Cascade, onUpdate: Cascade)
+  User                           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
 
 model Question {

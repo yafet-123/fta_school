@@ -56,7 +56,7 @@ export default function Subject({AllSubject}) {
     router.push(`/subject/${id}`);
   };
   return (
-    <div className='bg-[#E6E6E6] px-2 lg:px-32 h-full py-32'>
+    <div className='bg-[#E6E6E6] px-2 lg:px-32 h-full pt-44 pb-96'>
       <SubjectList AllSubject={AllSubject} />
     </div>
   );
