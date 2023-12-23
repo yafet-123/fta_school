@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Hero from "../../components/question/Hero"
-import { prisma } from '../../util/db.server.js'
+import QuestionCategory from "../../../components/question/QuestionCategory"
+import { prisma } from '../../../util/db.server.js'
 
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
@@ -46,7 +46,7 @@ export default function Category({AllquestionCategory}) {
   };
   return (
     <div className='bg-[#E6E6E6] px-2 lg:px-32 h-full pt-44 pb-96'>
-      <SubjectList AllquestionCategory={AllquestionCategory} />
+      <QuestionCategory AllquestionCategory={AllquestionCategory} />
     </div>
   );
 };
