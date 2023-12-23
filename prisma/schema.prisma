@@ -30,6 +30,7 @@ model User {
   Answer              Answer[]
   QuarterQuestionCategory QuarterQuestionCategory[]
   Quarter    Quarter[]
+  SubjectQuestionCategory SubjectQuestionCategory[]
 }
 
 model Students{
@@ -62,6 +63,8 @@ model Subject {
   ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
   User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   ClassSubject ClassSubject[]
+  Question     Question[]
+  SubjectQuestionCategory SubjectQuestionCategory[]
 }
 
 model ClassSubject {
@@ -83,6 +86,7 @@ model QuestionCategory{
   User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   Question              Question[]
   QuarterQuestionCategory QuarterQuestionCategory[]
+  SubjectQuestionCategory SubjectQuestionCategory[]
 }
 
 model Quarter {
@@ -91,6 +95,18 @@ model Quarter {
   quarterName           String      @db.VarChar(255)
   User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   QuarterQuestionCategory QuarterQuestionCategory[]
+}
+
+model SubjectQuestionCategory {
+  subject_category_id            Int       @id @default(autoincrement())
+  user_id                        Int?
+  subject_id                     Int
+  question_category_id           Int
+  CreatedDate                    DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate                   DateTime? @default(now()) @db.Timestamptz(6)
+  Subject                        Subject   @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
+  QuestionCategory               QuestionCategory   @relation(fields: [question_category_id], references: [question_category_id], onDelete: Cascade, onUpdate: Cascade)
+  User                           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
 
 model QuarterQuestionCategory {
@@ -110,6 +126,8 @@ model Question {
   question                String
   correctAnswer           String
   user_id                 Int?
+  subject_id              Int?
+  Subject                 Subject?              @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
   question_category_id    Int
   User                    User?                 @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   QuestionCategory        QuestionCategory?     @relation(fields: [question_category_id], references: [question_category_id], onUpdate: NoAction)
