@@ -131,6 +131,7 @@ model Question {
   question                String
   correctAnswer           String
   user_id                 Int?
+  answer                  String[]
   subject_id              Int?
   Subject                 Subject?              @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
   question_category_id    Int

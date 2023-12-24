@@ -9,15 +9,19 @@ export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const id = query.id
   
-  const questionCategory = await prisma.QuestionCategory.findMany({
+  const question = await prisma.Question.findMany({
       where:{
-        SubjectQuestionCategory:{
+        QuestionTypeQuestion:{
         some: {
-          Subject:{
-            subject_id: Number(id)
+          QuestionType:{
+            question_type_id: Number(id)
           }
         }
       } 
+      },
+      orderBy: {
+        // Specify the column and the order (asc for ascending)
+        question_id: 'asc'
       },
       include:{
         User:{
@@ -28,21 +32,39 @@ export async function getServerSideProps(context) {
       }
     })
 
-    const AllquestionCategory = questionCategory.map((data)=>({
-      question_category_id:data.question_category_id,
-      questioncategoryName:data.questioncategoryName,
-    }))
+  const questionCount = await prisma.question.aggregate({
+    where: {
+      QuestionTypeQuestion: {
+        some: {
+          QuestionType: {
+            question_type_id: Number(id)
+          }
+        }
+      }
+    },
+    _count: {
+      question_id: true // Assuming question_id is the primary key of your Question model
+    }
+  });
 
-    return {
-      props: {
-        AllquestionCategory,
-      }, // will be passed to the page component as props
+  const Allquestion = question.map((data)=>({
+    question_id:data.question_id,
+    question:data.question,
+    correctAnswer:data.correctAnswer
+  }))
+  const questionlength = questionCount._count.question_id
+  return {
+    props: {
+      Allquestion,
+      questionlength
+    }, // will be passed to the page component as props
   }
 }
 
-const Quiz = ({AllquestionCategory}) => {
+const Question = ({Allquestion,questionlength}) => {
   const router = useRouter();
   const id = router.query.id;
+  console.log(questionlength)
   let quiz;
   if(id == 1){
     quiz = html
@@ -105,19 +127,19 @@ const Quiz = ({AllquestionCategory}) => {
 
   return (
     <div className='bg-[#E6E6E6] px-2 lg:px-32 h-full py-32'>
-      <Hero AllquestionCategory={AllquestionCategory} />
+      <Hero Allquestion={Allquestion} />
       <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
       <div className="lg:px-20">
         <h2 className={`font-bold text-[#00225F] text-lg md:text-xl ${!showResult ? "flex" : "hidden"}`}>
           Question: {activeQuestion + 1}
-          <span>/{questions.length}</span>
+          <span>/{questionlength}</span>
         </h2>
       </div>
       <div className="lg:px-20">
         {!showResult ? (
           <div className='bg-[#f8f8f8] p-[1rem] mt-[1rem] rounded-xl'>
             <h3 className={` font-bold text-[#00225F] text-xl md:text-2xl mb-5 `}>
-              {questions[activeQuestion].question}
+              {Allquestion[activeQuestion].question}
             </h3>
             {answers.map((answer, idx) => (
               <li
@@ -191,4 +213,4 @@ const Quiz = ({AllquestionCategory}) => {
   );
 };
 
-export default Quiz;
+export default Question;
