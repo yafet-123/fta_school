@@ -29,6 +29,7 @@ export async function getServerSideProps(context) {
             UserName:true
           }
         },
+
       }
     })
 
@@ -46,11 +47,13 @@ export async function getServerSideProps(context) {
       question_id: true // Assuming question_id is the primary key of your Question model
     }
   });
-
+  console.log(question)
   const Allquestion = question.map((data)=>({
     question_id:data.question_id,
     question:data.question,
-    correctAnswer:data.correctAnswer
+    correctAnswer:data.correctAnswer,
+    points:data.points,
+    answer:data.answer || null
   }))
   const questionlength = questionCount._count.question_id
   return {
@@ -64,15 +67,8 @@ export async function getServerSideProps(context) {
 const Question = ({Allquestion,questionlength}) => {
   const router = useRouter();
   const id = router.query.id;
-  console.log(questionlength)
-  let quiz;
-  if(id == 1){
-    quiz = html
-  }else if(id == 2){
-    quiz = css
-  }else{
-    quiz = html
-  }
+  console.log(Allquestion)
+
   console.log(router.query.id)
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
@@ -84,15 +80,15 @@ const Question = ({Allquestion,questionlength}) => {
     correctAnswers: 0,
     wrongAnswers: 0,
   });
+  const [totalscore, settotalscore] = useState(0)
   console.log(html)
-  const { questions } = quiz;
-  const { question, answers, correctAnswer } = questions[activeQuestion];
+  const { question, answers, correctAnswer } = Allquestion[activeQuestion];
 
-  //   Select and check answer
-  const onAnswerSelected = (answer, idx) => {
+  const onAnswerSelected = (answer, idx, point) => {
     setChecked(true);
     setSelectedAnswerIndex(idx);
     if (answer === correctAnswer) {
+      settotalscore(totalscore+=1)
       setSelectedAnswer(true);
       console.log('true');
     } else {
@@ -116,7 +112,7 @@ const Question = ({Allquestion,questionlength}) => {
             wrongAnswers: prev.wrongAnswers + 1,
           }
     );
-    if (activeQuestion !== questions.length - 1) {
+    if (activeQuestion !== questionlength - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
       setActiveQuestion(0);
@@ -138,13 +134,18 @@ const Question = ({Allquestion,questionlength}) => {
       <div className="lg:px-20">
         {!showResult ? (
           <div className='bg-[#f8f8f8] p-[1rem] mt-[1rem] rounded-xl'>
-            <h3 className={` font-bold text-[#00225F] text-xl md:text-2xl mb-5 `}>
-              {Allquestion[activeQuestion].question}
-            </h3>
-            {answers.map((answer, idx) => (
+            <div className="flex justify-between items-center">
+              <h3 className={` font-bold text-[#00225F] text-xl md:text-2xl mb-5 `}>
+                {Allquestion[activeQuestion].question}
+              </h3>
+              <p className="font-bold text-[#00225F] text-xl md:text-2xl mb-5">
+                {Allquestion[activeQuestion].points} point
+              </p>
+            </div>
+            {Allquestion[activeQuestion].answer.map((answer, idx) => (
               <li
                 key={idx}
-                onClick={() => onAnswerSelected(answer, idx)}
+                onClick={() => onAnswerSelected(answer, idx, Allquestion[activeQuestion].points)}
                 className={` list-none mb-5 px-[16px] py-4 border-2 border-[#d3d3d3] cursor-pointer rounded-lg
                   ${selectedAnswerIndex === idx ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
                 `}
@@ -154,12 +155,12 @@ const Question = ({Allquestion,questionlength}) => {
             ))}
             {checked ? (
               <button onClick={nextQuestion} className='px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#808080] '>
-                {activeQuestion === questions.length-1 ? 'Finish' : 'Next'}
+                {activeQuestion === questionlength-1 ? 'Finish' : 'Next'}
               </button>
             ) : (
               <button onClick={nextQuestion} disabled className='px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#d8d8d8] '>
                 {' '}
-                {activeQuestion === questions.length-1 ? 'Finish' : 'Next'}
+                {activeQuestion === questionlength-1 ? 'Finish' : 'Next'}
               </button>
             )}
           </div>
@@ -173,10 +174,10 @@ const Question = ({Allquestion,questionlength}) => {
             </h3>
             <div className="flex flex-col font-bold text-lg md:text-xl mb-5">
               <p className="flex justify-between items-center border-b-2 mb-3">
-                Total Questions: <span>{questions.length}</span>
+                Total Questions: <span>{questionlength}</span>
               </p>
               <p className="flex justify-between items-center border-b-2 mb-3">
-                Total Score: <span>{result.score}</span>
+                Total Score: <span>{totalscore}</span>
               </p>
               <p className="flex justify-between items-center border-b-2 mb-3">
                 Correct Answers: <span>{result.correctAnswers}</span>
@@ -190,9 +191,9 @@ const Question = ({Allquestion,questionlength}) => {
               <h3 className="text-center font-bold text-[#00225F] text-2xl md:text-4xl mb-5">
                 Answers
               </h3>
-              {questions.map((data,index)=>(
+              {Allquestion.map((data,index)=>(
                 <h1 className="flex flex-col lg:flex-row justify-between lg:items-center border-b-2">
-                  <span className="text-center text-[#1A3E58]">Question: {data.id}</span>
+                  <span className="text-center text-[#1A3E58]">Question: {data.question}</span>
                   <span className="text-left">{data.correctAnswer}</span>
                 </h1>
               ))}
