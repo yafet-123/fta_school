@@ -31,6 +31,8 @@ model User {
   QuarterQuestionCategory QuarterQuestionCategory[]
   Quarter    Quarter[]
   SubjectQuestionCategory SubjectQuestionCategory[]
+  QuestionType        QuestionType[]
+  QuestionTypeQuestion        QuestionTypeQuestion[]
 }
 
 model Students{
@@ -85,6 +87,7 @@ model QuestionCategory{
   questioncategoryName  String      @db.VarChar(255)
   User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   Question              Question[]
+  QuestionType          QuestionType[]
   QuarterQuestionCategory QuarterQuestionCategory[]
   SubjectQuestionCategory SubjectQuestionCategory[]
 }
@@ -107,6 +110,7 @@ model SubjectQuestionCategory {
   Subject                        Subject   @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
   QuestionCategory               QuestionCategory   @relation(fields: [question_category_id], references: [question_category_id], onDelete: Cascade, onUpdate: Cascade)
   User                           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuestionType QuestionType[]
 }
 
 model QuarterQuestionCategory {
@@ -119,6 +123,7 @@ model QuarterQuestionCategory {
   Quarter                        Quarter   @relation(fields: [quarter_id], references: [quarter_id], onDelete: Cascade, onUpdate: Cascade)
   QuestionCategory               QuestionCategory   @relation(fields: [question_category_id], references: [question_category_id], onDelete: Cascade, onUpdate: Cascade)
   User                           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuestionType QuestionType[]
 }
 
 model Question {
@@ -132,6 +137,32 @@ model Question {
   User                    User?                 @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   QuestionCategory        QuestionCategory?     @relation(fields: [question_category_id], references: [question_category_id], onUpdate: NoAction)
   Answer                  Answer[]
+  QuestionTypeQuestion QuestionTypeQuestion[]
+}
+
+model QuestionType{
+  question_type_id        Int         @id @default(autoincrement())
+  user_id                 Int?
+  question_category_id    Int?
+  question_id             Int?
+  questiontypeName        String      @db.VarChar(255)
+  User                    User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuarterQuestionCategory QuarterQuestionCategory[]
+  SubjectQuestionCategory SubjectQuestionCategory[]
+  QuestionTypeQuestion QuestionTypeQuestion[]
+  QuestionCategory QuestionCategory[]
+}
+
+model QuestionTypeQuestion{
+  question_type_question_id      Int       @id @default(autoincrement())
+  user_id                        Int?
+  question_type_id               Int
+  question_id                    Int
+  CreatedDate                    DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate                   DateTime? @default(now()) @db.Timestamptz(6)
+  QuestionType                   QuestionType   @relation(fields: [question_type_id], references: [question_type_id], onDelete: Cascade, onUpdate: Cascade)
+  Question                       Question   @relation(fields: [question_id], references: [question_id], onDelete: Cascade, onUpdate: Cascade)
+  User                           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
 
 model Answer {
@@ -143,3 +174,4 @@ model Answer {
   User           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   question       Question @relation(fields: [question_id], references: [question_id])
 }
+
