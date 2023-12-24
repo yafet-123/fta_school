@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { prisma } from '../util/db.server.js'
-import ClassList from "../components/Class/ClassList"
+import ClassList from "../components/class/ClassList"
 export async function getStaticProps(){
   const classes = await prisma.Class.findMany();
   return{
