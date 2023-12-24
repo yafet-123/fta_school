@@ -170,7 +170,7 @@ const Question = ({Allquestion,questionlength}) => {
               Results
             </h3>
             <h3 className="mb-5 text-center font-bold text-[#00225F] text-xl md:text-2xl">
-              Overall {(result.score / 25) * 100}%
+              Overall {(totalscore / questionlength) * 100}%
             </h3>
             <div className="flex flex-col font-bold text-lg md:text-xl mb-5">
               <p className="flex justify-between items-center border-b-2 mb-3">
