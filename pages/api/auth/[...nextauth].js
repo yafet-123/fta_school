@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import GoogleProvider from 'next-auth/providers/google';
 import axios from 'axios';
 
 export default NextAuth({
@@ -32,11 +31,6 @@ export default NextAuth({
                 return user
             },
         }),
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        }),
-
     ],
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
