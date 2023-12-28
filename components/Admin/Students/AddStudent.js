@@ -146,6 +146,10 @@ export function AddStudent({classes}) {
                     </div>
                 </div>
 
+                <div className="">
+
+                </div>
+
                 <div className="mx-2 my-5 lg:my-0 flex flex-col lg:flex-row justify-between">
                     <h1 className="text-red-600 dark:text-red-400 text-md lg:text-2xl font-bold text-left mb-5 lg:mb-0">
                         {passworderror || error}
