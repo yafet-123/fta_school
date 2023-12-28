@@ -62,7 +62,7 @@ export default function SignIn({ csrfToken }) {
                                     </label>
 
                                     <div className="text-red-600 text-sm">
-                                        <ErrorMessage name="email" />
+                                        <ErrorMessage name="username" />
                                     </div>
                                 </div>
                                 <div className="mb-6">
