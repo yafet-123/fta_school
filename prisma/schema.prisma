@@ -31,8 +31,7 @@ model User {
   SubjectQuestionCategory SubjectQuestionCategory[]
   QuestionType        QuestionType[]
   QuestionTypeQuestion        QuestionTypeQuestion[]  
-  ClassStudents         ClassStudents[]
-ClassTeacher            ClassTeacher[]
+  ClassTeacher            ClassTeacher[]
 
 }
 
@@ -56,9 +55,10 @@ model Students{
   Password            String        @db.VarChar(255)
   CreatedDate         DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate        DateTime?     @default(now()) @db.Timestamptz(6)
+  class_id            Int?
+  Class                Class?         @relation(fields: [class_id], references: [class_id], onUpdate: NoAction)
   user_id             Int?
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
-  ClassStudents     ClassStudents[]
 }
 
 model Class {
@@ -69,21 +69,10 @@ model Class {
   ModifiedDate    DateTime?     @default(now()) @db.Timestamptz(6)
   User            User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   ClassSubject    ClassSubject[]
-  ClassStudents   ClassStudents[]
+  Students   Students[]
   ClassTeacher    ClassTeacher[]
 }
 
-model ClassStudents{
-  student_class_id             Int         @id @default(autoincrement())
-  user_id                        Int?
-  class_id                     Int
-  students_id                    Int
-  CreatedDate                    DateTime?   @default(now()) @db.Timestamptz(6)
-  ModifiedDate                   DateTime?   @default(now()) @db.Timestamptz(6)
-  Class                        Class     @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
-  Students                       Students    @relation(fields: [students_id], references: [students_id], onDelete: Cascade, onUpdate: Cascade)
-  User                           User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
-}
 
 model ClassTeacher{
   teacher_class_id             Int         @id @default(autoincrement())
