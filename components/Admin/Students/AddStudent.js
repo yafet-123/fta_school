@@ -16,28 +16,31 @@ export function AddStudent({classes}) {
     const [loading, setLoading] = useState(false);
     const [UserName, setUserName] =useState("")
     const [email, setemail] = useState("")
+    const [classId, setclassId] = useState("")
     const [password,setpassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [passworderror,setpassworderror] = useState("")
     const [error,seterror] = useState("")
     async function register(e){
+        console.log(classId)
         e.preventDefault();
         if(confirmPassword === password){
             setpassworderror("")
             seterror("")
             setLoadingModalIsOpen(true);
-            const data = await axios.post(`../api/teacher/Add`,{
+            const data = await axios.post(`../../api/student/Add`,{
                 'UserName':UserName,
                 'Password':password,
                 'email':email,
-                'role':'teacher'
+                'class_id':classId,
+                'role':'student'
             }).then(function (response) {
                 console.log(response.data);
                 router.reload()
                 setLoadingModalIsOpen(false);
             }).catch(function (error) {
                 console.log(error)
-                seterror("Creating teacher failed due to username is still exist or network error")
+                seterror("Creating Student failed due to username is still exist or network error")
                 setLoadingModalIsOpen(false);
             });
         }else{
@@ -47,6 +50,10 @@ export function AddStudent({classes}) {
         }
                 
     }
+
+    const handleSelectChange = (e) => {
+        setclassId(e.target.value);
+    };
 
     return (
         <div className="px-0 lg:px-10 pt-20">
@@ -146,8 +153,29 @@ export function AddStudent({classes}) {
                     </div>
                 </div>
 
-                <div className="">
-
+                <div className="relative z-0 w-full mb-5 mx-2">
+                    <select
+                        name="select"
+                        value={classId}
+                        onChange={handleSelectChange}
+                        className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
+                    >
+                        <option value="" disabled hidden></option>
+                        { classes.map((data,index)=>(
+                            <option value={data.class_id} className="text-sm lg:text-xl text-black">{data.ClassName}</option>
+                        ))}
+                    </select>
+                    <label
+                        htmlFor="select"
+                        className={`absolute top-1/2 bottom-1/2 duration-300 top-2 left-0 px-1 -z-1 text-sm lg:text-xl text-black left-2 bg-white ${
+                            classId ? 'text-xs' : 'text-sm'
+                            } ${classId ? '-translate-y-full' : 'translate-y-0'} transform origin-0`}
+                    >
+                        Select an option
+                    </label>
+                    <span className="text-sm text-red-600 hidden" id="error">
+                        Option has to be selected
+                    </span>
                 </div>
 
                 <div className="mx-2 my-5 lg:my-0 flex flex-col lg:flex-row justify-between">

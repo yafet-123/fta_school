@@ -8,8 +8,19 @@ import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
 export async function getServerSideProps(){
   const students = await prisma.Students.findMany({
+    orderBy : {ModifiedDate:'desc'},
     include:{
       Class:{
+        select:{
+          ClassName:true
+        }
+      },
+    }
+  });
+  
+  const classes = await prisma.Class.findMany({
+    include:{
+      User:{
         select:{
           UserName:true
         }
@@ -17,23 +28,14 @@ export async function getServerSideProps(){
     },
     orderBy : {ModifiedDate:'desc'}
   });
-  const classes = await prisma.Class.findMany({
-    include:{
-      User:{
-        select:{
-          ClassName:true
-        }
-      },
-    },
-    orderBy : {ModifiedDate:'desc'}
-  });
+  console.log(students)
   const Allstudents = students.map((data)=>({
       students_id:data.students_id,
+      UserName:data.UserName,
       email:data.email,
       role:data.role,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      UserName:data.UserName,
       ClassName:data.ClassName
   }))
 
@@ -42,7 +44,7 @@ export async function getServerSideProps(){
       ClassName:data.ClassName,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      UserName:data.UserName
+      UserName:data.User.UserName
   }))
 
   return{

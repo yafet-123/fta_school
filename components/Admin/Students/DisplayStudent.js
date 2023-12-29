@@ -8,7 +8,7 @@ import {UpdateStudent} from './UpdateStudent.js'
 
 export function DisplayStudent({students}) {
     const router = useRouter();
-    
+    console.log(students)
     const [deletemodalOn, setdeleteModalOn] = useState(false);
     const [updatemodalOn, setupdateModalOn] = useState(false);
     const [deleteuserid,setdeleteuserid] = useState()
@@ -56,6 +56,7 @@ export function DisplayStudent({students}) {
                                             </span>
                                         </h1>
                                     </td>
+
 
                                      <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
                                         {data.ClassName}
@@ -116,6 +117,13 @@ export function DisplayStudent({students}) {
                                     { data.email ? data.email : "No Email Address" }
                                 </span>
                             </div>
+
+                            <div className="text-md lg:text-lg text-gray-700 dark:text-white font-bold break-words ">
+                                Email : <span className={ `font-normal font-medium ${data.ClassName ? " " : "text-red-800"}`}>
+                                    { data.ClassName ? data.ClassName : "No Class" }
+                                </span>
+                            </div>
+
                             <div className="text-gray-700 dark:text-white font-bold">
                                 <span className="text-lg">Class : </span>
                                 <span className="text-md">{data.ClassName} </span>
