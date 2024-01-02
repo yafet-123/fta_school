@@ -9,7 +9,7 @@ export default async function handleaddlogin(req, res){
 	if (!username || !password) {
     	throw new Error("Please provide all values");
   	}
-  	const user = await prisma.Teacher.findUnique({
+  	const user = await prisma.User.findUnique({
     	where: { 
     		UserName: username 
     	},

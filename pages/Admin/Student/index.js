@@ -16,8 +16,9 @@ export async function getServerSideProps(){
         }
       },
     }
+    
   });
-  
+
   const classes = await prisma.Class.findMany({
     include:{
       User:{

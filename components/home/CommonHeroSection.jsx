@@ -42,16 +42,16 @@ export default function CommonHeroSection({Tag , Welcome_Message}) {
         {CardHeo.map((data, index) => (
           <div
             key={index}
-            className={`${data.image} w-full h-screen bg-fixed pt-24 flex flex-col`}
+            className={`${data.image} w-full h-screen bg-fixed pt-20 flex flex-col`}
           >
             <div className="flex flex-col justify-center lg:justify-start items-center lg:items-start font-bold md:p-12 w-full lg:w-[60%] px-2">
               <div>
-                <h1 className="font-bold text-center md:text-left text-white text-2xl md:text-6xl bg-opacity-30 mb-5">
+                <h1 className="font-bold text-center md:text-left text-white text-3xl md:text-5xl bg-opacity-30 mb-5">
                   {Tag}
                 </h1>
               </div>
               <div>             
-                <p className="text-white text-center md:text-left text-lg md:text-3xl bg-opacity-30 px-3">
+                <p className="text-white text-center md:text-left text-lg md:text-3xl bg-opacity-30">
                    {Welcome_Message}
                 </p>
               </div>
