@@ -2,15 +2,15 @@ import { prisma } from '../../../util/db.server.js'
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
-
+ 
 export default async function handleadduser(req, res){
 	const {UserName , Password,class_id, email, role} = req.body;
-	console.log(UserName)
+	console.log(req.body)
 	const data = await prisma.Students.create({
 		data:{
 			UserName,
 			email,
-			class_id:Number(class_id) || null,
+			class_id:Number(class_id),
 			Password:bcrypt.hashSync(Password, 8),
 			role
 		},

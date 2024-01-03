@@ -20,6 +20,7 @@ model User {
   CreatedDate         DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate        DateTime?     @default(now()) @db.Timestamptz(6)
   Students            Students[]
+  Teacher             Teacher[]
   Class               Class[]
   Subject             Subject[]
   Question            Question[]
@@ -35,6 +36,18 @@ model User {
 
 }
 
+model Class {
+  class_id        Int           @id @default(autoincrement())
+  ClassName       String        @db.VarChar(255)
+  user_id         Int?
+  CreatedDate     DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate    DateTime?     @default(now()) @db.Timestamptz(6)
+  User            User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  ClassSubject    ClassSubject[]
+  Students        Students[]
+  ClassTeacher    ClassTeacher[]
+}
+
 model Teacher {
   teacher_id          Int           @id @default(autoincrement())
   UserName            String        @unique @db.VarChar(255)
@@ -45,6 +58,8 @@ model Teacher {
   CreatedDate         DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate        DateTime?     @default(now()) @db.Timestamptz(6)
   ClassTeacher        ClassTeacher[]
+  user_id             Int?
+  User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
 
 model Students{
@@ -56,7 +71,7 @@ model Students{
   CreatedDate         DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate        DateTime?     @default(now()) @db.Timestamptz(6)
   class_id            Int?
-  Class                Class?         @relation(fields: [class_id], references: [class_id], onUpdate: NoAction)
+  Class               Class?         @relation(fields: [class_id], references: [class_id], onUpdate: NoAction)
   user_id             Int?
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
@@ -96,18 +111,6 @@ model ClassSubject {
   Class             Class     @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
   Subject           Subject   @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
   User              User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
-}
-
-model Class {
-  class_id        Int           @id @default(autoincrement())
-  ClassName       String        @db.VarChar(255)
-  user_id         Int?
-  CreatedDate     DateTime?     @default(now()) @db.Timestamptz(6)
-  ModifiedDate    DateTime?     @default(now()) @db.Timestamptz(6)
-  User            User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
-  ClassSubject    ClassSubject[]
-  Students   Students[]
-  ClassTeacher    ClassTeacher[]
 }
 
 model QuestionCategory{

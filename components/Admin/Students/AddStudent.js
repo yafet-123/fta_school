@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import {FiEye, FiEyeOff} from 'react-icons/fi'
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
-
+ 
 export function AddStudent({classes}) {
     console.log(classes)
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);

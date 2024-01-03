@@ -6,6 +6,7 @@ import ReactModal from "react-modal";
 
 export function UpdateTeacher({setupdateModalOn, updateuserid, updateemail, updateusername, setupdateemail , setupdateusername}) {
     const router = useRouter();
+    console.log("updateuserid")
     const [loading, setLoading] = useState(false);
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
     const handleOKClickForupdate = async() => {

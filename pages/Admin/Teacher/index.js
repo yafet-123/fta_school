@@ -7,7 +7,17 @@ import { useSession } from "next-auth/react";
 import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
 export async function getServerSideProps(){
-  const teachers = await prisma.Teacher.findMany({orderBy : {ModifiedDate:'desc'}});
+  const teachers = await prisma.Teacher.findMany({
+    orderBy : {ModifiedDate:'desc'},
+    include:{
+      User:{
+        select:{
+          UserName:true
+        }
+      }
+    },
+  });
+  console.log(teachers)
   const Allteachers = teachers.map((data)=>({
       teacher_id:data.teacher_id,
       email:data.email,

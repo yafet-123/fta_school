@@ -14,7 +14,7 @@ export async function getServerSideProps(){
         select:{
           ClassName:true
         }
-      },
+      }
     }
     
   });
@@ -25,11 +25,11 @@ export async function getServerSideProps(){
         select:{
           UserName:true
         }
-      },
+      }
     },
-    orderBy : {ModifiedDate:'desc'}
+    orderBy : {ModifiedDate:'desc'},
   });
-  console.log(students)
+  
   const Allstudents = students.map((data)=>({
       students_id:data.students_id,
       UserName:data.UserName,
@@ -37,7 +37,7 @@ export async function getServerSideProps(){
       role:data.role,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      ClassName:data.ClassName
+      ClassName:data.ClassName,
   }))
 
   const Allclasses = classes.map((data)=>({
@@ -45,9 +45,9 @@ export async function getServerSideProps(){
       ClassName:data.ClassName,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      UserName:data.User.UserName
+      User:data.User,
   }))
-
+  console.log(classes)
   return{
     props:{
       students:JSON.parse(JSON.stringify(Allstudents)),
