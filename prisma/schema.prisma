@@ -70,7 +70,7 @@ model Students{
   Password            String        @db.VarChar(255)
   CreatedDate         DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate        DateTime?     @default(now()) @db.Timestamptz(6)
-  class_id            Int?
+  class_id            Int? 
   Class               Class?        @relation(fields: [class_id], references: [class_id], onUpdate: NoAction)
   user_id             Int?
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)

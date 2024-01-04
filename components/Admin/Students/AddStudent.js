@@ -32,8 +32,7 @@ export function AddStudent({classes}) {
                 'UserName':UserName,
                 'Password':password,
                 'email':email,
-                'class_id':classId,
-                'role':'student'
+                'class_id':classId
             }).then(function (response) {
                 console.log(response.data);
                 router.reload()

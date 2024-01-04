@@ -4,15 +4,14 @@ import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
  
 export default async function handleadduser(req, res){
-	const {UserName , Password,class_id, email, role} = req.body;
+	const {UserName , Password,class_id, email} = req.body;
 	console.log(req.body)
 	const data = await prisma.Students.create({
 		data:{
 			UserName,
 			email,
-			class_id:Number(class_id),
 			Password:bcrypt.hashSync(Password, 8),
-			role
+			class_id:Number(class_id)
 		},
 	});
 

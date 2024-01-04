@@ -10,9 +10,9 @@ export async function getServerSideProps(){
   const students = await prisma.Students.findMany({
     orderBy : {ModifiedDate:'desc'},
     include:{
-      User:{
+      Class:{
         select:{
-          UserName:true
+          ClassName:true
         }
       }
       
@@ -38,7 +38,7 @@ export async function getServerSideProps(){
       role:data.role,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      ClassName:data.ClassName,
+      ClassName:data.Class.ClassName,
   }))
 
   const Allclasses = classes.map((data)=>({

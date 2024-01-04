@@ -10,7 +10,7 @@ export function UpdateStudent({setupdateModalOn, updateuserid, updateemail, upda
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
     const handleOKClickForupdate = async() => {
         setLoadingModalIsOpen(true)
-        const data = await axios.patch(`../api/teacher/updateTeacher/${updateuserid}`,{
+        const data = await axios.patch(`../api/student/updateStudent/${updateuserid}`,{
             "UserName": updateusername,
             "email": updateemail
         }).then(function (response) {
