@@ -82,7 +82,7 @@ export function DisplayClass({classes}) {
                     </table>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:hidden">
-                    {students.map((data,index)=>(
+                    {classes.map((data,index)=>(
                         <div key={index} className=" bg-neutral-200 dark:bg-slate-800 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
                             <div>
                                 <p className="text-blue-500 dark:text-white font-bold hover:underline">

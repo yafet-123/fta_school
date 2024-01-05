@@ -37,11 +37,11 @@ export function AddClass({classes}) {
     return (
         <div className="px-0 lg:px-10 pt-20">
             <form className="max-w-7xl mx-auto mt-10" onSubmit={register} >
-                <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic">Students</h1>
+                <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic my-5">Class</h1>
 
-                <div className="relative flex-1">
+                <div className="relative flex-1 my-5">
                     <input 
-                        id="Category" 
+                        id="class" 
                         type="text" 
                         required
                         className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "

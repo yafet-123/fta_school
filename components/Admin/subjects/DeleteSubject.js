@@ -4,7 +4,7 @@ import { useState,useEffect, useContext} from 'react'
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 
-export function DeleteClass({setdeleteModalOn,deletesubjectid}) {
+export function DeleteSubject({setdeleteModalOn,deletesubjectid}) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);

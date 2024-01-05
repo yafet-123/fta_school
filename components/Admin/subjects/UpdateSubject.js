@@ -4,7 +4,7 @@ import { useState,useEffect, useContext} from 'react'
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 
-export function UpdateStudent({setupdateModalOn, updatesubjectid, updatesubjectname, setupdatesubjectname , setupdatesubjectid}) {
+export function UpdateSubject({setupdateModalOn, updatesubjectid, updatesubjectname, setupdatesubjectname , setupdatesubjectid}) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);

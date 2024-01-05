@@ -6,7 +6,7 @@ import {DeleteSubject} from './DeleteSubject.js'
 import {UpdateSubject} from './UpdateSubject.js'
 
 
-export function DisplayClass({subjectes}) {
+export function DisplaySubject({subjectes}) {
     const router = useRouter();
     console.log(subjectes)
     const [deletemodalOn, setdeleteModalOn] = useState(false);
@@ -82,7 +82,7 @@ export function DisplayClass({subjectes}) {
                     </table>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:hidden">
-                    {students.map((data,index)=>(
+                    {subjectes.map((data,index)=>(
                         <div key={index} className=" bg-neutral-200 dark:bg-slate-800 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
                             <div>
                                 <p className="text-blue-500 dark:text-white font-bold hover:underline">
