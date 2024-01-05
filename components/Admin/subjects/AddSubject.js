@@ -34,11 +34,6 @@ export function AddSubject() {
         });
     }
                 
-    }
-
-    const handleSelectChange = (e) => {
-        setsubjectId(e.target.value);
-    };
 
     return (
         <div SubjectName="px-0 lg:px-10 pt-20">

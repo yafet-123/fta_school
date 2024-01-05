@@ -17,7 +17,6 @@ export function AddClass({classes}) {
     const [error,seterror] = useState("")
     const UserData = data?.user;
     async function register(e){
-        console.log(classId)
         e.preventDefault();
         seterror("")
         setLoadingModalIsOpen(true);
@@ -35,12 +34,6 @@ export function AddClass({classes}) {
         });
     }
                 
-    }
-
-    const handleSelectChange = (e) => {
-        setclassId(e.target.value);
-    };
-
     return (
         <div className="px-0 lg:px-10 pt-20">
             <form className="max-w-7xl mx-auto mt-10" onSubmit={register} >
