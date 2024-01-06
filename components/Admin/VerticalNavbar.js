@@ -21,6 +21,7 @@ export function VerticalNavbar({onChange, data}){
         { link: "/Admin/Student", icon: <AiOutlineUser size={25}/>, name: "Student",},
         { link: "/Admin/Subject", icon: <AiOutlineUser size={25}/>, name: "Subject",},
         { link: "/Admin/Class", icon: <AiOutlineUser size={25}/>, name: "Class",},
+        { link: "/Admin/Quarter", icon: <AiOutlineUser size={25}/>, name: "Quarter",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);

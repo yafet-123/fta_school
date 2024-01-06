@@ -9,7 +9,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-   
+    
 model User {
   user_id             Int           @id @default(autoincrement())
   UserName            String        @unique @db.VarChar(255)
@@ -112,7 +112,7 @@ model ClassSubject {
   Subject           Subject   @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
   User              User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
-
+ 
 model QuestionCategory{
   question_category_id  Int         @id @default(autoincrement())
   user_id               Int?
