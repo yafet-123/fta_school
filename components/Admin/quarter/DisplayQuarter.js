@@ -2,8 +2,8 @@ import React from "react";
 import { useState,useEffect, useContext} from 'react'
 import moment from 'moment';
 import { useRouter } from 'next/router'
-import {DeleteClass} from './DeleteClass.js'
-import {UpdateClass} from './UpdateClass.js'
+import {DeleteQuarter} from './DeleteQuarter.js'
+import {UpdateQuarter} from './UpdateQuarter.js'
 
 
 export function DisplayQuarter({quarter}) {
