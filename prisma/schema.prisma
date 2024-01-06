@@ -122,14 +122,18 @@ model QuestionCategory{
   QuestionType          QuestionType[]
   QuarterQuestionCategory QuarterQuestionCategory[]
   SubjectQuestionCategory SubjectQuestionCategory[]
+  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
 }
 
 model Quarter {
-  quarter_id            Int         @id @default(autoincrement())
-  user_id               Int?
-  quarterName           String      @db.VarChar(255)
-  User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  quarter_id              Int         @id @default(autoincrement())
+  user_id                 Int?
+  quarterName             String      @db.VarChar(255)
+  User                    User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   QuarterQuestionCategory QuarterQuestionCategory[]
+  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
 }
 
 model SubjectQuestionCategory {
@@ -172,6 +176,8 @@ model Question {
   QuestionCategory        QuestionCategory?     @relation(fields: [question_category_id], references: [question_category_id], onUpdate: NoAction)
   Answer                  Answer[]
   QuestionTypeQuestion QuestionTypeQuestion[]
+  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
 }
 
 model QuestionType{
@@ -185,6 +191,8 @@ model QuestionType{
   SubjectQuestionCategory SubjectQuestionCategory[]
   QuestionTypeQuestion QuestionTypeQuestion[]
   QuestionCategory QuestionCategory[]
+  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
 }
 
 model QuestionTypeQuestion{
@@ -207,5 +215,7 @@ model Answer {
   isCorrect      Boolean
   User           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   question       Question @relation(fields: [question_id], references: [question_id])
+  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate    DateTime? @default(now()) @db.Timestamptz(6)
 }
 

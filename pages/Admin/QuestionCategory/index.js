@@ -21,11 +21,11 @@ export async function getServerSideProps(){
   });
    
   const AllQuestionCategory = QuestionCategory.map((data)=>({
-      QuestionCategory_id:data.QuestionCategory_id,
-      QuestionCategoryName:data.QuestionCategoryName,
+      question_category_id:data.question_category_id,
+      questioncategoryName:data.questioncategoryName,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      User:data.User.UserName,
+      User:data.Use?.UserName,
   }))
   return{
     props:{

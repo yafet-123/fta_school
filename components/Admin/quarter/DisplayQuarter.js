@@ -132,11 +132,11 @@ export function DisplayQuarter({quarter}) {
             </div>
 
             {deletemodalOn && 
-                <DeleteClass setdeleteModalOn={setdeleteModalOn} deletequarterid={deletequarterid}/>
+                <DeleteQuarter setdeleteModalOn={setdeleteModalOn} deletequarterid={deletequarterid}/>
             }
 
             {updatemodalOn && 
-                <UpdateClass setupdateModalOn={setupdateModalOn} updatequarterid={updatequarterid} updatequartername={updatequartername} setupdatequartername={setupdatequartername} setupdatequarterid={setupdatequarterid} />
+                <UpdateQuarter setupdateModalOn={setupdateModalOn} updatequarterid={updatequarterid} updatequartername={updatequartername} setupdatequartername={setupdatequartername} setupdatequarterid={setupdatequarterid} />
             }
         </div>
     );

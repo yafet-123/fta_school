@@ -11,7 +11,7 @@ export function UpdateQuarter({setupdateModalOn, updatequarterid, updatequartern
     const handleOKClickForupdate = async() => {
         setLoadingModalIsOpen(true)
         const data = await axios.patch(`../api/quarter/updateQuarter/${updatequarterid}`,{
-            "ClassName": updatequartername
+            "quarterName": updatequartername
         }).then(function (response) {
             console.log(response.data);
             router.reload()

@@ -21,7 +21,7 @@ export function AddQuestionCategory() {
         seterror("")
         setLoadingModalIsOpen(true);
         const data = await axios.post(`../../api/QuestionCategory/Add`,{
-            'questionCategoryName':QuestionCategoryName,
+            'questioncategoryName':QuestionCategoryName,
             "user_id": UserData.user_id,
         }).then(function (response) {
             console.log(response.data);

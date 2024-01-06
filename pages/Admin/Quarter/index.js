@@ -19,13 +19,13 @@ export async function getServerSideProps(){
     }
     
   });
-   
+  console.log(quarter)
   const Allquarter = quarter.map((data)=>({
       quarter_id:data.quarter_id,
       quarterName:data.quarterName,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      User:data.User.UserName,
+      User:data.User?.UserName,
   }))
   return{
     props:{
@@ -38,7 +38,7 @@ export default function Subjects({quarter}) {
     const { status, data } = useSession();
     return (
     	<React.Fragment>
-      		<MainHeader title="Class Dashboard" />
+      		<MainHeader title="Quarter Dashboard" />
       		<section className="flex flex-col w-full h-full bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
 				    <div className='w-full h-full flex flex-row'>
 		        	<VerticalNavbar data={data} />

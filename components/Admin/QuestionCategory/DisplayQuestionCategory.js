@@ -43,7 +43,7 @@ export function DisplayQuestionCategory({QuestionCategory}) {
                                         <p className="font-bold text-gray-700 dark:text-white hover:underline">{data.question_category_id}</p>
                                     </td>
                                     <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
-                                        {data.QuestionCategoryName}
+                                        {data.questioncategoryName}
                                     </td>
 
                                     <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
@@ -58,7 +58,7 @@ export function DisplayQuestionCategory({QuestionCategory}) {
                                             onClick={() => {
                                                 clickedForupdate()
                                                 setupdateQuestionCategoryid(data.question_category_id)
-                                                setupdateQuestionCategoryname(data.QuestionCategoryName)
+                                                setupdateQuestionCategoryname(data.questioncategoryName)
                                             }} 
                                             className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
                                             Edit
@@ -92,7 +92,7 @@ export function DisplayQuestionCategory({QuestionCategory}) {
                             </div>
                             <div className="text-gray-700 dark:text-white font-bold">
                                 <span className="text-lg">Class Name : </span>
-                                <span className="text-md">{data.QuestionCategoryName} </span>
+                                <span className="text-md">{data.questioncategoryName} </span>
                             </div>
 
                             <div className="text-black font-bold dark:text-white">
@@ -110,7 +110,7 @@ export function DisplayQuestionCategory({QuestionCategory}) {
                                     onClick={() => {
                                         clickedForupdate()
                                         setupdateQuestionCategoryid(data.question_category_id)
-                                        setupdateQuestionCategoryname(data.QuestionCategoryName)
+                                        setupdateQuestionCategoryname(data.questioncategoryName)
                                     }}  
                                     className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
                                     Edit

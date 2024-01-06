@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handledeletecategory(req, res){
-	const {deletesubjectid} = req.query
+	const {deleteQuestionCategoryid} = req.query
 	console.log(req.query)
-	const data = await prisma.Subject.delete({
-		where:{subject_id:Number(deletesubjectid)},
+	const data = await prisma.QuestionCategory.delete({
+		where:{question_category_id:Number(deleteQuestionCategoryid)},
 	});
 	res.json(data)
 }
