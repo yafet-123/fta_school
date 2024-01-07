@@ -36,7 +36,7 @@ export function AddUser() {
                 'email':email,
                 'role':'admin',
                 "user_id": UserData.user_id,
-                
+
             }).then(function (response) {
                 console.log(response.data);
                 router.reload()
@@ -55,7 +55,7 @@ export function AddUser() {
     return (
         <div className="px-0 lg:px-10 pt-20">
             <form className="max-w-7xl mx-auto mt-10" onSubmit={register} >
-                <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic">User</h1>
+                <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic">Add User</h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 my-10 mx-2">
                     <div className="relative">

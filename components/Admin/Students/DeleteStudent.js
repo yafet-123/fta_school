@@ -10,7 +10,7 @@ export function DeleteStudent({setdeleteModalOn,deleteuserid}) {
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
 	const handleOKClickFordelete = async() => {
         setLoadingModalIsOpen(true)
-        const data = await axios.delete(`../api/teacher/deleteTeacher/${deleteuserid}`,{
+        const data = await axios.delete(`../api/student/deleteStudent/${deleteuserid}`,{
         }).then(function (response) {
             console.log(response.data);
             router.reload()
@@ -28,7 +28,7 @@ export function DeleteStudent({setdeleteModalOn,deleteuserid}) {
 		<div className="bg-gray-200 dark:bg-slate-800 opacity-90 fixed inset-0 z-50   ">
             <div className="flex h-screen justify-center items-center ">
                 <div className="flex-col justify-center bg-white dark:bg-slate-500 py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
-                    <div className="flex text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Are you sure You want to delete Teacher ?</div>
+                    <div className="flex text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Are you sure You want to delete Student ?</div>
                     <div className="flex">
                     	<button 
                             disabled={loading} 
