@@ -1,28 +1,30 @@
 import React, {useState,useEffect} from "react";
 import { useRouter } from 'next/router'
-import { FaBlogger,FaBlog } from "react-icons/fa"
-import { AiOutlineClose, AiOutlineMail, AiOutlineMenu, AiFillDashboard, AiOutlineUser, AiOutlineFolderAdd, AiOutlineHtml5 } from "react-icons/ai";
-import { DiJavascript1, DiPython } from "react-icons/di"
-import { GiArtificialIntelligence, GiArtificialHive, GiNewspaper} from "react-icons/gi"
-import { SiCss3 } from 'react-icons/si'
-import { MdOutlineCategory, MdLocationOn } from "react-icons/md";
-import { BsNewspaper, BsFiletypeCss } from 'react-icons/bs'
+
+import { GiTeacher } from "react-icons/gi";
+import { RiAdminFill } from "react-icons/ri";
+import { PiStudent } from "react-icons/pi";
+import { SiBookstack } from "react-icons/si";
+import { SiGoogleclassroom } from "react-icons/si";
+import { FaQuestion } from "react-icons/fa";
+import { AiOutlineUser,AiFillDashboard,AiOutlineMenu } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi"
+import { WiMoonFirstQuarter } from "react-icons/wi";
+
 import Link from 'next/link'
 import { useSession, signIn, signOut  } from "next-auth/react";
-import { FiLogOut } from "react-icons/fi"
-import { BiDownArrow, BiNews } from "react-icons/bi"
-import { BsDisplay, BsFunnelFill } from 'react-icons/bs'
+
 
 export function VerticalNavbar({onChange, data}){
     const SideBarList = [
         { link: "/Admin", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
-        { link: "/Admin/User", icon: <AiOutlineUser size={25}/>, name: "User",},
-        { link: "/Admin/Teacher", icon: <AiOutlineUser size={25}/>, name: "Teacher",},
-        { link: "/Admin/Student", icon: <AiOutlineUser size={25}/>, name: "Student",},
-        { link: "/Admin/Subject", icon: <AiOutlineUser size={25}/>, name: "Subject",},
-        { link: "/Admin/Class", icon: <AiOutlineUser size={25}/>, name: "Class",},
-        { link: "/Admin/Quarter", icon: <AiOutlineUser size={25}/>, name: "Quarter",},
-        { link: "/Admin/QuestionCategory", icon: <AiOutlineUser size={25}/>, name: "Question Qategory",},
+        { link: "/Admin/User", icon: <RiAdminFill size={25}/>, name: "User",},
+        { link: "/Admin/Teacher", icon: <GiTeacher size={25}/>, name: "Teacher",},
+        { link: "/Admin/Student", icon: <PiStudent size={25}/>, name: "Student",},
+        { link: "/Admin/Subject", icon: <SiBookstack size={25}/>, name: "Subject",},
+        { link: "/Admin/Class", icon: <SiGoogleclassroom size={25}/>, name: "Class",},
+        { link: "/Admin/Quarter", icon: <WiMoonFirstQuarter size={25}/>, name: "Quarter",},
+        { link: "/Admin/QuestionCategory", icon: <FaQuestion size={25}/>, name: "Question Qategory",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);
