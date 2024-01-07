@@ -22,6 +22,7 @@ export function DashBoard({categories}) {
     const [error , seterror] = useState("")
     const [type,settype] = useState()
 
+
     const [deletemodalOnforUser, setdeleteModalOnforUser] = useState(false);
     const [updatemodalOnforUser, setupdateModalOnforUser] = useState(false);
     const [deleteUserid,setdeleteUserid] = useState()
