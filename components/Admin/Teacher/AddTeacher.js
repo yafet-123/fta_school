@@ -6,8 +6,11 @@ import { useRouter } from 'next/router'
 import {FiEye, FiEyeOff} from 'react-icons/fi'
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
+import { useSession } from "next-auth/react";
 
 export function AddTeacher() {
+
+    const { status, data } = useSession();
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
     const [typepassword, setTypepassword] = useState('password');
     const [typepasswordconfirm, setTypepasswordconfirm] = useState('password');
@@ -19,6 +22,8 @@ export function AddTeacher() {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [passworderror,setpassworderror] = useState("")
     const [error,seterror] = useState("")
+    const UserData = data?.user;
+
     async function register(e){
         e.preventDefault();
         if(confirmPassword === password){
@@ -29,7 +34,8 @@ export function AddTeacher() {
                 'UserName':UserName,
                 'Password':password,
                 'email':email,
-                'role':'teacher'
+                'role':'teacher',
+                "user_id": UserData.user_id,
             }).then(function (response) {
                 console.log(response.data);
                 router.reload()

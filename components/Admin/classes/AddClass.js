@@ -7,7 +7,7 @@ import {FiEye, FiEyeOff} from 'react-icons/fi'
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
-
+ 
 export function AddClass({classes}) {
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
     const router = useRouter();
