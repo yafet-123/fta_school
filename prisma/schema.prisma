@@ -9,7 +9,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-    
+     
 model User {
   user_id             Int           @id @default(autoincrement())
   UserName            String        @unique @db.VarChar(255)
@@ -78,27 +78,33 @@ model Students{
 
 
 model ClassTeacher{
-  teacher_class_id             Int         @id @default(autoincrement())
-  user_id                        Int?
+  teacher_class_id             Int          @id @default(autoincrement())
+
+  user_id                      Int?
   class_id                     Int
-  teacher_id                    Int
-  CreatedDate                    DateTime?   @default(now()) @db.Timestamptz(6)
-  ModifiedDate                   DateTime?   @default(now()) @db.Timestamptz(6)
-  Class                        Class     @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
-  Teacher                       Teacher    @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade, onUpdate: Cascade)
-  User                           User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  teacher_id                   Int
+  subject_id                   Int
+
+  CreatedDate                  DateTime?    @default(now()) @db.Timestamptz(6)
+  ModifiedDate                 DateTime?    @default(now()) @db.Timestamptz(6)
+
+  Class                        Class        @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
+  Teacher                      Teacher      @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade, onUpdate: Cascade)
+  Subject                      Subject      @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
+  User                         User?        @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
 
 model Subject {
-  subject_id   Int           @id @default(autoincrement())
-  SubjectName  String        @db.VarChar(255)
-  user_id      Int?
-  CreatedDate  DateTime?     @default(now()) @db.Timestamptz(6)
-  ModifiedDate DateTime?     @default(now()) @db.Timestamptz(6)
-  User         User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
-  ClassSubject ClassSubject[]
-  Question     Question[]
+  subject_id              Int           @id @default(autoincrement())
+  SubjectName             String        @db.VarChar(255)
+  user_id                 Int?
+  CreatedDate             DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate            DateTime?     @default(now()) @db.Timestamptz(6)
+  User                    User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  ClassSubject            ClassSubject[]
+  Question                Question[]
   SubjectQuestionCategory SubjectQuestionCategory[]
+  ClassTeacher            ClassTeacher[]
 }
 
 model ClassSubject {

@@ -9,7 +9,7 @@ import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
 export function AddTeacher() {
-
+    const [classId,setClassId] = useState([])
     const { status, data } = useSession();
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
     const [typepassword, setTypepassword] = useState('password');
