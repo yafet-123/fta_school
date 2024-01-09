@@ -9,7 +9,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-     
+      
 model User {
   user_id             Int           @id @default(autoincrement())
   UserName            String        @unique @db.VarChar(255)
@@ -106,7 +106,7 @@ model Subject {
   SubjectQuestionCategory SubjectQuestionCategory[]
   ClassTeacher            ClassTeacher[]
 }
-
+ 
 model ClassSubject {
   class_subject_id  Int       @id @default(autoincrement())
   user_id           Int?
