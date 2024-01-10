@@ -9,26 +9,26 @@ import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 import Multiselect from 'multiselect-react-dropdown';
 
-export function AddAsign({subjectes,classes}) {
+export function AddAsign({subjectes,questioncategory}) {
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
     const router = useRouter();
     const { status, data } = useSession();
     const [loading, setLoading] = useState(false);
 
-    const [classId, setClassId] = useState([])
+    const [questioncategoryId, setquestioncategoryId] = useState([])
     const [subjectId, setsubjectId] = useState()
 
     const [error,seterror] = useState("")
     const UserData = data?.user;
 
-    console.log(classId)
+    console.log(questioncategoryId)
     console.log(subjectId)
     async function register(e){
         e.preventDefault();
         seterror("")
         setLoadingModalIsOpen(true);
-        const data = await axios.post(`../../api/class/AddAssign`,{
-            'classId':classId,
+        const data = await axios.post(`../../api/subject/AddAssign`,{
+            'questioncategoryId':questioncategoryId,
             'subjectId':subjectId,
             "user_id": UserData.user_id,
         }).then(function (response) {
@@ -37,11 +37,11 @@ export function AddAsign({subjectes,classes}) {
             setLoadingModalIsOpen(false);
         }).catch(function (error) {
             console.log(error)
-            seterror("Creating Class and subject Assign failed due to username is still exist or network error")
+            seterror("Creating subject and Question Category Assign failed due to username is still exist or network error")
             setLoadingModalIsOpen(false);
         });
     }
-
+    
     const handleSelectChangeForSubject = (e) => {
         setsubjectId(e.target.value);
     };
@@ -49,7 +49,7 @@ export function AddAsign({subjectes,classes}) {
     return (
         <div className="px-0 lg:px-10 pt-20">
             <form className="max-w-7xl mx-auto mt-10" onSubmit={register} >
-                <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic my-5">Subject Assign To Class</h1>
+                <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic my-5">Subject Assign To Question Category</h1>
 
                 <div className="relative z-0 w-full mb-5">
                     <select
@@ -79,18 +79,18 @@ export function AddAsign({subjectes,classes}) {
 
                 <div className="mb-10">
                     <Multiselect
-                        displayValue="ClassName"
-                        placeholder = "classes"
+                        displayValue="questioncategoryName"
+                        placeholder = "Question Category Name"
                         className="z-50 w-full px-1 lg:px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
                         onKeyPressFn={function noRefCheck(){}}
                         onRemove={function noRefCheck(){}}
                         onSearch={function noRefCheck(){}}
                         onSelect={(e)=>{
                             e.map((data,index)=>(
-                               setClassId([...classId, data.class_id])
+                               setquestioncategoryId([...questioncategoryId, data.question_category_id])
                             ))
                         }}
-                        options={classes}
+                        options={questioncategory}
                     />
                 </div>
 
