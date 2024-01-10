@@ -98,7 +98,7 @@ export default function AssignTeacher({subjectes,classes,allasign}) {
 				    <div className='w-full h-full flex flex-row'>
 		        	<VerticalNavbar data={data} />
 		        	<div className="w-full">
-            			<AddAsign subjectes={subjectes} classes={classes} />
+            			<AddAsign subjectes={subjectes} classes={classes} /> 
             			<DisplayAssign allasign={allasign} subjectes={subjectes} classes={classes} />
         			</div>
 		        </div> 

@@ -10,7 +10,7 @@ export function DeleteAssign({setdeleteModalOn,deleteassignid}) {
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
 	const handleOKClickFordelete = async() => {
         setLoadingModalIsOpen(true)
-        const data = await axios.delete(`../../api/class/deleteAssign/${deleteassignid}`,{
+        const data = await axios.delete(`../../api/subject/deleteAssign/${deleteassignid}`,{
         }).then(function (response) {
             console.log(response.data);
             router.reload()
@@ -28,7 +28,7 @@ export function DeleteAssign({setdeleteModalOn,deleteassignid}) {
 		<div className="bg-gray-200 dark:bg-slate-800 opacity-90 fixed inset-0 z-50   ">
             <div className="flex h-screen justify-center items-center ">
                 <div className="flex-col justify-center bg-white dark:bg-slate-500 py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
-                    <div className="flex text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Are you sure You want to delete Subject Assign to Class ?</div>
+                    <div className="flex text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Are you sure You want to delete Subject Assign to Question Category ?</div>
                     <div className="flex">
                     	<button 
                             disabled={loading} 

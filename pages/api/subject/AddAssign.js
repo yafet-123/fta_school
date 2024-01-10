@@ -1,15 +1,14 @@
 import { prisma } from '../../../util/db.server.js'
  
 export default async function handleadduser(req, res){
-	const {classId,subjectId,teacherId,user_id} = req.body;
+	const {questioncategoryId,subjectId,user_id} = req.body;
 	console.log(req.body)
 
-	for (let j = 0; j < classId.length; j++) {
-	  	const assignteacher = await prisma.ClassTeacher.create({
+	for (let j = 0; j < questioncategoryId.length; j++) {
+	  	const assignteacher = await prisma.SubjectQuestionCategory.create({
 		    data:{
 		      subject_id : Number(subjectId),
-		      class_id : Number(classId[j]),
-		      teacher_id : Number(teacherId),
+		      question_category_id : Number(questioncategoryId[j]),
 		      user_id : Number(user_id),
 		    }
 	  	})

@@ -27,6 +27,7 @@ export function VerticalNavbar({onChange, data}){
         { link: "/Admin/Class/AssignSubject", icon: <WiMoonFirstQuarter size={25}/>, name: "Assign Subject To Class",},
         { link: "/Admin/Quarter", icon: <WiMoonFirstQuarter size={25}/>, name: "Quarter",},
         { link: "/Admin/QuestionCategory", icon: <FaQuestion size={25}/>, name: "Question Qategory",},
+        { link: "/Admin/Subject/AssignQuestionCategory", icon: <FaQuestion size={25}/>, name: "Assign Question Qategory",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);

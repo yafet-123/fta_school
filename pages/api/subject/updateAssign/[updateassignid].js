@@ -5,12 +5,11 @@ import { StatusCodes } from "http-status-codes";
 
 export default async function handleupdateuser(req, res){
 	const {updateassignid} = req.query
-	const {updateuserid,updateclassid,updatesubjectid} = req.body
-	const data = await prisma.ClassTeacher.update({
-		where:{teacher_class_id:Number(updateassignid)},
+	const {updatequestioncategoryid,updatesubjectid} = req.body
+	const data = await prisma.SubjectQuestionCategory.update({
+		where:{subject_category_id:Number(updateassignid)},
 		data:{
-			class_id:Number(updateclassid),
-			teacher_id:Number(updateuserid),
+			question_category_id:Number(updatequestioncategoryid),
 			subject_id:Number(updatesubjectid)
 			
 		},

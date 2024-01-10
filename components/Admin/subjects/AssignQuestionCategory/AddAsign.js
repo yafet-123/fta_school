@@ -9,7 +9,7 @@ import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 import Multiselect from 'multiselect-react-dropdown';
 
-export function AddAsign({subjectes,questioncategory}) {
+export function AddAsign({subjects,questioncategory}) {
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
     const router = useRouter();
     const { status, data } = useSession();
@@ -59,7 +59,7 @@ export function AddAsign({subjectes,questioncategory}) {
                         className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
                     >
                         <option value="" disabled hidden></option>
-                        { subjectes.map((data,index)=>(
+                        { subjects.map((data,index)=>(
                             <option value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
                         ))}
                     </select>
@@ -69,7 +69,7 @@ export function AddAsign({subjectes,questioncategory}) {
                             subjectId ? 'text-xs' : 'text-sm'
                             } ${subjectId ? '-translate-y-full' : 'translate-y-0'} transform origin-0`}
                     >
-                        Select an option
+                        Select Subject
                     </label>
                     <span className="text-sm text-red-600 hidden" id="error">
                         Option has to be selected

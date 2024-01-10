@@ -27,7 +27,7 @@ export async function getServerSideProps(){
       SubjectName:data.SubjectName,
       CreatedDate:data.CreatedDate,
       ModifiedDate:data.ModifiedDate,
-      User:data.User.UserName,
+      User:data.User?.UserName,
   }))
 
   const questioncategory = await prisma.QuestionCategory.findMany({
@@ -54,9 +54,9 @@ export async function getServerSideProps(){
   const subjectquestioncategory = await prisma.SubjectQuestionCategory.findMany({
     orderBy : {ModifiedDate:'desc'},
     include:{
-      Class:{
+      Subject:{
         select:{
-          ClassName:true
+          SubjectName:true
         }
       },
 
