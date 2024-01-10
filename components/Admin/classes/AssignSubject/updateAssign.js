@@ -4,15 +4,15 @@ import { useState,useEffect, useContext} from 'react'
 import Loader from "../../../common/Loading";
 import ReactModal from "react-modal";
 
-export function UpdateAssign({setupdateModalOn, updateassignid, updatequestioncategoryid, updatesubjectid, setupdateassignid,setupdatequestioncategoryid,setupdatesubjectid,subjectes,questioncategory,}) {
+export function UpdateAssign({setupdateModalOn, updateassignid, updateclassId, updatesubjectid, setupdateassignid,setupdateclassId,setupdatesubjectid,subjectes,classes,}) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
 
     const handleOKClickForupdate = async() => {
         setLoadingModalIsOpen(true)
-        const data = await axios.patch(`../../api/subject/updateAssign/${updateassignid}`,{
-            "updatequestioncategoryid": updatequestioncategoryid,
+        const data = await axios.patch(`../../api/class/updateAssign/${updateassignid}`,{
+            "updateclassId": updateclassId,
             "updatesubjectid": updatesubjectid
         }).then(function (response) {
             console.log(response.data);
@@ -33,7 +33,7 @@ export function UpdateAssign({setupdateModalOn, updateassignid, updatequestionca
     };
 
     const handleSelectChangeForClass = (e) => {
-        setupdatequestioncategoryid(e.target.value);
+        setupdateclassId(e.target.value);
     };
 
 	return(
@@ -46,20 +46,20 @@ export function UpdateAssign({setupdateModalOn, updateassignid, updatequestionca
                         <div className="relative z-0 w-full">
                             <select
                                 name="select"
-                                value={updatequestioncategoryid}
+                                value={updateclassId}
                                 onChange={handleSelectChangeForClass}
                                 className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none focus:outline-none focus:ring-0 focus:border-black px-3"
                             >
                                 <option value="" disabled hidden></option>
-                                { questioncategory.map((data,index)=>(
-                                    <option value={data.question_category_id} className="text-sm lg:text-xl text-black">{data.questioncategoryName}</option>
+                                { classes.map((data,index)=>(
+                                    <option value={data.class_id} className="text-sm lg:text-xl text-black">{data.ClassName}</option>
                                 ))}
                             </select>
                             <label
                                 htmlFor="select"
                                 className={`absolute duration-300 top-2 left-0 px-1 -z-1 text-sm lg:text-xl text-black left-2 bg-white ${
-                                    updatequestioncategoryid ? 'text-xs' : 'text-sm'
-                                    } ${updatequestioncategoryid ? '-translate-y-full' : '-translate-y-0'} transform origin-0`}
+                                    updateclassId ? 'text-xs' : 'text-sm'
+                                    } ${updateclassId ? '-translate-y-full' : '-translate-y-0'} transform origin-0`}
                             >
                                 Select an Class
                             </label>

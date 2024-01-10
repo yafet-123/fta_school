@@ -50,7 +50,7 @@ export function DisplayAssign({allasign,subjectes,classes}) {
                                     </td>
 
                                     <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
-                                        {data.classesName}
+                                        {data.ClassName}
                                     </td>
 
                                     <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
@@ -105,7 +105,7 @@ export function DisplayAssign({allasign,subjectes,classes}) {
 
                             <div className="text-gray-700 dark:text-white font-bold">
                                 <span className="text-lg">Class Name : </span>
-                                <span className="text-md">{data.classesName} </span>
+                                <span className="text-md">{data.ClassName} </span>
                             </div>
 
                             <div className="text-gray-700 dark:text-white font-bold">

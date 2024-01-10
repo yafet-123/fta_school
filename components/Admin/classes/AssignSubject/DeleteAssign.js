@@ -10,7 +10,7 @@ export function DeleteAssign({setdeleteModalOn,deleteassignid}) {
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
 	const handleOKClickFordelete = async() => {
         setLoadingModalIsOpen(true)
-        const data = await axios.delete(`../../api/subject/deleteAssign/${deleteassignid}`,{
+        const data = await axios.delete(`../../api/class/deleteAssign/${deleteassignid}`,{
         }).then(function (response) {
             console.log(response.data);
             router.reload()
