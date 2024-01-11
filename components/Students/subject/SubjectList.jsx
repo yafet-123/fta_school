@@ -3,14 +3,14 @@ import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
 
-export default function SubjectList({AllSubject}) {
+export default function SubjectList({subjects}) {
   const router = useRouter();
   const handleSubject = (id) => {
     router.push(`/question/category/${id}`);
   };
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      {AllSubject.map((data,index)=>(
+    <div className="pt-20 px-0 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {subjects.map((data,index)=>(
         <button 
           onClick={() => handleSubject(data.subject_id)} 
           className={`${ data.subject_id <= 4 && "bg-[#2862E9]" || data.subject_id <= 8 && "bg-[#EFD81D]" || data.subject_id <= 12 && "bg-[#E95F21]" } 

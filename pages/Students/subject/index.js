@@ -1,0 +1,63 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import { useRouter } from 'next/router';
+import { prisma } from '../../../util/db.server.js'
+import { getSession } from "next-auth/react";
+import { MainHeader } from '../../../components/common/MainHeader';
+import { VerticalNavbar } from "../../../components/Students/VerticalNavbar";
+import SubjectList from '../../../components/Students/subject/SubjectList'
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  console.log(session)
+  
+  const student = await prisma.Students.findUnique({
+    where:{ students_id: Number(session.user.user_id) },
+    
+  });
+
+  const studentsubject = await prisma.classSubject.findMany({
+    where: {
+      // Specify your conditions here
+      class_id: Number(student.class_id),
+    },
+    include: {
+      Subject: {
+        select: {
+          subject_id: true,
+          SubjectName: true,
+        },
+      },
+    },
+  });
+  console.log(studentsubject)
+  
+  const subjects = studentsubject.map((data)=>({
+     class_subject_id: data.class_subject_id,
+     subject_id: data.Subject.subject_id,
+     SubjectName: data.Subject.SubjectName
+  }))
+
+  return {
+    props: {
+      subjects,
+    }, // will be passed to the page component as props
+  }
+}
+
+export default function Subjects({subjects}) {
+  console.log(subjects)
+  const router = useRouter();
+
+  return (
+    <React.Fragment>
+      <MainHeader title="Future Talent Academy : Student" />
+      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
+        <VerticalNavbar />
+        <div className="w-full">
+          <SubjectList subjects={subjects} />
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};

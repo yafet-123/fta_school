@@ -19,15 +19,6 @@ export function VerticalNavbar({onChange, data}){
     const SideBarList = [
         { link: "/Admin", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
         { link: "/Admin/User", icon: <RiAdminFill size={25}/>, name: "User",},
-        { link: "/Admin/Teacher", icon: <GiTeacher size={25}/>, name: "Teacher",},
-        { link: "/Admin/Teacher/Assign", icon: <GiTeacher size={25}/>, name: "Assign Teacher",},
-        { link: "/Admin/Student", icon: <PiStudent size={25}/>, name: "Student",},
-        { link: "/Admin/Subject", icon: <SiBookstack size={25}/>, name: "Subject",},
-        { link: "/Admin/Class", icon: <SiGoogleclassroom size={25}/>, name: "Class",},
-        { link: "/Admin/Class/AssignSubject", icon: <WiMoonFirstQuarter size={25}/>, name: "Assign Subject To Class",},
-        { link: "/Admin/Quarter", icon: <WiMoonFirstQuarter size={25}/>, name: "Quarter",},
-        { link: "/Admin/QuestionCategory", icon: <FaQuestion size={25}/>, name: "Question Qategory",},
-        { link: "/Admin/Subject/AssignQuestionCategory", icon: <FaQuestion size={25}/>, name: "Assign Question Qategory",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);
