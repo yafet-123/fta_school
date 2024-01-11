@@ -29,7 +29,8 @@ export default function SignIn({ csrfToken }) {
                         const res = await signIn('credentials', {
                             username: values.username,
                             password: values.password,
-                            callbackUrl: "/Admin"
+                            callbackUrl: "/Admin",
+                            type:"user",
                         });
                         console.log(res)
                         if (res?.error) {

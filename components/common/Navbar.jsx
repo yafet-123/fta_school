@@ -16,7 +16,7 @@ export const Navbar = () => {
     { path: "/", name: "Home" },
     { path: "/grade", name: "Grade" },
     { path: "/contact", name: "Contact" },
-    { path: "/auth/signin", name: "Login" },
+    { path: "/auth/signin-user", name: "Login" },
   ];
 
   useEffect(() => {
