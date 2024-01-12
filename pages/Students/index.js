@@ -1,4 +1,4 @@
-import { VerticalNavbar } from "../../components/Admin/VerticalNavbar";
+import { VerticalNavbar } from "../../components/Students/VerticalNavbar";
 import { useSession } from "next-auth/react";
 import { useState,useEffect} from 'react'
 import { useRouter } from 'next/router'
@@ -26,7 +26,7 @@ export default function Admin(){
       <MainHeader title="Future Talent Academy : Students" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <div className="w-full">
+        <div className="w-full pt-20">
           
         </div>
       </div>

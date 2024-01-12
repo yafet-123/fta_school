@@ -7,6 +7,8 @@ import { getSession } from "next-auth/react";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../components/Students/VerticalNavbar";
 import SubjectList from '../../../components/Students/subject/SubjectList'
+import { useSession } from "next-auth/react";
+
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session)
@@ -48,13 +50,16 @@ export async function getServerSideProps(context) {
 export default function Subjects({subjects}) {
   console.log(subjects)
   const router = useRouter();
-
+  function handleChange(newValue) {
+      setselected(newValue);
+  }
+  const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Student" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
-        <VerticalNavbar />
-        <div className="w-full">
+      <MainHeader title="Future Talent Academy : Student SUbject" />
+      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
+        <VerticalNavbar onChange={handleChange} data={data} />
+        <div className="w-full pt-20">
           <SubjectList subjects={subjects} />
         </div>
       </div>

@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
-import logo from '../../public/LOGO_V0.1-01.png';
+import logo from '../../../public/LOGO_V0.1-01.png';
 
-export default function Hero() {
+export default function Hero({classes}) {
   const router = useRouter();
-  
+  console.log(classes)
   return (
     <div className="flex flex-col bg-white border rounded-xl py-5">
       <div className="flex justify-between items-center gap-5 mb-5 px-5">
@@ -24,7 +24,7 @@ export default function Hero() {
         </h1>
       </div>
       <h1 className="font-bold text-2xl md:text-5xl text-center w-full px-20">
-        1<sup>st</sup> quarter ICT Worksheet For Grade 9
+        1<sup>st</sup> quarter ICT Worksheet For Grade {classes}
       </h1>
     </div>
   );
