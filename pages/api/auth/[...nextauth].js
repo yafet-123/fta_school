@@ -1,63 +1,77 @@
+
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
 
 export default NextAuth({
-    session:{
-        strategy:"jwt"
+    session: {
+        strategy: "jwt"
     },
     providers: [
         CredentialsProvider({
-            id: 'credentials',
-            name: 'my-project',
-            credentials: {},
-            pages: ({ credentials }) => ({
-                signIn: `/auth/signin-${credentials.type}`,  // Dynamic signIn page based on credentials.type
-                error: '/auth/error',
-            }),
+            id: 'user-credentials',
+            name: 'user-credentials',
+            credentials: {
+                username: { label: "Username", type: "text" },
+                password: { label: "Password", type: "password" },
+                userType: { label: "User Type", type: "select", options: ['user'] },
+            },
             async authorize(credentials, req) {
-                console.log(credentials.type)
-                if (credentials.type === 'user') {
-                    const payload = {
-                        username: credentials.username,
-                        password: credentials.password,
-                    };
+                const payload = {
+                    username: credentials.username,
+                    password: credentials.password,
+                };
                     
-                    let user
-                    const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/login`,{
-                        "username": payload.username,
-                        "password": payload.password
-                    }).then(function (response) {
-                        user = response.data
+                let user
+                console.log(payload)
+                const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/login`,{
+                    "username": payload.username,
+                    "password": payload.password
+                }).then(function (response) {
+                    user = response.data
                         
-                    }).catch(function (error) {
-                        throw new Error('Login Failed')
-                    });
+                }).catch(function (error) {
+                    throw new Error('Login Failed')
+                });
 
-                    return user
-                } else if (credentials.type === 'student') {
-                    const payload = {
-                        username: credentials.username,
-                        password: credentials.password,
-                    };
+                return user;
+            },
+        }),
+        CredentialsProvider({
+            id: 'student-credentials',
+            name: 'student-credentials',
+            credentials: {
+                username: { label: "Username", type: "text" },
+                password: { label: "Password", type: "password" },
+                userType: { label: "User Type", type: "select", options: ['student'] },
+            },
+            async authorize(credentials, req) {
+                const payload = {
+                    username: credentials.username,
+                    password: credentials.password,
+                };
                     
-                    let student
-                    const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/loginStudent`,{
-                        "username": payload.username,
-                        "password": payload.password
-                    }).then(function (response) {
-                        student = response.data
+                let student
+                console.log(payload)
+                const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/loginStudent`,{
+                    "username": payload.username,
+                    "password": payload.password
+                }).then(function (response) {
+                    student = response.data
                         
-                    }).catch(function (error) {
-                        throw new Error('Login Failed')
-                    });
+                }).catch(function (error) {
+                    throw new Error('Login Failed')
+                });
 
-                    return student
-                }
+                return student;
             },
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+        signIn: '/auth/signin',
+        error: '/auth/error',
+    },
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
@@ -74,9 +88,8 @@ export default NextAuth({
             session.user.user_id = token.userId;
             session.user.role = token.role;
             session.user.accessTokenExpires = token.accessTokenExpires;
-            
+
             return session;
         },
     },
-    
 });

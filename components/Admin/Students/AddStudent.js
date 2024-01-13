@@ -37,6 +37,7 @@ export function AddStudent({classes}) {
                 'UserName':UserName,
                 'Password':password,
                 'email':email,
+                'role':'student',
                 'class_id':classId,
                 "user_id": UserData.user_id,
             }).then(function (response) {
