@@ -14,7 +14,6 @@ export const Navbar = () => {
   const router = useRouter();
   const NavLinks = [
     { path: "/", name: "Home" },
-    { path: "/grade", name: "Grade" },
     { path: "/contact", name: "Contact" },
     { path: "/auth/signin-user", name: "Login" },
   ];
