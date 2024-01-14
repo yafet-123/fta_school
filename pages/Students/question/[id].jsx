@@ -87,11 +87,7 @@ export async function getServerSideProps(context) {
 const Question = ({Allquestion,questionlength,classes}) => {
   const router = useRouter();
   const id = router.query.id;
-  console.log(Allquestion)
- 
-  console.log(router.query.id)
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState('');
   const [checked, setChecked] = useState(false);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [showResult, setShowResult] = useState(false);
@@ -101,21 +97,46 @@ const Question = ({Allquestion,questionlength,classes}) => {
     wrongAnswers: 0,
   });
   const [totalscore, settotalscore] = useState(0)
-  console.log(html)
+
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  console.log(selectedAnswers)
+
+
+  const onAnswerSelected = (answer, question_id, points) => {
+    console.log(points)
+    console.log(question_id)
+    console.log(selectedAnswers)
+    setSelectedAnswers((prevSelectedAnswers) => ({
+      ...prevSelectedAnswers,
+      [question_id]: {
+        answer,
+        question_id,
+        points,
+      },
+    }));
+  };
+
+  const allQuestionsAnswered = Allquestion.every((question) => {
+  const isAnswered = selectedAnswers.hasOwnProperty(question.question_id);
+  console.log(`Question ${question.question_id} answered: ${isAnswered}`);
+  return isAnswered;
+});
+
+
   const { question, answers, correctAnswer } = Allquestion[activeQuestion];
 
-  const onAnswerSelected = (answer, idx, point) => {
-    setChecked(true);
-    setSelectedAnswerIndex(idx);
-    if (answer === correctAnswer) {
-      settotalscore(totalscore+=1)
-      setSelectedAnswer(true);
-      console.log('true');
-    } else {
-      setSelectedAnswer(false);
-      console.log('false');
-    }
-  };
+  // const onAnswerSelected = (answer, idx, point) => {
+  //   setChecked(true);
+  //   setSelectedAnswerIndex(idx);
+  //   if (answer === correctAnswer) {
+  //     settotalscore(totalscore+=1)
+  //     setSelectedAnswer(true);
+  //     console.log('true');
+  //   } else {
+  //     setSelectedAnswer(false);
+  //     console.log('false');
+  //   }
+  // };
 
   // Calculate score and increment to next question
   const nextQuestion = () => {
@@ -173,27 +194,27 @@ const Question = ({Allquestion,questionlength,classes}) => {
                     {question.answer.map((answer, idx) => (
                       <li
                         key={idx}
-                        onClick={() => onAnswerSelected(answer, idx, Allquestion[activeQuestion].points)}
+                        onClick={() => onAnswerSelected(answer, question.question_id, question.points)}
                         className={` list-none mb-5 px-[16px] py-4 border-2 border-[#d3d3d3] cursor-pointer rounded-lg
-                          ${selectedAnswerIndex === idx ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
+                          ${ selectedAnswers[question.question_id] && selectedAnswers[question.question_id].answer === answer ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
                         `}
                       >
                         <span>{answer}</span>
                       </li>
                     ))}
-                    {checked ? (
-                      <button onClick={nextQuestion} className='px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#808080] '>
-                        {activeQuestion === questionlength-1 ? 'Finish' : 'Next'}
-                      </button>
-                    ) : (
-                      <button onClick={nextQuestion} disabled className='px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#d8d8d8] '>
-                        {' '}
-                        {activeQuestion === questionlength-1 ? 'Finish' : 'Next'}
-                      </button>
-                    )}
                   </div>
                 </div>
               ))}
+
+              <button 
+                onClick={nextQuestion} 
+                disabled={!allQuestionsAnswered}
+                className={`px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#808080]
+                  ${ !allQuestionsAnswered ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
+                `}
+              >
+                Submit
+              </button>
           </div>
         </div>
       </div>
