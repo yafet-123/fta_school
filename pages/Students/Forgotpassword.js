@@ -1,4 +1,4 @@
-import { MainHeader } from '../components/common/MainHeader';
+import { MainHeader } from '../../components/common/MainHeader';
 import React from "react";
 import axios from 'axios';
 import { useState,useEffect, useContext} from 'react'
