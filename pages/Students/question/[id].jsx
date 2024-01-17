@@ -13,7 +13,6 @@ export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const id = query.id
   const session = await getSession(context);
-  console.log(session)
   
   const student = await prisma.Students.findUnique({
     where:{ students_id: Number(session.user.user_id) },
@@ -26,7 +25,13 @@ export async function getServerSideProps(context) {
     }
     
   });
-  console.log(student)
+
+  const types = await prisma.QuestionType.findUnique({
+    where:{ question_type_id: Number(id) },  
+  });
+
+  console.log(types.questiontypeName)
+  const type = types.questiontypeName
   const question = await prisma.Question.findMany({
       where:{
         QuestionTypeQuestion:{
@@ -47,10 +52,14 @@ export async function getServerSideProps(context) {
             UserName:true
           }
         },
-
+        Subject:{
+          select:{
+            SubjectName: true
+          }
+        }
       }
     })
-
+  console.log(question)
   const questionCount = await prisma.question.aggregate({
     where: {
       QuestionTypeQuestion: {
@@ -65,7 +74,6 @@ export async function getServerSideProps(context) {
       question_id: true // Assuming question_id is the primary key of your Question model
     }
   });
-  console.log(question)
   const Allquestion = question.map((data)=>({
     question_id:data.question_id,
     question:data.question,
@@ -79,12 +87,13 @@ export async function getServerSideProps(context) {
     props: {
       Allquestion,
       questionlength,
-      classes
+      classes,
+      type
     }, // will be passed to the page component as props
   }
 }
 
-const Question = ({Allquestion,questionlength,classes}) => {
+const Question = ({Allquestion,questionlength,classes,type}) => {
   const router = useRouter();
   const id = router.query.id;
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -165,13 +174,14 @@ const Question = ({Allquestion,questionlength,classes}) => {
       setselected(newValue);
   }
   const { status, data } = useSession();
+  console.log(type)
   return (
     <React.Fragment>
       <MainHeader title="Future Talent Academy : Students" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
-          <Hero Allquestion={Allquestion} classes={classes} />
+          <Hero Allquestion={Allquestion} classes={classes} type={type} />
           <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
           <div className="lg:px-16">
               {Allquestion.map((question, index) => (

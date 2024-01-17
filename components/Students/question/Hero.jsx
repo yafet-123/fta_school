@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import logo from '../../../public/LOGO_V0.1-01.png';
 
-export default function Hero({classes}) {
+export default function Hero({classes,type}) {
   const router = useRouter();
   console.log(classes)
   return (
@@ -24,7 +24,7 @@ export default function Hero({classes}) {
         </h1>
       </div>
       <h1 className="font-bold text-2xl md:text-5xl text-center w-full px-20">
-        1<sup>st</sup> quarter ICT Worksheet For Grade {classes}
+        1<sup>st</sup> quarter ICT {type} For Grade {classes}
       </h1>
     </div>
   );
