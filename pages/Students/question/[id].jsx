@@ -15,6 +15,8 @@ import axios from 'axios';
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const id = query.id
+  const SubjectId = query.SubjectId
+  console.log(SubjectId)
   const session = await getSession(context);
   
   const student = await prisma.Students.findUnique({
@@ -37,13 +39,18 @@ export async function getServerSideProps(context) {
   const type = types.questiontypeName
   const question = await prisma.Question.findMany({
       where:{
-        QuestionTypeQuestion:{
-        some: {
-          QuestionType:{
-            question_type_id: Number(id)
-          }
-        }
-      } 
+        AND: [
+          {
+            QuestionTypeQuestion:{
+              some: {
+                QuestionType:{
+                  question_type_id: Number(id)
+                },
+              },
+            },
+          },
+          {subject_id: Number(SubjectId),},
+        ]
       },
       orderBy: {
         // Specify the column and the order (asc for ascending)
@@ -81,7 +88,6 @@ export async function getServerSideProps(context) {
   const Allquestion = question.map((data)=>({
     question_id:data.question_id,
     question:data.question,
-    correctAnswer:data.correctAnswer,
     points:data.points,
     answer:data.answer || null
   }))
@@ -132,8 +138,6 @@ const Question = ({Allquestion,questionlength,classes,type}) => {
     return isAnswered;
   });
 
-  const { question, answers, correctAnswer } = Allquestion[activeQuestion];
-
   async function calculateScore (e){
     e.preventDefault();
     const selectedAnswersArray = await Object.values(selectedAnswers);
@@ -161,53 +165,59 @@ const Question = ({Allquestion,questionlength,classes,type}) => {
       <MainHeader title="Future Talent Academy : Students" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
-          <Hero Allquestion={Allquestion} classes={classes} type={type} />
-          <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
-          <div className="lg:px-16">
-              {Allquestion.map((question, index) => (
-                <div className="flex flex-col">
-                  <div className="py-5">
-                    <h2 className={`font-bold text-[#00225F] text-lg md:text-xl ${!showResult ? "flex" : "hidden"}`}>
-                      Question: {index + 1}
-                      <span>/{questionlength}</span>
-                    </h2>
-                  </div>
-                  <div className='bg-[#f8f8f8] p-[1rem] mt-[1rem] rounded-xl' key={index}>
-                    <div className="flex justify-between items-center">
-                      <h3 className={` font-bold w-3/4 text-[#00225F] text-lg md:text-xl mb-5 `}>
-                        {question.question}
-                      </h3>
-                      <p className="font-bold text-[#00225F] text-lg md:text-xl mb-5">
-                        {question.points} point
-                      </p>
-                    </div>
-                    {question.answer.map((answer, idx) => (
-                      <li
-                        key={idx}
-                        onClick={() => onAnswerSelected(answer, question.question_id, question.points)}
-                        className={` list-none mb-5 px-[16px] py-4 border-2 border-[#d3d3d3] cursor-pointer rounded-lg
-                          ${ selectedAnswers[question.question_id] && selectedAnswers[question.question_id].answer === answer ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
-                        `}
-                      >
-                        <span>{answer}</span>
-                      </li>
-                    ))}
-                  </div>
-                </div>
-              ))}
-
-              <button 
-                onClick={calculateScore} 
-                disabled={!allQuestionsAnswered}
-                className={`px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#808080]
-                  ${ allQuestionsAnswered ? 'text-white bg-black' : 'hover:bg-[#d8d8d8] hover:text-black'}
-                `}
-              >
-                Submit
-              </button>
+        {Allquestion.length == 0 ? (
+          <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20">
+            <p className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">No questions available.</p>
           </div>
-        </div>
+        ) : (
+          <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
+            <Hero Allquestion={Allquestion} classes={classes} type={type} />
+            <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
+            <div className="lg:px-16">
+                {Allquestion.map((question, index) => (
+                  <div className="flex flex-col">
+                    <div className="py-5">
+                      <h2 className={`font-bold text-[#00225F] text-lg md:text-xl ${!showResult ? "flex" : "hidden"}`}>
+                        Question: {index + 1}
+                        <span>/{questionlength}</span>
+                      </h2>
+                    </div>
+                    <div className='bg-[#f8f8f8] p-[1rem] mt-[1rem] rounded-xl' key={index}>
+                      <div className="flex justify-between items-center">
+                        <h3 className={` font-bold w-3/4 text-[#00225F] text-lg md:text-xl mb-5 `}>
+                          {question.question}
+                        </h3>
+                        <p className="font-bold text-[#00225F] text-lg md:text-xl mb-5">
+                          {question.points} point
+                        </p>
+                      </div>
+                      {question.answer.map((answer, idx) => (
+                        <li
+                          key={idx}
+                          onClick={() => onAnswerSelected(answer, question.question_id, question.points)}
+                          className={` list-none mb-5 px-[16px] py-4 border-2 border-[#d3d3d3] cursor-pointer rounded-lg
+                            ${ selectedAnswers[question.question_id] && selectedAnswers[question.question_id].answer === answer ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
+                          `}
+                        >
+                          <span>{answer}</span>
+                        </li>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+
+                <button 
+                  onClick={calculateScore} 
+                  disabled={!allQuestionsAnswered}
+                  className={`px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#808080]
+                    ${ allQuestionsAnswered ? 'text-white bg-black' : 'hover:bg-[#d8d8d8] hover:text-black'}
+                  `}
+                >
+                  Submit
+                </button>
+            </div>
+          </div>
+        )}
         <ReactModal
           isOpen={LoadingmodalIsOpen}
           // onRequestClose={closeModal}

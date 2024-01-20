@@ -44,6 +44,8 @@ export async function getServerSideProps(context) {
 export default function Category({AllquestionCategory}) {
   console.log(AllquestionCategory)
   const router = useRouter();
+  const { id } = router.query;
+  console.log(id)
   const handleSubject = (id) => {
     router.push(`/subject/${id}`);
   };
@@ -57,7 +59,7 @@ export default function Category({AllquestionCategory}) {
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className='w-full px-2 lg:px-32 h-full pt-20 pb-96'>
-          <QuestionCategory AllquestionCategory={AllquestionCategory} />
+          <QuestionCategory AllquestionCategory={AllquestionCategory} subjectId={id} />
         </div>
       </div>
     </React.Fragment>
