@@ -18,8 +18,8 @@ import { useSession, signIn, signOut  } from "next-auth/react";
 export function VerticalNavbar({onChange, data}){
     const SideBarList = [
         { link: "/Students", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
-        { link: "/Students/subject", icon: <RiAdminFill size={25}/>, name: "Question",},
-        { link: "/Students/subject", icon: <RiAdminFill size={25}/>, name: "Answer",},
+        { link: "/Students/question/subject", icon: <RiAdminFill size={25}/>, name: "Question",},
+        { link: "/Students/answered/subject", icon: <RiAdminFill size={25}/>, name: "Answer",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);

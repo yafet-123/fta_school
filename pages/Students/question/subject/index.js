@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { prisma } from '../../../util/db.server.js'
+import { prisma } from '../../../../util/db.server.js'
 import { getSession } from "next-auth/react";
-import { MainHeader } from '../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../components/Students/VerticalNavbar";
-import SubjectList from '../../../components/Students/subject/SubjectList'
+import { MainHeader } from '../../../../components/common/MainHeader';
+import { VerticalNavbar } from "../../../../components/Students/VerticalNavbar";
+import SubjectList from '../../../../components/Students/question/subject/SubjectList'
 import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
