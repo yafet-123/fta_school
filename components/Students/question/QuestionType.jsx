@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 export default function QuestionType({Allquestiontype,subjectId}) {
   const router = useRouter();
   const handleSubject = (id) => {
-    router.push(`/Students/question/${id}?subject=${subjectId}`);
+    router.push(`/Students/question/${id}?subjectId=${subjectId}`);
   };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

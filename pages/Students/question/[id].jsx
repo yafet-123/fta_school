@@ -15,10 +15,11 @@ import axios from 'axios';
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const id = query.id
-  const SubjectId = query.SubjectId
+  const SubjectId = query.subjectId
+
   console.log(SubjectId)
   const session = await getSession(context);
-  
+  const studentId = session.user.user_id
   const student = await prisma.Students.findUnique({
     where:{ students_id: Number(session.user.user_id) },
     include:{
@@ -37,6 +38,24 @@ export async function getServerSideProps(context) {
 
   console.log(types.questiontypeName)
   const type = types.questiontypeName
+
+  const hasUserAnswered = await prisma.UserAnswer.findFirst({
+    where: {
+      students_id: Number(session.user.user_id),
+      question_type_id: Number(id),
+    },
+  });
+
+  if (hasUserAnswered) {
+    // Redirect or handle the case where the user has already answered questions
+    return {
+      redirect: {
+        destination: '/Students/question/answered', // Replace with the path you want to redirect to
+        permanent: false,
+      },
+    };
+  }
+  console.log(id,SubjectId)
   const question = await prisma.Question.findMany({
       where:{
         AND: [
@@ -98,12 +117,14 @@ export async function getServerSideProps(context) {
       Allquestion,
       questionlength,
       classes,
-      type
+      type,
+      studentId,
+      SubjectId
     }, // will be passed to the page component as props
   }
 }
 
-const Question = ({Allquestion,questionlength,classes,type}) => {
+const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}) => {
   const router = useRouter();
   const id = router.query.id;
   const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
@@ -144,7 +165,9 @@ const Question = ({Allquestion,questionlength,classes,type}) => {
     setLoadingModalIsOpen(true);
     const data = await axios.post(`../../api/answer/check`,{
       'selectedAnswers':selectedAnswersArray,
-      'id': id
+      'id': id,
+      'studentId':studentId,
+      'SubjectId':SubjectId
     }).then(function (response) {
       console.log(response.data);
       setLoadingModalIsOpen(false);

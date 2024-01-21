@@ -220,7 +220,7 @@ model QuestionTypeQuestion{
   Question                       Question   @relation(fields: [question_id], references: [question_id], onDelete: Cascade, onUpdate: Cascade)
   User                           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
 }
-
+ 
 model UserAnswer {
   user_answer_id      Int           @id @default(autoincrement())
   students_id         Int

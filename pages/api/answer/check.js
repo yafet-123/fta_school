@@ -6,8 +6,8 @@ export default async function handleadduser(req, res){
   	}
 
 	try {
-	    const { selectedAnswers, id } = req.body; 
-	    console.log(selectedAnswers)
+	    const { selectedAnswers, id, studentId, SubjectId} = req.body; 
+	    console.log(SubjectId)
 
 	    const question = await prisma.Question.findMany({
 	      where:{
@@ -49,6 +49,7 @@ export default async function handleadduser(req, res){
     		return res.status(400).json({ error: 'Invalid request body' });
   		}
 
+
 	    let totalPoints = 0;
 
   		for (const userAnswer of selectedAnswers) {
@@ -61,9 +62,29 @@ export default async function handleadduser(req, res){
       			if (userSelectedAnswer === correctAnswer) {
       				totalPoints += userAnswer.points;
       			}
+      			await prisma.UserAnswer.create({
+		          data: {
+		            students_id: Number(studentId), // Replace with the actual student ID
+		            subject_id: Number(SubjectId), // Replace with the actual subject ID
+		            question_type_id: Number(id),
+		            question_id: Number(userAnswer.question_id),
+		            user_answer: userSelectedAnswer,
+		            points: Number(userAnswer.points),
+		          },
+		        });
     		}
   		}
-  		console.log(totalPoints)
+
+  		const mark = await prisma.Mark.create({
+	      data: {
+	        students_id: Number(studentId), // Replace with the actual student ID
+	        subject_id: Number(SubjectId), // Replace with the actual subject ID
+	        question_type_id: Number(id),
+	        mark: Number(totalPoints),
+	      },
+    	});
+
+  		console.log(mark)
   		res.status(200).json({ totalPoints })
 	  } catch (error) {
 	    console.error('Error adding user:', error);
