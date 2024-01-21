@@ -41,8 +41,9 @@ export async function getServerSideProps(context) {
 
   const hasUserAnswered = await prisma.UserAnswer.findFirst({
     where: {
-      students_id: Number(session.user.user_id),
-      question_type_id: Number(id),
+        students_id: Number(session.user.user_id),
+        question_type_id: Number(id),
+        subject_id: Number(SubjectId),
     },
   });
 
@@ -50,7 +51,7 @@ export async function getServerSideProps(context) {
     // Redirect or handle the case where the user has already answered questions
     return {
       redirect: {
-        destination: '/Students/question/answered', // Replace with the path you want to redirect to
+        destination: '/Students/question/answed', // Replace with the path you want to redirect to
         permanent: false,
       },
     };
@@ -158,7 +159,7 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
     console.log(`Question ${question.question_id} answered: ${isAnswered}`);
     return isAnswered;
   });
-
+ 
   async function calculateScore (e){
     e.preventDefault();
     const selectedAnswersArray = await Object.values(selectedAnswers);

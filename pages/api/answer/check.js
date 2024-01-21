@@ -49,7 +49,7 @@ export default async function handleadduser(req, res){
     		return res.status(400).json({ error: 'Invalid request body' });
   		}
 
-
+ 
 	    let totalPoints = 0;
 
   		for (const userAnswer of selectedAnswers) {
