@@ -181,6 +181,7 @@ model Question {
   answer                  String[]
   points                  Int?
   subject_id              Int?
+  timedisplay             DateTime?
   Subject                 Subject?              @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
   question_category_id    Int
   User                    User?                 @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)

@@ -39,23 +39,23 @@ export async function getServerSideProps(context) {
   console.log(types.questiontypeName)
   const type = types.questiontypeName
 
-  const hasUserAnswered = await prisma.UserAnswer.findFirst({
-    where: {
-        students_id: Number(session.user.user_id),
-        question_type_id: Number(id),
-        subject_id: Number(SubjectId),
-    },
-  });
+  // const hasUserAnswered = await prisma.UserAnswer.findFirst({
+  //   where: {
+  //       students_id: Number(session.user.user_id),
+  //       question_type_id: Number(id),
+  //       subject_id: Number(SubjectId),
+  //   },
+  // });
 
-  if (hasUserAnswered) {
-    // Redirect or handle the case where the user has already answered questions
-    return {
-      redirect: {
-        destination: '/Students/question/answed', // Replace with the path you want to redirect to
-        permanent: false,
-      },
-    };
-  }
+  // if (hasUserAnswered) {
+  //   // Redirect or handle the case where the user has already answered questions
+  //   return {
+  //     redirect: {
+  //       destination: '/Students/question/answed', // Replace with the path you want to redirect to
+  //       permanent: false,
+  //     },
+  //   };
+  // }
   console.log(id,SubjectId)
   const question = await prisma.Question.findMany({
       where:{
