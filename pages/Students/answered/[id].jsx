@@ -69,6 +69,10 @@ export async function getServerSideProps(context) {
               },
             },
           },
+          {ModifiedDate:{
+              gt: prisma.Question.col('timedisplay'),
+            },
+          },
           {subject_id: Number(SubjectId),},
         ]
       },
@@ -199,7 +203,7 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
             <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
             <div className="lg:px-16">
                 {Allquestion.map((question, index) => (
-                  <div className="flex flex-col">
+                  <div key={index} className="flex flex-col">
                     <div className="py-5">
                       <h2 className={`font-bold text-[#00225F] text-lg md:text-xl ${!showResult ? "flex" : "hidden"}`}>
                         Question: {index + 1}
