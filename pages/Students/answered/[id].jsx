@@ -17,7 +17,6 @@ export async function getServerSideProps(context) {
   const id = query.id
   const SubjectId = query.subjectId
 
-  console.log(SubjectId)
   const session = await getSession(context);
   const studentId = session.user.user_id
   const student = await prisma.Students.findUnique({
@@ -36,26 +35,9 @@ export async function getServerSideProps(context) {
     where:{ question_type_id: Number(id) },  
   });
 
-  console.log(types.questiontypeName)
+
   const type = types.questiontypeName
 
-  // const hasUserAnswered = await prisma.UserAnswer.findFirst({
-  //   where: {
-  //       students_id: Number(session.user.user_id),
-  //       question_type_id: Number(id),
-  //       subject_id: Number(SubjectId),
-  //   },
-  // });
-
-  // if (hasUserAnswered) {
-  //   // Redirect or handle the case where the user has already answered questions
-  //   return {
-  //     redirect: {
-  //       destination: '/Students/question/answed', // Replace with the path you want to redirect to
-  //       permanent: false,
-  //     },
-  //   };
-  // }
   console.log(id,SubjectId)
   const question = await prisma.Question.findMany({
       where:{
@@ -67,10 +49,6 @@ export async function getServerSideProps(context) {
                   question_type_id: Number(id)
                 },
               },
-            },
-          },
-          {ModifiedDate:{
-              gt: prisma.Question.col('timedisplay'),
             },
           },
           {subject_id: Number(SubjectId),},
@@ -93,7 +71,14 @@ export async function getServerSideProps(context) {
         }
       }
     })
-  console.log(question)
+
+  const filteredQuestions = question.filter((ques) => {
+      // Customize the comparison logic based on your requirements
+    console.log(ques.ModifiedDate < ques.timedisplay)
+    return ques.ModifiedDate < ques.timedisplay;
+  });
+
+  console.log(filteredQuestions)
   const questionCount = await prisma.question.aggregate({
     where: {
       QuestionTypeQuestion: {
