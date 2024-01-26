@@ -4,7 +4,7 @@ import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import { useSession } from "next-auth/react";
-import { MainHeader } from '../../components/common/MainHeader';
+import { MainHeader } from '../../../../components/common/MainHeader';
 import React from 'react'
 import Link from 'next/link'
 export default function SignIn({ csrfToken }) {
@@ -18,7 +18,7 @@ export default function SignIn({ csrfToken }) {
     if (status === "unauthenticated")
         return (
             <React.Fragment>
-                <MainHeader title="Login" />
+                <MainHeader title="Admin Login" />
                 <Formik
                     initialValues={{ username: '', password: '' }}
                     validationSchema={Yup.object({
@@ -26,7 +26,7 @@ export default function SignIn({ csrfToken }) {
                         password: Yup.string().required('Please enter your password'),
                     })}
                     onSubmit={async (values, { setSubmitting }) => {
-                        const res = await signIn('credentials', {
+                        const res = await signIn('user-credentials', {
                             username: values.username,
                             password: values.password,
                             callbackUrl: "/Admin",

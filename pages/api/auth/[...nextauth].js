@@ -66,6 +66,35 @@ export default NextAuth({
                 return student;
             },
         }),
+        CredentialsProvider({
+            id: 'teacher-credentials',
+            name: 'teacher-credentials',
+            credentials: {
+                username: { label: "Username", type: "text" },
+                password: { label: "Password", type: "password" },
+                userType: { label: "User Type", type: "select", options: ['teacher'] },
+            },
+            async authorize(credentials, req) {
+                const payload = {
+                    username: credentials.username,
+                    password: credentials.password,
+                };
+                    
+                let teacher
+                console.log(payload)
+                const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/loginTeacher`,{
+                    "username": payload.username,
+                    "password": payload.password
+                }).then(function (response) {
+                    teacher = response.data
+                        
+                }).catch(function (error) {
+                    throw new Error('Login Failed')
+                });
+
+                return teacher;
+            },
+        }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
     pages: {

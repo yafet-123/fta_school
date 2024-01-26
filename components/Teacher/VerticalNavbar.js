@@ -17,17 +17,7 @@ import { useSession, signIn, signOut  } from "next-auth/react";
 
 export function VerticalNavbar({onChange, data}){
     const SideBarList = [
-        { link: "/Admin", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
-        { link: "/Admin/User", icon: <RiAdminFill size={25}/>, name: "User",},
-        { link: "/Admin/Teacher", icon: <GiTeacher size={25}/>, name: "Teacher",},
-        { link: "/Admin/Teacher/Assign", icon: <GiTeacher size={25}/>, name: "Assign Teacher",},
-        { link: "/Admin/Student", icon: <PiStudent size={25}/>, name: "Student",},
-        { link: "/Admin/Subject", icon: <SiBookstack size={25}/>, name: "Subject",},
-        { link: "/Admin/Class", icon: <SiGoogleclassroom size={25}/>, name: "Class",},
-        { link: "/Admin/Class/AssignSubject", icon: <WiMoonFirstQuarter size={25}/>, name: "Assign Subject To Class",},
-        { link: "/Admin/Quarter", icon: <WiMoonFirstQuarter size={25}/>, name: "Quarter",},
-        { link: "/Admin/QuestionCategory", icon: <FaQuestion size={25}/>, name: "Question Qategory",},
-        { link: "/Admin/Subject/AssignQuestionCategory", icon: <FaQuestion size={25}/>, name: "Assign Question Qategory",},
+        { link: "/Students", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);
@@ -73,7 +63,7 @@ export function VerticalNavbar({onChange, data}){
                     </div>
                     <div className="mt-auto flex flex-col">
                         <Link href="/">
-                            <a className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-white dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl">
+                            <a className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-black dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl">
                                 <span className="hidden lg:flex"><AiOutlineUser size={25} /> </span>
                                 <span className={`ml-1 lg:ml-4 text-xs lg:text-lg font-semibold ${sideBar ? "hidden" : "flex"} `}>{data?.user.name}</span>
                             </a>
@@ -84,7 +74,7 @@ export function VerticalNavbar({onChange, data}){
                             onClick={() => signOut({
                                 callbackUrl: '/auth/signin'
                             })} 
-                            className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-white dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl" href="#">
+                            className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-black dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl" href="#">
                             <span className="hidden lg:flex"><FiLogOut size={25} /></span>
                             <span className={`ml-1 lg:ml-4 text-xs lg:text-lg font-semibold ${sideBar ? "hidden" : "flex"} `}>Log Out</span>
                         </button>
