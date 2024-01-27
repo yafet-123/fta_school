@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  console.log(id,SubjectId)
+  console.log(id,SubjectId) 
   const question = await prisma.Question.findMany({
       where:{
         AND: [
