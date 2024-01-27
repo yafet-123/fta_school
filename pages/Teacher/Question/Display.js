@@ -6,49 +6,50 @@ import { prisma } from '../../../util/db.server.js'
 import { getSession } from "next-auth/react";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../components/Teacher/VerticalNavbar";
-import SubjectList from '../../../components/Teacher/subject/SubjectList'
+import ClassList from '../../../components/Teacher/Class/ClassList'
 import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session)
   
-  const student = await prisma.Students.findUnique({
-    where:{ students_id: Number(session.user.user_id) },
+  const teacher = await prisma.Teacher.findUnique({
+    where:{ teacher_id: Number(session.user.user_id) },
     
   });
 
-  const studentsubject = await prisma.classSubject.findMany({
+  const teacherClass = await prisma.ClassTeacher.findMany({
     where: {
       // Specify your conditions here
-      class_id: Number(student.class_id),
+      teacher_id: Number(teacher.teacher_id),
     },
     include: {
-      Subject: {
+      Class: {
         select: {
-          subject_id: true,
-          SubjectName: true,
+          class_id: true,
+          ClassName: true,
         },
       },
     },
   });
-  console.log(studentsubject)
+  console.log(teacherClass)
   
-  const subjects = studentsubject.map((data)=>({
-     class_subject_id: data.class_subject_id,
-     subject_id: data.Subject.subject_id,
-     SubjectName: data.Subject.SubjectName
+  const classes = teacherClass.map((data)=>({
+     teacher_class_id: data.teacher_class_id,
+     class_id: data.Class.class_id,
+     subject_id: data.subject_id,
+     className: data.Class.ClassName
   }))
 
   return {
     props: {
-      subjects,
+      classes,
     }, // will be passed to the page component as props
   }
 }
 
-export default function Add({subjects}) {
-  console.log(subjects)
+export default function Add({classes}) {
+  console.log(classes)
   const router = useRouter();
   function handleChange(newValue) {
       setselected(newValue);
@@ -56,11 +57,11 @@ export default function Add({subjects}) {
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Student SUbject" />
+      <MainHeader title="Future Talent Academy : Teacher Class" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <SubjectList subjects={subjects} />
+          <ClassList classes={classes} />
         </div>
       </div>
     </React.Fragment>

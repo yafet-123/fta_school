@@ -33,7 +33,7 @@ export default async function handleaddlogin(req, res) {
     }
 
     const createJWT = jwt.sign(
-      { userId: user.students_id, user: user.UserName },
+      { userId: user.teacher_id, user: user.UserName },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_LIFETIME,
@@ -43,7 +43,7 @@ export default async function handleaddlogin(req, res) {
     const token = createJWT;
 
     res.status(StatusCodes.OK).json({
-      userId: user.students_id,
+      userId: user.teacher_id,
       name: user.UserName,
       role: user.role,
       email: user.email,
