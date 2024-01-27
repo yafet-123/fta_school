@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 export default function SubjectList({subjects}) {
   const router = useRouter();
   const handleSubject = (id) => {
-    router.push(`/Students/question/category/${id}`);
+    router.push(`/Teacher/Question/category/?subjectId=${id}`);
   };
   return (
     <div className="py-10 px-5 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">

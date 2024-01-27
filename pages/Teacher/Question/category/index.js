@@ -1,50 +1,65 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import QuestionCategory from "../../../../components/Teacher/QuestionCategory"
 import { prisma } from '../../../../util/db.server.js'
-import { getSession } from "next-auth/react";
 import { MainHeader } from '../../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
-import SubjectList from '../../../../components/Teacher/subject/SubjectList'
 import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const id = query.subjectId
-
-  const allSubjects = await prisma.Subject.findMany({
-    where: {
-      subject_id: Number(id),
-    }
-  });
   
-  const subjects = allSubjects.map((data)=>({
-     subject_id: data.subject_id,
-     SubjectName: data.SubjectName
-  }))
+  const questionCategory = await prisma.QuestionCategory.findMany({
+      where:{
+        SubjectQuestionCategory:{
+        some: {
+          Subject:{
+            subject_id: Number(id)
+          }
+        }
+      } 
+      },
+      include:{
+        User:{
+          select:{
+            UserName:true
+          }
+        },
+      }
+    })
 
-  return {
-    props: {
-      subjects,
-    }, // will be passed to the page component as props
+    const AllquestionCategory = questionCategory.map((data)=>({
+      question_category_id:data.question_category_id,
+      questioncategoryName:data.questioncategoryName,
+    }))
+
+    return {
+      props: {
+        AllquestionCategory,
+      }, // will be passed to the page component as props
   }
 }
 
-export default function Subjects({subjects}) {
-  console.log(subjects)
+export default function Category({AllquestionCategory}) {
+  console.log(AllquestionCategory)
   const router = useRouter();
+  const { subjectId } = router.query;
+  console.log(subjectId)
+  const handleSubject = (subjectId) => {
+    router.push(`/subject/${subjectId}`);
+  };
   function handleChange(newValue) {
       setselected(newValue);
   }
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Student SUbject" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
+      <MainHeader title="Future Talent Academy : Students" />
+      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <div className="w-full pt-20">
-          <SubjectList subjects={subjects} />
+        <div className='w-full px-2 lg:px-32 h-full pt-20 pb-96'>
+          <QuestionCategory AllquestionCategory={AllquestionCategory} subjectId={subjectId} />
         </div>
       </div>
     </React.Fragment>
