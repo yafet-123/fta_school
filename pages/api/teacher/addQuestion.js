@@ -8,6 +8,7 @@ export default async function handleadduser(req, res){
 	console.log(Question[0].answers)
 	console.log(req.body)
 	let addquestion
+	let classQuestion
 	for (let j = 0; j < Question.length; j++) {
 		console.log(Question[j].answers)
 	  	addquestion = await prisma.Question.create({
@@ -28,20 +29,31 @@ export default async function handleadduser(req, res){
     			},   
 		    }
 	  	})
-	}
-	let classQuestion
-	for (const question of addquestion) {
-		for (let i = 0; i < Question.length; i++) {
+
+	  	for (let i = 0; i < classId.length; i++) {
 			classQuestion = await prisma.ClassQuestion.create({
 			    data:{             
-	    			teacher_id: question.teacher_id,
-	    			question_id: question.question_id,
+	    			teacher_id: addquestion.teacher_id,
+	    			question_id: addquestion.question_id,
 	    			class_id: classId[i],
 	    		}
 	    	})
   		}
+	  	console.log(addquestion)
 	}
+	
+	// for (const question of addquestion) {
+	// 	for (let i = 0; i < classId.length; i++) {
+	// 		classQuestion = await prisma.ClassQuestion.create({
+	// 		    data:{             
+	//     			teacher_id: question.teacher_id,
+	//     			question_id: question.question_id,
+	//     			class_id: classId[i],
+	//     		}
+	//     	})
+  	// 	}
+	// }
 
 	console.log(classQuestion)
-	res.json(ClassQuestion)
+	res.json(classQuestion)
 }
