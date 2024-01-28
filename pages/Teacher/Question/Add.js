@@ -6,49 +6,67 @@ import { prisma } from '../../../util/db.server.js'
 import { getSession } from "next-auth/react";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../components/Teacher/VerticalNavbar";
-import SubjectList from '../../../components/Teacher/subject/SubjectList'
+import {AddQuestion} from '../../../components/Teacher/AddQuestion'
 import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session)
   
-  const student = await prisma.Students.findUnique({
-    where:{ students_id: Number(session.user.user_id) },
+  const teacherId = session.user.user_id;
+  const teacher = await prisma.Teacher.findUnique({
+    where:{ teacher_id: Number(session.user.user_id) },
     
   });
 
-  const studentsubject = await prisma.classSubject.findMany({
-    where: {
-      // Specify your conditions here
-      class_id: Number(student.class_id),
+  const classes = await prisma.ClassTeacher.findMany({
+    where:{
+      teacher_id:Number(teacher.teacher_id)
     },
-    include: {
-      Subject: {
-        select: {
-          subject_id: true,
-          SubjectName: true,
-        },
+    include:{
+      Class:{
+        select:{
+          ClassName:true
+        }
       },
-    },
-  });
-  console.log(studentsubject)
+      Subject:{
+        select:{
+          SubjectName:true
+        }
+      },
+    }
+  })
+
+  const types = await prisma.QuestionType.findMany({})
   
-  const subjects = studentsubject.map((data)=>({
-     class_subject_id: data.class_subject_id,
-     subject_id: data.Subject.subject_id,
-     SubjectName: data.Subject.SubjectName
+  const Allclasses = classes.map((data)=>({
+    class_id:data.class_id,
+    ClassName:data.Class.ClassName,
+  }))
+
+  
+  const Allsubjects = classes.map((data)=>({
+    subject_id:data.subject_id,
+    SubjectName:data.Subject.SubjectName,
+  }))
+
+  const Alltypes = types.map((data)=>({
+    question_type_id:data.question_type_id,
+    questiontypeName:data.questiontypeName,
   }))
 
   return {
     props: {
-      subjects,
+      Allclasses,
+      Alltypes,
+      Allsubjects,
+      teacherId,
     }, // will be passed to the page component as props
   }
 }
 
-export default function Add({subjects}) {
-  console.log(subjects)
+export default function Add({Allclasses,Alltypes,Allsubjects,teacherId}) {
+  console.log(Allclasses)
   const router = useRouter();
   function handleChange(newValue) {
       setselected(newValue);
@@ -56,11 +74,11 @@ export default function Add({subjects}) {
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Student SUbject" />
+      <MainHeader title="Future Talent Academy : Add Question" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <SubjectList subjects={subjects} />
+          <AddQuestion Allclasses={Allclasses} Alltypes={Alltypes} Allsubjects={Allsubjects} teacherId={teacherId} />
         </div>
       </div>
     </React.Fragment>

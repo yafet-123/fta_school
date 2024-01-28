@@ -23,13 +23,11 @@ export async function getServerSideProps(context) {
         },
       }
     })
-    console.log("id")
+
     const Allquestiontype = questionType.map((data)=>({
       question_type_id:data.question_type_id,
       questiontypeName:data.questiontypeName,
     }))
-
-    console.log(Allquestiontype)
 
     return {
       props: {

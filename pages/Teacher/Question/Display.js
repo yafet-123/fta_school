@@ -170,7 +170,7 @@ const Display = ({Allquestion,questionlength,type, SubjectId}) => {
           </div>
         ) : (
           <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
-            <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
+            <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">{type} Question</h1>
             <div className="lg:px-16">
                 {Allquestion.map((question, index) => (
                   <div className="flex flex-col">
@@ -200,19 +200,22 @@ const Display = ({Allquestion,questionlength,type, SubjectId}) => {
                           <span>{answer}</span>
                         </li>
                       ))}
+                      <div className="flex justify-between items-center">
+                        <button
+                          className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded"
+                        >
+                          Edit
+                        </button>
+
+                        <button  
+                          className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
+                        >
+                            Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
-
-                <button 
-                  onClick={calculateScore} 
-                  disabled={!allQuestionsAnswered}
-                  className={`px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#808080]
-                    ${ allQuestionsAnswered ? 'text-white bg-black' : 'hover:bg-[#d8d8d8] hover:text-black'}
-                  `}
-                >
-                  Submit
-                </button>
             </div>
           </div>
         )}

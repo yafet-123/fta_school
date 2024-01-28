@@ -45,6 +45,7 @@ model Class {
   ClassSubject    ClassSubject[]
   Students        Students[]
   ClassTeacher    ClassTeacher[]
+  ClassQuestion   ClassQuestion[]
 }
 
 model Teacher {
@@ -60,6 +61,7 @@ model Teacher {
   ClassTeacher        ClassTeacher[]
   user_id             Int?
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  ClassQuestion       ClassQuestion[]
 }
 
 model Students{
@@ -129,7 +131,6 @@ model QuestionCategory{
   user_id               Int?
   questioncategoryName  String      @db.VarChar(255)
   User                  User?       @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
-  Question              Question[]
   QuestionType          QuestionType[]
   QuarterQuestionCategory QuarterQuestionCategory[]
   SubjectQuestionCategory SubjectQuestionCategory[]
@@ -172,7 +173,7 @@ model QuarterQuestionCategory {
   User                           User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   QuestionType QuestionType[]
 }
-
+ 
 model Question {
   question_id             Int                  @id @default(autoincrement())
   question                String
@@ -181,16 +182,29 @@ model Question {
   answer                  String[]
   points                  Int?
   subject_id              Int?
+  question_type_id        Int?
+  QuestionType            QuestionType?         @relation(fields: [question_type_id], references: [question_type_id], onUpdate: NoAction)
   timedisplay             DateTime?
   Subject                 Subject?              @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
-  question_category_id    Int
   Teacher                 Teacher?              @relation(fields: [teacher_id], references: [teacher_id], onUpdate: NoAction)
-  QuestionCategory        QuestionCategory?     @relation(fields: [question_category_id], references: [question_category_id], onUpdate: NoAction)
   Answer                  Answer[]
-  QuestionTypeQuestion QuestionTypeQuestion[]
-  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
-  ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
-  UserAnswer        UserAnswer?
+  QuestionTypeQuestion    QuestionTypeQuestion[]
+  CreatedDate             DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate            DateTime? @default(now()) @db.Timestamptz(6)
+  ClassQuestion           ClassQuestion[]
+  UserAnswer              UserAnswer?
+}
+
+model ClassQuestion{
+  class_question_id              Int               @id @default(autoincrement())
+  teacher_id                     Int?
+  question_id                    Int
+  class_id                       Int
+  CreatedDate                    DateTime?          @default(now()) @db.Timestamptz(6)
+  ModifiedDate                   DateTime?          @default(now()) @db.Timestamptz(6)
+  Question                       Question           @relation(fields: [question_id], references: [question_id], onDelete: Cascade, onUpdate: Cascade)
+  Class                          Class              @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
+  Teacher                        Teacher?           @relation(fields: [teacher_id], references: [teacher_id], onUpdate: NoAction)
 }
 
 model QuestionType{
@@ -208,6 +222,7 @@ model QuestionType{
   ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
   UserAnswer        UserAnswer[]
   Mark              Mark?
+  Question          Question[]
 }
 
 model QuestionTypeQuestion{

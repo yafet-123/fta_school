@@ -77,11 +77,6 @@ export async function getServerSideProps(context) {
         question_id: 'asc'
       },
       include:{
-        User:{
-          select:{
-            UserName:true
-          }
-        },
         Subject:{
           select:{
             SubjectName: true
