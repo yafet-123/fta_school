@@ -205,7 +205,9 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
         <VerticalNavbar onChange={handleChange} data={data} />
         {Allquestion.length == 0 ? (
           <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20">
-            <p className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">No questions available.</p>
+            <p className="text-center font-bold text-[#00225F] text-3xl md:text-3xl lg:text-4xl pt-10 mb-5">
+              No questions available at the moment. Please check back later.
+            </p>
           </div>
         ) : (
           <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
