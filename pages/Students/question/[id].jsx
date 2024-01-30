@@ -56,20 +56,31 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  console.log(id,SubjectId) 
-  const question = await prisma.Question.findMany({
+  console.log(id,SubjectId)  
+  const question = await prisma.ClassQuestion.findMany({
       where:{
         AND: [
           {
-            QuestionTypeQuestion:{
-              some: {
-                QuestionType:{
-                  question_type_id: Number(id)
+            class_id: Number(student.class_id)
+          },
+          {
+            Question:{
+              QuestionTypeQuestion:{
+                some: {
+                  QuestionType:{
+                    question_type_id: Number(id)
+                  },
                 },
               },
             },
           },
-          {subject_id: Number(SubjectId),},
+          {
+            Question:{
+              
+                subject_id: Number(SubjectId),
+              
+            }
+          }
         ]
       },
       orderBy: {
@@ -77,15 +88,17 @@ export async function getServerSideProps(context) {
         question_id: 'asc'
       },
       include:{
-        Subject:{
+        Question:{
           select:{
-            SubjectName: true
+            question: true,
+            answer:true,
+            points:true
           }
         }
       }
     })
   console.log(question)
-  const questionCount = await prisma.question.aggregate({
+  const questionCount = await prisma.Question.aggregate({
     where: {
       QuestionTypeQuestion: {
         some: {

@@ -194,7 +194,7 @@ model Question {
   ClassQuestion           ClassQuestion[]
   UserAnswer              UserAnswer?
 }
-
+ 
 model ClassQuestion{
   class_question_id              Int               @id @default(autoincrement())
   teacher_id                     Int?
