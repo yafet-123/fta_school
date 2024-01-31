@@ -7,7 +7,7 @@ import React from 'react'
 import { prisma } from '../../../util/db.server.js'
 
 
-export default function Answered(){
+export default function TimePassedQuestions(){
   const router = useRouter();
   function handleChange(newValue) {
       setselected(newValue);
@@ -23,8 +23,7 @@ export default function Answered(){
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20 flex flex-col justify-center items-center">
           <p className="text-center font-bold text-[#00225F] text-3xl md:text-3xl lg:text-4xl pt-10 mb-5 leading-10">
-            Great questions await answers! While there are no questions that have been answered yet, feel free to explore and answer some questions 
-            to contribute to the community.
+            Explore questions with consideration for time passed. Gain insights into topics and queries that have evolved over time.
           </p>
           <button
               onClick={handleReturn} 

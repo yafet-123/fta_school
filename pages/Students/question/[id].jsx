@@ -17,7 +17,6 @@ export async function getServerSideProps(context) {
   const id = query.id
   const SubjectId = query.subjectId
 
-  console.log(SubjectId)
   const session = await getSession(context);
   const studentId = session.user.user_id
   const student = await prisma.Students.findUnique({
@@ -36,7 +35,6 @@ export async function getServerSideProps(context) {
     where:{ question_type_id: Number(id) },  
   });
 
-  console.log(types.questiontypeName)
   const type = types.questiontypeName
 
   const hasUserAnswered = await prisma.UserAnswer.findFirst({
@@ -47,16 +45,18 @@ export async function getServerSideProps(context) {
     },
   });
 
+
+
   if (hasUserAnswered) {
     // Redirect or handle the case where the user has already answered questions
     return {
       redirect: {
-        destination: '/Students/question/answed', // Replace with the path you want to redirect to
+        destination: '/Students/question/answered', // Replace with the path you want to redirect to
         permanent: false,
       },
     };
   }
-  console.log(id,SubjectId)  
+
   const question = await prisma.Question.findMany({
       where:{
         AND: [
@@ -67,15 +67,7 @@ export async function getServerSideProps(context) {
               },
             }
           },
-          {
-            QuestionTypeQuestion:{
-              some: {
-                QuestionType:{
-                  question_type_id: Number(id)
-                },
-              },
-            },
-          },
+          {question_type_id: Number(id)},
           {subject_id: Number(SubjectId),}
         ]
       },
@@ -91,7 +83,30 @@ export async function getServerSideProps(context) {
         }
       }
     })
-  console.log(question)
+
+  let redirectToAnswered = false;
+
+  question.forEach((ques) => {
+  // Customize the comparison logic based on your requirements
+    const isConditionSatisfied = ques.ModifiedDate < ques.timedisplay;
+
+    if (isConditionSatisfied) {
+      
+      redirectToAnswered = true;
+      // You can also break out of the loop if you want to redirect based on the first question that satisfies the condition
+      // break;
+    }
+  });
+
+  if (redirectToAnswered) {
+    return {
+      redirect: {
+        destination: '/Students/question/timePassedQuestions', // Replace with the path you want to redirect to
+        permanent: false,
+      },
+    };
+  }
+
   const questionCount = await prisma.Question.aggregate({
     where:{
       AND: [
@@ -102,15 +117,7 @@ export async function getServerSideProps(context) {
             },
           }
         },
-        {
-          QuestionTypeQuestion:{
-            some: {
-              QuestionType:{
-                question_type_id: Number(id)
-              },
-            },
-          },
-        },
+        {question_type_id: Number(id)},
         {subject_id: Number(SubjectId),}
       ]
     },
@@ -118,7 +125,6 @@ export async function getServerSideProps(context) {
       question_id: true // Assuming question_id is the primary key of your Question model
     }
   });
-
   const Allquestion = question.map((data)=>({
     question_id:data.question_id,
     question:data.question,
@@ -196,6 +202,11 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
   function handleChange(newValue) {
       setselected(newValue);
   }
+
+  function handleReturn(){
+    router.push('/Students/question/subject')
+  }
+
   const { status, data } = useSession();
   console.log(type)
   return (
@@ -204,10 +215,16 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         {Allquestion.length == 0 ? (
-          <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20">
-            <p className="text-center font-bold text-[#00225F] text-3xl md:text-3xl lg:text-4xl pt-10 mb-5">
-              No questions available at the moment. Please check back later.
+          <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20 flex flex-col justify-center items-center">
+            <p className="text-center font-bold text-[#00225F] text-3xl md:text-3xl lg:text-4xl pt-10 mb-5 leading-10">
+              We're working hard to bring you more engaging questions! Unfortunately, there are no questions available at the moment. 
+              Please check back later for new content.
             </p>
+            <button
+              onClick={handleReturn} 
+              className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent text-white px-10 py-2 rounded-xl">
+              Return
+            </button>
           </div>
         ) : (
           <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>

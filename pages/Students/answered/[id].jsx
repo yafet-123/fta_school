@@ -38,10 +38,16 @@ export async function getServerSideProps(context) {
 
   const type = types.questiontypeName
 
-  console.log(id,SubjectId)
   const question = await prisma.Question.findMany({
       where:{
         AND: [
+          {
+            ClassQuestion:{
+              some: {
+                class_id: Number(student.class_id)
+              },
+            }
+          },
           {
             QuestionTypeQuestion:{
               some: {
@@ -51,7 +57,7 @@ export async function getServerSideProps(context) {
               },
             },
           },
-          {subject_id: Number(SubjectId),},
+          {subject_id: Number(SubjectId),}
         ]
       },
       orderBy: {
@@ -59,42 +65,66 @@ export async function getServerSideProps(context) {
         question_id: 'asc'
       },
       include:{
-        User:{
-          select:{
-            UserName:true
-          }
-        },
         Subject:{
           select:{
-            SubjectName: true
+            SubjectName: true,
           }
         }
       }
     })
 
-  const filteredQuestions = question.filter((ques) => {
-      // Customize the comparison logic based on your requirements
-    console.log(ques.ModifiedDate < ques.timedisplay)
-    return ques.ModifiedDate < ques.timedisplay;
+  let redirectToAnswered = false;
+
+  const filteredQuestions = [];
+  question.filter((ques) => {
+    // Customize the comparison logic based on your requirements
+    const isConditionSatisfied = ques.ModifiedDate < ques.timedisplay;
+
+    if (isConditionSatisfied) {
+      redirectToAnswered = true;
+      filteredQuestions.push(ques);
+    }
+
+    return isConditionSatisfied; // Include the question in the filtered array if the condition is true
   });
 
-  console.log(filteredQuestions)
-  const questionCount = await prisma.question.aggregate({
-    where: {
-      QuestionTypeQuestion: {
-        some: {
-          QuestionType: {
-            question_type_id: Number(id)
+  if (!redirectToAnswered) {
+    return {
+      redirect: {
+        destination: '/Students/answered/waitArea', // Replace with the path you want to redirect to
+        permanent: false,
+      },
+    };
+  }
+
+  const questionCount = await prisma.Question.aggregate({
+    where:{
+      AND: [
+        {
+          ClassQuestion:{
+            some: {
+              class_id: Number(student.class_id)
+            },
           }
-        }
-      }
+        },
+        {
+          QuestionTypeQuestion:{
+            some: {
+              QuestionType:{
+                question_type_id: Number(id)
+              },
+            },
+          },
+        },
+        {subject_id: Number(SubjectId),}
+      ]
     },
     _count: {
       question_id: true // Assuming question_id is the primary key of your Question model
     }
   });
 
-  const Allquestion = question.map((data)=>({
+  const Allquestion = filteredQuestions.map((data)=>({
     question_id:data.question_id,
     question:data.question,
     points:data.points,
