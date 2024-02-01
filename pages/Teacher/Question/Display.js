@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
     where:{ teacher_id: Number(session.user.user_id) },
     
   });
-
+  console.log(teacher)
   const types = await prisma.QuestionType.findUnique({
     where:{ question_type_id: Number(id) },  
   });
@@ -31,14 +31,13 @@ export async function getServerSideProps(context) {
       where:{
         AND: [
           {
-            QuestionTypeQuestion:{
+            ClassQuestion:{
               some: {
-                QuestionType:{
-                  question_type_id: Number(id)
-                },
+                class_id: Number(student.class_id)
               },
-            },
+            }
           },
+          { question_type_id: Number(id)},
           {subject_id: Number(SubjectId),},
           {teacher_id: Number(teacher.teacher_id),},
         ]

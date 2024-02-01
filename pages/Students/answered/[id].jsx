@@ -35,7 +35,6 @@ export async function getServerSideProps(context) {
     where:{ question_type_id: Number(id) },  
   });
 
-
   const type = types.questiontypeName
 
   const question = await prisma.Question.findMany({
@@ -48,15 +47,7 @@ export async function getServerSideProps(context) {
               },
             }
           },
-          {
-            QuestionTypeQuestion:{
-              some: {
-                QuestionType:{
-                  question_type_id: Number(id)
-                },
-              },
-            },
-          },
+          {question_type_id: Number(id)},
           {subject_id: Number(SubjectId),}
         ]
       },
@@ -107,15 +98,7 @@ export async function getServerSideProps(context) {
             },
           }
         },
-        {
-          QuestionTypeQuestion:{
-            some: {
-              QuestionType:{
-                question_type_id: Number(id)
-              },
-            },
-          },
-        },
+        {question_type_id: Number(id)},
         {subject_id: Number(SubjectId),}
       ]
     },
@@ -124,13 +107,29 @@ export async function getServerSideProps(context) {
     }
   });
 
+  const marks = await prisma.Mark.findMany({
+    where:{
+      AND: [
+        {question_type_id: Number(id)},
+        {students_id : Number(student.class_id) },
+        {subject_id: Number(SubjectId)}
+      ]
+    },
+  });
+
   const Allquestion = filteredQuestions.map((data)=>({
     question_id:data.question_id,
     question:data.question,
     points:data.points,
+    correctAnswer:data.correctAnswer,
     answer:data.answer || null
   }))
   const questionlength = questionCount._count.question_id
+  const mark = marks.map((data)=>({
+    mark_id:data.mark_id,
+    mark:data.mark
+  }))
+  console.log(mark)
   const classes = student.Class.ClassName
   return {
     props: {
@@ -139,12 +138,13 @@ export async function getServerSideProps(context) {
       classes,
       type,
       studentId,
-      SubjectId
+      SubjectId,
+      mark
     }, // will be passed to the page component as props
   }
 }
 
-const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}) => {
+const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId, mark}) => {
   const router = useRouter();
   const id = router.query.id;
   const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
@@ -160,43 +160,6 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
   const [totalscore, settotalscore] = useState(0)
   const [error,seterror] = useState("")
   const [selectedAnswers, setSelectedAnswers] = useState([]);
-
-  const onAnswerSelected = (answer, question_id, points) => {
-    setSelectedAnswers((prevSelectedAnswers) => ({
-      ...prevSelectedAnswers,
-      [question_id]: {
-        answer,
-        question_id,
-        points,
-
-      },
-    }));
-  };
-
-  const allQuestionsAnswered = Allquestion.every((question) => {
-    const isAnswered = selectedAnswers.hasOwnProperty(question.question_id);
-    console.log(`Question ${question.question_id} answered: ${isAnswered}`);
-    return isAnswered;
-  });
- 
-  async function calculateScore (e){
-    e.preventDefault();
-    const selectedAnswersArray = await Object.values(selectedAnswers);
-    setLoadingModalIsOpen(true);
-    const data = await axios.post(`../../api/answer/check`,{
-      'selectedAnswers':selectedAnswersArray,
-      'id': id,
-      'studentId':studentId,
-      'SubjectId':SubjectId
-    }).then(function (response) {
-      console.log(response.data);
-      setLoadingModalIsOpen(false);
-    }).catch(function (error) {
-        console.log(error)
-        seterror("Creating Class failed due to username is still exist or network error")
-        setLoadingModalIsOpen(false);
-    });
-  };
 
   function handleChange(newValue) {
       setselected(newValue);
@@ -215,7 +178,6 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
         ) : (
           <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
             <Hero Allquestion={Allquestion} classes={classes} type={type} />
-            <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
             <div className="lg:px-16">
                 {Allquestion.map((question, index) => (
                   <div key={index} className="flex flex-col">
@@ -237,9 +199,8 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
                       {question.answer.map((answer, idx) => (
                         <li
                           key={idx}
-                          onClick={() => onAnswerSelected(answer, question.question_id, question.points)}
                           className={` list-none mb-5 px-[16px] py-4 border-2 border-[#d3d3d3] cursor-pointer rounded-lg
-                            ${ selectedAnswers[question.question_id] && selectedAnswers[question.question_id].answer === answer ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
+                            ${ question.correctAnswer === answer ? 'text-white bg-[#000925]' : 'hover:bg-[#d8d8d8] hover:text-black'}
                           `}
                         >
                           <span>{answer}</span>
@@ -248,16 +209,9 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
                     </div>
                   </div>
                 ))}
-
-                <button 
-                  onClick={calculateScore} 
-                  disabled={!allQuestionsAnswered}
-                  className={`px-[20px] text-[#f8f8f8] text-base w-full px-[16px] py-[12px] mt-[12px] rounded-xl cursor-pointer bg-[#808080]
-                    ${ allQuestionsAnswered ? 'text-white bg-black' : 'hover:bg-[#d8d8d8] hover:text-black'}
-                  `}
-                >
-                  Submit
-                </button>
+                <div>
+                  {mark[0]?.mark}
+                </div>
             </div>
           </div>
         )}

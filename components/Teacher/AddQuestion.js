@@ -71,6 +71,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 
     return (
         <div className="px-0 lg:px-10">
+        	<h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic my-5">Add Question</h1>
         	<Formik initialValues={initialValues} onSubmit={handleSubmit}>
 			    {({ values, handleSubmit }) => (
 			        <Form onSubmit={handleSubmit}>
@@ -95,7 +96,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                            name="select"
 		                            value={typeId}
 		                            onChange={handleSelectChangeFortype}
-		                            className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
+		                            className="py-2 lg:py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
 		                        >
 		                            <option value="" disabled hidden></option>
 		                            { Alltypes.map((data,index)=>(
@@ -120,7 +121,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                            name="select"
 		                            value={subjectId}
 		                            onChange={handleSelectChangeForsubject}
-		                            className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
+		                            className="py-2 lg:py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
 		                        >
 		                            <option value="" disabled hidden></option>
 		                            { Allsubjects.map((data,index)=>(
@@ -154,7 +155,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                            htmlFor="floating_outlined" 
 		                            className="absolute text-md lg:text-lg text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
 		                        >
-		                            Answered Viewed
+		                            Answered Viewed Date
 		                        </label>
 		                    </div>
                 		</div>
@@ -176,8 +177,8 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 						                      	/>
 					                    	</label>
 
-					                    	<div className="flex items-center pl-10 my-5 w-full">
-					                    		<label className="w-full pr-5">
+					                    	<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pl-10 my-5 w-full">
+					                    		<label className="w-full lg:pr-5">
 						                    		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
 									                    points
 									                </span>
@@ -190,7 +191,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 							                      	/>
 							                    </label>
 
-						                    	<label className="w-full pl-5">
+						                    	<label className="w-full lg:pl-5">
 						                    		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
 									                    Correct Answer:
 									                </span>
@@ -206,9 +207,9 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 
 					                    	<FieldArray name={`questions.${questionIndex}.answers`}>
 					                      		{({ push: pushAnswer, remove: removeAnswer }) => (
-					                        		<div className="pl-10 my-5">
+					                        		<div className="lg:pl-10 my-5">
 					                          			{question.answers.map((answer, answerIndex) => (
-					                            			<div key={answerIndex}>
+					                            			<div key={answerIndex} className="">
 								                              	<label>
 								                              		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
 								                                		Answer {answerIndex + 1}:
