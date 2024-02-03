@@ -38,7 +38,8 @@ export async function getServerSideProps(context) {
 
 export default function Type({Allquestiontype}) {
   const router = useRouter();
-  const { subjectId } = router.query;
+  const subjectId = router.query.subjectId;
+  const classId = router.query.classId;
   const handleSubject = (id) => {
     router.push(`/subject/${id}`);
   };
@@ -52,7 +53,7 @@ export default function Type({Allquestiontype}) {
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className='w-full px-2 lg:px-32 h-full pt-20 pb-96'>
-          <QuestionType Allquestiontype={Allquestiontype} subjectId={subjectId} />
+          <QuestionType Allquestiontype={Allquestiontype} subjectId={subjectId} classId={classId} />
         </div>
       </div>
     </React.Fragment>

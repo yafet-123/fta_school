@@ -14,6 +14,7 @@ export async function getServerSideProps(context) {
   console.log(session)
   const {params,req,res,query} = context
   const id = query.id
+  const classId = query.classId;
   const SubjectId = query.subjectId
   const teacher = await prisma.Teacher.findUnique({
     where:{ teacher_id: Number(session.user.user_id) },
@@ -24,7 +25,6 @@ export async function getServerSideProps(context) {
     where:{ question_type_id: Number(id) },  
   });
 
-  console.log(types.questiontypeName)
   const type = types.questiontypeName
 
   const question = await prisma.Question.findMany({
@@ -33,11 +33,11 @@ export async function getServerSideProps(context) {
           {
             ClassQuestion:{
               some: {
-                class_id: Number(student.class_id)
+                class_id: Number(classId)
               },
             }
           },
-          { question_type_id: Number(id)},
+          {question_type_id: Number(id)},
           {subject_id: Number(SubjectId),},
           {teacher_id: Number(teacher.teacher_id),},
         ]
@@ -63,17 +63,18 @@ export async function getServerSideProps(context) {
   const questionCount = await prisma.question.aggregate({
     where: {
       AND: [
-        {
-          QuestionTypeQuestion: {
-            some: {
-              QuestionType: {
-                question_type_id: Number(id)
-              }
+          {
+            ClassQuestion:{
+              some: {
+                class_id: Number(classId)
+              },
             }
           },
-        },
-        {teacher_id: Number(teacher.teacher_id),},
-      ]
+          {question_type_id: Number(id)},
+          {subject_id: Number(SubjectId),},
+          {teacher_id: Number(teacher.teacher_id),},
+        ]
+      
     },
     _count: {
       question_id: true // Assuming question_id is the primary key of your Question model
@@ -87,8 +88,7 @@ export async function getServerSideProps(context) {
     answer:data.answer || null
   }))
   const questionlength = questionCount._count.question_id
-
-  console.log(Allquestion)
+  
   return {
     props: {
       Allquestion,

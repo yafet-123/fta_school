@@ -3,10 +3,10 @@ import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
 
-export default function SubjectList({subjects}) {
+export default function SubjectList({subjects,classId}) {
   const router = useRouter();
   const handleSubject = (id) => {
-    router.push(`/Teacher/Question/category/?subjectId=${id}`);
+    router.push(`/Teacher/Question/category/?subjectId=${id}&classId=${classId}`);
   };
   return (
     <div className="py-10 px-5 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">

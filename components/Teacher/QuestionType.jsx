@@ -3,10 +3,10 @@ import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
 
-export default function QuestionType({Allquestiontype,subjectId}) {
+export default function QuestionType({Allquestiontype,subjectId,classId}) {
   const router = useRouter();
   const handleSubject = (id) => {
-    router.push(`/Teacher/Question/Display/?subjectId=${subjectId}&id=${id}`);
+    router.push(`/Teacher/Question/Display/?subjectId=${subjectId}&id=${id}&classId=${classId}`);
   };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

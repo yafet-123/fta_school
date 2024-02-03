@@ -75,7 +75,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
         	<Formik initialValues={initialValues} onSubmit={handleSubmit}>
 			    {({ values, handleSubmit }) => (
 			        <Form onSubmit={handleSubmit}>
-			        	<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5">
+			        	<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
 		                    <Multiselect
 		                        displayValue="ClassName"
 		                        placeholder = "Class"
@@ -125,7 +125,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                        >
 		                            <option value="" disabled hidden></option>
 		                            { Allsubjects.map((data,index)=>(
-		                                <option value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
+		                                <option key={index} value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
 		                            ))}
 		                        </select>
 		                        <label
@@ -212,7 +212,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 					                            			<div key={answerIndex} className="">
 								                              	<label>
 								                              		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
-								                                		Answer {answerIndex + 1}:
+								                                		Choice {answerIndex + 1}:
 								                                	</span>
 								                                	<Field
 								                                  		type="text"
@@ -270,7 +270,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 
 			          	<button 
 			          		type="submit"
-                        	className={`mb-5 w-64 float-right text-white font-medium rounded-lg text-xl p-4 text-center inline-flex items-center 
+                        	className={`mb-5 w-64 float-right text-white font-medium rounded-lg text-xl p-4 text-center flex justify-center items-center 
                             	${loading ? "bg-gray-200" : "bg-[#009688] hover:bg-[#009688] focus:ring-4 focus:ring-[#009688]" }`}
                     	>
                         	Submit

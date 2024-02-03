@@ -34,6 +34,8 @@ export async function getServerSideProps(context) {
 export default function Subjects({subjects}) {
   console.log(subjects)
   const router = useRouter();
+  const classId = router.query.classId;
+  console.log(classId)
   function handleChange(newValue) {
       setselected(newValue);
   }
@@ -44,7 +46,7 @@ export default function Subjects({subjects}) {
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <SubjectList subjects={subjects} />
+          <SubjectList subjects={subjects} classId={classId} />
         </div>
       </div>
     </React.Fragment>
