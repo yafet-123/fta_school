@@ -20,6 +20,7 @@ export function VerticalNavbar({onChange, data}){
         { link: "/Teacher", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
         { link: "/Teacher/Question/Add", icon: <AiFillDashboard size={25}/>, name: "Add Question",},
         { link: "/Teacher/Class", icon: <AiFillDashboard size={25}/>, name: "Display Question",},
+        { link: "/Teacher/Display/Class", icon: <AiFillDashboard size={25}/>, name: "Display Answer",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);

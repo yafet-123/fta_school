@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { prisma } from '../../../util/db.server.js'
+import { prisma } from '../../../../util/db.server.js'
 import { getSession } from "next-auth/react";
-import { MainHeader } from '../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../components/Teacher/VerticalNavbar";
-import ClassList from '../../../components/Teacher/Class/ClassList'
+import { MainHeader } from '../../../../components/common/MainHeader';
+import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
+import ClassList from '../../../../components/Teacher/Class/ClassList'
 import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
@@ -58,13 +58,27 @@ export default function Class({classes}) {
       setselected(newValue);
   }
   const { status, data } = useSession();
+  const handleSubject = (props) => {
+    console.log(props)
+    router.push(`/Teacher/Display/subject/?subjectId=${props.subject_id}&classId=${props.class_id}`);
+  }; 
   return (
     <React.Fragment>
       <MainHeader title="Future Talent Academy : Teacher Class" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <ClassList classes={classes} />
+          <div className="py-20 h-full px-5 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+            {classes.map((data,index)=>(
+              <button 
+                key={index}
+                onClick={() => handleSubject(data)} 
+                className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent px-5 py-16 text-white font-bold text-xl lg:text-3xl rounded-lg"
+              >
+                {data.className}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </React.Fragment>
