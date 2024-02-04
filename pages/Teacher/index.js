@@ -7,8 +7,19 @@ import React from 'react'
 import { prisma } from '../../util/db.server.js'
 
 export async function getServerSideProps(){
+  const questionCountsByClass = await prisma.classQuestion.groupBy({
+    by: ['class_id'],
+    _count: true,
+    // include: {
+    //   Class: {
+    //     select: {
+    //       ClassName: true,
+    //     },
+    //   },
+    // },
+  }); 
   
-
+  console.log(questionCountsByClass)
   return{
     props:{
       
