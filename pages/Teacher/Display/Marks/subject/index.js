@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { prisma } from '../../../../util/db.server.js'
+import { prisma } from '../../../../../util/db.server.js'
 import { getSession } from "next-auth/react";
-import { MainHeader } from '../../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
+import { MainHeader } from '../../../../../components/common/MainHeader';
+import { VerticalNavbar } from "../../../../../components/Teacher/VerticalNavbar";
 import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
@@ -40,7 +40,7 @@ export default function Subjects({subjects}) {
   }
   const { status, data } = useSession();
   const handleSubject = (id) => {
-    router.push(`/Teacher/Display/category/?subjectId=${id}&classId=${classId}`);
+    router.push(`/Teacher/Display/Marks/Mark/?subjectId=${id}&classId=${classId}`);
   };
   return (
     <React.Fragment>
