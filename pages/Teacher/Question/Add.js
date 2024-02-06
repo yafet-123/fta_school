@@ -34,10 +34,19 @@ export async function getServerSideProps(context) {
           SubjectName:true
         }
       },
-    }
+    },
+    orderBy: {
+      // Specify the column and the order (asc for ascending)
+      class_id: 'asc'
+    },
   })
 
-  const types = await prisma.QuestionType.findMany({})
+  const types = await prisma.QuestionType.findMany({
+    orderBy: {
+      // Specify the column and the order (asc for ascending)
+      question_type_id: 'asc'
+    },
+  })
   
   const Allclasses = classes.map((data)=>({
     class_id:data.class_id,
@@ -54,7 +63,7 @@ export async function getServerSideProps(context) {
     question_type_id:data.question_type_id,
     questiontypeName:data.questiontypeName,
   }))
-
+  console.log(Alltypes)
   return {
     props: {
       Allclasses,

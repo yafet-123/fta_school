@@ -5,7 +5,8 @@ import { prisma } from '../../../util/db.server.js'
 import { getSession } from "next-auth/react";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../components/Teacher/VerticalNavbar";
-import ClassList from '../../../components/Teacher/Class/ClassList'
+import {DeleteQuestion} from '../../../components/Teacher/Display/DeleteQuestion'
+import {UpdateQuestion} from '../../../components/Teacher/Display/UpdateQuestion'
 import { useSession } from "next-auth/react";
 import React, { useState } from 'react';
 
@@ -60,7 +61,7 @@ export async function getServerSideProps(context) {
       }
     })
 
-  const questionCount = await prisma.question.aggregate({
+  const questionCount = await prisma.Question.aggregate({
     where: {
       AND: [
           {
@@ -85,6 +86,8 @@ export async function getServerSideProps(context) {
     question_id:data.question_id,
     question:data.question,
     points:data.points,
+    correctAnswer: data.correctAnswer,
+    timedisplay: data?.CreatedDate.toISOString(),
     answer:data.answer || null
   }))
   const questionlength = questionCount._count.question_id
@@ -115,6 +118,27 @@ const Display = ({Allquestion,questionlength,type, SubjectId}) => {
   const [totalscore, settotalscore] = useState(0)
   const [error,seterror] = useState("")
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+
+  const [deletemodalOn, setdeleteModalOn] = useState(false);
+  const [updatemodalOn, setupdateModalOn] = useState(false);
+
+  const [deletequestionid,setdeletequestionid] = useState()
+  const [updatequestionid,setupdatequestionid] = useState()
+  const [updatequestion,setupdatequestion] = useState()
+  const [updatecorrectAnswer,setupdatecorrectAnswer] = useState()
+  const [updatepoints,setupdatepoints] = useState()
+  const [updatetimedisplay,setupdatetimedisplay] = useState()
+  const [updateanswer, setanswer] = useState()
+
+  const clickedFordelete = () => {
+    setdeleteModalOn(true)
+  }
+
+  const clickedForupdate = () => {
+      setupdateModalOn(true)
+  }
+
+  const [updateclassname,setupdateclassname] = useState("")
 
   const onAnswerSelected = (answer, question_id, points) => {
     setSelectedAnswers((prevSelectedAnswers) => ({
@@ -199,14 +223,36 @@ const Display = ({Allquestion,questionlength,type, SubjectId}) => {
                           <span>{answer}</span>
                         </li>
                       ))}
+                      <div className="flex flex-col justify-between">
+                        <p className="font-bold text-[#00225F] text-lg md:text-xl mb-5">
+                          Correct Answer : {question.correctAnswer}
+                        </p>
+
+                        <p className="font-bold text-[#00225F] text-lg md:text-xl mb-5">
+                          Time Question Hide : {question.timedisplay}
+                        </p>
+                      </div>
                       <div className="flex justify-between items-center">
                         <button
+                          onClick={() => {
+                            clickedForupdate()
+                            setupdatequestionid(question.question_id)
+                            setupdatequestion(question.question)
+                            setupdatecorrectAnswer(question.correctAnswer)
+                            setupdatepoints(question.points)
+                            setupdatetimedisplay(question.timedisplay)
+                            setanswer(question.answer)
+                          }}
                           className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded"
                         >
                           Edit
                         </button>
 
                         <button  
+                          onClick={() => {
+                            clickedFordelete()
+                            setdeletequestionid(question.question_id)
+                          }} 
                           className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
                         >
                             Delete
@@ -218,6 +264,30 @@ const Display = ({Allquestion,questionlength,type, SubjectId}) => {
             </div>
           </div>
         )}
+        {deletemodalOn && 
+          <DeleteQuestion 
+            deletequestionid={deletequestionid}
+            setdeleteModalOn={setdeleteModalOn}
+          />
+        }
+
+        {updatemodalOn && 
+          <UpdateQuestion
+            setupdateModalOn={setupdateModalOn}
+            updatequestionid={updatequestionid}
+            updatequestion={updatequestion}
+            updatecorrectAnswer={updatecorrectAnswer}
+            updatepoints={updatepoints}
+            updatetimedisplay={updatetimedisplay}
+            updateanswer={updateanswer} 
+            setupdatequestionid={setupdatequestionid}
+            setupdatequestion={setupdatequestion}
+            setupdatecorrectAnswer={setupdatecorrectAnswer}
+            setupdatepoints={setupdatepoints}
+            setupdatetimedisplay={setupdatetimedisplay}
+            setanswer={setanswer}
+          />
+        }
       </div>
     </React.Fragment>
   );

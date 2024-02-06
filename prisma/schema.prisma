@@ -193,7 +193,7 @@ model Question {
   ModifiedDate            DateTime? @default(now()) @db.Timestamptz(6)
   ClassQuestion           ClassQuestion[]
   UserAnswer              UserAnswer?
-}
+} 
  
 model ClassQuestion{
   class_question_id              Int               @id @default(autoincrement())
