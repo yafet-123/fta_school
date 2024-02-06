@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import QuestionCategory from "../../../../components/Teacher/UserAnswer/QuestionCategory"
-import { prisma } from '../../../../util/db.server.js'
-import { MainHeader } from '../../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
+import QuestionCategory from "../../../../../components/Teacher/UserAnswer/QuestionCategory"
+import { prisma } from '../../../../../util/db.server.js'
+import { MainHeader } from '../../../../../components/common/MainHeader';
+import { VerticalNavbar } from "../../../../../components/Teacher/VerticalNavbar";
 import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
@@ -44,10 +44,12 @@ export async function getServerSideProps(context) {
 export default function Category({AllquestionCategory}) {
   console.log(AllquestionCategory)
   const router = useRouter();
+  const { id } = router.query;
   const subjectId = router.query.subjectId;
   const classId = router.query.classId;
-  const handleSubject = (subjectId) => {
-    router.push(`/subject/${subjectId}`);
+  console.log(id)
+  const handleSubject = (id) => {
+    router.push(`/subject/${id}`);
   };
   function handleChange(newValue) {
       setselected(newValue);
