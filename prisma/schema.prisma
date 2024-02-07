@@ -63,9 +63,12 @@ model Teacher {
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   ClassQuestion       ClassQuestion[]
 }
-
+ 
 model Students{
   students_id         Int           @id @default(autoincrement())
+  firstName           String?       @db.VarChar(255)
+  lastName            String?       @db.VarChar(255)
+  age                 Int?
   UserName            String        @unique @db.VarChar(255)
   email               String?       @unique @db.VarChar(255)
   resetToken          String?       @unique @db.VarChar(255)
@@ -241,8 +244,8 @@ model UserAnswer {
   user_answer_id      Int           @id @default(autoincrement())
   students_id         Int
   subject_id          Int
-  question_type_id    Int            
-  question_id         Int
+  question_type_id    Int                       
+  question_id         Int           @unique 
   user_answer         String
   points              Int?
   Students            Students      @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
@@ -257,7 +260,7 @@ model Mark {
   mark_id             Int           @id @default(autoincrement())
   students_id         Int
   subject_id          Int?
-  question_type_id    Int                  
+  question_type_id    Int           @unique                  
   mark                Int
   Students            Students      @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
   QuestionType        QuestionType  @relation(fields: [question_type_id], references: [question_type_id], onUpdate: NoAction)

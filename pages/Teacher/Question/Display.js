@@ -9,6 +9,7 @@ import {DeleteQuestion} from '../../../components/Teacher/Display/DeleteQuestion
 import {UpdateQuestion} from '../../../components/Teacher/Display/UpdateQuestion'
 import { useSession } from "next-auth/react";
 import React, { useState } from 'react';
+import Moment from 'react-moment';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -229,7 +230,8 @@ const Display = ({Allquestion,questionlength,type, SubjectId}) => {
                         </p>
 
                         <p className="font-bold text-[#00225F] text-lg md:text-xl mb-5">
-                          Time Question Hide : {question.timedisplay}
+                          Time Question Hide : <Moment>{question.timedisplay}</Moment>
+
                         </p>
                       </div>
                       <div className="flex justify-between items-center">

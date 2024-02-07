@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import QuestionType from "../../../../../../components/Teacher/QuestionType"
+import QuestionType from "../../../../../../components/Teacher/UserAnswer/QuestionType"
 import { prisma } from '../../../../../../util/db.server.js'
 import { useSession } from "next-auth/react";
 import { MainHeader } from '../../../../../../components/common/MainHeader';
