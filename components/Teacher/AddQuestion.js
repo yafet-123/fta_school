@@ -26,7 +26,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 
     async function handleSubmit(values){
     	console.log(subjectId)
-
+ 		setLoadingModalIsOpen(true);
         const transformedData = values.questions.map((question) => ({
         	question: question.question,
         	answers: question.answers.map((answer) => answer.answer),
@@ -44,9 +44,11 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
         }).then(function (response) {
             console.log(response.data);
             router.reload()
+            setLoadingModalIsOpen(false);
         }).catch(function (error) {
             seterror("Creating Ai Search Failed")
             setLoading(false)
+            setLoadingModalIsOpen(false);
         });
     }
 
@@ -270,6 +272,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 
 			          	<button 
 			          		type="submit"
+			          		
                         	className={`mb-5 w-64 float-right text-white font-medium rounded-lg text-xl p-4 text-center flex justify-center items-center 
                             	${loading ? "bg-gray-200" : "bg-[#009688] hover:bg-[#009688] focus:ring-4 focus:ring-[#009688]" }`}
                     	>
@@ -278,6 +281,13 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 			        </Form>
 			    )}
 			</Formik>
+			<ReactModal
+                    isOpen={LoadingmodalIsOpen}
+                    // onRequestClose={closeModal}
+                    className="flex items-center justify-center w-full h-full"
+                >
+                    <Loader />
+                </ReactModal>
         </div>
     );
 }

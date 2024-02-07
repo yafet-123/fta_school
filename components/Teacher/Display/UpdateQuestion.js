@@ -32,17 +32,21 @@ export function UpdateQuestion({
     };
 
 	const handleOKClickForupdate = async() => {
-        // setLoadingModalIsOpen(true)
-        // const data = await axios.patch(`../api/class/updateClass/${updateclassid}`,{
-        //     "updatequestion": updatequestion
-        // }).then(function (response) {
-        //     console.log(response.data);
-        //     router.reload()
-        // }).catch(function (error) {
-        //     console.log(error);
-        //     setLoadingModalIsOpen(false)
-        // });
-        // setupdateModalOn(false)
+        setLoadingModalIsOpen(true)
+        const data = await axios.patch(`../../api/question/updateQuestion/${updatequestionid}`,{
+            "updatequestion": updatequestion,
+            "updatecorrectAnswer": updatecorrectAnswer,
+            "updatepoints":updatepoints,
+            "updatetimedisplay":updatetimedisplay,
+            "updateanswer":updateanswer
+        }).then(function (response) {
+            console.log(response.data);
+            router.reload()
+        }).catch(function (error) {
+            console.log(error);
+            setLoadingModalIsOpen(false)
+        });
+        setupdateModalOn(false)
         console.log(updateanswer)
        
     }
@@ -112,7 +116,7 @@ export function UpdateQuestion({
                                     type="date"
                                     required
                                     className="block w-full px-3 text-xl text-black dark:text-white bg-transparent py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                                    value={updatetimedisplay}
+                                    value={dateOnly}
                                     onChange={(e) => setupdatetimedisplay(e.target.value)}
                                 />
                                 <label 
