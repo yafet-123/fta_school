@@ -10,6 +10,7 @@ import TodoList from '../../components/Students/TodoList'
 import Profile from '../../components/Students/Profile'
 import Announcements from '../../components/Students/Announcements'
 import { getSession } from "next-auth/react";
+import Moment from 'react-moment';
 
 export async function getServerSideProps(context){
   const serverdate = new Date();
@@ -34,6 +35,31 @@ export async function getServerSideProps(context){
     }
   });
 
+  const announcements = await prisma.Announcement.findMany({
+    where: {
+      ClassAnnouncement: {
+        some: {
+          class_id: Number(student.students_id),
+        },
+      },
+    },
+    include:{
+      teacher:{
+        select:{
+          UserName:true
+        }
+      }
+    }
+  });
+
+  const Allannouncements = announcements.map((data)=>({
+    announcement_id:data.announcement_id,
+    title:data.title,
+    content:data.content,
+    teacherName: data.teacher.UserName,
+    ModifiedDate: data.ModifiedDate.toISOString()
+  }))
+
   const Alltasks = tasks.map((data)=>({
     id: data.id,
     text:data.text,
@@ -56,12 +82,13 @@ export async function getServerSideProps(context){
     props: {
       tasks:Alltasks,
       studentId,
+      announcements:Allannouncements,
       Allstudents
     },
   };
 }
 
-export default function Admin({serverdate, tasks, studentId, Allstudents}){
+export default function Admin({serverdate, tasks, studentId, Allstudents, announcements}){
   function handleChange(newValue) {
       setselected(newValue);
   }
@@ -76,9 +103,9 @@ export default function Admin({serverdate, tasks, studentId, Allstudents}){
             <Profile Allstudents={Allstudents} />
             <MyCalendar serverdate={serverdate} />
           </div>
-          <div className="flex flex-col lg:flex-row justify-between items-center px-5 lg:px-10 mb-5">
+          <div className="flex flex-col lg:flex-row justify-between px-5 lg:px-10 mb-5">
             <TodoList tasks={tasks} studentId={studentId} />
-            <Announcements />
+            <Announcements announcements={announcements} />
           </div>
         </div>
       </div>
