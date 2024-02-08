@@ -46,6 +46,7 @@ model Class {
   Students        Students[]
   ClassTeacher    ClassTeacher[]
   ClassQuestion   ClassQuestion[]
+  ClassAnnouncement ClassAnnouncement[]
 }
 
 model Teacher {
@@ -95,11 +96,10 @@ model Students{
   UserAnswer          UserAnswer[]
   Mark                Mark[]
   Task                Task[]
-  ClassAnnouncement   ClassAnnouncement[]
 }
 
 model ClassAnnouncement {
-  student_announcement_id     Int           @id @default(autoincrement())
+  class_announcement_id     Int           @id @default(autoincrement())
   class_id                    Int
   Class                       Class         @relation(fields: [class_id], references: [class_id])
   announcement_id             Int

@@ -8,6 +8,7 @@ import { prisma } from '../../util/db.server.js'
 import MyCalendar from '../../components/common/MyCalendar' 
 import TodoList from '../../components/Students/TodoList'
 import Profile from '../../components/Students/Profile'
+import Announcements from '../../components/Students/Announcements'
 import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context){
@@ -71,12 +72,13 @@ export default function Admin({serverdate, tasks, studentId, Allstudents}){
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <div className="flex justify-between items-center px-5 lg:px-10 mb-5">
+          <div className="flex flex-col lg:flex-row justify-between items-center px-5 lg:px-10 mb-5">
             <Profile Allstudents={Allstudents} />
             <MyCalendar serverdate={serverdate} />
           </div>
-          <div className="px-5 lg:px-10 mb-5">
+          <div className="flex flex-col lg:flex-row justify-between items-center px-5 lg:px-10 mb-5">
             <TodoList tasks={tasks} studentId={studentId} />
+            <Announcements />
           </div>
         </div>
       </div>

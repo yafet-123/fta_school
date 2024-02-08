@@ -39,6 +39,7 @@ const TodoList = ({ tasks, studentId }) => {
 
   return (
     <div className="w-full">
+      <h1 className="text-center text-2xl font-bold mb-5">To Do List</h1>
       <div className="mb-4 flex">
         <input
           type="text"
