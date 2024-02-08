@@ -30,7 +30,7 @@ export function VerticalNavbar({onChange, data}){
     console.log(data)
 
 	return(
-            <div className={`flex h-full sticky top-0 bottom-0 ${sideBar ? "w-16 lg:w-28" : "w-16 lg:w-96"} pt-24`}>
+            <div className={`flex h-full sticky top-0 bottom-0 ${sideBar ? "w-16 lg:w-28" : "w-16 lg:w-96"} pt-10`}>
                 <nav className="w-full h-full flex flex-col py-8 lg:px-4 bg-[#e6e6e6] dark:bg-[#02201D] scroll_width">
                     <div className="flex justify-between ml-2 lg:ml-5">
                         <h1 className={`text-2xl font-bold text-black dark:text-white ${sideBar ? "hidden" : "hidden lg:flex"}`}>Student Page</h1>

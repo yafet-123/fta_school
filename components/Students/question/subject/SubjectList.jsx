@@ -9,7 +9,7 @@ export default function SubjectList({subjects}) {
     router.push(`/Students/question/category/${id}`);
   };
   return (
-    <div className="py-20 h-full px-5 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+    <div className="pt-0 pb-20 h-full px-5 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
       {subjects.map((data,index)=>(
         <button 
           key={index}

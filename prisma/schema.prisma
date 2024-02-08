@@ -62,6 +62,18 @@ model Teacher {
   user_id             Int?
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   ClassQuestion       ClassQuestion[]
+  Announcement        Announcement[]
+}
+
+model Announcement {
+  announcement_id Int       @id @default(autoincrement())
+  title           String
+  content         String
+  teacher_id      Int
+  CreatedDate     DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate    DateTime?     @default(now()) @db.Timestamptz(6)
+  teacher         Teacher   @relation(fields: [teacher_id], references: [teacher_id])
+  ClassAnnouncement ClassAnnouncement[]
 }
  
 model Students{
@@ -82,8 +94,19 @@ model Students{
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   UserAnswer          UserAnswer[]
   Mark                Mark[]
+  Task                Task[]
+  ClassAnnouncement   ClassAnnouncement[]
 }
 
+model ClassAnnouncement {
+  student_announcement_id     Int           @id @default(autoincrement())
+  class_id                    Int
+  Class                       Class         @relation(fields: [class_id], references: [class_id])
+  announcement_id             Int
+  Announcement                Announcement  @relation(fields: [announcement_id], references: [announcement_id])
+  CreatedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                DateTime?     @default(now()) @db.Timestamptz(6)
+}
 
 model ClassTeacher{
   teacher_class_id             Int          @id @default(autoincrement())
@@ -287,3 +310,12 @@ model Answer {
   ModifiedDate    DateTime? @default(now()) @db.Timestamptz(6)
 }
 
+model Task {
+  id                  Int       @id @default(autoincrement())
+  text                String
+  students_id         Int
+  completed           Boolean
+  createdAt           DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt           DateTime @default(now()) @db.Timestamptz(6)
+  Students            Students      @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
+}
