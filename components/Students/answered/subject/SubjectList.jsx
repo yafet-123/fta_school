@@ -14,8 +14,7 @@ export default function SubjectList({subjects}) {
         <button 
           key={index}
           onClick={() => handleSubject(data.subject_id)} 
-          className={`${ data.subject_id <= 4 && "bg-[#2862E9]" || data.subject_id <= 8 && "bg-[#EFD81D]" || data.subject_id <= 12 && "bg-[#E95F21]" } 
-          px-5 py-16 text-white font-bold text-xl lg:text-3xl rounded-lg`}
+          className={`bg-gradient-to-r from-green-500 via-red-500 to-blue-500 text-transparent px-5 py-16 text-white font-bold text-xl lg:text-3xl rounded-lg`}
         >
           {data.SubjectName}
         </button>

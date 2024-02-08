@@ -13,9 +13,7 @@ export default function QuestionType({Allquestiontype,subjectId}) {
       {Allquestiontype.map((data,index)=>(
         <button 
           onClick={() => handleSubject(data.question_type_id)} 
-          className={`${ data.question_type_id % 3 == 0 && "bg-[#2862E9]" || data.question_type_id % 3 == 1 && "bg-[#EFD81D]" 
-          || data.question_type_id % 3 == 2 && "bg-[#E95F21]" } 
-          px-5 py-16 text-white font-bold text-xl lg:text-3xl rounded-lg`}
+          className={`bg-gradient-to-r from-yellow-500 via-blue-500 to-green-500 text-transparent px-5 py-16 text-white font-bold text-xl lg:text-3xl rounded-lg`}
         >
           {data.questiontypeName}
         </button>

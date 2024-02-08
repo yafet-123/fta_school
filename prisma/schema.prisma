@@ -149,6 +149,8 @@ model Quarter {
   QuarterQuestionCategory QuarterQuestionCategory[]
   CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
   ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
+  Mark              Mark[]
+  UserAnswer        UserAnswer[]
 }
 
 model SubjectQuestionCategory {
@@ -195,7 +197,7 @@ model Question {
   CreatedDate             DateTime? @default(now()) @db.Timestamptz(6)
   ModifiedDate            DateTime? @default(now()) @db.Timestamptz(6)
   ClassQuestion           ClassQuestion[]
-  UserAnswer              UserAnswer?
+  UserAnswer              UserAnswer[]
 } 
  
 model ClassQuestion{
@@ -224,7 +226,7 @@ model QuestionType{
   CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
   ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
   UserAnswer        UserAnswer[]
-  Mark              Mark?
+  Mark              Mark[]
   Question          Question[]
 }
 
@@ -244,26 +246,30 @@ model UserAnswer {
   user_answer_id      Int           @id @default(autoincrement())
   students_id         Int
   subject_id          Int
-  question_type_id    Int                       
-  question_id         Int           @unique 
+  question_type_id    Int  
+  quarter_id          Int                     
+  question_id         Int            
   user_answer         String
   points              Int?
   Students            Students      @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
   Question            Question      @relation(fields: [question_id], references: [question_id], onUpdate: NoAction)
   QuestionType        QuestionType  @relation(fields: [question_type_id], references: [question_type_id], onUpdate: NoAction)
   Subject             Subject       @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
+  Quarter             Quarter       @relation(fields: [quarter_id], references: [quarter_id], onUpdate: NoAction)
   CreatedDate         DateTime      @default(now()) @db.Timestamptz(6)
   ModifiedDate        DateTime      @default(now()) @db.Timestamptz(6)
 }
 
 model Mark {
-  mark_id             Int           @id @default(autoincrement())
+  mark_id             Int           @id  @default(autoincrement())
   students_id         Int
   subject_id          Int?
-  question_type_id    Int           @unique                  
+  quarter_id          Int
+  question_type_id    Int                             
   mark                Int
   Students            Students      @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
   QuestionType        QuestionType  @relation(fields: [question_type_id], references: [question_type_id], onUpdate: NoAction)
+  Quarter             Quarter       @relation(fields: [quarter_id], references: [quarter_id], onUpdate: NoAction)
   Subject             Subject?      @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
   CreatedDate         DateTime      @default(now()) @db.Timestamptz(6)
   ModifiedDate        DateTime      @default(now()) @db.Timestamptz(6)

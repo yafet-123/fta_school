@@ -51,7 +51,7 @@ export async function getServerSideProps(context) {
     // Redirect or handle the case where the user has already answered questions
     return {
       redirect: {
-        destination: '/Students/question/answered', // Replace with the path you want to redirect to
+        destination: '/Students/question/answed', // Replace with the path you want to redirect to
         permanent: false,
       },
     };
@@ -88,7 +88,9 @@ export async function getServerSideProps(context) {
 
   question.forEach((ques) => {
   // Customize the comparison logic based on your requirements
-    const isConditionSatisfied = ques.ModifiedDate < ques.timedisplay;
+    const currentDate = new Date();
+    const timedisplayDate = new Date(ques.timedisplay);
+    const isConditionSatisfied = currentDate  > timedisplayDate;
 
     if (isConditionSatisfied) {
       
@@ -192,6 +194,7 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
     }).then(function (response) {
       console.log(response.data);
       setLoadingModalIsOpen(false);
+      router.reload()
     }).catch(function (error) {
         console.log(error)
         seterror("Creating Class failed due to username is still exist or network error")

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { html } from '../../../data/html.js';
-import { css } from '../../../data/css.js';
 import { useRouter } from 'next/router';
 import Hero from "../../../components/Students/answered/Hero"
 import { prisma } from '../../../util/db.server.js'
 import { useSession } from "next-auth/react";
 import { MainHeader } from '../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../components/Students/VerticalNavbar";
+import { VerticalNavbar } from "../../../components/students/VerticalNavbar";
 import { getSession } from "next-auth/react";
 import ReactModal from "react-modal";
 import Loader from "../../../components/common/Loading";
@@ -55,21 +53,44 @@ export async function getServerSideProps(context) {
         // Specify the column and the order (asc for ascending)
         question_id: 'asc'
       },
-      include:{
-        Subject:{
-          select:{
-            SubjectName: true,
-          }
+    })
+  const questionIds = question.map(data => data.question_id);
+
+  console.log(questionIds);
+  const userAnswers = await prisma.UserAnswer.findMany({
+    where: {
+      question_id: {
+        in: questionIds,
+      },
+      students_id: Number(student.students_id), // Replace with the actual students_id
+      subject_id: Number(SubjectId),   // Replace with the actual subject_id
+      question_type_id: Number(id), // Replace with the actual question_type_id
+    },
+    orderBy: {
+      // Specify the column and the order (asc for ascending)
+      user_answer_id: 'asc',
+    }, 
+    include:{
+      Question:{
+        select:{
+          question:true,
+          correctAnswer:true,
+          answer:true,
+          points:true,
+          timedisplay:true
         }
       }
-    })
-
-  let redirectToAnswered = false;
+    }
+  });
 
   const filteredQuestions = [];
-  question.filter((ques) => {
+  let redirectToAnswered
+  userAnswers.filter((ques) => {
     // Customize the comparison logic based on your requirements
-    const isConditionSatisfied = ques.ModifiedDate < ques.timedisplay;
+    const currentDate = new Date();
+    const timedisplayDate = new Date(ques.Question.timedisplay);
+    console.log(timedisplayDate)
+    const isConditionSatisfied = currentDate  > timedisplayDate;
 
     if (isConditionSatisfied) {
       redirectToAnswered = true;
@@ -87,6 +108,17 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
+  const Allquestion = userAnswers.map((data)=>({
+    user_answer_id:data.user_answer_id,
+    user_answer:data.user_answer,
+    question: data.Question.question,
+    correctAnswer: data.Question.correctAnswer,
+    answer: data.Question.answer,
+    points: data.Question.points,
+    timedisplay: data.Question.timedisplay.toISOString(),
+  }))
+  console.log(userAnswers);
 
   const questionCount = await prisma.Question.aggregate({
     where:{
@@ -111,25 +143,19 @@ export async function getServerSideProps(context) {
     where:{
       AND: [
         {question_type_id: Number(id)},
-        {students_id : Number(student.class_id) },
-        {subject_id: Number(SubjectId)}
+        {students_id : Number(student.students_id) },
+        {subject_id: Number(SubjectId)},
+        {quarter_id: 1}
       ]
     },
   });
-
-  const Allquestion = filteredQuestions.map((data)=>({
-    question_id:data.question_id,
-    question:data.question,
-    points:data.points,
-    correctAnswer:data.correctAnswer,
-    answer:data.answer || null
-  }))
   const questionlength = questionCount._count.question_id
   const mark = marks.map((data)=>({
     mark_id:data.mark_id,
     mark:data.mark
   }))
-  console.log(mark)
+
+  console.log("mark", mark)
   const classes = student.Class.ClassName
   return {
     props: {
@@ -144,7 +170,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId, mark}) => {
+const AnswerQuestionForStudents = ({Allquestion,questionlength,classes,type,studentId, SubjectId, mark}) => {
   const router = useRouter();
   const id = router.query.id;
   const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
@@ -165,7 +191,7 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId,
       setselected(newValue);
   }
   const { status, data } = useSession();
-  console.log(type)
+ 
   return (
     <React.Fragment>
       <MainHeader title="Future Talent Academy : Students" />
@@ -173,7 +199,7 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId,
         <VerticalNavbar onChange={handleChange} data={data} />
         {Allquestion.length == 0 ? (
           <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20">
-            <p className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">No questions available.</p>
+            <p className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Sorry No question Are Done.</p>
           </div>
         ) : (
           <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
@@ -206,11 +232,20 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId,
                           <span>{answer}</span>
                         </li>
                       ))}
+                      <div className="flex flex-col justify-between">
+                        <p className="font-bold text-[#00225F] text-lg md:text-xl mb-5">
+                          Correct Answer : {question.correctAnswer}
+                        </p>
+
+                        <p className="font-bold text-[#00225F] text-lg md:text-xl mb-5">
+                          Student Answer : {question.user_answer}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
-                <div>
-                  {mark[0]?.mark}
+                <div className="bg-white p-5 w-full flex items-center justify-center mt-5">
+                  <p className="text-center text-xl font-bold">Mark: {mark[0]?.mark}</p>
                 </div>
             </div>
           </div>
@@ -227,4 +262,4 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId,
   );
 };
 
-export default Question;
+export default AnswerQuestionForStudents;

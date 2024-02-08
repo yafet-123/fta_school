@@ -24,11 +24,6 @@ export default async function handleadduser(req, res){
 	        question_id: 'asc'
 	      },
 	      include:{
-	        User:{
-	          select:{
-	            UserName:true
-	          }
-	        },
 	        Subject:{
 	          select:{
 	            SubjectName: true
@@ -64,10 +59,22 @@ export default async function handleadduser(req, res){
       			}
       			await prisma.UserAnswer.create({
 		          data: {
-		            students_id: Number(studentId), // Replace with the actual student ID
-		            subject_id: Number(SubjectId), // Replace with the actual subject ID
-		            question_type_id: Number(id),
-		            question_id: Number(userAnswer.question_id),
+		          	Students: {
+      					connect: { students_id: Number(studentId)},
+    				},
+		            Subject: {
+      					connect: { subject_id: Number(SubjectId),},
+    				},
+		            QuestionType:{
+      					connect: { question_type_id: Number(id),},
+    				},
+		            Quarter: {
+      					connect: { quarter_id: 1 },
+    				},
+    				Question: {
+      					connect: {question_id: Number(userAnswer.question_id),},
+    				},
+		       
 		            user_answer: userSelectedAnswer,
 		            points: Number(userAnswer.points),
 		          },
@@ -77,9 +84,19 @@ export default async function handleadduser(req, res){
 
   		const mark = await prisma.Mark.create({
 	      data: {
-	        students_id: Number(studentId), // Replace with the actual student ID
-	        subject_id: Number(SubjectId), // Replace with the actual subject ID
-	        question_type_id: Number(id),
+	        Students: {
+      			connect: { students_id: Number(studentId)},
+    		},
+    		Subject: {
+      			connect: { subject_id: Number(SubjectId),},
+    		},
+	         // Replace with the actual subject ID
+    		QuestionType:{
+      			connect: { question_type_id: Number(id),},
+    		},
+	        Quarter: {
+      			connect: { quarter_id: 1 },
+    		},
 	        mark: Number(totalPoints),
 	      },
     	});

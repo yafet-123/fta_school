@@ -89,7 +89,7 @@ export async function getServerSideProps(context) {
     correctAnswer: data.Question.correctAnswer,
     answer: data.Question.answer,
     points: data.Question.points,
-    timedisplay: data.Question.timedisplay,
+    timedisplay: data.Question.timedisplay.toISOString(),
   }))
   console.log(userAnswers);
 
@@ -116,8 +116,9 @@ export async function getServerSideProps(context) {
     where:{
       AND: [
         {question_type_id: Number(id)},
-        {students_id : Number(student.class_id) },
-        {subject_id: Number(SubjectId)}
+        {students_id : Number(student.students_id) },
+        {subject_id: Number(SubjectId)},
+        question_type_id: Number(id),
       ]
     },
   });
@@ -215,8 +216,8 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId,
                     </div>
                   </div>
                 ))}
-                <div>
-                  {mark[0]?.mark}
+                <div className="bg-white p-5 w-full flex items-center justify-center mt-5">
+                  <p className="text-center text-center text-xl font-bold">Mark: {mark[0]?.mark}</p>
                 </div>
             </div>
           </div>
