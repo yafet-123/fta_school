@@ -26,7 +26,7 @@ export async function getServerSideProps(context){
       }
     }
   });
-
+ 
   const studentId = student.students_id
 
   const tasks = await prisma.Task.findMany({
@@ -39,9 +39,12 @@ export async function getServerSideProps(context){
     where: {
       ClassAnnouncement: {
         some: {
-          class_id: Number(student.students_id),
+          class_id: Number(student.class_id),
         },
       },
+    },
+    orderBy:{
+      ModifiedDate:'desc'
     },
     include:{
       teacher:{
@@ -77,7 +80,7 @@ export async function getServerSideProps(context){
     ClassName: student.Class.ClassName
   };
 
-  console.log(tasks)
+  console.log(Allannouncements)
   return {
     props: {
       tasks:Alltasks,
@@ -87,7 +90,7 @@ export async function getServerSideProps(context){
     },
   };
 }
-
+ 
 export default function Admin({serverdate, tasks, studentId, Allstudents, announcements}){
   function handleChange(newValue) {
       setselected(newValue);

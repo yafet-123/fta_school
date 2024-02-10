@@ -1,5 +1,5 @@
 // pages/announcements.js
-
+import moment from 'moment';
 import React from 'react';
 
 // const announcementsData = [
@@ -33,15 +33,15 @@ const Announcements = ({announcements}) => {
       <h1 className="text-center text-2xl font-bold mb-5">Announcements</h1>
       <ul>
         {announcements.map((announcement) => (
-          <li key={announcement.announcement_id} className="p-2 bg-gray-200 rounded-lg mb-5">
+          <li key={announcement.announcement_id} className="p-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent rounded-lg mb-5">
             <div className="flex flex-col lg:flex-row justify-between items-center mb-5">
-              <h2 className="text-md font-normal">{announcement.teacherName}</h2>
-              <p className="text-md font-normal">
-                <Moment>{announcement.ModifiedDate}</Moment>  
+              <h2 className="text-white text-md font-normal">{announcement.teacherName}</h2>
+              <p className="text-white text-md font-normal">
+                {moment(announcement.ModifiedDate).utc().format('YYYY-MM-DD')} 
               </p>
             </div>
-            <h2 className="text-xl font-bold mb-2">{announcement.title}</h2>
-            <p className="text-lg font-semibold">{announcement.content}</p>
+            <h2 className="text-white text-xl font-bold mb-2">{announcement.title}</h2>
+            <p className="text-white text-lg font-semibold">{announcement.content}</p>
           </li>
         ))}
       </ul>

@@ -7,6 +7,7 @@ import { getSession } from "next-auth/react";
 import { MainHeader } from '../../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
 import {AddAnnouncement} from '../../../../components/Teacher/AddAnnouncement'
+import {DisplayAnnouncement} from '../../../../components/Teacher/DisplayAnnouncement'
 import { useSession } from "next-auth/react";
   
 export async function getServerSideProps(context) {
@@ -46,37 +47,63 @@ export async function getServerSideProps(context) {
     ClassName:data.Class.ClassName,
   }))
 
+  const classAnnouncements = await prisma.classAnnouncement.findMany({
+    include: {
+      Announcement: true,
+      Class: true,
+    },
+  });
+
+
   const announcements = await prisma.Announcement.findMany({
     where: {
       teacher_id: Number(teacher.teacher_id),
     },
     include:{
-      ClassAnnouncement:{
-        select:{
-          Class:true
-        }
-      }
+      ClassAnnouncement: {
+        include: {
+          Class: {
+            select: {
+              class_id: true,
+              ClassName: true,
+            },
+          },
+        },
+      },
     }
+
   })
 
-  const Allannouncements = announcements.map((data)=>({
-    announcement_id : data.announcement_id,
-    title: data.title,
-    content: data.content,
-    class: data.ClassAnnouncement
-  }))
+  const Allannouncements = announcements.map((announcement) => {
+  const associatedClassAnnouncements = classAnnouncements.filter(
+    (classAnnouncement) => classAnnouncement.announcement_id === announcement.announcement_id
+  );
 
-  console.log(Allannouncements[0].class)
+  const classDetails = associatedClassAnnouncements.map((classAnnouncement) => ({
+    class_id: classAnnouncement.Class.class_id,
+    class_name: classAnnouncement.Class.ClassName,
+  }));
+
+  return {
+    announcement_id: announcement.announcement_id,
+    title: announcement.title,
+    content: announcement.content,
+    classDetails,
+  };
+});
+
+console.log(Allannouncements);
 
   return {
     props: {
       Allclasses,
       teacherId,
+      Allannouncements
     }, // will be passed to the page component as props
   }
 }
 
-export default function Add({Allclasses,teacherId}) {
+export default function Add({Allclasses,teacherId,Allannouncements}) {
   const router = useRouter();
   function handleChange(newValue) {
       setselected(newValue);
@@ -87,8 +114,9 @@ export default function Add({Allclasses,teacherId}) {
       <MainHeader title="Future Talent Academy : Add Announcement" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <div className="w-full pt-20">
+        <div className="w-full flex flex-col pt-20">
           <AddAnnouncement Allclasses={Allclasses} teacherId={teacherId} />
+          <DisplayAnnouncement Allannouncements={Allannouncements} Allclasses={Allclasses} />
         </div>
       </div>
     </React.Fragment>

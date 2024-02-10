@@ -21,7 +21,7 @@ export function VerticalNavbar({onChange, data}){
         { link: "/Teacher/Class", icon: <AiFillDashboard size={25}/>, name: "Display Question",},
         { link: "/Teacher/User/Answer/Class", icon: <AiFillDashboard size={25}/>, name: "Display Student Mark",},
         { link: "/Teacher/Display/Marks/Class", icon: <AiFillDashboard size={25}/>, name: "Display Mark",},
-        { link: "/Teacher/User/Announcement/Add", icon: <AiFillDashboard size={25}/>, name: "Add Announcement",},
+        { link: "/Teacher/User/Announcement", icon: <AiFillDashboard size={25}/>, name: "Announcement",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);
@@ -65,15 +65,7 @@ export function VerticalNavbar({onChange, data}){
                             ))}
                         </ul>
                     </div>
-                    <div className="mt-auto flex flex-col">
-                        <Link href="/">
-                            <a className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-black dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl">
-                                <span className="hidden lg:flex"><AiOutlineUser size={25} /> </span>
-                                <span className={`ml-1 lg:ml-4 text-xs lg:text-lg font-semibold ${sideBar ? "hidden" : "flex"} `}>{data?.user.name}</span>
-                            </a>
-                        </Link>
-
-                        
+                    <div className="mt-auto flex flex-col">                        
                         <button 
                             onClick={() => signOut({
                                 callbackUrl: '/auth/signin'
