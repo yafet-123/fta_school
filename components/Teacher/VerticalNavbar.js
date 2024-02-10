@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from "react";
 import { useRouter } from 'next/router'
-
 import { GiTeacher } from "react-icons/gi";
 import { RiAdminFill } from "react-icons/ri";
 import { PiStudent } from "react-icons/pi";
@@ -22,6 +21,7 @@ export function VerticalNavbar({onChange, data}){
         { link: "/Teacher/Class", icon: <AiFillDashboard size={25}/>, name: "Display Question",},
         { link: "/Teacher/User/Answer/Class", icon: <AiFillDashboard size={25}/>, name: "Display Student Mark",},
         { link: "/Teacher/Display/Marks/Class", icon: <AiFillDashboard size={25}/>, name: "Display Mark",},
+        { link: "/Teacher/User/Announcement/Add", icon: <AiFillDashboard size={25}/>, name: "Add Announcement",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);

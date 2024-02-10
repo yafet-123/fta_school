@@ -34,7 +34,7 @@ model User {
   ClassTeacher            ClassTeacher[]
 
 }
-
+ 
 model Class {
   class_id        Int           @id @default(autoincrement())
   ClassName       String        @db.VarChar(255)
@@ -309,7 +309,7 @@ model Answer {
   CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
   ModifiedDate    DateTime? @default(now()) @db.Timestamptz(6)
 }
-
+ 
 model Task {
   id                  Int       @id @default(autoincrement())
   text                String
