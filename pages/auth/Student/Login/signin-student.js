@@ -12,13 +12,13 @@ export default function SignIn({ csrfToken }) {
     const [error, setError] = useState(null);
     const { status, data } = useSession(); 
     useEffect(() => {
-        if (status === "authenticated") router.replace("/Teacher");
+        if (status === "authenticated") router.replace("/Students");
     }, [status, router]);
 
     if (status === "unauthenticated")
         return (
             <React.Fragment>
-                <MainHeader title="Login" />
+                <MainHeader title="Login Student" />
                 <Formik
                     initialValues={{ username: '', password: '' }}
                     validationSchema={Yup.object({
@@ -26,14 +26,15 @@ export default function SignIn({ csrfToken }) {
                         password: Yup.string().required('Please enter your password'),
                     })}
                     onSubmit={async (values, { setSubmitting }) => {
-                        const res = await signIn('teacher-credentials', {
+                        const res = await signIn('student-credentials', {
                             username: values.username,
                             password: values.password,
-                            callbackUrl: "/Teacher",
-                            type:"user",
+                            callbackUrl: "/Students",
+                            type:"student",
                         });
                         console.log(res)
                         if (res?.error) {
+                            router.push(`/auth/error/student-credentials`);
                             setError(res.error);
                         } else {
                             setError(null);
@@ -83,7 +84,7 @@ export default function SignIn({ csrfToken }) {
                                     </div>
                                 </div>
 
-                                <Link href="/Teacher/Forgotpassword" >
+                                <Link href="/Students/Forgotpassword" >
                                     <a
                                         className="font-bold flex justify-end text-lg lg:text-xl text-red-600 mb-5"
                                     >

@@ -63,18 +63,10 @@ export function VerticalNavbar({onChange, data}){
                             ))}
                         </ul>
                     </div>
-                    <div className="mt-auto flex flex-col">
-                        <Link href="/">
-                            <a className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-black dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl">
-                                <span className="hidden lg:flex"><AiOutlineUser size={25} /> </span>
-                                <span className={`ml-1 lg:ml-4 text-xs lg:text-lg font-semibold ${sideBar ? "hidden" : "flex"} `}>{data?.user.name}</span>
-                            </a>
-                        </Link>
-
-                        
+                    <div className="mt-auto flex flex-col">                        
                         <button 
                             onClick={() => signOut({
-                                callbackUrl: '/auth/signin'
+                                callbackUrl: '/auth/Student/Login/signin-student'
                             })} 
                             className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-black dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl" href="#">
                             <span className="hidden lg:flex"><FiLogOut size={25} /></span>

@@ -5,25 +5,32 @@ import { useState,useEffect, useContext} from 'react'
 export default function ForgotPassword() {
   const [email, setemail] = useState("")
   const [status, setStatus] = useState("")
+  const [loading, setloading] = useState(false)
+
   async function forgotPasswordregister(e){
     e.preventDefault()
-    const data = await axios.post(`api/forgotPassword`,{
+    setloading(true)
+    const data = await axios.post(`../../../api/teacher/forgotPassword`,{
         "email": email,
     }).then(function (response) {
       setStatus(response.data.status)
+      console.log(response)
+      setloading(false)
     }).catch(function (error) {
         console.log("Password Changing Failed")
+        setloading(false)
     });
+    setloading(false) 
   }
 
   return (
     <React.Fragment>
       <MainHeader title="Hulu Media : Forgot Password" />
       <div className="flex flex-col justify-center items-center h-screen w-full bg-[#e6e6e6] dark:bg-[#02201D]"> 
-        <p className="mb-5 text-black text-xl font-bold">{status}</p> 
-    
+        
         <form className="flex flex-col bg-neutral-100 dark:bg-slate-700 border border-slate-300 rounded-xl w-full lg:w-[45rem] h-full lg:h-[35rem]" onSubmit={forgotPasswordregister}>
-          <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic my-20">Reset Password</h1>
+          <h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic mt-20 mb-5">Reset Password</h1>
+           <p className="text-red-500 text-xl font-bold text-center">{status}</p> 
           <div className="flex flex-col">
             <div className="relative my-10 mx-5">
               <input 
@@ -44,7 +51,8 @@ export default function ForgotPassword() {
 
             <div className="flex justify-end mx-5">
               <button 
-                  className="w-32 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl p-4"
+                  disabled={loading}
+                  className={` ${ loading ? "bg-opacity-10" : "" } w-32 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl p-4`}
               >
                   Submit
               </button>

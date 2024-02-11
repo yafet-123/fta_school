@@ -11,7 +11,7 @@ export default function ResetPassword() {
   const { token } = router.query
   async function handleSubmit(e){
         e.preventDefault()
-        const data = await axios.post(`api/ResetPasswordapi`,{
+        const data = await axios.post(`../api/student/ResetPasswordapi`,{
             "password": password,
             "token": token,
         }).then(function (response) {
@@ -28,7 +28,7 @@ export default function ResetPassword() {
     return(
       <div className="flex flex-col justify-center items-center h-screen w-full bg-[#e6e6e6] dark:bg-[#02201D]" >
         <p className="mb-5 text-black text-xl font-bold">Your password has been successfully reset password.</p>
-        <Link href="/auth/signin">
+        <Link href="/auth/Student/Login/signin-student">
           <a className="w-32 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl p-4">
             Login
           </a>
