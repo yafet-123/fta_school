@@ -4,12 +4,14 @@ import { GiTeacher } from "react-icons/gi";
 import { RiAdminFill } from "react-icons/ri";
 import { PiStudent } from "react-icons/pi";
 import { SiBookstack } from "react-icons/si";
-import { SiGoogleclassroom } from "react-icons/si";
-import { FaQuestion } from "react-icons/fa";
 import { AiOutlineUser,AiFillDashboard,AiOutlineMenu } from "react-icons/ai";
+import { FaQuestion, FaQuestionCircle  } from "react-icons/fa";
+import { CiSquareQuestion } from "react-icons/ci";
+import { CiBookmarkCheck, CiBookmarkPlus } from "react-icons/ci";
 import { FiLogOut } from "react-icons/fi"
 import { WiMoonFirstQuarter } from "react-icons/wi";
-
+import { SiGoogleclassroom } from "react-icons/si";
+import { TfiAnnouncement } from "react-icons/tfi";
 import Link from 'next/link'
 import { useSession, signIn, signOut  } from "next-auth/react";
 
@@ -17,11 +19,11 @@ import { useSession, signIn, signOut  } from "next-auth/react";
 export function VerticalNavbar({onChange, data}){
     const SideBarList = [
         { link: "/Teacher", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
-        { link: "/Teacher/Question/Add", icon: <AiFillDashboard size={25}/>, name: "Add Question",},
-        { link: "/Teacher/Class", icon: <AiFillDashboard size={25}/>, name: "Display Question",},
-        { link: "/Teacher/User/Answer/Class", icon: <AiFillDashboard size={25}/>, name: "Display Student Mark",},
-        { link: "/Teacher/Display/Marks/Class", icon: <AiFillDashboard size={25}/>, name: "Display Mark",},
-        { link: "/Teacher/User/Announcement", icon: <AiFillDashboard size={25}/>, name: "Announcement",},
+        { link: "/Teacher/Question/Add", icon: <CiSquareQuestion size={25}/>, name: "Add Question",},
+        { link: "/Teacher/Class", icon: <SiGoogleclassroom size={25}/>, name: "Display Question",},
+        { link: "/Teacher/User/Answer/Class", icon: <CiBookmarkCheck  size={25}/>, name: "Display Student Mark",},
+        { link: "/Teacher/Display/Marks/Class", icon: <CiBookmarkPlus  size={25}/>, name: "Display Mark",},
+        { link: "/Teacher/User/Announcement", icon: <TfiAnnouncement  size={25}/>, name: "Announcement",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);
