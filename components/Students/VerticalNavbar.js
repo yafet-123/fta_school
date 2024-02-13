@@ -7,11 +7,11 @@ import { PiStudent } from "react-icons/pi";
 import { SiBookstack } from "react-icons/si";
 import { SiGoogleclassroom } from "react-icons/si";
 import { FaQuestion } from "react-icons/fa";
+import { CiSquareQuestion } from "react-icons/ci";
 import { AiOutlineUser,AiFillDashboard,AiOutlineMenu } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi"
 import { WiMoonFirstQuarter } from "react-icons/wi";
-import { SiGoogleclassroom } from "react-icons/si";
-
+import { MdQuestionAnswer } from "react-icons/md";
 import Link from 'next/link'
 import { useSession, signIn, signOut  } from "next-auth/react";
 
@@ -19,8 +19,8 @@ import { useSession, signIn, signOut  } from "next-auth/react";
 export function VerticalNavbar({onChange, data}){
     const SideBarList = [
         { link: "/Students", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
-        { link: "/Students/question/subject", icon: <RiAdminFill size={25}/>, name: "Question",},
-        { link: "/Students/answered/subject", icon: <RiAdminFill size={25}/>, name: "Answer",},
+        { link: "/Students/question/subject", icon: <CiSquareQuestion size={25}/>, name: "Question",},
+        { link: "/Students/answered/subject", icon: <MdQuestionAnswer size={25}/>, name: "Answer",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);
