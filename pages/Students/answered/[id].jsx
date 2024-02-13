@@ -4,7 +4,7 @@ import Hero from "../../../components/Students/answered/Hero"
 import { prisma } from '../../../util/db.server.js'
 import { useSession } from "next-auth/react";
 import { MainHeader } from '../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../components/students/VerticalNavbar";
+import { VerticalNavbar } from "../../../components/Students/VerticalNavbar";
 import { getSession } from "next-auth/react";
 import ReactModal from "react-modal";
 import Loader from "../../../components/common/Loading";

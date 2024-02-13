@@ -118,7 +118,7 @@ export async function getServerSideProps(context) {
         {question_type_id: Number(id)},
         {students_id : Number(student.students_id) },
         {subject_id: Number(SubjectId)},
-        question_type_id: Number(id),
+        {question_type_id: Number(id)},
       ]
     },
   });
