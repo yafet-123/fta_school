@@ -18,7 +18,7 @@ export default function Answered(){
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <p></p>
+          <p>answered</p>
         </div>
       </div>
     </React.Fragment>  );
