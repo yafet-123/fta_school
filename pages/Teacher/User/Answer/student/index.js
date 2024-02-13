@@ -13,6 +13,12 @@ export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const classId = query.classId
 
+  const classes = await prisma.Class.findUnique({
+    where:{
+      class_id: Number(classId)
+    }
+  })
+
   const students = await prisma.Students.findMany({
     where: {
       class_id: Number(classId),
@@ -29,7 +35,7 @@ export async function getServerSideProps(context) {
       },
     },
   });
-  
+  const ClassName = classes.ClassName
   console.log(students)
   const Allstudents = students.map((data)=>({
      students_id: data.students_id,
@@ -42,11 +48,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       Allstudents,
+      ClassName
     }, // will be passed to the page component as props
   }
 }
 
-export default function Students({Allstudents}) {
+export default function Students({Allstudents, ClassName}) {
   const router = useRouter();
   function handleChange(newValue) {
       setselected(newValue);
@@ -58,7 +65,13 @@ export default function Students({Allstudents}) {
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <Studentlist Allstudents={Allstudents} />
+          {Allstudents.length == 0 ? (
+            <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20">
+              <p className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Sorry No students Are Found in {ClassName}.</p>
+            </div>
+          ) : (
+            <Studentlist Allstudents={Allstudents} />
+          )}
         </div>
       </div>
     </React.Fragment>
