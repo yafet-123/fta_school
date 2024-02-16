@@ -9,7 +9,7 @@ import { getSession } from "next-auth/react";
 import ReactModal from "react-modal";
 import Loader from "../../../components/common/Loading";
 import axios from 'axios';
-import { getSession } from "next-auth/react";
+
 
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context

@@ -8,10 +8,7 @@ import { MainHeader } from '../../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../../components/Students/VerticalNavbar";
 import SubjectList from '../../../../components/Students/answered/subject/SubjectList'
 import { useSession } from "next-auth/react";
-import { getSession } from "next-auth/react";
 export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  console.log(session)
   const session = await getSession(context);
   const userRole = await session.user.role
   if (userRole !== 'student') {

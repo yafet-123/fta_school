@@ -7,6 +7,8 @@ import { useSession } from "next-auth/react";
 import { MainHeader } from '../../../../components/common/MainHeader';
 import React from 'react'
 import Link from 'next/link'
+import { getSession } from "next-auth/react";
+
 export default function SignIn({ csrfToken }) {
     const router = useRouter();
     const [error, setError] = useState(null);
@@ -110,6 +112,34 @@ export default function SignIn({ csrfToken }) {
 }
 
 export async function getServerSideProps(context) {
+    const session = await getSession(context);
+  const userRole = await session.user.role
+  if (userRole === 'student') {
+    return {
+      redirect: {
+        destination: '/', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+  
+  if (userRole === 'teacher') {
+    return {
+      redirect: {
+        destination: '/auth/Teacher/Login/signin-teacher', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+
+  if (userRole === 'admin') {
+    return {
+      redirect: {
+        destination: '/auth/Admin/Login/signin-user', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       csrfToken: await getCsrfToken(context),
