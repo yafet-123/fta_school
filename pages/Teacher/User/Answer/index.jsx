@@ -15,6 +15,30 @@ export async function getServerSideProps(context) {
   const id = query.id
   const SubjectId = query.subjectId
   const studentId = query.studentId
+  const session = await getSession(context);
+  const userRole = await session.user.role
+  if (userRole !== 'teacher') {
+    return {
+      redirect: {
+        destination: '/auth/error', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+
+  const teacher = await prisma.Teacher.findUnique({
+    where:{ teacher_id: Number(session.user.user_id) },
+  });
+
+  console.log(teacher)
+  if (teacher === null) {
+    return {
+      redirect: {
+        destination: '/auth/error',
+        permanent: false,
+      },
+    };
+  }
 
   const student = await prisma.Students.findUnique({
     where:{ students_id: Number(studentId) },

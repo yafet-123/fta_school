@@ -2,6 +2,43 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { getSession } from "next-auth/react";
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  const userRole = await session.user.role
+  if (userRole === 'student') {
+    return {
+      redirect: {
+        destination: '/auth/Students/Login/signin-student', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+  
+  if (userRole === 'teacher') {
+    return {
+      redirect: {
+        destination: '/', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+
+  if (userRole === 'admin') {
+    return {
+      redirect: {
+        destination: '/auth/Admin/Login/signin-user', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      
+    }, // will be passed to the page component as props
+  }
+}
 export default function ResetPassword() {
   const router = useRouter();
   const [password, setPassword] = useState('');

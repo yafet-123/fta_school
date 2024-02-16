@@ -109,6 +109,34 @@ export default function SignIn({ csrfToken }) {
 }
 
 export async function getServerSideProps(context) {
+    const session = await getSession(context);
+  const userRole = await session.user.role
+  if (userRole === 'student') {
+    return {
+      redirect: {
+        destination: '/auth/Student/Login/signin-student', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+  
+  if (userRole === 'teacher') {
+    return {
+      redirect: {
+        destination: '/', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+
+  if (userRole === 'admin') {
+    return {
+      redirect: {
+        destination: '/auth/Admin/Login/signin-user', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       csrfToken: await getCsrfToken(context),

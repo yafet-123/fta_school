@@ -10,7 +10,16 @@ export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const id = query.id
   console.log(query.id)
-  
+  const session = await getSession(context);
+  const userRole = await session.user.role
+  if (userRole !== 'teacher') {
+    return {
+      redirect: {
+        destination: '/auth/error', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
   const questionType = await prisma.QuestionType.findMany({
       where:{
         question_category_id:Number(id)

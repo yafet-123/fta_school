@@ -5,11 +5,34 @@ import { prisma } from '../../../../util/db.server.js'
 import { MainHeader } from '../../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
 import { useSession } from "next-auth/react";
-
+import { getSession } from "next-auth/react";
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
   const id = query.subjectId
+  const session = await getSession(context);
+  const userRole = await session.user.role
+  if (userRole !== 'teacher') {
+    return {
+      redirect: {
+        destination: '/auth/error', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
   
+  const teacher = await prisma.Teacher.findUnique({
+    where:{ teacher_id: Number(session.user.user_id) },
+    
+  });
+
+  if (teacher === null) {
+    return {
+      redirect: {
+        destination: '/auth/error',
+        permanent: false,
+      },
+    };
+  }
   const questionCategory = await prisma.QuestionCategory.findMany({
       where:{
         SubjectQuestionCategory:{

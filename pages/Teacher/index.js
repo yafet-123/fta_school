@@ -13,10 +13,29 @@ import Profile from '../../components/Teacher/Profile'
 export async function getServerSideProps(context){
   const serverdate = new Date();
   const session = await getSession(context);
-  
+  const userRole = await session.user.role
+  if (userRole !== 'teacher') {
+    return {
+      redirect: {
+        destination: '/auth/error', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
+
   const teacher = await prisma.Teacher.findUnique({
     where:{ teacher_id: Number(session.user.user_id) },
   });
+
+  console.log(teacher)
+  if (teacher === null) {
+    return {
+      redirect: {
+        destination: '/auth/error',
+        permanent: false,
+      },
+    };
+  }
 
   const teacherId = teacher.teacher_id
 

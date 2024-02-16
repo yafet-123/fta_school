@@ -12,12 +12,29 @@ import { useSession } from "next-auth/react";
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session)
-  
+  const userRole = await session.user.role
+  if (userRole !== 'teacher') {
+    return {
+      redirect: {
+        destination: '/auth/error', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
   const teacherId = session.user.user_id;
   const teacher = await prisma.Teacher.findUnique({
     where:{ teacher_id: Number(session.user.user_id) },
     
   });
+
+  if (teacher === null) {
+    return {
+      redirect: {
+        destination: '/auth/error',
+        permanent: false,
+      },
+    };
+  }
 
   const classes = await prisma.ClassTeacher.findMany({
     where:{

@@ -14,6 +14,15 @@ import Moment from 'react-moment';
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session)
+  const userRole = await session.user.role
+  if (userRole !== 'teacher') {
+    return {
+      redirect: {
+        destination: '/auth/error', // Redirect to the error page for unauthorized access
+        permanent: false,
+      },
+    };
+  }
   const {params,req,res,query} = context
   const id = query.id
   const classId = query.classId;
@@ -22,6 +31,14 @@ export async function getServerSideProps(context) {
     where:{ teacher_id: Number(session.user.user_id) },
     
   });
+  if (teacher === null) {
+    return {
+      redirect: {
+        destination: '/auth/error',
+        permanent: false,
+      },
+    };
+  }
   console.log(teacher)
   const types = await prisma.QuestionType.findUnique({
     where:{ question_type_id: Number(id) },  
