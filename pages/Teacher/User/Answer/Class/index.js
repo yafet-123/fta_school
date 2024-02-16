@@ -11,8 +11,6 @@ import { useSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log(session)
-  const session = await getSession(context);
   const userRole = await session.user.role
   if (userRole !== 'teacher') {
     return {
