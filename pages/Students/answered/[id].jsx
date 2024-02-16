@@ -27,21 +27,6 @@ export async function getServerSideProps(context) {
   }
   const student = await prisma.Students.findUnique({
     where:{ students_id: Number(session.user.user_id) },
-    
-  });
-  if (student === null) {
-    return {
-      redirect: {
-        destination: '/auth/error',
-        permanent: false,
-      },
-    };
-  }
-
-  const session = await getSession(context);
-  const studentId = session.user.user_id
-  const student = await prisma.Students.findUnique({
-    where:{ students_id: Number(session.user.user_id) },
     include:{
       Class:{
         select:{
@@ -51,6 +36,16 @@ export async function getServerSideProps(context) {
     }
     
   });
+  
+  if (student === null) {
+    return {
+      redirect: {
+        destination: '/auth/error',
+        permanent: false,
+      },
+    };
+  }
+  
 
   const types = await prisma.QuestionType.findUnique({
     where:{ question_type_id: Number(id) },  
