@@ -18,7 +18,7 @@ export async function getServerSideProps(context) {
   const SubjectId = query.subjectId
 
   const session = await getSession(context);
-  const userRole = await session.user.user_id
+  const userRole = await session.user.role
   if (userRole !== 'student') {
     return {
       redirect: {
