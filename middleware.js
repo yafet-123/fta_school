@@ -3,51 +3,24 @@ import { NextRequest, NextResponse } from "next/server";
 
 export default withAuth({
   callbacks: {
-    async authorized({ req, token }) {
-      const { pathname } = req.nextUrl;
-
-      // Allow access to "/" and "/about" for all users
-      if (["/", "/about"].includes(pathname)) {
-        return true;
+    authorized({ req, token }) {
+      // `/admin` requires admin role
+      if (req.nextUrl.pathname === "/Admin") {
+        return token?.role === "admin"
       }
 
-      // Check role-based access for specific routes
-      console.log(pathname)
-      if (pathname.startsWith("/Admin")) {
-        if (token?.role !== "admin") {
-          return false;
-        }
+      if (req.nextUrl.pathname === "/Admin") {
+        return token?.role === "student"
       }
 
-      if (pathname.startsWith("/Students")) {
-        if (token?.role !== "student") {
-          return false;
-        }
+      if (req.nextUrl.pathname === "/Admin") {
+        return token?.role === "teacher"
       }
-
-      if (pathname.startsWith("/Teacher")) {
-        if (token?.role !== "teacher") {
-          return false;
-        }
-      }
-
-      // Default behavior: Check if the user is logged in for other routes
-      if (!token) {
-        return false;
-      }
-
-      return true;
+      // `/me` only requires the user to be logged in
+      return !!token
     },
   },
+})
 
-export const config = { matcher: "/(.*)" };
 
-export function handle({ request, resolve }) {
-  const authorized = request.authenticated;
-
-  if (!authorized) {
-    return NextResponse.redirect('/auth/error');
-  }
-
-  return resolve(request);
-}
+export const config = { matcher: ["/Admin","/Admin/Students","/Admin/Teacher"] };
