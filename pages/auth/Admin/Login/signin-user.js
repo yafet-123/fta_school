@@ -135,7 +135,7 @@ export async function getServerSideProps(context) {
     if (userRole === 'admin') {
         return {
             redirect: {
-                destination: '/', // Redirect to the error page for unauthorized access
+                destination: '/Admin', // Redirect to the error page for unauthorized access
                 permanent: false,
             },
         };
