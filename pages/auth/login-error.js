@@ -13,7 +13,7 @@ export default function Error () {
           <p className="text-center text-md lg:text-4xl font-bold">Error : {error}</p>
           <button 
               className="mt-10 text-xl md:text-2xl lg:text-3xl bg-blue-400 focus:text-white focus:bg-blue-600 p-4 rounded-xl"
-              onClick={() => router.push("/auth/signin-user")}
+              onClick={() =>  router.back()}
           >Go To Login Page</button>
         </div>
       </div>
