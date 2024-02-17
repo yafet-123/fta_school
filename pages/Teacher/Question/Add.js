@@ -12,7 +12,7 @@ import { useSession } from "next-auth/react";
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session)
-  const userRole = await session.user.role
+  const userRole = await session?.user?.role
   if (userRole !== 'teacher') {
     return {
       redirect: {

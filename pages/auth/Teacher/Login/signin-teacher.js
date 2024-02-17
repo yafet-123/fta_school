@@ -110,7 +110,7 @@ export default function SignIn({ csrfToken }) {
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-  const userRole = await session.user.role
+  const userRole = await session?.user?.role
   if (userRole === 'student') {
     return {
       redirect: {

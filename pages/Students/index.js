@@ -15,7 +15,7 @@ import Moment from 'react-moment';
 export async function getServerSideProps(context){
   const serverdate = new Date();
   const session = await getSession(context);
-  const userRole = await session.user.role
+  const userRole = await session?.user?.role
   if (userRole !== 'student') {
     return {
       redirect: {

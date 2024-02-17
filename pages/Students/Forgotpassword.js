@@ -5,7 +5,7 @@ import { useState,useEffect, useContext} from 'react'
 import { getSession } from "next-auth/react";
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  const userRole = await session.user.role
+  const userRole = await session?.user?.role
   if (userRole === 'student') {
     return {
       redirect: {

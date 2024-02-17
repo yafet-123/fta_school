@@ -13,7 +13,7 @@ import Profile from '../../components/Teacher/Profile'
 export async function getServerSideProps(context){
   const serverdate = new Date();
   const session = await getSession(context);
-  const userRole = await session.user.role
+  const userRole = await session?.user?.role
   if (userRole !== 'teacher') {
     return {
       redirect: {
