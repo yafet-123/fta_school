@@ -11,6 +11,7 @@ import { getSession } from "next-auth/react";
 import ReactModal from "react-modal";
 import Loader from "../../../components/common/Loading";
 import axios from 'axios';
+import moment from 'moment';
 
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
@@ -148,10 +149,12 @@ export async function getServerSideProps(context) {
     question_id:data.question_id,
     question:data.question,
     points:data.points,
+    timedisplay: data.timedisplay.toISOString(),
     answer:data.answer || null
   }))
   const questionlength = questionCount._count.question_id
   const classes = student.Class.ClassName
+  console.log(Allquestion[0])
   return {
     props: {
       Allquestion,
@@ -249,7 +252,10 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
         ) : (
           <div className='bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20'>
             <Hero Allquestion={Allquestion} classes={classes} type={type} />
-            <h1 className="text-center font-bold text-[#00225F] text-3xl md:text-4xl lg:text-5xl pt-10 mb-5">Quiz Page</h1>
+            <p className="font-bold text-[#00225F] text-center text-xl md:text-2xl px-2 lg:px-16 pt-10">
+              This Question will be hide <span className="text-red-700">{moment(Allquestion[0].timedisplay).utc().format('YYYY-MMMM-DD')} </span> 
+              and answer will be visible
+            </p>
             <div className="lg:px-16">
                 {Allquestion.map((question, index) => (
                   <div className="flex flex-col">
