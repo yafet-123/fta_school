@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import QuestionCategory from "../../../../components/Teacher/UserAnswer/QuestionCategory"
+import QuestionCategory from "../../../../components/Teacher/QuestionCategory"
 import { prisma } from '../../../../util/db.server.js'
 import { MainHeader } from '../../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
@@ -81,7 +81,7 @@ export default function Category({AllquestionCategory}) {
       <MainHeader title="Future Talent Academy : Students" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <div className='w-full px-2 lg:px-32 h-full pt-20 pb-96'>
+        <div className='w-full px-2 lg:px-20 h-full pt-20 pb-96'>
           <QuestionCategory AllquestionCategory={AllquestionCategory} subjectId={subjectId} classId={classId} />
         </div>
       </div>

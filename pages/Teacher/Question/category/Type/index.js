@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import QuestionType from "../../../../../components/Teacher/UserAnswer/QuestionType"
+import QuestionType from "../../../../../components/Teacher/QuestionType"
 import { prisma } from '../../../../../util/db.server.js'
 import { useSession } from "next-auth/react";
 import { MainHeader } from '../../../../../components/common/MainHeader';
@@ -75,7 +75,7 @@ export default function Type({Allquestiontype}) {
       <MainHeader title="Future Talent Academy : Students" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <div className='w-full px-2 lg:px-32 h-full pt-20 pb-96'>
+        <div className='w-full px-2 lg:px-20 h-full pt-20 pb-96'>
           <QuestionType Allquestiontype={Allquestiontype} subjectId={subjectId} classId={classId} />
         </div>
       </div>

@@ -5,6 +5,7 @@ import { prisma } from '../../../../../../util/db.server.js'
 import { useSession } from "next-auth/react";
 import { MainHeader } from '../../../../../../components/common/MainHeader';
 import { VerticalNavbar } from "../../../../../../components/Teacher/VerticalNavbar";
+import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
