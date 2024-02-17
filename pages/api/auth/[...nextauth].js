@@ -99,7 +99,7 @@ export default NextAuth({
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: '/auth/signin',
-        error:`/auth/error`
+        error:`/auth/login-error`
     },
     callbacks: {
         async jwt({ token, user }) {
