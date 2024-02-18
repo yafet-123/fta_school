@@ -98,25 +98,25 @@ export const Navbar = () => {
                 <li
                   key={link.name}
                   className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#17c294] ${
-                    router.pathname === "/auth/Student/Login/signin-student"
+                    router.pathname === link.path
                       ? "text-[#edf1f4] underline"
                       : ""
                   } `}
                 >
-                  <Link href="/auth/Student/Login/signin-student">
-                    <p onClick={closeDropdown}>Login</p>
+                  <Link href={link.path}>
+                    <p onClick={closeDropdown}>{link.name}</p>
                   </Link>
                 </li>
               ))}
               <li
                 className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#17c294] ${
-                  router.pathname === link.path
+                  router.pathname === "/auth/Student/Login/signin-student"
                     ? "text-[#edf1f4] underline"
                     : ""
                 } `}
               >
-                <Link href={link.path}>
-                  <p onClick={closeDropdown}>{link.name}</p>
+                <Link href="/auth/Student/Login/signin-student">
+                  <p onClick={closeDropdown}>Login</p>
                 </Link>
               </li>
             </ul>
