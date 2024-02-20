@@ -73,8 +73,6 @@ export async function getServerSideProps(context) {
       },
     })
   const questionIds = question.map(data => data.question_id);
-
-  console.log(questionIds);
   const userAnswers = await prisma.UserAnswer.findMany({
     where: {
       question_id: {
@@ -103,14 +101,14 @@ export async function getServerSideProps(context) {
 
   const filteredQuestions = [];
   let redirectToAnswered
-  userAnswers.filter((ques) => {
+  question.filter((ques) => {
     // Customize the comparison logic based on your requirements
     const currentDate = new Date();
-    const timedisplayDate = new Date(ques.Question.timedisplay);
+    const timedisplayDate = new Date(ques.timedisplay);
     console.log(timedisplayDate)
-    const isConditionSatisfied = currentDate  > timedisplayDate;
-
-    if (isConditionSatisfied) {
+    const isConditionSatisfied = currentDate < timedisplayDate;
+    console.log(isConditionSatisfied)
+    if (!isConditionSatisfied) {
       redirectToAnswered = true;
       filteredQuestions.push(ques);
     }
@@ -118,7 +116,7 @@ export async function getServerSideProps(context) {
     return isConditionSatisfied; // Include the question in the filtered array if the condition is true
   });
 
-  if (!redirectToAnswered) {
+  if (redirectToAnswered) {
     return {
       redirect: {
         destination: '/Students/answered/waitArea', // Replace with the path you want to redirect to
@@ -136,7 +134,6 @@ export async function getServerSideProps(context) {
     points: data.Question.points,
     timedisplay: data.Question.timedisplay.toISOString(),
   }))
-  console.log(userAnswers);
 
   const questionCount = await prisma.Question.aggregate({
     where:{
@@ -172,8 +169,6 @@ export async function getServerSideProps(context) {
     mark_id:data.mark_id,
     mark:data.mark
   }))
-
-  console.log("mark", mark)
   const classes = student.Class.ClassName
   return {
     props: {
@@ -181,14 +176,13 @@ export async function getServerSideProps(context) {
       questionlength,
       classes,
       type,
-      studentId,
       SubjectId,
       mark
     }, // will be passed to the page component as props
   }
 }
 
-const AnswerQuestionForStudents = ({Allquestion,questionlength,classes,type,studentId, SubjectId, mark}) => {
+const AnswerQuestionForStudents = ({Allquestion,questionlength,classes,type, SubjectId, mark}) => {
   const router = useRouter();
   const id = router.query.id;
   const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);

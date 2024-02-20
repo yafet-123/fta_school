@@ -108,15 +108,17 @@ export async function getServerSideProps(context) {
   // Customize the comparison logic based on your requirements
     const currentDate = new Date();
     const timedisplayDate = new Date(ques.timedisplay);
-    const isConditionSatisfied = currentDate  > timedisplayDate;
-
+    console.log(timedisplayDate)
+    console.log(currentDate)
+    const isConditionSatisfied = currentDate  < timedisplayDate;
+    console.log(isConditionSatisfied)
     if (isConditionSatisfied) {
       
       redirectToAnswered = true;
       // You can also break out of the loop if you want to redirect based on the first question that satisfies the condition
       // break;
     }
-  });
+  }); 
 
   if (redirectToAnswered) {
     return {

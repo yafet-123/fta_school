@@ -19,11 +19,11 @@ export default function Hero({classes,type}) {
             className="h-14 w-14"
           />
         </div>
-        <h1 className="font-bold text-4xl md:text-6xl text-right italic">
+        <h1 className="font-bold text-2xl md:text-6xl text-right italic">
           Future Talent Academy
         </h1>
       </div>
-      <h1 className="font-bold text-2xl md:text-5xl text-center w-full px-20">
+      <h1 className="font-bold text-xl md:text-5xl text-center w-full px-2 lg:px-20">
         1<sup>st</sup> quarter ICT {type} For Grade {classes}
       </h1>
     </div>
