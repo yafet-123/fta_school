@@ -108,7 +108,7 @@ export async function getServerSideProps(context) {
     console.log(timedisplayDate)
     const isConditionSatisfied = currentDate < timedisplayDate;
     console.log(isConditionSatisfied)
-    if (!isConditionSatisfied) {
+    if (isConditionSatisfied) {
       redirectToAnswered = true;
       filteredQuestions.push(ques);
     }
