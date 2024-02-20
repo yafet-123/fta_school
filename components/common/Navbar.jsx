@@ -5,10 +5,12 @@ import { useRouter } from "next/router";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { BsLinkedin, BsInstagram } from "react-icons/bs";
 import logo from '../../public/LOGO_V0.1-01.png';
-
+import { useSession } from 'next-auth/react';
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { session } = useSession();
+  console.log(session)
   // const [toggleDropdown, setToggleDropdown] = useState(false);
   const [shadow, setShadow] = useState(false);
   const router = useRouter();
@@ -108,17 +110,19 @@ export const Navbar = () => {
                   </Link>
                 </li>
               ))}
-              <li
-                className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#17c294] ${
-                  router.pathname === "/auth/Student/Login/signin-student"
-                    ? "text-[#edf1f4] underline"
-                    : ""
-                } `}
-              >
-                <Link href="/auth/Student/Login/signin-student">
-                  <p onClick={closeDropdown}>Login</p>
-                </Link>
-              </li>
+              { 
+                <li
+                  className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#17c294] ${
+                    router.pathname === "/auth/Student/Login/signin-student"
+                      ? "text-[#edf1f4] underline"
+                      : ""
+                  } `}
+                >
+                  <Link href="/auth/Student/Login/signin-student">
+                    <p onClick={closeDropdown}>Login</p>
+                  </Link>
+                </li>
+              }
             </ul>
           </div>
         </div>

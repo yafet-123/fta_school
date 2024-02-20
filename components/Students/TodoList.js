@@ -49,7 +49,7 @@ const TodoList = ({ tasks, studentId }) => {
           onChange={(e) => setTaskText(e.target.value)}
         />
         <button
-          className={`bg-blue-500 text-white p-2 rounded-r ${ loading ? 'bg-opacity-10' : ""}`}
+          className={` bg-blue-500 text-white p-2 rounded-r ${ loading ? 'bg-opacity-10' : ""}`}
           onClick={addTask}
           disabled={loading}
         >
@@ -62,9 +62,7 @@ const TodoList = ({ tasks, studentId }) => {
 
           <li
             key={task.id}
-            className={`flex justify-between items-center p-2 border-b border-gray-300 ${
-              task.completed ? 'line-through text-gray-500' : ''
-            }`}
+            className="bg-white w-full flex justify-between items-center rounded-lg px-2 py-2 border-b border-gray-300 mb-5"
           >
             {task.text}
             <button

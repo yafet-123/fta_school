@@ -17,8 +17,8 @@ const Profile = ({Allstudents}) => {
     setupdateModalOn(true)
   }
   return (
-    <div className="flex flex-col">      
-      <div className="bg-white rounded-lg p-8 shadow-md w-80 text-center">
+    <div className="flex flex-col mb-5">      
+      <div className="bg-white rounded-lg p-8 shadow-md w-full lg:w-80 text-center">
         <h1 className="text-center text-2xl font-bold mb-5">Profile</h1>
         <div className="flex items-center justify-center">
           <div className="rounded-full overflow-hidden">

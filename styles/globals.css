@@ -45,3 +45,7 @@
   background-position: center;
   background-size: cover;
 }
+body .react-calendar {
+  width: auto !important;
+  max-width: none !important;
+}

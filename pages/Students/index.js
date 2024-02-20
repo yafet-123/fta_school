@@ -117,14 +117,14 @@ export default function Admin({serverdate, tasks, studentId, Allstudents, announ
   return (
     <React.Fragment>
       <MainHeader title="Future Talent Academy : Students" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
+      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10 w-full">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
-          <div className="flex flex-col lg:flex-row justify-between items-center px-5 lg:px-10 mb-5">
+          <div className="flex flex-col lg:flex-row justify-between items-center px-0 lg:px-10 mb-5">
             <Profile Allstudents={Allstudents} />
             <MyCalendar serverdate={serverdate} />
           </div>
-          <div className="flex flex-col lg:flex-row justify-between px-5 lg:px-10 mb-5">
+          <div className="flex flex-col lg:flex-row justify-between px-2 lg:px-10 mb-5">
             <TodoList tasks={tasks} studentId={studentId} />
             <Announcements announcements={announcements} />
           </div>
