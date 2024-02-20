@@ -108,10 +108,7 @@ export async function getServerSideProps(context) {
   // Customize the comparison logic based on your requirements
     const currentDate = new Date();
     const timedisplayDate = new Date(ques.timedisplay);
-    console.log(timedisplayDate)
-    console.log(currentDate)
     const isConditionSatisfied = currentDate  < timedisplayDate;
-    console.log(isConditionSatisfied)
     if (isConditionSatisfied) {
       
       redirectToAnswered = true;
