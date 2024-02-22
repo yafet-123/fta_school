@@ -63,7 +63,7 @@ export async function getServerSideProps(context) {
     },
   });
 
-
+  console.log(hasUserAnswered)
 
   if (hasUserAnswered) {
     // Redirect or handle the case where the user has already answered questions
@@ -104,30 +104,6 @@ export async function getServerSideProps(context) {
 
   let redirectToAnswered = false;
 
-  question.forEach((ques) => {
-  // Customize the comparison logic based on your requirements
-    const currentDate = new Date();
-    const timedisplayDate = new Date(ques.timedisplay);
-    console.log(timedisplayDate)
-    console.log(currentDate)
-    const isConditionSatisfied = currentDate  < timedisplayDate;
-    console.log(isConditionSatisfied)
-    if (!isConditionSatisfied) {
-      
-      redirectToAnswered = true;
-      // You can also break out of the loop if you want to redirect based on the first question that satisfies the condition
-      // break;
-    }
-  }); 
-
-  if (redirectToAnswered) {
-    return {
-      redirect: {
-        destination: '/Students/question/timePassedQuestions', // Replace with the path you want to redirect to
-        permanent: false,
-      },
-    };
-  }
 
   const questionCount = await prisma.Question.aggregate({
     where:{
@@ -156,7 +132,7 @@ export async function getServerSideProps(context) {
   }))
   const questionlength = questionCount._count.question_id
   const classes = student.Class.ClassName
-  console.log(Allquestion[0])
+
   return {
     props: {
       Allquestion,

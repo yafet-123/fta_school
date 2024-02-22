@@ -46,10 +46,10 @@ export default async function handleadduser(req, res){
 
  
 	    let totalPoints = 0;
-
   		for (const userAnswer of selectedAnswers) {
+  			console.log(userAnswer)
     		const question = Allquestion.find(question => question.question_id === userAnswer.question_id);
-
+    		console.log(question)
     		if (question) {
       			const correctAnswer = question.correctAnswer;
       			const userSelectedAnswer = userAnswer.answer;

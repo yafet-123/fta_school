@@ -30,7 +30,6 @@ export async function getServerSideProps(context) {
     where:{ teacher_id: Number(session.user.user_id) },
   });
 
-  console.log(teacher)
   if (teacher === null) {
     return {
       redirect: {
@@ -79,7 +78,6 @@ export async function getServerSideProps(context) {
     })
   const questionIds = question.map(data => data.question_id);
 
-  console.log(questionIds);
   const userAnswers = await prisma.UserAnswer.findMany({
     where: {
       question_id: {
@@ -105,7 +103,6 @@ export async function getServerSideProps(context) {
       }
     }
   });
-
   const Allquestion = userAnswers.map((data)=>({
     user_answer_id:data.user_answer_id,
     user_answer:data.user_answer,
