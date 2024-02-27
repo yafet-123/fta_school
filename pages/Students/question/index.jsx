@@ -103,7 +103,30 @@ export async function getServerSideProps(context) {
     })
 
   let redirectToAnswered = false;
+  const filteredQuestions = [];
+  question.filter((ques) => {
+    // Customize the comparison logic based on your requirements
+    const currentDate = new Date();
+    const timedisplayDate = new Date(ques.timedisplay);
+    console.log(timedisplayDate)
+    const isConditionSatisfied = currentDate > timedisplayDate;
+    console.log(isConditionSatisfied)
+    if (isConditionSatisfied) {
+      redirectToAnswered = true;
+      filteredQuestions.push(ques);
+    }
 
+    return isConditionSatisfied; // Include the question in the filtered array if the condition is true
+  });
+
+  if (redirectToAnswered) {
+    return {
+      redirect: {
+        destination: '/Students/question/timePassedQuestions', // Replace with the path you want to redirect to
+        permanent: false,
+      },
+    };
+  }
 
   const questionCount = await prisma.Question.aggregate({
     where:{
