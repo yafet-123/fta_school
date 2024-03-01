@@ -1,8 +1,8 @@
 import { MainHeader } from "../components/common/MainHeader";
 import CommonHeroSection from '../components/home/CommonHeroSection.jsx';
-// import PopularDestination from '../components/home/popularDestination';
-// import OurServices from '../components/home/OurServices';
-// import FeaturedTours from "../components/home/FeaturedTours1"
+import PopularDestination from '../components/home/popularDestination';
+import OurServices from '../components/home/OurServices';
+import FeaturedTours from "../components/home/FeaturedTours1"
 import Testimonials from "../components/home/Testimonials"
 // import PhotographyFocus from "../components/home/PhotographyFocus"
 // import WhyChooseUs from "../components/home/WhyChooseUs" 
@@ -28,7 +28,7 @@ export default function Home() {
         />
         <Testimonials />
         <ContactInformation />
-
+        
       </div>
     </div>
   );
