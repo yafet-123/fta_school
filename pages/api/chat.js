@@ -1,25 +1,18 @@
-// pages/api/chat.js
-import { Server } from 'socket.io';
+import { prisma } from '../../../util/db.server.js'
+ 
+export default async function handleadduser(req, res){
+  const {questioncategoryId,subjectId,user_id} = req.body;
+  console.log(req.body)
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    // Handle incoming messages
-    const io = new Server().attach(3001); // Attach Socket.io to the same port
-
-    io.on('connection', (socket) => {
-      console.log('User connected');
-
-      socket.on('message', (data) => {
-        io.emit('message', data); // Broadcast the message to all connected clients
-      });
-
-      socket.on('disconnect', () => {
-        console.log('User disconnected');
-      });
-    });
-
-    res.status(200).json({ message: 'Socket.io server running.' });
-  } else {
-    res.status(404).json({ error: 'Not Found' });
+  for (let j = 0; j < questioncategoryId.length; j++) {
+      const assignteacher = await prisma.SubjectQuestionCategory.create({
+        data:{
+          subject_id : Number(subjectId),
+          question_category_id : Number(questioncategoryId[j]),
+          user_id : Number(user_id),
+        }
+      })
   }
+
+  res.json("Success")
 }

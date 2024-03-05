@@ -98,17 +98,32 @@ const Add = ({Allclasses,Allsubjects,teacher,teacherId}) => {
   const [content, setcontent] = useState('');
   const [loading, setloading] = useState(false)
 
-  const sendMessage = () => {
-
-  };
+  async function handleSubmit(values){
+    setloading(true);
+    
+    const data = await axios.post(`../../../api/chat`,{
+      "title":title,
+      "content":content,
+      "classId" : classId,
+      "teacherId":teacherId
+    }).then(function (response) {
+      console.log(response.data);
+      router.reload()
+      setloading(false);
+    }).catch(function (error) {
+      seterror("Creating Ai Search Failed")
+      setLoading(false)
+      setloading(false);
+    });
+  }
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Add Question" />
+      <MainHeader title="Future Talent Academy : Add Communication" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar />
         <div className="px-0 lg:px-10 pt-32 w-full">
           <div className="flex justify-between flex-col items-center">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full mb-5">
+            <div className="w-full">
               <Multiselect
                 displayValue="ClassName"
                 placeholder = "Class"
@@ -163,7 +178,7 @@ const Add = ({Allclasses,Allsubjects,teacher,teacherId}) => {
               disabled={loading}
               className={`float-right text-white font-medium rounded-lg text-xl p-4 text-center inline-flex items-center 
                 ${loading ? "bg-gray-200" : "bg-[#009688] hover:bg-[#009688] focus:ring-4 focus:ring-[#009688]" }`}
-              onClick={sendMessage}
+              onClick={handleSubmit}
             >
               Send
             </button>

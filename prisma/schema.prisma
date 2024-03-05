@@ -125,11 +125,11 @@ model Communication{
 model CommunicationRelation{
   communication_relation_id   Int           @id @default(autoincrement())
 
-  class_id                     Int
-  teacher_id                   Int
-  subject_id                   Int
-  students_id                  Int
-  communication_id             Int
+  class_id                     Int?
+  teacher_id                   Int?
+  subject_id                   Int?
+  students_id                  Int?
+  communication_id             Int?
 
   Class                        Class         @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
   Subject                      Subject       @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
