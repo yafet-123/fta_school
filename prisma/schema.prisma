@@ -32,7 +32,6 @@ model User {
   QuestionType        QuestionType[]
   QuestionTypeQuestion        QuestionTypeQuestion[]  
   ClassTeacher            ClassTeacher[]
-
 }
  
 model Class {
@@ -47,6 +46,7 @@ model Class {
   ClassTeacher    ClassTeacher[]
   ClassQuestion   ClassQuestion[]
   ClassAnnouncement ClassAnnouncement[]
+  CommunicationRelation CommunicationRelation[]
 }
 
 model Teacher {
@@ -67,6 +67,7 @@ model Teacher {
   User                User?         @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
   ClassQuestion       ClassQuestion[]
   Announcement        Announcement[]
+  CommunicationRelation  CommunicationRelation[]
 }
 
 model Announcement {
@@ -99,6 +100,7 @@ model Students{
   UserAnswer          UserAnswer[]
   Mark                Mark[]
   Task                Task[]
+  CommunicationRelation CommunicationRelation[]
 }
 
 model ClassAnnouncement {
@@ -107,6 +109,34 @@ model ClassAnnouncement {
   Class                       Class         @relation(fields: [class_id], references: [class_id])
   announcement_id             Int
   Announcement                Announcement  @relation(fields: [announcement_id], references: [announcement_id])
+  CreatedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                DateTime?     @default(now()) @db.Timestamptz(6)
+}
+
+model Communication{
+  communication_id            Int           @id @default(autoincrement())
+  title                       String?       @db.VarChar(255)
+  content                     String?       @db.VarChar(255)
+  CreatedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
+  ModifiedDate                DateTime?     @default(now()) @db.Timestamptz(6)
+  CommunicationRelation       CommunicationRelation[]
+}
+
+model CommunicationRelation{
+  communication_relation_id   Int           @id @default(autoincrement())
+
+  class_id                     Int
+  teacher_id                   Int
+  subject_id                   Int
+  students_id                  Int
+  communication_id             Int
+
+  Class                        Class         @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
+  Subject                      Subject       @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
+  Teacher                      Teacher       @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade, onUpdate: Cascade)
+  Students                     Students      @relation(fields: [students_id], references: [students_id], onDelete: Cascade, onUpdate: Cascade)
+  Communication                Communication      @relation(fields: [communication_id], references: [communication_id], onDelete: Cascade, onUpdate: Cascade)
+
   CreatedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate                DateTime?     @default(now()) @db.Timestamptz(6)
 }
@@ -141,6 +171,7 @@ model Subject {
   ClassTeacher            ClassTeacher[]
   UserAnswer              UserAnswer[]
   Mark                    Mark[]
+  CommunicationRelation   CommunicationRelation[]
 }
  
 model ClassSubject {

@@ -19,6 +19,8 @@ import { useSession, signIn, signOut  } from "next-auth/react";
 export function VerticalNavbar({onChange, data}){
     const SideBarList = [
         { link: "/Teacher", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
+        { link: "/Teacher/Communication/Add", icon: <CiSquareQuestion size={25}/>, name: "Write Communication",},
+        { link: "/Teacher/Communication/Display", icon: <CiSquareQuestion size={25}/>, name: "Display Communication",},
         { link: "/Teacher/Question/Add", icon: <CiSquareQuestion size={25}/>, name: "Add Question",},
         { link: "/Teacher/Class", icon: <SiGoogleclassroom size={25}/>, name: "Display Question",},
         { link: "/Teacher/User/Answer/Class", icon: <CiBookmarkCheck  size={25}/>, name: "Display Student Mark",},
