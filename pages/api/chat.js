@@ -1,18 +1,33 @@
 import { prisma } from '../../../util/db.server.js'
  
 export default async function handleadduser(req, res){
-  const {questioncategoryId,subjectId,user_id} = req.body;
+  const {title,content,classId,teacherId} = req.body;
   console.log(req.body)
 
-  for (let j = 0; j < questioncategoryId.length; j++) {
-      const assignteacher = await prisma.SubjectQuestionCategory.create({
-        data:{
-          subject_id : Number(subjectId),
-          question_category_id : Number(questioncategoryId[j]),
-          user_id : Number(user_id),
+  const data = await prisma.Communication.create({
+    data:{
+      title,
+      content
+    },
+  });
+
+  for (let j = 0; j < classId.length; j++) {
+      addcommunication = await prisma.CommunicationRelation.create({
+        data:{             
+          Communication: {
+              connect: { communication_id: Number(data.communication_id) },
+          },
+          Class: {
+              connect: { class_id: Number(classId[j]) },
+          }, 
+          Teacher:{
+            connect:{ teacher_id: Number(teacherId)},
+          }    
         }
       })
+      console.log(addcommunication)
   }
-
-  res.json("Success")
+  
+  console.log(addcommunication)
+  res.json(addcommunication)
 }

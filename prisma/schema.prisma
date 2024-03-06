@@ -131,11 +131,11 @@ model CommunicationRelation{
   students_id                  Int?
   communication_id             Int?
 
-  Class                        Class         @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
-  Subject                      Subject       @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
-  Teacher                      Teacher       @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade, onUpdate: Cascade)
-  Students                     Students      @relation(fields: [students_id], references: [students_id], onDelete: Cascade, onUpdate: Cascade)
-  Communication                Communication      @relation(fields: [communication_id], references: [communication_id], onDelete: Cascade, onUpdate: Cascade)
+  Class                        Class?         @relation(fields: [class_id], references: [class_id], onDelete: Cascade, onUpdate: Cascade)
+  Subject                      Subject?       @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade, onUpdate: Cascade)
+  Teacher                      Teacher?       @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade, onUpdate: Cascade)
+  Students                     Students?      @relation(fields: [students_id], references: [students_id], onDelete: Cascade, onUpdate: Cascade)
+  Communication                Communication?      @relation(fields: [communication_id], references: [communication_id], onDelete: Cascade, onUpdate: Cascade)
 
   CreatedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate                DateTime?     @default(now()) @db.Timestamptz(6)
