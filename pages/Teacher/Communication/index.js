@@ -6,6 +6,8 @@ import Multiselect from 'multiselect-react-dropdown';
 import { getSession } from "next-auth/react";
 import { prisma } from '../../../util/db.server.js'
 import { AddGroup } from '../../../components/Teacher/Communication/AddGroup'
+import { Display } from '../../../components/Teacher/Communication/Display'
+
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   console.log(session)
@@ -78,6 +80,55 @@ export async function getServerSideProps(context) {
     },
   });
 
+  const communications = await prisma.CommunicationRelation.findMany({
+    where: {
+      teacher_id: Number(teacher.teacher_id)
+    },
+    orderBy: {
+      CreatedDate:"asc"
+    },
+    include: {
+      Communication: {
+        select: {
+          communication_id:true,
+          title: true,
+          content: true,
+        },
+      },
+      Class:{
+        select:{
+          ClassName:true
+        }
+      },
+      Students:{
+        select:{
+          students_id:true,
+          firstName:true,
+          lastName:true
+        }
+      },
+      Teacher:{
+        select:{
+          firstName:true,
+          lastName:true
+        }
+      }
+    },
+  });
+
+  const Allcommunications = communications.map((data)=>({
+    communication_relation_id:data.communication_relation_id,
+    title: data.Communication.title,
+    communication_id:data.Communication.communication_id,
+    content:data.Communication.content,
+    students_id:data.Students.students_id,
+    name:data.Students.firstName + " " + data.Students.lastName,
+    studentlastName: data.Students.lastName,
+    teacherfirstName:data.Teacher.firstName,
+    teacherlastName: data.Teacher.lastName,
+    ClassName:data.Class ? data.Class.ClassName : null,
+  }))
+  console.log(Allcommunications)
   const Allclasses = classes.map((data)=>({
     class_id:data.class_id,
     ClassName:data.Class.ClassName,
@@ -90,8 +141,6 @@ export async function getServerSideProps(context) {
     email:data.email,
     class_id:data.Class.class_id
   }))
-
-  console.log(students)
   
   const Allsubjects = classes.map((data)=>({
     subject_id:data.subject_id,
@@ -103,12 +152,13 @@ export async function getServerSideProps(context) {
       Allclasses,
       Allsubjects,
       teacherId,
-      Allstudents
+      Allstudents,
+      Allcommunications
     }, // will be passed to the page component as props
   }
 }
 
-const Add = ({Allclasses,Allsubjects,teacherId,Allstudents}) => {
+const Add = ({Allclasses,Allsubjects,teacherId,Allstudents,Allcommunications}) => {
   
   return (
     <React.Fragment>
@@ -117,7 +167,7 @@ const Add = ({Allclasses,Allsubjects,teacherId,Allstudents}) => {
         <VerticalNavbar />
         <div className="w-full flex flex-col pt-20">
           <AddGroup Allclasses={Allclasses} Allstudents={Allstudents} Allsubjects={Allsubjects} teacherId={teacherId} />
-        
+          <Display Allcommunications={Allcommunications} Allstudents={Allstudents} />
         </div>
       </div>
     </React.Fragment>

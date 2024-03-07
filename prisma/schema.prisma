@@ -116,7 +116,7 @@ model ClassAnnouncement {
 model Communication{
   communication_id            Int           @id @default(autoincrement())
   title                       String?       @db.VarChar(255)
-  content                     String?       @db.VarChar(255)
+  content                     String?       
   CreatedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate                DateTime?     @default(now()) @db.Timestamptz(6)
   CommunicationRelation       CommunicationRelation[]

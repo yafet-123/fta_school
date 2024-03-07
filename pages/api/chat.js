@@ -1,9 +1,9 @@
-import { prisma } from '../../../util/db.server.js'
+import { prisma } from '../../util/db.server.js'
  
 export default async function handleadduser(req, res){
-  const {title,content,classId,teacherId} = req.body;
+  const {title,content,studentId,teacherId} = req.body;
   console.log(req.body)
-
+  let addcommunication
   const data = await prisma.Communication.create({
     data:{
       title,
@@ -11,14 +11,14 @@ export default async function handleadduser(req, res){
     },
   });
 
-  for (let j = 0; j < classId.length; j++) {
+  for (let j = 0; j < studentId.length; j++) {
       addcommunication = await prisma.CommunicationRelation.create({
         data:{             
           Communication: {
               connect: { communication_id: Number(data.communication_id) },
           },
-          Class: {
-              connect: { class_id: Number(classId[j]) },
+          Students: {
+              connect: { students_id: Number(studentId[j]) },
           }, 
           Teacher:{
             connect:{ teacher_id: Number(teacherId)},
@@ -28,6 +28,6 @@ export default async function handleadduser(req, res){
       console.log(addcommunication)
   }
   
-  console.log(addcommunication)
-  res.json(addcommunication)
+  console.log("addcommunication")
+  res.json("addcommunication")
 }
