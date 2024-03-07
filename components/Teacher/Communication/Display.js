@@ -6,7 +6,7 @@ import {DeleteAnnouncement} from './DeleteAnnouncement.js'
 import {UpdateAnnouncement} from './UpdateAnnouncement.js'
 
 
-export function Display({Allcommunications}) {
+export function Display({Allcommunications,Allstudents}) {
     const router = useRouter();
     const [deletemodalOn, setdeleteModalOn] = useState(false);
     const [updatemodalOn, setupdateModalOn] = useState(false);
@@ -16,6 +16,7 @@ export function Display({Allcommunications}) {
     const [updatetitle,setupdatetitle] = useState("")
     const [updatecontent,setupdatecontent] = useState("")
     const [updatestudentId,setupdatestudentId] = useState("")
+    const [updateCommunicationrelationshipid,setupdateCommunicationrelationshipid] = useState()
     console.log(Allcommunications)
     const clickedFordelete = () => {
         setdeleteModalOn(true)
@@ -67,10 +68,11 @@ export function Display({Allcommunications}) {
                                         <button
                                             onClick={() => {
                                                 clickedForupdate()
-                                                setupdateCommunicationid(data.communication_relation_id)
+                                                setupdateCommunicationid(data.communication_id)
                                                 setupdatetitle(data.title)
                                                 setupdatecontent(data.content)
                                                 setupdatestudentId(data.students_id)
+                                                setupdateCommunicationrelationshipid(data.communication_relation_id)
                                             }} 
                                             className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
                                             Edit
@@ -127,10 +129,11 @@ export function Display({Allcommunications}) {
                                 <button
                                     onClick={() => {
                                         clickedForupdate()
-                                        setupdateCommunicationid(data.communication_relation_id)
+                                        setupdateCommunicationid(data.communication_id)
                                         setupdatetitle(data.title)
                                         setupdatecontent(data.content)
                                         setupdatestudentId(data.students_id)
+                                        setupdateCommunicationrelationshipid(data.communication_relation_id)
                                     }}  
                                     className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
                                     Edit
@@ -172,6 +175,7 @@ export function Display({Allcommunications}) {
                     setupdatecontent={setupdatecontent}
                     setupdatestudentId={setupdatestudentId}
                     Allstudents={Allstudents}
+                    updateCommunicationrelationshipid={updateCommunicationrelationshipid}
                 />
             }
         </div>

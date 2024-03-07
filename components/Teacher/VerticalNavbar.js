@@ -14,12 +14,13 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { TfiAnnouncement } from "react-icons/tfi";
 import Link from 'next/link'
 import { useSession, signIn, signOut  } from "next-auth/react";
+import { FaComment } from "react-icons/fa";
 
 
 export function VerticalNavbar({onChange, data}){
     const SideBarList = [
         { link: "/Teacher", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
-        { link: "/Teacher/Communication", icon: <CiSquareQuestion size={25}/>, name: "Communication",},
+        { link: "/Teacher/Communication", icon: <FaComment size={25}/>, name: "Communication",},
         { link: "/Teacher/Question/Add", icon: <CiSquareQuestion size={25}/>, name: "Add Question",},
         { link: "/Teacher/Class", icon: <SiGoogleclassroom size={25}/>, name: "Display Question",},
         { link: "/Teacher/User/Answer/Class", icon: <CiBookmarkCheck  size={25}/>, name: "Display Student Mark",},

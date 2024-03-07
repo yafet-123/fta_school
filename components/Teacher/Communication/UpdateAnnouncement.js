@@ -7,27 +7,31 @@ import Multiselect from 'multiselect-react-dropdown';
 
 export function UpdateAnnouncement({
     setupdateModalOn
-    ,updateAnnouncementid
+    ,updateCommunicationid
     ,updatetitle
     ,updatecontent
-    ,updateClassId
-    ,setupdateAnnouncementid
+    ,updatestudentId
+    ,setupdateCommunicationid
     ,setupdatetitle
     ,setupdatecontent
-    ,setupdateClassId
-    ,Allclasses}) {
+    ,setupdatestudentId
+    ,Allstudents
+    ,updateCommunicationrelationshipid}) {
+    console.log(updatestudentId)
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
-    const classIds = updateClassId.map((classDetail) => classDetail.class_id);
-    const [classId, setClassId] = useState(classIds)
-    console.log(classId)
+    const [studentId, setstudentId] = useState(updatestudentId)
+    const handleSelectChangeForSubject = (e) => {
+        setstudentId(e.target.value);
+    };
+    console.log(studentId)
     const handleOKClickForupdate = async() => {
         setLoadingModalIsOpen(true)
-        const data = await axios.patch(`../../api/teacher/updateAnnouncement/${updateAnnouncementid}`,{
+        const data = await axios.patch(`../../api/Communication/updateCommunication/${updateCommunicationid}?param=${updateCommunicationrelationshipid}`,{
             "updatetitle": updatetitle,
             "updatecontent": updatecontent,
-            "updateClassId": classId
+            "updatestudentId": studentId
         }).then(function (response) {
             console.log(response.data);
             router.reload()
@@ -49,8 +53,8 @@ export function UpdateAnnouncement({
                 <div className="flex-col justify-center bg-white dark:bg-slate-500 py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
                     <div className="flex text-center text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Update Announcement</div>
                     <div className="flex flex-col justify-between items-center">
-                        <div className="flex justify-between items-center gap-5">
-                            <div className="relative mb-10">
+                        <div className="flex flex-col justify-between items-center gap-5">
+                            <div className="w-full relative mb-5">
                                 <input 
                                     id="Title" 
                                     type="text" 
@@ -65,14 +69,16 @@ export function UpdateAnnouncement({
                                     Title
                                 </label>
                             </div>
-
-                            <div className="relative mb-10">
-                                <input 
-                                    id="Content" 
-                                    type="text" 
-                                    className="block w-full px-3 text-xl text-black dark:text-white bg-transparent py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+                      
+                            <div className="relative mb-5">
+                                <textarea
                                     value={updatecontent}
-                                    onChange={(e) => setupdatecontent(e.target.value)}
+                                    onChange={(e) => setupdatecontent(e.target.value)} 
+                                    className="block w-full px-3 text-xl text-black dark:text-white bg-transparent py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+                                    id="w3review" 
+                                    name="w3review" 
+                                    rows="4" 
+                                    cols="50" 
                                 />
                                 <label 
                                     htmlFor="floating_outlined" 
@@ -82,22 +88,19 @@ export function UpdateAnnouncement({
                                 </label>
                             </div>
                         </div>
-                        <div className="w-full">
-                        <Multiselect
-                            displayValue="ClassName"
-                            placeholder = "Class"
-                            className="z-50 mb-5 w-full px-1 text-md lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
-                            onKeyPressFn={function noRefCheck(){}}
-                            onRemove={function noRefCheck(){}}
-                            onSearch={function noRefCheck(){}}
-                            onSelect={(e)=>{
-                                e.map((data,index)=>(
-                                   setClassId([...classId, data.class_id])
-                                ))
-                            }}
-                            selectedValues={Allclasses.filter((option) => classId.includes(option.class_id))}
-                            options={Allclasses}
-                        />
+
+                        <div className="w-full mb-5">
+                            <select
+                                name="select"
+                                value={studentId}
+                                onChange={handleSelectChangeForSubject}
+                                className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
+                            >
+                                <option value="" disabled hidden></option>
+                                { Allstudents.map((data,index)=>(
+                                    <option value={data.students_id} className="text-sm lg:text-xl text-black">{data.name}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div className="flex">
