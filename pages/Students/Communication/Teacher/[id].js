@@ -69,7 +69,8 @@ export async function getServerSideProps(context) {
       Teacher:{
         select:{
           firstName:true,
-          lastName:true
+          lastName:true,
+          email:true
         }
       }
     },
@@ -77,10 +78,12 @@ export async function getServerSideProps(context) {
 
   const Allcommunications = communications.map((data)=>({
     communication_relation_id:data.communication_relation_id,
+    students_id:data.students_id,
     title: data.Communication.title,
     communication_id:data.Communication.communication_id,
     content:data.Communication.content,
     teacher_id:data.teacher_id,
+    email:data.Teacher.email,
     name:data.Teacher.firstName + " " + data.Teacher.lastName,
     ClassName:data.Class ? data.Class.ClassName : null,
     ModifiedDate: data.ModifiedDate.toISOString()

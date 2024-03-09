@@ -117,6 +117,7 @@ model Communication{
   communication_id            Int           @id @default(autoincrement())
   title                       String?       @db.VarChar(255)
   content                     String?       
+  isStudent                   Boolean?      @default(false) // Add the new boolean column
   CreatedDate                 DateTime?     @default(now()) @db.Timestamptz(6)
   ModifiedDate                DateTime?     @default(now()) @db.Timestamptz(6)
   CommunicationRelation       CommunicationRelation[]
