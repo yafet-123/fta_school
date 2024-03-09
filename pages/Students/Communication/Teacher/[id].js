@@ -1,16 +1,16 @@
 import React,{ useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import { MainHeader } from '../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../components/Teacher/VerticalNavbar";
+import { MainHeader } from '../../../../components/common/MainHeader';
+import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
 import Multiselect from 'multiselect-react-dropdown';
 import { getSession } from "next-auth/react";
-import { prisma } from '../../../util/db.server.js'
-import Display from '../../../components/Students/Communication/Display'
-import Teachers from '../../../components/Students/Communication/Teachers'
+import { prisma } from '../../../../util/db.server.js'
+import Display from '../../../../components/Students/Communication/Display'
+import Teachers from '../../../../components/Students/Communication/Teachers'
 
 export async function getServerSideProps(context) {
   const {params,req,res,query} = context
-
+   const id = query.id;
   const session = await getSession(context);
   const userRole = await session?.user?.role
   if (userRole !== 'student') {
@@ -42,35 +42,13 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const teachers = await prisma.ClassTeacher.findMany({
-    where: {
-      class_id: Number(student.class_id)
-    },
-    orderBy: {
-      ModifiedDate:"asc"
-    },
-    include:{
-      Teacher:{
-        select:{
-          firstName:true,
-          lastName:true,
-          email:true
-        }
-      }
-    }
-  })
-
-  const Allteachers = teachers.map((data)=>({
-    teacher_class_id:data.teacher_class_id,
-    teacher_id:data.teacher_id,
-    name:data.Teacher.firstName + " " + data.Teacher.lastName,
-    email:data.Teacher.email,
-    ModifiedDate: data.ModifiedDate.toISOString()
-  }))
-
   const communications = await prisma.CommunicationRelation.findMany({
     where: {
-      students_id: Number(student.students_id)
+      AND: [
+        { students_id: Number(student.students_id)},
+        { teacher_id: Number(id) }, // Add more fields and values as needed
+      ],
+      
     },
     orderBy: {
       CreatedDate:"asc"
@@ -111,12 +89,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       Allcommunications,
-      Allteachers
+    
     }, // will be passed to the page component as props
   }
 }
 
-const Communication = ({Allcommunications, Allteachers}) => {
+const StudentDisplay = ({Allcommunications}) => {
   
   return (
     <React.Fragment>
@@ -124,11 +102,11 @@ const Communication = ({Allcommunications, Allteachers}) => {
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar />
         <div className="w-full flex flex-col pt-20">
-          <Teachers Allteachers={Allteachers} />
+          <Display Allcommunications={Allcommunications} />
         </div>
       </div>
     </React.Fragment>
   );
 }
 
-export default Communication;
+export default StudentDisplay;
