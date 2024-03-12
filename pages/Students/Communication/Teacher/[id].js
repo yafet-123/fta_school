@@ -1,7 +1,7 @@
 import React,{ useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import { MainHeader } from '../../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../../components/Teacher/VerticalNavbar";
+import { VerticalNavbar } from "../../../../components/Students/VerticalNavbar";
 import Multiselect from 'multiselect-react-dropdown';
 import { getSession } from "next-auth/react";
 import { prisma } from '../../../../util/db.server.js'
@@ -59,6 +59,7 @@ export async function getServerSideProps(context) {
           communication_id:true,
           title: true,
           content: true,
+          isStudent:true
         },
       },
       Class:{
@@ -79,6 +80,8 @@ export async function getServerSideProps(context) {
   const Allcommunications = communications.map((data)=>({
     communication_relation_id:data.communication_relation_id,
     students_id:data.students_id,
+    isStudent: data.Communication.isStudent,
+    class_id:data.class_id,
     title: data.Communication.title,
     communication_id:data.Communication.communication_id,
     content:data.Communication.content,
@@ -92,12 +95,14 @@ export async function getServerSideProps(context) {
   return {
     props: {
       Allcommunications,
+      teacherId:id,
+      studentId
     
     }, // will be passed to the page component as props
   }
 }
 
-const StudentDisplay = ({Allcommunications}) => {
+const StudentDisplay = ({Allcommunications,teacherId, studentId}) => {
   
   return (
     <React.Fragment>
@@ -105,7 +110,7 @@ const StudentDisplay = ({Allcommunications}) => {
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar />
         <div className="w-full flex flex-col pt-20">
-          <Display Allcommunications={Allcommunications} />
+          <Display Allcommunications={Allcommunications} teacherId={teacherId} studentId={studentId} />
         </div>
       </div>
     </React.Fragment>

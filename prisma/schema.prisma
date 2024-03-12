@@ -123,6 +123,7 @@ model Communication{
   CommunicationRelation       CommunicationRelation[]
 }
 
+
 model CommunicationRelation{
   communication_relation_id   Int           @id @default(autoincrement())
 

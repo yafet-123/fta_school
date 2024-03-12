@@ -1,7 +1,7 @@
 import React,{ useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import { MainHeader } from '../../../components/common/MainHeader';
-import { VerticalNavbar } from "../../../components/Teacher/VerticalNavbar";
+import { VerticalNavbar } from "../../../components/Students/VerticalNavbar";
 import Multiselect from 'multiselect-react-dropdown';
 import { getSession } from "next-auth/react";
 import { prisma } from '../../../util/db.server.js'
