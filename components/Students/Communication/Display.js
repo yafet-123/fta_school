@@ -42,12 +42,12 @@ export default function Display({Allcommunications, teacherId, studentId}) {
     <div className="pt-0 pb-20 w-full h-full px-5 lg:px-10 gap-5 ">
       {Allcommunications.map((data,index)=>(
         <div className="w-full">
-          <div className="flex items-center space-x-2 mb-5">
+          <div className={`flex items-center space-x-2 mb-5 ${data.isStudent ? "justify-end":"justify-start"}`}>
             <div className="rounded-full overflow-hidden">
               <Gravatar email={data.email} size={75} />
             </div>
 
-            <div className={` ${data.isStudent ? "w-full bg-gray-300 text-gray-700 p-3 rounded-lg" : "w-full bg-blue-500 text-white p-3 rounded-lg"}`}>
+            <div className={`${data.isStudent ? "w-1/2 bg-gray-300 text-gray-700 p-3 rounded-lg" : "w-1/2 bg-blue-500 text-white p-3 rounded-lg"}`}>
               <div className="flex justify-between items-center my-2">
                 <p className={` ${data.isStudent ? "hidden":"flex text-lg lg:text-xl"}`}><span className="font-bold"> Title :</span> {data.title}</p>
                 <p className="font-bold text-md lg:text-lg">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</p>
