@@ -6,7 +6,7 @@ import { RiAdminFill } from "react-icons/ri";
 import { PiStudent } from "react-icons/pi";
 import { SiBookstack } from "react-icons/si";
 import { SiGoogleclassroom } from "react-icons/si";
-import { FaQuestion } from "react-icons/fa";
+import { FaQuestion,FaComment } from "react-icons/fa";
 import { CiSquareQuestion } from "react-icons/ci";
 import { AiOutlineUser,AiFillDashboard,AiOutlineMenu } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi"
@@ -21,7 +21,7 @@ export function VerticalNavbar({onChange, data}){
         { link: "/Students", icon: <AiFillDashboard size={25}/>, name: "Dashboard",},
         { link: "/Students/question/subject", icon: <CiSquareQuestion size={25}/>, name: "Question",},
         { link: "/Students/answered/subject", icon: <MdQuestionAnswer size={25}/>, name: "Answer",},
-        { link: "/Students/Communication", icon: <MdQuestionAnswer size={25}/>, name: "Communication",},
+        { link: "/Students/Communication", icon: <FaComment size={25}/>, name: "Communication",},
     ];
 	const router = useRouter();
     const [sideBar , setsideBar] = useState(false);

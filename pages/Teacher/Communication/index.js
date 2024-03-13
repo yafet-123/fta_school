@@ -93,6 +93,7 @@ export async function getServerSideProps(context) {
           communication_id:true,
           title: true,
           content: true,
+          isStudent:true
         },
       },
       Class:{
@@ -121,6 +122,7 @@ export async function getServerSideProps(context) {
     title: data.Communication.title,
     communication_id:data.Communication.communication_id,
     content:data.Communication.content,
+    isStudent: data.Communication.isStudent !== undefined ? data.Communication.isStudent : null,
     students_id:data.Students.students_id,
     name:data.Students.firstName + " " + data.Students.lastName,
     studentlastName: data.Students.lastName,

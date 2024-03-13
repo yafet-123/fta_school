@@ -102,7 +102,7 @@ model Students{
   Task                Task[]
   CommunicationRelation CommunicationRelation[]
 }
-
+ 
 model ClassAnnouncement {
   class_announcement_id     Int           @id @default(autoincrement())
   class_id                    Int

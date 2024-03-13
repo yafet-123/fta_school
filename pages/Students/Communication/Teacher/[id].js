@@ -67,6 +67,11 @@ export async function getServerSideProps(context) {
           ClassName:true
         }
       },
+      Students:{
+        select:{
+          email:true
+        }
+      },
       Teacher:{
         select:{
           firstName:true,
@@ -87,6 +92,7 @@ export async function getServerSideProps(context) {
     content:data.Communication.content,
     teacher_id:data.teacher_id,
     email:data.Teacher.email,
+    studentemail:data.Students.email,
     name:data.Teacher.firstName + " " + data.Teacher.lastName,
     ClassName:data.Class ? data.Class.ClassName : null,
     ModifiedDate: data.ModifiedDate.toISOString()
@@ -96,21 +102,22 @@ export async function getServerSideProps(context) {
     props: {
       Allcommunications,
       teacherId:id,
-      studentId
+      studentId,
+      student:student.email
     
     }, // will be passed to the page component as props
   }
 }
 
-const StudentDisplay = ({Allcommunications,teacherId, studentId}) => {
-  
+const StudentDisplay = ({Allcommunications,teacherId, studentId, student}) => {
+  console.log(student)
   return (
     <React.Fragment>
       <MainHeader title="Future Talent Academy : Communication" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar />
         <div className="w-full flex flex-col pt-20">
-          <Display Allcommunications={Allcommunications} teacherId={teacherId} studentId={studentId} />
+          <Display Allcommunications={Allcommunications} teacherId={teacherId} studentId={studentId} student={student} />
         </div>
       </div>
     </React.Fragment>

@@ -8,17 +8,24 @@ import Gravatar from 'react-gravatar';
 import axios from 'axios';
 import ReactModal from "react-modal";
 import Loader from "../../common/Loading";
- 
-export default function Display({Allcommunications, teacherId, studentId}) {
+import UpdateCommunication from './UpdateCommunication'
+
+export default function Display({Allcommunications, teacherId, studentId, student}) {
   const router = useRouter();
+
   const [content, setcontent] = useState()
   const [error , seterror] = useState()
   const [classId,setclassId] = useState()
   const [loading, setLoading] = useState(false);
-  const handleSubject = (id) => {
-    router.push(`/Students/question/category/${id}`);
-  };
-  console.log(Allcommunications)
+  const [deletecategoryId,setdeletecategoryId] = useState()
+  const [updateCommunicationid,setupdateCommunicationid] = useState()
+  const [updatecontent, setupdatecontent] = useState()
+  const [updatecommunicationId, setupdatecommunicationId] = useState()
+  const [updatemodalOn, setupdateModalOn] = useState(false);
+
+  const clickedForupdate = () => {
+    setupdateModalOn(true)
+  }
 
   async function handleSubmit(values){
     setLoading(true)
@@ -38,21 +45,69 @@ export default function Display({Allcommunications, teacherId, studentId}) {
     });
   }
 
+  async function handleDelete(deletecommunicationId){
+    console.log(deletecommunicationId)
+    setLoading(true)
+    const data = await axios.delete(`../../../api/student/deleteChat/${deletecommunicationId}?${deletecategoryId}`,{
+    }).then(function (response) {
+        console.log(response.data);
+        router.reload()
+    }).catch(function (error) {
+      console.log(error);
+      setLoading(false)
+    });
+    setdeleteModalOn(false)
+  }
+
   return (
     <div className="pt-0 pb-20 w-full h-full px-5 lg:px-10 gap-5 ">
       {Allcommunications.map((data,index)=>(
         <div className="w-full">
           <div className={`flex items-center space-x-2 mb-5 ${data.isStudent ? "justify-end":"justify-start"}`}>
-            <div className="rounded-full overflow-hidden">
-              <Gravatar email={data.email} size={75} />
-            </div>
-
-            <div className={`${data.isStudent ? "w-1/2 bg-gray-300 text-gray-700 p-3 rounded-lg" : "w-1/2 bg-blue-500 text-white p-3 rounded-lg"}`}>
-              <div className="flex justify-between items-center my-2">
-                <p className={` ${data.isStudent ? "hidden":"flex text-lg lg:text-xl"}`}><span className="font-bold"> Title :</span> {data.title}</p>
-                <p className="font-bold text-md lg:text-lg">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</p>
+            { data.isStudent ?
+              <div className="rounded-full overflow-hidden">
+                <Gravatar email={data.studentemail} size={50} />
               </div>
-              <p className="font-normal text-md lg:text-lg"> <span className="font-bold"> Content :</span> {data.content}</p> 
+              :
+              <div className="rounded-full overflow-hidden">
+                <Gravatar email={data.email} size={50} />
+              </div>
+            }
+
+            <div className={`${data.isStudent ? "w-3/4 bg-gray-300 text-gray-700 py-3 px-5 rounded-lg" : "w-3/4 bg-blue-500 text-white py-3 px-5 rounded-lg"}`}>
+              <div className="flex justify-between items-center my-2">
+                <p className={` ${data.isStudent ? "hidden":"flex text-sm lg:text-md"}`}><span className="font-bold"> Title :</span> {data.title}</p>
+                <p className="font-bold text-sm lg:text-md">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</p>
+              </div>
+              <p className="font-normal text-sm lg:text-md"> <span className="font-bold"> Content :</span> {data.content}</p> 
+              { data.isStudent ?
+                <div className="flex justify-between items-center mt-2">
+                  <button
+                    onClick={() => {
+                      clickedForupdate()
+                      setcontent(data.content)
+                      setupdateCommunicationid(data.communication_id)
+                    }} 
+                    disabled={loading}
+                    className="text-md bg-blue-500 text-white p-2 rounded-md"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() => { 
+                      setdeletecategoryId(data.communication_relation_id)
+                      handleDelete(data.communication_id)
+                    }}
+                    disabled={loading}
+                    className="text-md bg-red-500 text-white p-2 rounded-md"
+                  >
+                    Delete
+                  </button>
+                </div>
+                :
+                <div></div>
+              }
             </div>
           </div>      
         </div>
@@ -73,6 +128,16 @@ export default function Display({Allcommunications, teacherId, studentId}) {
           Send
         </button>
       </form>
+
+        {updatemodalOn && 
+          <UpdateCommunication 
+            setupdateModalOn={setupdateModalOn} 
+            updatecommunicationId={updatecommunicationId} 
+            updatecontent={updatecontent} 
+            setupdatecontent={setupdatecontent}
+          />
+        }
+
       <ReactModal
         isOpen={loading}
                 // onRequestClose={closeModal}

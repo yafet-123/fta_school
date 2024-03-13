@@ -7,6 +7,7 @@ import {UpdateAnnouncement} from './UpdateAnnouncement.js'
 
 
 export function Display({Allcommunications,Allstudents}) {
+    console.log(Allcommunications)
     const router = useRouter();
     const [deletemodalOn, setdeleteModalOn] = useState(false);
     const [updatemodalOn, setupdateModalOn] = useState(false);
@@ -36,6 +37,7 @@ export function Display({Allcommunications,Allstudents}) {
                               <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Id</th>
                               <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Title</th>
                               <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Content</th>
+                              <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Student</th>
                               <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Student Name</th>
                               <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
                             </tr>
@@ -57,6 +59,10 @@ export function Display({Allcommunications,Allstudents}) {
                                     </td>
 
                                     <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                        {data.isStudent ? "true" : "false" }
+                                    </td>
+
+                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
                                         {data.name}
                                     </td>
 
@@ -64,33 +70,40 @@ export function Display({Allcommunications,Allstudents}) {
                                         {moment(data.createDate).utc().format('YYYY-MM-DD')}
                                     </td>
 
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
-                                        <button
-                                            onClick={() => {
-                                                clickedForupdate()
-                                                setupdateCommunicationid(data.communication_id)
-                                                setupdatetitle(data.title)
-                                                setupdatecontent(data.content)
-                                                setupdatestudentId(data.students_id)
-                                                setupdateCommunicationrelationshipid(data.communication_relation_id)
-                                            }} 
-                                            className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
-                                            Edit
-                                        </button>
-                                    </td>
+                                    { data.isStudent ? 
+                                        <div></div>
+                                        :
+                                        <div>
+                                            <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                <button
+                                                    onClick={() => {
+                                                        clickedForupdate()
+                                                        setupdateCommunicationid(data.communication_id)
+                                                        setupdatetitle(data.title)
+                                                        setupdatecontent(data.content)
+                                                        setupdatestudentId(data.students_id)
+                                                        setupdateCommunicationrelationshipid(data.communication_relation_id)
+                                                    }} 
+                                                    className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
+                                                    Edit
+                                                </button>
+                                            </td>
 
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
-                                        <button 
-                                            onClick={() => {
-                                                clickedFordelete()
-                                                setdeleteCommunicationid(data.communication_id)
-                                                setdeleteCommunicationrelationshipid(data.communication_relation_id)
-                                            }}
-                                            className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+                                            <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                <button 
+                                                    onClick={() => {
+                                                        clickedFordelete()
+                                                        setdeleteCommunicationid(data.communication_id)
+                                                        setdeleteCommunicationrelationshipid(data.communication_relation_id)
+                                                    }}
+                                                    className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </div>
+                                        
+                                    }
                                 </tr>
                             ))}
                         </tbody>
