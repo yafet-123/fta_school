@@ -8,8 +8,8 @@ export function UpdateCommunication({setupdateModalOn,updatecommunicationId,upda
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
-
-    async function handleEdit(){
+    console.log(updatecommunicationId)
+    async function handleOKClickForupdate(){
         setLoadingModalIsOpen(true)
         const data = await axios.patch(`../../../api/student/updateChat/${updatecommunicationId}`,{
             "content": updatecontent

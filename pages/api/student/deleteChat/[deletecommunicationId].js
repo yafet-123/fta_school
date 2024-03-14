@@ -10,8 +10,8 @@ export default async function handledeleteChat(req, res){
 		where:{communication_id:Number(deletecommunicationId)},
 	});
 
-	const data = await prisma.CommunicationRelation.delete({
-		where:{communication_relation_id:Number(deletecommunicationId)},
+	const data12 = await prisma.CommunicationRelation.delete({
+		where:{communication_relation_id:Number(deletecategoryId)},
 	});
 	
 	res.json(data)

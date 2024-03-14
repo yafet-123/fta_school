@@ -8,7 +8,8 @@ import Gravatar from 'react-gravatar';
 import axios from 'axios';
 import ReactModal from "react-modal";
 import Loader from "../../common/Loading";
-import UpdateCommunication from './UpdateCommunication'
+import {UpdateCommunication} from './UpdateCommunication'
+import {DeleteCommunication} from './DeleteCommunication'
 
 export default function Display({Allcommunications, teacherId, studentId, student}) {
   const router = useRouter();
@@ -18,13 +19,18 @@ export default function Display({Allcommunications, teacherId, studentId, studen
   const [classId,setclassId] = useState()
   const [loading, setLoading] = useState(false);
   const [deletecategoryId,setdeletecategoryId] = useState()
-  const [updateCommunicationid,setupdateCommunicationid] = useState()
   const [updatecontent, setupdatecontent] = useState()
   const [updatecommunicationId, setupdatecommunicationId] = useState()
+  const [deletecommunicationId, setdeletecommunicationId] = useState()
   const [updatemodalOn, setupdateModalOn] = useState(false);
+  const [deletemodalOn, setdeleteModalOn] = useState(false);
 
   const clickedForupdate = () => {
     setupdateModalOn(true)
+  }
+
+  const clickedFordelete = () => {
+    setdeleteModalOn(true)
   }
 
   async function handleSubmit(values){
@@ -37,26 +43,12 @@ export default function Display({Allcommunications, teacherId, studentId, studen
         "teacherId":teacherId
     }).then(function (response) {
       console.log(response.data);
-      router.reload()
       setLoadingModalIsOpen(false);
+      router.reload()
     }).catch(function (error) {
-        seterror("Creating Respond Failed")
-        setLoading(false)
-    });
-  }
-
-  async function handleDelete(deletecommunicationId){
-    console.log(deletecommunicationId)
-    setLoading(true)
-    const data = await axios.delete(`../../../api/student/deleteChat/${deletecommunicationId}?${deletecategoryId}`,{
-    }).then(function (response) {
-        console.log(response.data);
-        router.reload()
-    }).catch(function (error) {
-      console.log(error);
+      seterror("Creating Respond Failed")
       setLoading(false)
     });
-    setdeleteModalOn(false)
   }
 
   return (
@@ -85,8 +77,8 @@ export default function Display({Allcommunications, teacherId, studentId, studen
                   <button
                     onClick={() => {
                       clickedForupdate()
-                      setcontent(data.content)
-                      setupdateCommunicationid(data.communication_id)
+                      setupdatecontent(data.content)
+                      setupdatecommunicationId(data.communication_id)
                     }} 
                     disabled={loading}
                     className="text-md bg-blue-500 text-white p-2 rounded-md"
@@ -96,8 +88,9 @@ export default function Display({Allcommunications, teacherId, studentId, studen
 
                   <button
                     onClick={() => { 
+                      clickedFordelete()
                       setdeletecategoryId(data.communication_relation_id)
-                      handleDelete(data.communication_id)
+                      setdeletecommunicationId(data.communication_id)
                     }}
                     disabled={loading}
                     className="text-md bg-red-500 text-white p-2 rounded-md"
@@ -135,6 +128,14 @@ export default function Display({Allcommunications, teacherId, studentId, studen
             updatecommunicationId={updatecommunicationId} 
             updatecontent={updatecontent} 
             setupdatecontent={setupdatecontent}
+          />
+        }
+
+        {deletemodalOn && 
+          <DeleteCommunication 
+            setdeleteModalOn={setdeleteModalOn} 
+            deletecommunicationId={deletecommunicationId} 
+            deletecategoryId={deletecategoryId} 
           />
         }
 
