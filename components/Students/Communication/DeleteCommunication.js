@@ -11,7 +11,7 @@ export function DeleteCommunication({setdeleteModalOn,deletecommunicationId,dele
 	async function handleOKClickFordelete(){
         console.log(deletecommunicationId)
         setLoading(true)
-        const data = await axios.delete(`../../../api/student/deleteChat/${deletecommunicationId}?${deletecategoryId}`,{
+        const data = await axios.delete(`../../../api/student/deleteChat/${deletecommunicationId}?deletecategoryId=${deletecategoryId}`,{
         }).then(function (response) {
             console.log(response.data);
             router.reload()
