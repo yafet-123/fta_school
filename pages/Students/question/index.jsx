@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { html } from '../../../data/html.js';
-import { css } from '../../../data/css.js';
 import { useRouter } from 'next/router';
 import Hero from "../../../components/Students/question/Hero"
 import { prisma } from '../../../util/db.server.js'
