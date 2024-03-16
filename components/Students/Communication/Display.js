@@ -67,13 +67,13 @@ export default function Display({Allcommunications, teacherId, studentId, studen
             }
 
             <div className={`${data.isStudent ? "w-3/4 bg-gray-300 text-gray-700 py-3 px-5 rounded-lg" : "w-3/4 bg-blue-500 text-white py-3 px-5 rounded-lg"}`}>
-              <div className="flex justify-between items-center my-2">
-                <p className={` ${data.isStudent ? "hidden":"flex text-sm lg:text-md"}`}><span className="font-bold"> Title :</span> {data.title}</p>
+              <div className="flex justify-between items-center my-1">
+                <p className={` ${data.isStudent ? "hidden":"flex text-sm lg:text-md"}`}><span className="font-bold"> Title : </span> {data.title}</p>
                 <p className="font-bold text-sm lg:text-md">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</p>
               </div>
               <p className="font-normal text-sm lg:text-md"> <span className="font-bold"> Content :</span> {data.content}</p> 
               { data.isStudent ?
-                <div className="flex justify-between items-center mt-2">
+                <div className="flex justify-between items-center mt-1">
                   <button
                     onClick={() => {
                       clickedForupdate()
@@ -81,7 +81,7 @@ export default function Display({Allcommunications, teacherId, studentId, studen
                       setupdatecommunicationId(data.communication_id)
                     }} 
                     disabled={loading}
-                    className="text-md bg-blue-500 text-white p-2 rounded-md"
+                    className="text-md text-blue-500 hover:text-white hover:bg-blue-500 px-2 px-1 font-bold rounded-md"
                   >
                     Edit
                   </button>
@@ -93,7 +93,7 @@ export default function Display({Allcommunications, teacherId, studentId, studen
                       setdeletecommunicationId(data.communication_id)
                     }}
                     disabled={loading}
-                    className="text-md bg-red-500 text-white p-2 rounded-md"
+                    className="text-md text-red-500 hover:text-white hover:bg-red-500 px-2 px-1 font-bold rounded-md"
                   >
                     Delete
                   </button>

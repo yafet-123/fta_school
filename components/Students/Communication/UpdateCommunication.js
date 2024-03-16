@@ -31,7 +31,7 @@ export function UpdateCommunication({setupdateModalOn,updatecommunicationId,upda
 		<div className="bg-gray-200 dark:bg-slate-800 opacity-95 fixed inset-0 z-50   ">
             <div className="flex h-screen justify-center items-center ">
                 <div className="flex-col justify-center bg-white dark:bg-slate-500 py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
-                    <div className="flex text-center text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Update Class</div>
+                    <div className="flex text-center text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Update Chat</div>
                     <div className="flex flex-col justify-between items-center">
                         <div className="relative mb-10">
                             <input 
