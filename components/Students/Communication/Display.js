@@ -44,7 +44,7 @@ export default function Display({Allcommunications, teacherId, studentId, studen
     }).then(function (response) {
       console.log(response.data);
       setLoadingModalIsOpen(false);
-      router.reload()
+      router.push(router.asPath);
     }).catch(function (error) {
       seterror("Creating Respond Failed")
       setLoading(false)
