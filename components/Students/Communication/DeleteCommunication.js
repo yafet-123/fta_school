@@ -22,7 +22,6 @@ export function DeleteCommunication({setdeleteModalOn,deletecommunicationId,dele
         setdeleteModalOn(false)
     }
 
-
     const handleCancelClickFordelete = () => {
         setdeleteModalOn(false)
     }

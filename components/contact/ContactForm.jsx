@@ -12,6 +12,8 @@ const initialValues = {
   message: "",
 };
 
+
+
 const validateForm = (values) => {
   const errors = {};
   const MAX_TEXT_LENGTH = 100;
