@@ -92,7 +92,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                        }}
 		                        options={Allclasses}
 		                    />
-
+   
 		                    <div className="relative z-0 w-full mb-5">
 		                        <select
 		                            name="select"
