@@ -27,7 +27,7 @@ const Profile = ({Allteachers}) => {
         </div>
         <div className="mb-4">
           <h2 className="text-xl font-semibold">{Allteachers.firstName} {Allteachers.lastName}</h2>
-          <h2 className="text-lg font-semibold">{Allteachers.UserName}</h2>
+          <h2 className="text-lg font-semibold">UserName : {Allteachers.UserName}</h2>
           <p className="text-gray-500">Age: {Allteachers.age}</p>
           <p className="text-gray-500">Email: {Allteachers.email}</p>
         </div>

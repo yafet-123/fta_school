@@ -11,6 +11,7 @@ import Multiselect from 'multiselect-react-dropdown';
 
 export function AddGroup({Allclasses,teacherId,Allstudents, Allsubjects}) {
     const [studentId, setstudentId] = useState([])
+    const router = useRouter();
   	const [title, settitle] = useState('');
   	const [content, setcontent] = useState('');
   	const [loading, setloading] = useState(false)
@@ -25,9 +26,9 @@ export function AddGroup({Allclasses,teacherId,Allstudents, Allsubjects}) {
     	  "studentId" : studentId,
     	  "teacherId":teacherId
     	}).then(function (response) {
-    	  console.log(response.data);
-      	router.reload()
-      	setloading(false);
+    	  	console.log(response.data);
+      		router.push(router.asPath);
+      		setloading(false);
     	}).catch(function (error) {
       		seterror("Creating Ai Search Failed")
       		setloading(false);

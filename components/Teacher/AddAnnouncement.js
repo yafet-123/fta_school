@@ -33,7 +33,7 @@ export function AddAnnouncement({Allclasses,teacherId}) {
             "teacherId":teacherId
         }).then(function (response) {
             console.log(response.data);
-            router.reload()
+            router.push(router.asPath);
             setLoadingModalIsOpen(false);
         }).catch(function (error) {
             seterror("Creating Ai Search Failed")

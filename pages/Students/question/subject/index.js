@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
         permanent: false,
       },
     };
-  }
+  } 
   const student = await prisma.Students.findUnique({
     where:{ students_id: Number(session.user.user_id) },
     

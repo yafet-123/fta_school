@@ -84,8 +84,8 @@ export async function getServerSideProps(context) {
     where: {
       teacher_id: Number(teacher.teacher_id)
     },
-    orderBy: {
-      CreatedDate:"asc"
+    orderBy: { 
+      ModifiedDate:"desc"
     },
     include: {
       Communication: {

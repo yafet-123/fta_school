@@ -53,9 +53,9 @@ export function Display({Allcommunications,Allstudents}) {
                                     </td>
 
                                     <td className="p-3 w-2/4 text-lg text-gray-700 dark:text-white whitespace-nowrap">
-                                        <div style={{ whiteSpace: 'normal' }}>
+                                        <p style={{ whiteSpace: 'normal' }}>
                                             {data.content}
-                                        </div>
+                                        </p>
                                     </td>
 
                                     <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
@@ -70,11 +70,11 @@ export function Display({Allcommunications,Allstudents}) {
                                         {moment(data.createDate).utc().format('YYYY-MM-DD')}
                                     </td>
 
-                                    { data.isStudent ? 
-                                        <div></div>
-                                        :
-                                        <div>
-                                            <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                    <td>
+                                        { data.isStudent ? 
+                                            <p></p>
+                                            :
+                                            <div className="flex">
                                                 <button
                                                     onClick={() => {
                                                         clickedForupdate()
@@ -84,26 +84,24 @@ export function Display({Allcommunications,Allstudents}) {
                                                         setupdatestudentId(data.students_id)
                                                         setupdateCommunicationrelationshipid(data.communication_relation_id)
                                                     }} 
-                                                    className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
+                                                    className="mx-2 bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
                                                     Edit
                                                 </button>
-                                            </td>
-
-                                            <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                
                                                 <button 
                                                     onClick={() => {
                                                         clickedFordelete()
                                                         setdeleteCommunicationid(data.communication_id)
                                                         setdeleteCommunicationrelationshipid(data.communication_relation_id)
                                                     }}
-                                                    className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
+                                                    className="mx-2 bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
                                                 >
                                                     Delete
                                                 </button>
-                                            </td>
-                                        </div>
-                                        
-                                    }
+                                            
+                                            </div>
+                                        }
+                                    </td>  
                                 </tr>
                             ))}
                         </tbody>

@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
+ 
   const classes = await prisma.ClassTeacher.findMany({
     where:{
       teacher_id:Number(teacher.teacher_id)

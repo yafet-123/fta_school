@@ -77,7 +77,7 @@ export function VerticalNavbar({onChange, data}){
                             onClick={() => signOut({
                                 callbackUrl: '/auth/Admin/Login/signin-user'
                             })} 
-                            className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-white dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl" href="#">
+                            className="flex items-center p-2 lg:p-4 text-xl text-black hover:text-black dark:text-white hover:bg-[#009688] dark:hover:bg-white dark:hover:text-slate-800 rounded-xl hover:bg-white rounded-xl" href="#">
                             <span className="hidden lg:flex"><FiLogOut size={25} /></span>
                             <span className={`ml-1 lg:ml-4 text-xs lg:text-lg font-semibold ${sideBar ? "hidden" : "flex"} `}>Log Out</span>
                         </button>

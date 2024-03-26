@@ -67,6 +67,7 @@ export function AddAsign({teachers,subjectes,classes}) {
                             className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none focus:outline-none focus:ring-0 focus:border-black px-3"
                         >
                             <option value="" disabled hidden></option>
+                            <option value="" ></option>
                             { teachers.map((data,index)=>(
                                 <option value={data.teacher_id} className="text-sm lg:text-xl text-black">{data.UserName}</option>
                             ))}
@@ -92,6 +93,7 @@ export function AddAsign({teachers,subjectes,classes}) {
                             className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
                         >
                             <option value="" disabled hidden></option>
+                            <option value="" ></option>
                             { subjectes.map((data,index)=>(
                                 <option value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
                             ))}
