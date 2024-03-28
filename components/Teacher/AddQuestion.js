@@ -138,7 +138,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                        </select>
 		                        <label
 		                            htmlFor="select"
-		                            className={`absolute duration-300 top-5 left-0 px-1 -z-1 text-sm lg:text-lg text-black left-2 w-3/4 bg-white ${
+		                            className={`absolute duration-300 top-5 left-0 px-1 -z-1 text-sm lg:text-lg text-black left-2 bg-white ${
 		                                subjectId ? 'text-xs' : 'text-sm'
 		                                } ${subjectId ? '-translate-y-full' : 'translate-y-0'} transform origin-0`}
 		                        >
