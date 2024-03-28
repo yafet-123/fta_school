@@ -23,7 +23,13 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
     const [error,seterror] = useState("")
     const [typechange , settypechange] = useState(true)
     const UserData = data?.user;
-
+    const uniqueSubjects = [...new Set(Allsubjects.map(subject => subject.subjectName))].map(subjectName => {
+  		const subject = Allsubjects.find(subject => subject.subjectName === subjectName);
+  		return {
+  		  subject_id: subject.subject_id,
+  		  subjectName: subjectName
+  		};
+	});
     async function handleSubmit(values){
     	console.log(subjectId)
  		setLoadingModalIsOpen(true);
@@ -126,7 +132,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                            className="py-2 lg:py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
 		                        >
 		                            <option value="" disabled hidden></option>
-		                            { Allsubjects.map((data,index)=>(
+		                            { uniqueSubjects.map((data,index)=>(
 		                                <option key={index} value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
 		                            ))}
 		                        </select>
