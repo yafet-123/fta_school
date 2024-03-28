@@ -23,11 +23,11 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
     const [error,seterror] = useState("")
     const [typechange , settypechange] = useState(true)
     const UserData = data?.user;
-    const uniqueSubjects = [...new Set(Allsubjects.map(subject => subject.subjectName))].map(subjectName => {
-  		const subject = Allsubjects.find(subject => subject.subjectName === subjectName);
+    const uniqueSubjects = [...new Set(Allsubjects.map(subject => subject.SubjectName))].map(SubjectName => {
+  		const subject = Allsubjects.find(subject => subject.SubjectName === SubjectName);
   		return {
   		  subject_id: subject.subject_id,
-  		  subjectName: subjectName
+  		  SubjectName: SubjectName
   		};
 	});
     async function handleSubmit(values){
