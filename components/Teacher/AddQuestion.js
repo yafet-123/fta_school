@@ -23,7 +23,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
     const [error,seterror] = useState("")
     const [typechange , settypechange] = useState(true)
     const UserData = data?.user;
-    const uniqueSubjectNames = Array.from(new Set(Allsubjects.map((data) => data.SubjectName)));
+
     async function handleSubmit(values){
     	console.log(subjectId)
  		setLoadingModalIsOpen(true);
@@ -126,15 +126,13 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                            className="py-2 lg:py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
 		                        >
 		                            <option value="" disabled hidden></option>
-		                            {uniqueSubjectNames.map((subjectName, index) => (
-								      <option key={index} value={subjectName} className="text-sm lg:text-xl text-black">
-								        {subjectName}
-								      </option>
-								    ))}
+		                            { Allsubjects.map((data,index)=>(
+		                                <option key={index} value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
+		                            ))}
 		                        </select>
 		                        <label
 		                            htmlFor="select"
-		                            className={`absolute duration-300 top-5 left-0 px-1 -z-1 text-sm lg:text-lg text-black left-2 bg-white w-3/4 ${
+		                            className={`absolute duration-300 top-5 left-0 px-1 -z-1 text-sm lg:text-lg text-black left-2 w-3/4 bg-white ${
 		                                subjectId ? 'text-xs' : 'text-sm'
 		                                } ${subjectId ? '-translate-y-full' : 'translate-y-0'} transform origin-0`}
 		                        >
