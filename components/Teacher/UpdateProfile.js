@@ -4,7 +4,7 @@ import { useState,useEffect, useContext} from 'react'
 import Loader from "../common/Loading";
 import ReactModal from "react-modal";
 
-export function UpdateProfile({updateteacherid,updatefirstName,updatelastName,updateage,updateUserName,updateemail,setupdateModalOn,setupdatefirstName,setupdatelastName,setupdateage,setupdateUserName,setupdateemail}) {
+export function UpdateProfile({updateteacherid,updatefirstName,updatelastName,updateage,updateUserName,updateemail,setupdateModalOn,setupdateUserName,setupdatefirstName,setupdatelastName,setupdateage,setupdateemail}) {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
@@ -39,11 +39,11 @@ export function UpdateProfile({updateteacherid,updatefirstName,updatelastName,up
                     <div className="flex flex-col justify-between items-center">
                     	<div className="relative mb-10 w-full">
 	                        <input 
-	                        	id="email" 
+	                        	id="username" 
 	                        	type="text" 
 	                           	className="block w-full px-3 text-xl text-black dark:text-white bg-transparent py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
 	                           	value={updateUserName}
-	                            onChange={(e) => setupdateusername(e.target.value)}
+	                            onChange={(e) => setupdateUserName(e.target.value)}
 	                        />
 		                    <label 
 		                        htmlFor="floating_outlined" 

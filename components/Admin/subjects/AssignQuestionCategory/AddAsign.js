@@ -59,6 +59,7 @@ export function AddAsign({subjects,questioncategory}) {
                         className="py-4 border-2 border-black rounded-xl block w-full bg-white appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black px-3"
                     >
                         <option value="" disabled hidden></option>
+                        <option value="" ></option>
                         { subjects.map((data,index)=>(
                             <option value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
                         ))}
