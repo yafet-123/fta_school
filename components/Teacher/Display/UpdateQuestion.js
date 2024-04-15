@@ -130,7 +130,9 @@ export function UpdateQuestion({
 
                         <div className="flex flex-col justify-between w-full mx-5">
                             {updateanswer.map((answer,index)=>(
-                                <div className="relative mb-10 mx-5">
+                                <div
+                                 key={index} 
+                                className="relative mb-10 mx-5">
                                     <input 
                                         id="choose" 
                                         type="text" 

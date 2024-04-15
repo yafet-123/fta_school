@@ -61,7 +61,7 @@ export function AddAsign({subjects,questioncategory}) {
                         <option value="" disabled hidden></option>
                         <option value="" ></option>
                         { subjects.map((data,index)=>(
-                            <option value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
+                            <option key={index} value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
                         ))}
                     </select>
                     <label

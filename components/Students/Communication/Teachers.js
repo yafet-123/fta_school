@@ -13,7 +13,7 @@ export default function Teachers({Allteachers}) {
   return (
     <div className="pt-0 pb-20 w-full h-full px-5 lg:px-10 gap-5 ">
       {Allteachers.map((data,index)=>(
-        <div className="flex-1 overflow-x-hidden overflow-y-auto p-4">
+        <div key={index} className="flex-1 overflow-x-hidden overflow-y-auto p-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               <button
                 onClick={()=> handleGoToCommunication(data.teacher_id)} 

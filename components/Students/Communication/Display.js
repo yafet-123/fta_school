@@ -54,7 +54,7 @@ export default function Display({Allcommunications, teacherId, studentId, studen
   return (
     <div className="pt-0 pb-20 w-full h-full px-5 lg:px-10 gap-5 ">
       {Allcommunications.map((data,index)=>(
-        <div className="w-full">
+        <div  key={index} className="w-full">
           <div className={`flex items-center space-x-2 mb-5 ${data.isStudent ? "justify-end":"justify-start"}`}>
             { data.isStudent ?
               <div className="rounded-full overflow-hidden">
@@ -73,7 +73,7 @@ export default function Display({Allcommunications, teacherId, studentId, studen
               </div>
               <p className="font-normal text-sm lg:text-md"> <span className="font-bold"> Content :</span> {data.content}</p> 
               { data.isStudent ?
-                <div className="flex justify-between items-center mt-1">
+                <div key={index} className="flex justify-between items-center mt-1">
                   <button
                     onClick={() => {
                       clickedForupdate()

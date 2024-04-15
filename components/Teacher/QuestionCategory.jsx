@@ -13,6 +13,7 @@ export default function QuestionCategory({AllquestionCategory,subjectId,classId}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {AllquestionCategory.map((data,index)=>(
         <button 
+          key={index}
           onClick={() => handleSubject(data.question_category_id)} 
           className={`${ data.question_category_id % 3 == 0 && "bg-[#2862E9]" || data.question_category_id % 3 == 1 && "bg-[#EFD81D]" 
           || data.question_category_id % 3 == 2 && "bg-[#E95F21]" } 

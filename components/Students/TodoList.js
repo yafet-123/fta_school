@@ -58,7 +58,7 @@ const TodoList = ({ tasks, studentId }) => {
       </div>
 
       <ul>
-        {tasks?.map((task) => (
+        {tasks?.map((task,index) => (
 
           <li
             key={task.id}

@@ -69,7 +69,7 @@ export function AddAsign({teachers,subjectes,classes}) {
                             <option value="" disabled hidden></option>
                             <option value="" ></option>
                             { teachers.map((data,index)=>(
-                                <option value={data.teacher_id} className="text-sm lg:text-xl text-black">{data.UserName}</option>
+                                <option key={index} value={data.teacher_id} className="text-sm lg:text-xl text-black">{data.UserName}</option>
                             ))}
                         </select>
                         <label
@@ -95,7 +95,7 @@ export function AddAsign({teachers,subjectes,classes}) {
                             <option value="" disabled hidden></option>
                             <option value="" ></option>
                             { subjectes.map((data,index)=>(
-                                <option value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
+                                <option key={index} value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
                             ))}
                         </select>
                         <label

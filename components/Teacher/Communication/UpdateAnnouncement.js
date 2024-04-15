@@ -98,7 +98,7 @@ export function UpdateAnnouncement({
                             >
                                 <option value="" disabled hidden></option>
                                 { Allstudents.map((data,index)=>(
-                                    <option value={data.students_id} className="text-sm lg:text-xl text-black">{data.name}</option>
+                                    <option key={index} value={data.students_id} className="text-sm lg:text-xl text-black">{data.name}</option>
                                 ))}
                             </select>
                         </div>

@@ -108,7 +108,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                        >
 		                            <option value="" disabled hidden></option>
 		                            { Alltypes.map((data,index)=>(
-		                                <option value={data.question_type_id} className="text-sm lg:text-lg text-black">{data.questiontypeName}</option>
+		                                <option key={inex} value={data.question_type_id} className="text-sm lg:text-lg text-black">{data.questiontypeName}</option>
 		                            ))}
 		                        </select>
 		                        <label

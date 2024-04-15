@@ -239,8 +239,8 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
         {Allquestion.length == 0 ? (
           <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20 flex flex-col justify-center items-center">
             <p className="text-center font-bold text-[#00225F] text-3xl md:text-3xl lg:text-4xl pt-10 mb-5 leading-10">
-              We're working hard to bring you more engaging questions! Unfortunately, there are no questions available at the moment. 
-              Please check back later for new content.
+              {`We're working hard to bring you more engaging questions! Unfortunately, there are no questions available at the moment. 
+              Please check back later for new content.`}
             </p>
             <button
               onClick={handleReturn} 
@@ -257,7 +257,7 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId}
             </p>
             <div className="lg:px-16">
                 {Allquestion.map((question, index) => (
-                  <div className="flex flex-col">
+                  <div key={index} className="flex flex-col">
                     <div className="py-5">
                       <h2 className={`font-bold text-[#00225F] text-lg md:text-xl ${!showResult ? "flex" : "hidden"}`}>
                         Question: {index + 1}

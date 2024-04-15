@@ -52,7 +52,7 @@ export function UpdateAssign({setupdateModalOn, updateassignid, updatequestionca
                             >
                                 <option value="" disabled hidden></option>
                                 { questioncategory.map((data,index)=>(
-                                    <option value={data.question_category_id} className="text-sm lg:text-xl text-black">{data.questioncategoryName}</option>
+                                    <option key={index} value={data.question_category_id} className="text-sm lg:text-xl text-black">{data.questioncategoryName}</option>
                                 ))}
                             </select>
                             <label
@@ -77,7 +77,7 @@ export function UpdateAssign({setupdateModalOn, updateassignid, updatequestionca
                             >
                                 <option value="" disabled hidden></option>
                                 { subjects.map((data,index)=>(
-                                    <option value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
+                                    <option key={index} value={data.subject_id} className="text-sm lg:text-xl text-black">{data.SubjectName}</option>
                                 ))}
                             </select>
                             <label

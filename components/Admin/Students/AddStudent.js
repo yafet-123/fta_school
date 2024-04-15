@@ -168,7 +168,7 @@ export function AddStudent({classes}) {
                     >
                         <option value="" disabled hidden></option>
                         { classes.map((data,index)=>(
-                            <option value={data.class_id} className="text-sm lg:text-xl text-black">{data.ClassName}</option>
+                            <option key={index} value={data.class_id} className="text-sm lg:text-xl text-black">{data.ClassName}</option>
                         ))}
                     </select>
                     <label
