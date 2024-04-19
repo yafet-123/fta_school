@@ -26,7 +26,7 @@ export default async function handleforgotpassword(req, res){
 		},
 		data:{resetToken : token}
 	});
-
+ 
 	const link = `${process.env.link}/Teacher/ResetPassword?token=${token}`;
 	console.log(link)
 	var transporter = nodemailer.createTransport({
