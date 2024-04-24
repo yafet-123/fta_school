@@ -19,6 +19,7 @@ export default function ForgotPassword() {
     }).catch(function (error) {
         console.log("Password Changing Failed")
         setloading(false)
+        console.log(error)
     });
     setloading(false) 
   }
