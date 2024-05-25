@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 
-export default function FeaturedTours() {
+export default function ImageGallery() {
   const router = useRouter();
   const handleSeeTour = (tourid) => {
     router.push(`/tours/${tourid}`);

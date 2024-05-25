@@ -41,7 +41,7 @@ export const Navbar = () => {
         ${
           shadow
             ? "fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300 bg-[#1a3e58] overflow-hidden"
-            : "fixed w-full h-20 z-[100] border-b-2 border-slate-100 bg-[#1A3E58]"
+            : "fixed w-full h-20 z-[100] bg-[#1A3E58]"
         }
       `}
     >
