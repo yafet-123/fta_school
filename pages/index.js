@@ -1,15 +1,8 @@
 import { MainHeader } from "../components/common/MainHeader";
 import CommonHeroSection from '../components/home/CommonHeroSection.jsx';
-import PopularDestination from '../components/home/popularDestination';
-import OurServices from '../components/home/OurServices';
-import FeaturedTours from "../components/home/FeaturedTours1"
 import ImageGallery from "../components/home/ImageGallery"
 import Testimonials from "../components/home/Testimonials"
-// import WhyChooseUs from "../components/home/WhyChooseUs" 
-// import ExploringUniqueDestinations from "../components/home/ExploringUniqueDestinations"
 import ContactInformation from "../components/home/ContactInformation"
-// import CapturingtheExtraordinary from "../components/home/CapturingtheExtraordinary"
-// import CommunityServiceatOurCore from "../components/home/CommunityServiceatOurCore"
 import {useRouter} from 'next/router'
 
 
