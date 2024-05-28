@@ -18,6 +18,10 @@
   }
 }
 
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
 .custom-shadow {
   box-shadow: 5px 5px 50px 50px rgba(252, 5, 5, 0.699);
 }
@@ -28,6 +32,18 @@
 
 .animate-bg {
   animation: animate-Bg 5s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+.animate-bg-gallery {
+  animation: animate 20s linear infinite;
 }
 
 @keyframes animate-Bg {

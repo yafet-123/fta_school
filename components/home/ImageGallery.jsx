@@ -9,23 +9,20 @@ import Image3 from '../../public/heroImge3.jpg';
 import Image4 from '../../public/heroImge4.jpg';
 import Image5 from '../../public/heroImge5.jpg';
 import Image6 from '../../public/heroImge6.jpg';
+import Image7 from '../../public/heroImge5.jpg';
+import Image8 from '../../public/heroImge6.jpg';
 
 export default function ImageGallery() {
-  const router = useRouter();
-  const handleSeeTour = (tourid) => {
-    router.push(`/tours/${tourid}`);
-  };
-
   const images = [
-    Image1,Image2,Image3
+    Image1,Image2,Image3,Image4,Image5,Image6,Image8,Image7
   ];
 
-  return (
+  return ( 
      <div
       className="flex items-center justify-center min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('prescription-3384324_1920.jpg')" }}
+      style={{ backgroundImage: "url('../../public/Simien-Mountains-landscapes.jpeg')" }}
     >
-      <div className="relative w-48 h-72 transform-style-preserve-3d animate-bg">
+      <div className="relative w-48 h-72 transform-style-preserve-3d animate-bg-gallery">
         {images.map((src, index) => (
           <span
             key={index}
