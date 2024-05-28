@@ -3,6 +3,7 @@ import CommonHeroSection from '../components/home/CommonHeroSection.jsx';
 import ImageGallery from "../components/home/ImageGallery"
 import Testimonials from "../components/home/Testimonials"
 import ContactInformation from "../components/home/ContactInformation"
+import NewsEvents from "../components/home/NewsEvents"
 import {useRouter} from 'next/router'
 
 
@@ -22,7 +23,7 @@ export default function Home() {
         <Testimonials />
         <ImageGallery />
         <ContactInformation />
-        
+        <NewsEvents />
       </div>
     </div>
   );
