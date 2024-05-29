@@ -19,8 +19,8 @@ export default function ImageGallery() {
 
   return ( 
      <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('../../public/Simien-Mountains-landscapes.jpeg')" }}
+      className="flex items-center justify-center min-h-screen bg-cover bg-center overflow-hidden"
+      style={{ backgroundImage: "url('/Simien-Mountains-landscapes.jpeg')" }}
     >
       <div className="relative w-48 h-72 transform-style-preserve-3d animate-bg-gallery">
         {images.map((src, index) => (
