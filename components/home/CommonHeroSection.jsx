@@ -42,7 +42,7 @@ export default function CommonHeroSection({Tag , Welcome_Message}) {
         {CardHeo.map((data, index) => (
           <div
             key={index}
-            className={`${data.image} w-full h-screen bg-fixed pt-10 flex flex-col`}
+            className={`${data.image} w-full h-screen bg-fixed pt-32 flex flex-col`}
           >
             <div className="flex flex-col justify-center lg:justify-start items-center lg:items-start font-bold md:p-12 w-full lg:w-[60%] px-2">
               <div>
