@@ -40,6 +40,10 @@ export const Footer = () => {
 
   const quickLinks = [
     { url: "/", link: "Home" },
+    { url: "/contact", link: "About Us" },
+    { url: "/contact", link: "Service" },
+    { url: "/contact", link: "Gallery" },
+    { url: "/contact", link: "Team" },
     { url: "/contact", link: "Contact" },
   ];
 
@@ -79,10 +83,10 @@ export const Footer = () => {
           <Link
             target="_blank"
             className="flex flex-row items-center gap-2 hover:text-gray-300"
-            href={`tel:${+251777940161}`}
+            href={`tel:${+251966149422}`}
           >
             <span className="flex items-center">
-              <FaPhone /> <p className="ml-2 md:ml-3 cursor-pointer">+251777940161</p>
+              <FaPhone /> <p className="ml-2 md:ml-3 cursor-pointer">+251966149422</p>
             </span>
           </Link>
           <div>
@@ -92,7 +96,7 @@ export const Footer = () => {
               href="mailto:info@undiscoveredethiopia.com"
             >
               <span className="flex items-center">
-                <MdEmail /> <p className="ml-2 md:ml-3 cursor-pointer">info@fta.com</p>
+                <MdEmail /> <p className="ml-2 md:ml-3 cursor-pointer">info@ftiaet</p>
               </span>
             </Link>
           </div>
@@ -105,7 +109,7 @@ export const Footer = () => {
             <span className="flex items-center">
               <ImLocation />{' '}
               <p className="ml-3 cursor-pointer">
-                Addis Ababa, Ethiopia.
+                Wollo Sefer Addis Ababa, Ethiopia.
               </p>
             </span>
           </Link>
