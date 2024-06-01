@@ -11,7 +11,7 @@ const teamMembers = [
       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
       proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-    shape: 'circle',
+    shape: 'absolute bottom-10 left-10 w-24 h-12 bg-blue-100 rounded-l-full tansform -rotate-45 bg-opacity-50',
   },
   {
     name: 'Scott Peters',
@@ -23,7 +23,7 @@ const teamMembers = [
       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
       proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-    shape: 'custom',
+    shape: 'absolute bottom-10 left-10 w-24 h-12 bg-blue-100 rounded-r-full tansform rotate-45 bg-opacity-50',
   },
   {
     name: 'Jack Hartman',
@@ -35,7 +35,7 @@ const teamMembers = [
       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
       proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-    shape: 'rounded',
+    shape: 'absolute bottom-10 left-10 w-24 h-12 bg-blue-100 rounded-b-full tansform -rotate-45 bg-opacity-50',
   },
   {
     name: 'Heather Kramer',
@@ -47,38 +47,24 @@ const teamMembers = [
       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
       proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-    shape: 'custom',
+    shape: 'absolute bottom-10 left-10 w-24 h-12 bg-blue-100 rounded-t-full tansform -rotate-90 bg-opacity-50',
   },
 ];
 
-export const TeamMember = ({ name, title, image, description, shape }) => {
-  let shapeClasses = '';
-
-  switch (shape) {
-    case 'circle':
-      shapeClasses = 'rounded-full';
-      break;
-    case 'rounded':
-      shapeClasses = 'rounded-lg';
-      break;
-    case 'custom':
-      shapeClasses = 'clip-path-polygon';
-      break;
-    default:
-      shapeClasses = '';
-  }
-
+export const TeamMember = ({ index, name, title, image, description, shape }) => {
+  const isEven = index % 2 === 0;
   return (
-    <div className="flex flex-col md:flex-row mb-12 relative z-10">
+    <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} mb-12 relative z-10`}>
       <div className="md:w-1/2">
-        <div className={`w-full h-full overflow-hidden ${shapeClasses}`}>
+        <div className="relative w-full h-full overflow-hidden lg:clip-path-polygon">
           <Image
             src={image}
             alt={name}
-            width={500}
-            height={500}
-            className="w-full h-full object-cover"
+            width={350}
+            height={350}
+            className="absolute w-full h-full object-cover"
           />
+          <div className={`${shape}`}></div>
         </div>
       </div>
       <div className="md:w-1/2 flex flex-col justify-center p-6">
@@ -103,8 +89,8 @@ const TeamSection = () => {
             </p>
           </div>
     
-          <div class="relative w-48 h-24 bg-blue-600 flex justify-center rounded-b-full tansform -rotate-45">
-            <div class="absolute w-32 h-16 bg-white border-blue-600 rounded-b-full"></div>
+          <div className="hidden lg:flex relative w-48 h-24 bg-blue-600 flex align-center justify-center rounded-b-full tansform -rotate-45">
+            <div className="absolute top-0 w-32 h-16 bg-white border-blue-600 rounded-b-full"></div>
           </div>
           {/*<div className="absolute bottom-0 right-0 w-64 h-32 bg-indigo-500 rounded-b-full"></div>
           <div className="absolute top-1/4 left-1/2 w-32 h-16 bg-blue-500 rounded-t-full"></div>
@@ -113,7 +99,7 @@ const TeamSection = () => {
 
         {teamMembers.map((member, index) => (
           <TeamMember
-            key={index}
+            index={index}
             name={member.name}
             title={member.title}
             image={member.image}
