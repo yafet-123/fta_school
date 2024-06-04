@@ -55,21 +55,22 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
   const isEven = index % 2 === 0;
   return (
     <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} mb-12 relative z-10`}>
-      <div className="md:w-1/2">
+      <div className="w-full md:w-1/2">
         <div className="relative w-full h-full overflow-hidden lg:clip-path-polygon">
           <Image
             src={image}
             alt={name}
+            priority
             width={350}
             height={350}
-            className="absolute w-full h-full object-cover"
+            className="absolute w-full h-full lg:object-cover"
           />
           <div className={`${shape}`}></div>
         </div>
       </div>
-      <div className="md:w-1/2 flex flex-col justify-center p-6">
-        <h3 className="text-2xl font-bold text-blue-600">{name}</h3>
-        <p className="text-gray-600 font-semibold mb-4">{title}</p>
+      <div className="md:w-1/2 flex flex-col justify-center py-6 lg:px-6">
+        <h3 className="text-2xl font-bold text-blue-600 mb-5">{name}</h3>
+        <p className="text-gray-600 font-semibold mb-5">{title}</p>
         <p className="text-gray-600">{description}</p>
       </div>
     </div>
@@ -83,7 +84,7 @@ const TeamSection = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center">
           <div className="mb-10">
-            <h2 className="text-xl lg:text-5xl font-bold text-blue-600">Meet <br/> our team</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold text-blue-600">Meet <br/> our team</h2>
             <p className="text-lg lg:text-xl text-gray-600 mt-4">
               Award-winning national and international <br /> key opinion leaders
             </p>
@@ -99,6 +100,7 @@ const TeamSection = () => {
 
         {teamMembers.map((member, index) => (
           <TeamMember
+            key={index}
             index={index}
             name={member.name}
             title={member.title}
