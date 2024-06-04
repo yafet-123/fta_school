@@ -54,7 +54,7 @@ const teamMembers = [
 export const TeamMember = ({ index, name, title, image, description, shape }) => {
   const isEven = index % 2 === 0;
   return (
-    <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} mb-12 relative z-10`}>
+    <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} mb-12 relative z-10 px-4`}>
       <div className="w-full md:w-1/2">
         <div className="relative w-full h-full overflow-hidden lg:clip-path-polygon">
           <Image
@@ -69,9 +69,9 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
         </div>
       </div>
       <div className="md:w-1/2 flex flex-col justify-center py-6 lg:px-6">
-        <h3 className="text-2xl font-bold text-blue-600 mb-5">{name}</h3>
-        <p className="text-gray-600 font-semibold mb-5">{title}</p>
-        <p className="text-gray-600">{description}</p>
+        <h3 className="text-2xl lg:text-3xl font-bold text-blue-600 mb-5">{name}</h3>
+        <p className="text-lg lg:text-xl text-gray-600 font-bold mb-5">{title}</p>
+        <p className="text-lg lg:text-xl text-gray-600">{description}</p>
       </div>
     </div>
   );
@@ -80,9 +80,9 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
 const TeamSection = () => {
 
   return (
-    <section className="bg-white text-gray-800 py-16 px-4 overflow-hidden">
+    <section className="bg-white text-gray-800 py-16 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center px-4">
           <div className="mb-10">
             <h2 className="text-4xl lg:text-5xl font-bold text-blue-600">Meet <br/> our team</h2>
             <p className="text-lg lg:text-xl text-gray-600 mt-4">
@@ -93,9 +93,6 @@ const TeamSection = () => {
           <div className="hidden lg:flex relative w-48 h-24 bg-blue-600 flex align-center justify-center rounded-b-full tansform -rotate-45">
             <div className="absolute top-0 w-32 h-16 bg-white border-blue-600 rounded-b-full"></div>
           </div>
-          {/*<div className="absolute bottom-0 right-0 w-64 h-32 bg-indigo-500 rounded-b-full"></div>
-          <div className="absolute top-1/4 left-1/2 w-32 h-16 bg-blue-500 rounded-t-full"></div>
-          <div className="absolute top-1/2 right-1/3 w-20 h-10 bg-indigo-400 rounded-b-full"></div>*/}
         </div>
 
         {teamMembers.map((member, index) => (
@@ -109,15 +106,19 @@ const TeamSection = () => {
             shape={member.shape}
           />
         ))}
+      </div>
 
-        <div className="mt-16 text-center relative z-10">
-          <h3 className="text-2xl font-bold text-gray-800">Discover our upcoming courses</h3>
-          <p className="text-gray-600 mt-2">Foundation courses, Advanced courses, Masterclasses and more.</p>
-          <button className="mt-4 px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700">
+      <div className="mt-16 text-center relative px-4 py-5 z-10 bg-[#aac7d8]">
+          <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-5">
+            Discover our upcoming courses
+          </h3>
+          <p className="text-lg lg:text-xl text-gray-600 mb-5">
+            Foundation courses, Advanced courses, Masterclasses and more.
+          </p>
+          <button className="text-lg lg:text-xl mt-4 px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:text-2xl hover:bg-blue-700">
             Explore
           </button>
         </div>
-      </div>
     </section>
   );
 };
