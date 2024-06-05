@@ -214,13 +214,15 @@ const ContactForm = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="bg-[#17c294] w-28 text-white paragraph-fonts py-2 px-4 mb-8 md:mb-0 md:py-4 md:px-8
+            <div className="flex justify-center items-center">
+              <button
+                type="submit"
+                className="bg-[#17c294] w-28 text-white paragraph-fonts py-2 px-4 mb-8 md:mb-0 md:py-4 md:px-8
                            shadow-black items-center rounded-md justify-center shadow-md hover:scale-105 duration-300"
-            >
-              Submit
-            </button>
+              > 
+                Submit
+              </button>
+            </div>
         </form>
         )}
       </Formik>
