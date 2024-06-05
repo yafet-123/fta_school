@@ -1,7 +1,7 @@
 {
-  "name": "Future Talent Academy",
+  "name": "undiscovered-ethiopia",
   "description": "Future Talent Academy",
-  "homepage": "https://abselat.et.hulumedia24.com",
+  "homepage": "https://undiscoveredethiopia.com/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "prisma:generate": "prisma generate",
     "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
@@ -25,7 +26,7 @@
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
     "multiselect-react-dropdown": "^2.0.25",
-    "next":"12.3.1",
+    "next": "12.3.1",
     "next-auth": "^4.22.3",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
