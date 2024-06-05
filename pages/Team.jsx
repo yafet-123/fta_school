@@ -12,11 +12,7 @@ export default function Home() {
   return (
     <div className="">
       <MainHeader title="Future Talent Academy" />
-      <div className="flex flex-col">
-        <CommonHeroSection  
-          Tag="Empowering minds and shaping futures at Future Talent Academy - where excellence meets opportunity."
-          Welcome_Message="At Future Talent Academy, we take pride in fostering an environment where every student is empowered to unleash their potential. Our commitment lies in the holistic development of young minds, providing a dynamic platform where academic excellence meets individualized opportunities."
-        />
+      <div className="flex flex-col pt-20">
         <TeamSection />
       </div>
     </div>

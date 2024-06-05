@@ -91,7 +91,7 @@ const TeamSection = () => {
           </div>
     
           <div className="hidden lg:flex relative w-48 h-24 bg-blue-600 flex align-center justify-center rounded-b-full tansform -rotate-45">
-            <div className="absolute top-0 w-32 h-16 bg-white border-blue-600 rounded-b-full"></div>
+            <div className="absolute -top-5 w-32 h-20 bg-white border-blue-600 rounded-b-full"></div>
           </div>
         </div>
 
@@ -108,11 +108,11 @@ const TeamSection = () => {
         ))}
       </div>
 
-      <div className="mt-16 text-center relative px-4 py-5 z-10 bg-[#aac7d8]">
-          <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-5">
+      <div className="mt-16 text-center relative px-4 py-5 z-10 bg-[#44576d]">
+          <h3 className="text-2xl lg:text-3xl font-bold text-white mb-5">
             Discover our upcoming courses
           </h3>
-          <p className="text-lg lg:text-xl text-gray-600 mb-5">
+          <p className="text-lg lg:text-xl text-white mb-5">
             Foundation courses, Advanced courses, Masterclasses and more.
           </p>
           <button className="text-lg lg:text-xl mt-4 px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:text-2xl hover:bg-blue-700">
