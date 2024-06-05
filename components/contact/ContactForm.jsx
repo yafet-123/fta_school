@@ -52,8 +52,8 @@ const ContactForm = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalIsOpenone, setModalIsOpenone] = useState(false);
   const socialMediaLinks = [
-    {id:"https://www.linkedin.com/in/helen-zeray-789b89267",path:<BsLinkedin size={30} color="black"/>},
-    {id:"https://instagram.com/helenzeray1?igshid=ZGUzMzM3NWJiOQ==",path:<BsInstagram size={30} color="black"/>},
+    {id:"https://www.linkedin.com/in/helen-zeray-789b89267",path:<BsLinkedin size={30} color="white"/>},
+    {id:"https://instagram.com/helenzeray1?igshid=ZGUzMzM3NWJiOQ==",path:<BsInstagram size={30} color="white"/>},
   ]
   const handleSubmit = async (values) => {
     console.log(values)
@@ -93,22 +93,41 @@ const ContactForm = () => {
     setModalIsOpenone(false);
   };
   return (
-    <div className="w-full flex flex-col md:flex-row items-center space-y-6">
+    <div className="w-full flex flex-col md:flex-row items-center">
       <div className="flex flex-col px-2 lg:px-10 w-full">
-        <h1 className="font-poppins font-bold text-4xl lg:tetx-6xl text-left text-[#010101] mb-5">
+        <h1 className="font-poppins text-center font-bold text-4xl lg:tetx-6xl text-left text-white mb-5">
           Contact
         </h1>
-        <div className="font-poppins text-left text-[#010101]">
-          <p className="font-normal text-xl lg:text-2xl mb-5">ftaacademy@gmail.com </p>
-          <p className="font-normal text-xl lg:text-2xl mb-5">Wello Sefer Campus</p>
-          <p className="font-normal text-xl lg:text-2xl mb-5">WhatsApp: +934781038</p>
+        <div className="font-poppins text-left text-white">
+          <p className="text-center text-md lg:text-lg mb-3">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <div className="flex flex-col justify-center items-center font-normal text-xl lg:text-2xl mb-3">
+            <p className="font-bold">Address</p>
+            <p>Wello Sefer Campus</p>
+          </div>
+
+          <div className="flex flex-col justify-center items-center font-normal text-xl lg:text-2xl mb-3">
+            <p className="font-bold">Phone</p>
+            <p>WhatsApp: +934781038</p>
+          </div>
+
+          <div className="flex flex-col justify-center items-center font-normal text-xl lg:text-2xl mb-3">
+            <p className="font-bold">Email</p>
+            <p>ftaacademy@gmail.com </p>
+          </div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col ">
           {socialMediaLinks.map((paths, index) => {
             return (
-              <Link key={index} href={paths.path} target="_blank">
-                {paths.path}
+              <Link  key={index} href={paths.path} target="_blank">
+                <p className="mb-5">{paths.path}</p>
               </Link>
             );
           })}
@@ -120,13 +139,13 @@ const ContactForm = () => {
         onSubmit={handleSubmit}
       >
         {({ handleSubmit }) => (
-        <form className="flex flex-col px-2 lg:px-10 w-full" onSubmit={handleSubmit} >
-            <h3 className="font-poppins text-left text-[#010101] font-bold text-4xl lg:tetx-6xl mb-5">Enquiry form</h3>
+        <form className="flex flex-col px-2 lg:px-10 w-full border py-5 rounded-lg border-gray-300" onSubmit={handleSubmit} >
+            <h3 className="font-poppins text-center text-left text-white font-bold text-4xl lg:tetx-6xl mb-5">Contact form</h3>
 
             <div className="mb-4">
-              <label htmlFor="name" className="block mb-1">
+              <label htmlFor="name" className="text-white block mb-1">
                 Name:
-                <span className="text-gray-500 text-sm ml-1">(required)</span>
+                <span className="text-white text-sm ml-1">(required)</span>
               </label>
               <Field
                 type="name"
@@ -142,9 +161,9 @@ const ContactForm = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="email" className="block mb-1">
+              <label htmlFor="email" className="text-white bblock mb-1">
                 Email:
-                <span className="text-gray-500 text-sm ml-1">(required)</span>
+                <span className="text-white text-sm ml-1">(required)</span>
               </label>
               <Field
                 type="email"
@@ -160,9 +179,9 @@ const ContactForm = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="phone" className="block mb-1">
+              <label htmlFor="phone" className="text-white bblock mb-1">
                 Phone:
-                <span className="text-gray-500 text-sm ml-1">(required)</span>
+                <span className="text-white text-sm ml-1">(required)</span>
               </label>
               <Field
                 type="text"
@@ -178,9 +197,9 @@ const ContactForm = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="message" className="block mb-1">
+              <label htmlFor="message" className="text-white block mb-1">
                 Message:
-                <span className="text-gray-500 text-sm ml-1">(required)</span>
+                <span className="text-white text-sm ml-1">(required)</span>
               </label>
               <Field
                 as="textarea"

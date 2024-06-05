@@ -7,7 +7,7 @@ export default function Contact() {
   
 
   return (
-      <main className="w-full h-full px-2 lg:px-10 py-32 bg-white flex flex-col">
+      <main className="w-full h-full px-2 lg:px-10 py-32 bg-white flex flex-col bg-[#44576d]">
         <MainHeader title="Hulu Media Ecommerce : Contact" />
         <ContactForm />
       </main> 

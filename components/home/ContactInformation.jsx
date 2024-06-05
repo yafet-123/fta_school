@@ -9,7 +9,7 @@ export default function ContactInformation (){
   };
 	return(
 		<section className="py-10">
-	      <div className="text-left text-black px-5 lg:px-32">
+	    <div className="text-left text-black px-5 lg:px-32">
 				<div className="text-center font-semibold text-black text-2xl md:text-4xl lg:text-5xl p-3 md:p-14">
 					<span className="font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text" >
 						Get in Touch
@@ -46,6 +46,6 @@ export default function ContactInformation (){
 					</button>
 				</div>
 			</div>
-    	</section>
+    </section>
 	)
 }

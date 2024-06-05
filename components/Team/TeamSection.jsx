@@ -80,7 +80,7 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
 const TeamSection = () => {
 
   return (
-    <section className="bg-white text-gray-800 py-16 overflow-hidden">
+    <section className="bg-white text-gray-800 pt-16 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center px-4">
           <div className="mb-10">
