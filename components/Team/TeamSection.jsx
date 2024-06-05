@@ -55,7 +55,7 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
   const isEven = index % 2 === 0;
   return (
     <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} mb-12 relative z-10 px-4`}>
-      <div className="w-full md:w-1/2">
+      <div className="w-full md:w-1/2 lg:px-6">
         <div className="relative w-full h-full overflow-hidden lg:clip-path-polygon">
           <Image
             src={image}
@@ -68,10 +68,10 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
           <div className={`${shape}`}></div>
         </div>
       </div>
-      <div className="md:w-1/2 flex flex-col justify-center py-6 lg:px-6">
+      <div className="md:w-1/2 flex flex-col justify-center lg:px-6">
         <h3 className="text-2xl lg:text-3xl font-bold text-blue-600 mb-5">{name}</h3>
-        <p className="text-lg lg:text-xl text-gray-600 font-bold mb-5">{title}</p>
-        <p className="text-lg lg:text-xl text-gray-600">{description}</p>
+        <p className="text-md lg:text-lg text-gray-600 font-bold mb-5">{title}</p>
+        <p className="text-md lg:text-lg text-gray-600">{description}</p>
       </div>
     </div>
   );
