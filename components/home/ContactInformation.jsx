@@ -15,7 +15,7 @@ export default function ContactInformation (){
 						Get in Touch
 					</p>
 
-					<p className="md:text-xl text-base text-left my-5 w-full lg:w-[90%]">
+					<p className="md:text-lg text-base text-left my-5 w-full lg:w-[90%]">
 							{`Curious to learn more about Future Talent Academy? Feel free to get in touch with us! 
 							Whether you have inquiries about our programs, admissions, or simply want to explore how 
 							we can nurture your child's potential, our friendly team is here to assist. Connect with 
@@ -24,7 +24,7 @@ export default function ContactInformation (){
 							soon.`}
 					</p>
 
-					<p className="flex flex-row text-lg md:text-xl text-base my-3">
+					<p className="flex flex-row text-lg md:text-lg text-base my-3">
 						<span className="font-bold">Phone : </span>
 						<Link
               target="_blank"
@@ -35,7 +35,7 @@ export default function ContactInformation (){
             </Link>
 					</p>
 
-					<p className="flex flex-row text-lg md:text-xl text-base my-3">
+					<p className="flex flex-row text-lg md:text-lg text-base my-3">
 						<span className="font-bold">Email : </span>
 						<Link
               target="_blank"

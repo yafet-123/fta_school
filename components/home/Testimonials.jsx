@@ -36,15 +36,15 @@ export default function Testimonials() {
 	    autoplaySpeed: 3000,
 	  }
   	return (
-  		<div className="text-center py-20 bg-slate-100">
-      		<div className="flex flex-col flex-grow justify-between px-4 lg:mx-8">
+  		<div className="text-center py-20 bg-[#44576d] h-screen">
+      		<div className="flex flex-col flex-grow justify-between px-4 lg:px-20">
         		<div>
-	          		<h1 className="text-3xl md:text-5xl text-black font-bold my-4">
+	          		<h1 className="text-3xl md:text-5xl text-white font-bold my-4">
 	            		Don&apos;t just take our word for it... Read reviews from our happy
 	           			students
 	          		</h1>
         		</div>
-			    <div className="overflow-hidden">
+			    <div className="overflow-hidden px-52 ">
 			      <Slider {...settings}>
 			        {testimonials.map((person, index) => (
 			          	<div
