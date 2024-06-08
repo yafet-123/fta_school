@@ -7,7 +7,7 @@ import NewsEvents from "../components/home/NewsEvents"
 import {useRouter} from 'next/router'
 
 
-export default function Home() {
+export default function About() {
   return (
     <div className="">
       <MainHeader title="Future Talent Academy : Home" />

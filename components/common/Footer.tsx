@@ -40,10 +40,9 @@ export const Footer = () => {
 
   const quickLinks = [
     { url: "/", link: "Home" },
-    { url: "/contact", link: "About Us" },
+    { url: "/about", link: "About Us" },
     { url: "/contact", link: "Service" },
-    { url: "/contact", link: "Gallery" },
-    { url: "/contact", link: "Team" },
+    { url: "/Team", link: "Team" },
     { url: "/contact", link: "Contact" },
   ];
 
