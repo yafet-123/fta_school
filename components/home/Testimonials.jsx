@@ -36,7 +36,7 @@ export default function Testimonials() {
 	    autoplaySpeed: 3000,
 	  }
   	return (
-  		<div className="text-center py-20 bg-[#44576d] h-screen">
+  		<div className="text-center py-20 bg-[#44576d] h-full lg:h-screen">
       		<div className="flex flex-col flex-grow justify-between px-4 lg:px-20">
         		<div>
 	          		<h1 className="text-3xl md:text-5xl text-white font-bold my-4">
