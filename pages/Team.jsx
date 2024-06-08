@@ -11,7 +11,7 @@ export default function Home() {
   };
   return (
     <div className="">
-      <MainHeader title="Future Talent Academy" />
+      <MainHeader title="Future Talent Academy : Team" />
       <div className="flex flex-col pt-20">
         <TeamSection />
       </div>
