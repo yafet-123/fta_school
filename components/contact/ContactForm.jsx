@@ -12,8 +12,6 @@ const initialValues = {
   message: "",
 };
 
-
-
 const validateForm = (values) => {
   const errors = {};
   const MAX_TEXT_LENGTH = 100;
@@ -51,10 +49,12 @@ const ContactForm = () => {
   const router = useRouter();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalIsOpenone, setModalIsOpenone] = useState(false);
+
   const socialMediaLinks = [
     {id:"https://www.linkedin.com/in/helen-zeray-789b89267",path:<BsLinkedin size={30} color="white"/>},
     {id:"https://instagram.com/helenzeray1?igshid=ZGUzMzM3NWJiOQ==",path:<BsInstagram size={30} color="white"/>},
   ]
+  
   const handleSubmit = async (values) => {
     console.log(values)
     // Handle form submission logic her
@@ -92,6 +92,7 @@ const ContactForm = () => {
   const closeModalone = () => {
     setModalIsOpenone(false);
   };
+
   return (
     <div className="w-full flex flex-col md:flex-row items-center">
       <div className="flex flex-col px-2 lg:px-10 w-full">

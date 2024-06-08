@@ -10,10 +10,9 @@ import { useSession } from 'next-auth/react';
 export const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { session } = useSession();
-  console.log(session)
-  // const [toggleDropdown, setToggleDropdown] = useState(false);
   const [shadow, setShadow] = useState(false);
   const router = useRouter();
+   console.log(router.pathname)
   const NavLinks = [
     { path: "/", name: "Home" },
     { path: "/contact", name: "Contact" },
@@ -98,12 +97,12 @@ export const Navbar = () => {
                   : "text-white"
               } items-center font-bold paragraph-fonts justify-center space-y-8 lg:flex lg:flex-row flex-col lg:space-x-6 lg:space-y-0`}
             >
-              {NavLinks.map((link) => (
+              {NavLinks.map((link,index) => (
                 <li
-                  key={link.name}
+                  key={index}
                   className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#17c294] ${
                     router.pathname === link.path
-                      ? "text-[#edf1f4] underline"
+                      ? "text-[#17c294] underline"
                       : ""
                   } `}
                 >
