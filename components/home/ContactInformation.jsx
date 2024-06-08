@@ -24,7 +24,7 @@ export default function ContactInformation (){
 							soon.`}
 					</p>
 
-					<p className="flex flex-row text-lg md:text-lg text-base my-3">
+					<div className="flex flex-row text-lg md:text-lg text-base my-3">
 						<span className="font-bold">Phone : </span>
 						<Link
               target="_blank"
@@ -33,9 +33,9 @@ export default function ContactInformation (){
             >
               <p className="ml-3">+251777940161</p>
             </Link>
-					</p>
+					</div>
 
-					<p className="flex flex-row text-lg md:text-lg text-base my-3">
+					<div className="flex flex-row text-lg md:text-lg text-base my-3">
 						<span className="font-bold">Email : </span>
 						<Link
               target="_blank"
@@ -44,7 +44,7 @@ export default function ContactInformation (){
             >
               <p className="ml-3">info@futuretalentacademy.com</p>
             </Link>
-					</p>
+					</div>
 					<button 
 						onClick={() => handleContact()}
 						className="bottom-5 font-bold md:text-lg text-md  py-1 md:py-2 px-5 bg-gradient-to-r from-red-500 to-blue-500 hover:bg-[#00D1BB] text-white  border-2 border-white rounded-md">
