@@ -44,7 +44,7 @@ export default function Testimonials() {
 	           			students
 	          		</h1>
         		</div>
-			    <div className="overflow-hidden px-52 ">
+			    <div className="overflow-hidden px-5 lg:px-52 ">
 			      <Slider {...settings}>
 			        {testimonials.map((person, index) => (
 			          	<div
