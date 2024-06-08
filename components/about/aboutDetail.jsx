@@ -48,10 +48,11 @@ const AboutDetail = () => {
   },
   ];
   return (
-    <section className="bg-white text-gray-800 pt-16 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <section className=" overflow-hidden">
+      <div className="">
         {teamMembers.map((member, index) => (
-          <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} mb-12 relative z-10 px-4`}>
+          <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row bg-[#064469]' : 'md:flex-row-reverse bg-[#072d44]'} relative 
+            z-10 px-5 lg:px-52 py-4 text-white`}>
             <div className="w-full md:w-1/2 lg:px-6">
               <div className="relative w-full h-full overflow-hidden ">
                 <Image
@@ -65,8 +66,8 @@ const AboutDetail = () => {
               </div>
             </div>
             <div className="md:w-1/2 flex flex-col justify-center lg:px-6">
-              <h3 className="text-2xl lg:text-3xl font-bold text-blue-600 mb-5">{member.name}</h3>
-              <p className="text-md lg:text-lg text-gray-600">{member.description}</p>
+              <h3 className="text-2xl lg:text-3xl font-bold mb-5">{member.name}</h3>
+              <p className="text-md lg:text-lg">{member.description}</p>
             </div>
           </div>
         ))}
