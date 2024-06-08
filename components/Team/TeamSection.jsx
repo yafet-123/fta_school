@@ -108,7 +108,7 @@ const TeamSection = () => {
         ))}
       </div>
 
-      <div className="mt-16 text-center relative px-4 py-5 z-10 bg-[#44576d]">
+      <div className="mt-16 text-center relative px-4 py-5 z-10 bg-[#44576d] mb-5">
           <h3 className="text-2xl lg:text-3xl font-bold text-white mb-5">
             Discover our upcoming courses
           </h3>

@@ -1,18 +1,16 @@
 import { MainHeader } from "../components/common/MainHeader";
 import CommonHeroSection from '../components/home/CommonHeroSection.jsx';
-import ImageGallery from "../components/home/ImageGallery"
-import Testimonials from "../components/home/Testimonials"
-import ContactInformation from "../components/home/ContactInformation"
-import NewsEvents from "../components/home/NewsEvents"
-import {useRouter} from 'next/router'
-
+import AboutDetail from "../components/about/aboutDetail"
 
 export default function About() {
   return (
     <div className="">
       <MainHeader title="Future Talent Academy : About" />
-      <div className="flex flex-col">
-        
+      <div className="flex flex-col pt-20">
+        <h1 className="text-center text-2xl lg:text-4xl py-5 text-black text-capitalize font-bold">
+          About Us
+        </h1>
+        <AboutDetail />
       </div>
     </div>
   );
