@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React,{useState} from 'react';
 import logo from '../../public/LOGO_V0.1-01.png';
 
 import {
@@ -46,8 +46,40 @@ export const Footer = () => {
     { url: "/contact", link: "Contact" },
   ];
 
+  const [loading, setLoading] = useState(false);
+  const [email, setemail] =useState("")
+
   return (
     <footer className="bg-[#1a3e58] bottom-0 w-full">
+      <div className="flex flex-col justify-center items-center py-10 bg-[#44576d]">
+          <h1 className="text-2xl lg:text-4xl py-5 text-white text-capitalize font-bold">Subscribe Our Newsletter</h1>
+          <p className="text-lg lg:text-xl pb-5 text-white text-capitalize font-normal">We organize the best Ethiopian premium tours covering historical routes, mountain trekking</p>
+          <div className="flex justify-center items-center w-full">
+            <div className="relative">
+              <input 
+                  id="username" 
+                  type="text" 
+                  value={email}
+                  required
+                  className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+                  onChange={(e) => setemail(e.target.value)}
+              />
+              <label 
+                  htmlFor="floating_outlined" 
+                  className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+              >
+                  Place Enter Your Email
+              </label>
+            </div>
+            <button 
+              disabled={loading}
+              className={`text-white font-medium text-xl p-4 text-center inline-flex items-center 
+                ${loading ? "bg-gray-200" : "bg-[#009688] hover:bg-[#009688] focus:ring-4 focus:ring-[#009688]" }`}
+            >
+              Submit
+            </button>
+          </div>
+      </div>
       <div className="flex flex-col lg:flex-row justify-between gap-4 text-white mx-5 md:mx-10 my-5">
         <div className="flex flex-col gap-8 items-start justify-evemly mb-10 md:mb-0">
           <div className="">

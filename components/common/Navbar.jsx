@@ -100,9 +100,9 @@ export const Navbar = () => {
               {NavLinks.map((link,index) => (
                 <li
                   key={index}
-                  className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#17c294] ${
+                  className={` md:my-0 my-7 text-lg md:text-xl hover:text-2xl hover:underline cursor-pointer hover:text-[#17c294] ${
                     router.pathname === link.path
-                      ? "text-[#17c294] underline"
+                      ? "text-[#17c294] text-2xl underline"
                       : ""
                   } `}
                 >
