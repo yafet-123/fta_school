@@ -65,9 +65,9 @@ const AboutDetail = () => {
                 />
               </div>
             </div>
-            <div className="md:w-1/2 flex flex-col justify-center lg:px-6">
+            <div className="md:w-1/2 flex flex-col justify-center lg:px-6 text-justify">
               <h3 className="text-2xl lg:text-3xl font-bold mb-5">{member.name}</h3>
-              <p className="text-md lg:text-lg">{member.description}</p>
+              <p className="text-lg lg:text-xl">{member.description}</p>
             </div>
           </div>
         ))}

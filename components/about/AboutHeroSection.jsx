@@ -25,7 +25,7 @@ export default function AboutHeroSection({Tag , Welcome_Message}) {
         <h1 className="text-center text-2xl lg:text-4xl pb-5 text-white text-capitalize font-bold">
           About Us
         </h1>
-        <p className="text-center text-lg lg:text-2xl pb-5 text-white text-capitalize font-bold">
+        <p className="text-center text-xl lg:text-3xl pb-5 text-white text-capitalize font-bold">
           At FTIA, we are dedicated to providing a world-class education that prepares our students for success in a global society.
         </p>
         
