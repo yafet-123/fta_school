@@ -52,7 +52,7 @@ const AboutDetail = () => {
       <div className="">
         {teamMembers.map((member, index) => (
           <div className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row bg-[#064469]' : 'md:flex-row-reverse bg-[#072d44]'} relative 
-            z-10 px-5 lg:px-52 py-4 text-white`}>
+            z-10 px-5 lg:px-52 text-white py-10`}>
             <div className="w-full md:w-1/2 lg:px-6">
               <div className="relative w-full h-full overflow-hidden ">
                 <Image
