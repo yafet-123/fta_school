@@ -8,9 +8,9 @@ export default function ContactInformation (){
     router.push(`/contact`);
   };
 	return(
-		<section className="py-10">
+		<section className="py-10 bg-[#1a3e58] text-white">
 	    <div className="flex flex-col lg:flex-row justify-between items-center px-5 lg:px-32">
-				<div className="text-left font-semibold text-black text-2xl md:text-4xl lg:text-5xl w-full lg:w-1/2 lg:px-10">
+				<div className="text-left font-semibold text-2xl md:text-4xl lg:text-5xl w-full lg:w-1/2 lg:px-10">
 					<p className="font-bold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text" >
 						Get in Touch
 					</p>

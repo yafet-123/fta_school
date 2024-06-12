@@ -51,7 +51,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-[#1a3e58] bottom-0 w-full">
-      <div className="flex flex-col justify-center items-center py-10 bg-[#44576d]">
+      <div className="flex flex-col justify-center items-center py-10 bg-[#064569]">
           <h1 className="text-2xl lg:text-4xl py-5 text-white text-capitalize font-bold">Subscribe Our Newsletter</h1>
           <p className="text-xl lg:text-2xl pb-5 text-white text-capitalize font-normal">We organize the best Ethiopian premium tours covering historical routes, mountain trekking</p>
           <div className="flex justify-center items-center w-full">

@@ -24,8 +24,8 @@ export default function NewsEvents() {
     }
   ]
   return (
-    <div className="py-20 bg-gray-100 px-5 lg:px-20">
-      <h2 className="text-center text-3xl font-bold mb-10">News & Events</h2>
+    <div className="py-20 bg-[#44576a] px-5 lg:px-20">
+      <h2 className="text-center text-3xl font-bold mb-10 text-white">News & Events</h2>
       <div className="flex flex-col lg:flex-row">
         <div className="flex flex-col justify-between lg:w-1/4 h-full">
           {events.map((event, index) => (
@@ -36,7 +36,7 @@ export default function NewsEvents() {
           ))}
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-between lg:w-3/4 my-5 ">
+        <div className="flex flex-col lg:flex-row justify-between lg:w-3/4 my-5 text-white">
           {eventsTwo.map((data,index)=>(
             <div key={index} className="flex flex-col justify-between w-full h-full lg:mx-10 mb-10 lg:mb-0">
               <div className="relative w-full h-72">
