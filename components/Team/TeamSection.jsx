@@ -4,7 +4,7 @@ const teamMembers = [
   {
     name: 'Hilary Sedgwick',
     title: 'Founder & CEO',
-    image: '/1.png', // Add your image paths here
+    image: '/Testimonals/cherishe.jpg', // Add your image paths here
     description:`Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -16,7 +16,7 @@ const teamMembers = [
   {
     name: 'Scott Peters',
     title: 'Founder & CEO',
-    image: '/2.png',
+    image: '/Testimonals/maleone.jpg',
     description:`Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -28,7 +28,7 @@ const teamMembers = [
   {
     name: 'Jack Hartman',
     title: 'Founder & CEO',
-    image: '/3.png',
+    image: '/Testimonals/cherishe.jpg',
     description:`Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -40,7 +40,7 @@ const teamMembers = [
   {
     name: 'Heather Kramer',
     title: 'Founder & CEO',
-    image: '/4.png',
+    image: '/Testimonals/maletwo.jpg',
     description:`Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -68,7 +68,7 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
           <div className={`${shape}`}></div>
         </div>
       </div>
-      <div className="md:w-1/2 flex flex-col justify-center lg:px-6">
+      <div className="text-justify md:w-1/2 flex flex-col justify-center lg:px-6">
         <h3 className="text-2xl lg:text-3xl font-bold text-blue-600 mb-5">{name}</h3>
         <p className="text-md lg:text-lg text-gray-600 font-bold mb-5">{title}</p>
         <p className="text-md lg:text-lg text-gray-600">{description}</p>
@@ -86,7 +86,7 @@ const TeamSection = () => {
           <div className="mb-10">
             <h2 className="text-4xl lg:text-5xl font-bold text-blue-600">Meet <br/> our team</h2>
             <p className="text-lg lg:text-xl text-gray-600 mt-4">
-              Award-winning national and international <br /> key opinion leaders
+              Award-winning national and international key opinion leaders
             </p>
           </div>
     
@@ -108,7 +108,7 @@ const TeamSection = () => {
         ))}
       </div>
 
-      <div className="mt-16 text-center relative px-4 py-5 z-10 bg-[#44576d] mb-5">
+      <div className="mt-16 text-center relative px-4 py-10 z-10 bg-[#44576d]">
           <h3 className="text-2xl lg:text-3xl font-bold text-white mb-5">
             Discover our upcoming courses
           </h3>
