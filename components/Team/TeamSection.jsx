@@ -70,8 +70,8 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
       </div>
       <div className="text-justify md:w-1/2 flex flex-col justify-center lg:px-6">
         <h3 className="text-2xl lg:text-3xl font-bold text-blue-600 mb-5">{name}</h3>
-        <p className="text-md lg:text-lg text-gray-600 font-bold mb-5">{title}</p>
-        <p className="text-md lg:text-lg text-gray-600">{description}</p>
+        <p className="text-md lg:text-lg font-bold mb-5">{title}</p>
+        <p className="text-md lg:text-lg">{description}</p>
       </div>
     </div>
   );
@@ -80,12 +80,12 @@ export const TeamMember = ({ index, name, title, image, description, shape }) =>
 const TeamSection = () => {
 
   return (
-    <section className="bg-white text-gray-800 pt-16 overflow-hidden">
+    <section className="bg-[#064569] text-white pt-16 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center px-4">
           <div className="mb-10">
             <h2 className="text-4xl lg:text-5xl font-bold text-blue-600">Meet <br/> our team</h2>
-            <p className="text-lg lg:text-xl text-gray-600 mt-4">
+            <p className="text-lg lg:text-xl text-white mt-4">
               Award-winning national and international key opinion leaders
             </p>
           </div>
