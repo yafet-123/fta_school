@@ -37,82 +37,79 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full bg-[#002244] border-b border-black flex justify-between items-center px-6 py-4 z-50">
-        <div className="flex items-center gap-2">
-          <Image
-            src="/Logo1.png"
-            alt="MatricMate Logo"
-            width={60}
-            height={50}
-            priority
-          />
-          <a href="/" className="text-[#007BFF] font-bold text-xl">
-            MatricMate
-          </a>
+    <nav
+      className={`
+        ${
+          shadow
+            ? "fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300 bg-[#1a3e58] overflow-hidden"
+            : "fixed w-full h-20 z-[100] bg-[#1A3E58]"
+        }
+      `}
+    >
+      <div
+        className={` ${
+          open ? "bg-[#1a3e58] fixed w-full" : ""
+        } lg:justify-between justify-around px-2 lg:px-10 items-center lg:flex`}
+      >
+        <div className="flex items-center justify-between py-4">
+          {/* <h1
+            className={` text-white fonr-bold font-poppins text-xl md:text-4xl font-normal`}
+          >
+            UNDISCOVERED
+          </h1> */}
+          <div className="">
+            <Link href="/">
+              <Image
+                src={logo}
+                className="cursor-pointer hover:scale-105 transition duration-300"
+                alt="Logo"
+                width={60}
+                height={60}
+              />
+            </Link>
+          </div>
+          <div className="flex items-center lg:hidden">
+            <div className="pl-5">
+              <button
+                className={` text-white p-2 rounded-md outline-none focus:border-gray-400 focus:border`}
+                onClick={() => setOpen(!open)}
+              >
+                {open === true ? (
+                  <AiOutlineClose size={35} />
+                ) : (
+                  <AiOutlineMenu size={35} />
+                )}
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex gap-6">
-          {["Home", "Books", "Practice", "About", "Contact", "Account"].map(
-            (link, i) => (
-              <li key={i}>
-                <a
-                  href={
-                    link === "Home"
-                     ? "/"
-                      : link === "Practice"
-                      ? "/practice"
-                      : "#"
-                  }
-                  className="relative text-[#007BFF] font-medium hover:after:w-full after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#007BFF] after:transition-all after:duration-300"
+        <div className="">
+          <div
+            className={`flex-1 justify-self-center pb-2 mt-4 lg:block lg:pb-0 lg:mt-0 ${
+              open ? "flex " : "hidden"
+            }`}
+          >
+            <ul
+              className={` ${
+                open
+                  ? "text-white"
+                  : "text-white"
+              } items-center font-bold paragraph-fonts justify-center space-y-8 lg:flex lg:flex-row flex-col lg:space-x-6 lg:space-y-0`}
+            >
+              {NavLinks.map((link,index) => (
+                <li
+                  key={index}
+                  className={` md:my-0 my-7 text-lg md:text-xl hover:text-2xl hover:underline cursor-pointer hover:text-[#17c294] ${
+                    router.pathname === link.path
+                      ? "text-[#17c294] text-2xl underline"
+                      : ""
+                  } `}
                 >
-                  {link}
-                </a>
-              </li>
-            )
-          )}
-        </ul>
-
-        {/* Hamburger */}
-        <div
-          className="md:hidden flex flex-col gap-1 cursor-pointer"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span className="w-6 h-[3px] bg-[#007BFF] rounded"></span>
-          <span className="w-6 h-[3px] bg-[#007BFF] rounded"></span>
-          <span className="w-6 h-[3px] bg-[#007BFF] rounded"></span>
-        </div>
-      </nav>
-
-      {/* Mobile Dropdown */}
-      {menuOpen && (
-        <ul className="absolute top-16 right-6 bg-white border rounded-lg shadow-lg flex flex-col w-48 animate-fade-in">
-          {["Home", "Books", "Practice", "About", "Contact", "Account"].map(
-            (link, i) => (
-              <li key={i} className="border-b last:border-none">
-                <a
-                  href={
-                    link === "Home"
-                      ? "/"
-                      : link === "Practice"
-                      ? "/practice"
-                      : "#"
-                  }
-                  className="block px-4 py-3 text-[#007BFF] hover:bg-gray-100"
-                >
-                  {link}
-                </a>
-              </li>
-            )
-          )}
-        </ul>
-      )}
-    </div>
-  );
-};
-/li>
+                  <Link href={link.path}>
+                    <p onClick={closeDropdown}>{link.name}</p>
+                  </Link>
+                </li>
               ))}
               { 
                 <li
