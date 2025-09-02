@@ -1,5 +1,4 @@
 import { MainHeader } from "../components/common/MainHeader";
-import CommonHeroSection from "../components/home/CommonHeroSection.jsx";
 import ContactForm from "../components/contact/ContactForm";
 import ReachUs from "../components/contact/ReachUs";
 
