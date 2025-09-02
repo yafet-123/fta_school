@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Link from "next/link"
 import { FaFolder } from "react-icons/fa6";
 
-export default function Category() {
+export default function Grade() {
   const grades = [
     { id: 1, name: "Grade 1" },
     { id: 2, name: "Grade 2" },
@@ -38,7 +38,7 @@ export default function Category() {
                 <h1>
                   <FaFolder size={40} color="#ffcb23" />
                 </h1>
-                <h1 className="flex justify-center items-center pl-4 font-caveat mb-5 text-center font-bold text-md md:text-lg">
+                <h1 className="pl-4 font-caveat mb-5 text-center font-bold text-md md:text-lg">
                   {grade.name}
                 </h1>
               </a>
