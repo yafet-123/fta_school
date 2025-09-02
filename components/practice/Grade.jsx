@@ -32,7 +32,7 @@ export default function Grade() {
             hover:bg-[#0041e1] hover:text-[#fff]`}
           >
             <Link 
-              href={`/practice/grade/${grade.name}`}
+              href={`/practice/subject/${grade.name}`}
             >
               <a className="flex justify-center items-center">
                 <h1>

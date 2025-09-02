@@ -1,13 +1,12 @@
-import { MainHeader } from "../../components/common/MainHeader";
-import { getAllSubjects, getSubjectById } from "../../data/BooksData.jsx";
-import Subject from "../../components/books/Subject";
+import { MainHeader } from "../../../components/common/MainHeader";
+import { getAllSubjects, getSubjectById } from "../../../data/SubjectData.jsx";
+import Subject from "../../../components/practice/Subject";
 
 export default function BookGradeDetail({ subjects, all_subjects }) {
-  console.log(subjects);
   return (
     <div className="antialiased bg-gradient-to-r">
       <MainHeader title={`Future Talent Academy`} />
-      <Subject subjects={subjects} />
+      <Subject AllGradesubject={subjects} />
     </div>
   );
 }
