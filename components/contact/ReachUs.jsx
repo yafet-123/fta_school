@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import reachUsImage from "../../public/heroImge4.jpg";
+import reachUsImage from "../../public/background.jpg";
 import {BsFacebook, BsYoutube, BsLinkedin, BsInstagram, BsTwitter} from 'react-icons/bs'
 
 const ReachUs = () => {

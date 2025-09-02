@@ -2,15 +2,15 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 
-import Image1 from '../../public/heroImge1.jpg';
-import Image2 from '../../public/heroImge2.jpg';
-import Image3 from '../../public/heroImge3.jpg';
+import Image1 from '../../public/background.jpg';
+import Image2 from '../../public/background.jpg';
+import Image3 from '../../public/background.jpg';
 
-import Image4 from '../../public/heroImge4.jpg';
-import Image5 from '../../public/heroImge5.jpg';
-import Image6 from '../../public/heroImge6.jpg';
-import Image7 from '../../public/heroImge5.jpg';
-import Image8 from '../../public/heroImge6.jpg';
+import Image4 from '../../public/background.jpg';
+import Image5 from '../../public/background.jpg';
+import Image6 from '../../public/background.jpg';
+import Image7 from '../../public/background.jpg';
+import Image8 from '../../public/background.jpg';
 
 export default function ImageGallery() {
   const images = [

@@ -15,9 +15,11 @@ export const Navbar = () => {
    console.log(router.pathname)
   const NavLinks = [
     { path: "/", name: "Home" },
-    { path: "/contact", name: "Contact" },
+    { path: "/books", name: "Book" },
+    { path: "/practice", name: "Practice" },
+    { path: "/about", name: "About" },
     { path: "/Team", name: "Team" },
-    { path: "/about", name: "About Us" },
+    { path: "/contact", name: "Contact" },
   ];
 
   useEffect(() => {
@@ -41,8 +43,8 @@ export const Navbar = () => {
       className={`
         ${
           shadow
-            ? "fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300 bg-[#1a3e58] overflow-hidden"
-            : "fixed w-full h-20 z-[100] bg-[#1A3E58]"
+            ? "fixed w-full h-20 shadow-xl z-[100] ease-in-out duration-300 bg-[#002244] overflow-hidden"
+            : "fixed w-full h-20 z-[100] bg-[#002244]"
         }
       `}
     >
@@ -52,21 +54,19 @@ export const Navbar = () => {
         } lg:justify-between justify-around px-2 lg:px-10 items-center lg:flex`}
       >
         <div className="flex items-center justify-between py-4">
-          {/* <h1
-            className={` text-white fonr-bold font-poppins text-xl md:text-4xl font-normal`}
-          >
-            UNDISCOVERED
-          </h1> */}
-          <div className="">
+          <div className="flex justify-center items-center">
             <Link href="/">
               <Image
                 src={logo}
                 className="cursor-pointer hover:scale-105 transition duration-300"
                 alt="Logo"
-                width={60}
+                width={70}
                 height={60}
               />
             </Link>
+             <h1 className={` text-white fonr-bold font-poppins text-lg md:text-2xl font-bold text-[#0041e1]`}>
+                Matrick Mate
+              </h1> 
           </div>
           <div className="flex items-center lg:hidden">
             <div className="pl-5">
@@ -100,9 +100,9 @@ export const Navbar = () => {
               {NavLinks.map((link,index) => (
                 <li
                   key={index}
-                  className={` md:my-0 my-7 text-lg md:text-xl hover:text-2xl hover:underline cursor-pointer hover:text-[#17c294] ${
+                  className={` md:my-0 my-7 text-md md:text-lg hover:text-xl hover:underline cursor-pointer hover:text-[#0041e1] ${
                     router.pathname === link.path
-                      ? "text-[#17c294] text-2xl underline"
+                      ? "text-[#0041e1] text-2xl underline"
                       : ""
                   } `}
                 >
@@ -113,7 +113,7 @@ export const Navbar = () => {
               ))}
               { 
                 <li
-                  className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#17c294] ${
+                  className={` md:my-0 my-7 text-lg md:text-xl hover:underline cursor-pointer hover:text-[#0041e1] ${
                     router.pathname === "/auth/Student/Login/signin-student"
                       ? "text-[#edf1f4] underline"
                       : ""

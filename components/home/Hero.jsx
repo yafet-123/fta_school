@@ -6,42 +6,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 
 export default function CommonHeroSection({Tag , Welcome_Message}) {
-  const CardHeo = [
-    {
-      id: 1,
-      image: "home-1",
-    },
-    {
-      id: 2,
-      image: "home-2",
-    },
-    {
-      id: 3,
-      image: "home-3",
-    },
-    {
-      id: 4,
-      image: "home-4",
-    },
-    {
-      id: 5,
-      image: "home-5",
-    },
-  ];
-  var settings = {
-    dots: false,
-    lazyLoad: true,
-    fade: true,
-    infinite: true,
-    autoplay: true,
-    speed: 4000,
-    autoplaySpeed: 3000,
-  }
   return (
     <main
-      className="flex-1 flex flex-col items-center justify-center text-center px-4"
+      className="flex flex-col items-center justify-center text-center px-4 pt-24 h-full lg:h-screen"
       style={{
-        backgroundImage: "url('/back.jpg')",
+        backgroundImage: "url('/background.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -57,11 +26,10 @@ export default function CommonHeroSection({Tag , Welcome_Message}) {
         here to support every step. Access textbooks, test your knowledge,
         and get instant answers, all from one platform.
       </p>
-      <Link
-        className="bg-white text-[#002244] px-6 py-3 rounded-full border border-[#007BFF] hover:bg-[#007BFF] hover:text-white transition"
-      >
+      <Link href="/practice">
         <a
-          href="/practice"
+          className={`bg-white text-[#002244] px-6 py-3 rounded-full border border-[#007BFF] hover:bg-[#007BFF] hover:text-white 
+          transition`}
         >
           Get Started
         </a>

@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import Image1 from '../../public/heroImge1.jpg';
-import Image2 from '../../public/heroImge2.jpg';
+import Image1 from '../../public/background.jpg';
+import Image2 from '../../public/background.jpg';
 
 export default function NewsEvents() {
   const events = [
