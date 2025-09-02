@@ -28,17 +28,17 @@ export default function Grade() {
         {grades.map((grade, index) => (
           <div
             key={grade.id}
-            className={`flex justify-center items-center bg-[#002244] text-[#fff] py-2 px-2 border-lg rounded-2xl 
+            className={`flex justify-center items-center bg-[#002244] text-[#fff] py-4 px-2 border-lg rounded-2xl 
             hover:bg-[#0041e1] hover:text-[#fff]`}
           >
             <Link 
-              href={`/books/${grade.name}`}
+              href={`/practice/grade/${grade.name}`}
             >
               <a className="flex justify-center items-center">
                 <h1>
                   <FaFolder size={40} color="#ffcb23" />
                 </h1>
-                <h1 className="pl-4 font-caveat mb-5 text-center font-bold text-md md:text-lg">
+                <h1 className="pl-4 font-caveat text-center font-bold text-md md:text-lg">
                   {grade.name}
                 </h1>
               </a>
