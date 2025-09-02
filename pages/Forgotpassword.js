@@ -26,7 +26,7 @@ export default function ForgotPassword() {
 
   return (
     <React.Fragment>
-      <MainHeader title="Hulu Media : Forgot Password" />
+      <MainHeader title="Matrick Mate : Forgot Password" />
       <div className="flex flex-col justify-center items-center h-screen w-full bg-[#e6e6e6] dark:bg-[#02201D]"> 
         
         <form className="flex flex-col bg-neutral-100 dark:bg-slate-700 border border-slate-300 rounded-xl w-full lg:w-[45rem] h-full lg:h-[35rem]" onSubmit={forgotPasswordregister}>

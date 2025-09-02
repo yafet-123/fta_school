@@ -54,44 +54,42 @@ const teamMembers = [
 export const TeamMember = ({ index, name, title, image, description, shape }) => {
   const isEven = index % 2 === 0;
   return (
-    <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} mb-12 relative z-10 px-4`}>
-      <div className="w-full md:w-1/2 lg:px-6">
-        <div className="relative w-full h-full overflow-hidden lg:clip-path-polygon">
+    <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} relative z-10 px-4`}>
+      <div className="w-full md:w-1/2">
+        <div className="w-full h-72 md:h-[500px] relative">
           <Image
             src={image}
             alt={name}
+            layout="fill"
+            objectFit="cover"
             priority
-            width={350}
-            height={350}
-            className="absolute w-full h-full lg:object-cover"
+            className=""
           />
-          <div className={`${shape}`}></div>
         </div>
       </div>
-      <div className="text-justify md:w-1/2 flex flex-col justify-center lg:px-6">
+      <div className="text-justify md:w-1/2 flex flex-col justify-center px-6">
         <h3 className="text-2xl lg:text-3xl font-bold text-blue-600 mb-5">{name}</h3>
-        <p className="text-md lg:text-lg font-bold mb-5">{title}</p>
-        <p className="text-md lg:text-lg">{description}</p>
+        <p className="text-[#000] text-md lg:text-lg font-bold mb-5">{title}</p>
+        <p className="text-[#000] text-md lg:text-lg">{description}</p>
       </div>
     </div>
   );
 };
 
 const TeamSection = () => {
-
   return (
-    <section className="bg-[#064569] text-white pt-16 overflow-hidden">
+    <section className="bg-[#fff] text-black pt-16 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center px-4">
           <div className="mb-10">
-            <h2 className="text-4xl lg:text-5xl font-bold text-blue-600">Meet <br/> our team</h2>
-            <p className="text-lg lg:text-xl text-white mt-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-blue-600">Meet our team</h2>
+            <p className="text-lg lg:text-xl mt-4 text-black">
               Award-winning national and international key opinion leaders
             </p>
           </div>
     
           <div className="hidden lg:flex relative w-48 h-24 bg-blue-600 flex align-center justify-center rounded-b-full tansform -rotate-45">
-            <div className="absolute -top-5 w-32 h-20 bg-white border-blue-600 rounded-b-full"></div>
+            <div className="absolute -top-5 w-32 h-20 bg-black border-blue-600 rounded-b-full"></div>
           </div>
         </div>
 
@@ -107,18 +105,6 @@ const TeamSection = () => {
           />
         ))}
       </div>
-
-      <div className="mt-16 text-center relative px-4 py-10 z-10 bg-[#44576d]">
-          <h3 className="text-2xl lg:text-3xl font-bold text-white mb-5">
-            Discover our upcoming courses
-          </h3>
-          <p className="text-lg lg:text-xl text-white mb-5">
-            Foundation courses, Advanced courses, Masterclasses and more.
-          </p>
-          <button className="text-lg lg:text-xl mt-4 px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:text-2xl hover:bg-blue-700">
-            Explore
-          </button>
-        </div>
     </section>
   );
 };

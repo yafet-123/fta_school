@@ -9,7 +9,7 @@ import {useRouter} from 'next/router'
 export default function Home() {
   return (
     <div className="">
-      <MainHeader title="Future Talent Academy : Home" />
+      <MainHeader title="Matrick Mate : Home" />
       <div className="flex flex-col">
         <Hero  
           Tag="Empowering minds and shaping futures at Future Talent Academy - where excellence meets opportunity."

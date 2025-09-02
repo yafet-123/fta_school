@@ -40,8 +40,9 @@ export const Footer = () => {
 
   const quickLinks = [
     { url: "/", link: "Home" },
-    { url: "/about", link: "About Us" },
-    { url: "/contact", link: "Service" },
+    { url: "/books", link: "Book" },
+    { url: "/practice", link: "Practice" },
+    { url: "/about", link: "About" },
     { url: "/Team", link: "Team" },
     { url: "/contact", link: "Contact" },
   ];
@@ -53,7 +54,9 @@ export const Footer = () => {
     <footer className="bg-[#1a3e58] bottom-0 w-full">
       <div className="flex flex-col justify-center items-center py-10 bg-[#064569]">
           <h1 className="text-2xl lg:text-4xl py-5 text-white text-capitalize font-bold">Subscribe Our Newsletter</h1>
-          <p className="text-xl lg:text-2xl pb-5 text-white text-capitalize font-normal">We organize the best Ethiopian premium tours covering historical routes, mountain trekking</p>
+          <p className="text-xl lg:text-2xl pb-5 text-white text-capitalize font-normal">
+            We organize the best Ethiopian premium tours covering historical routes, mountain trekking
+          </p>
           <div className="flex justify-center items-center w-full">
             <div className="relative">
               <input 
@@ -88,8 +91,8 @@ export const Footer = () => {
                 src={logo}
                 className=""
                 alt="Logo"
-                width={50}
-                height={50}
+                width={120}
+                height={110}
               />
             </Link>
           </div>
@@ -163,20 +166,10 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center md:h-10  px-5 md:px-10 bg-white py-2">
+      <div className="flex justify-center items-center md:h-10  px-5 md:px-10 bg-white py-2">
         <p className="text-sm md:text-md text-[#1A3E58] md:block text-center md:text-left mb-5 md:mb-0 ">
-          &copy; 2023 FTA. All rights reserved.
+          © 2025 MatricMate. Built for students by students
         </p>
-
-        <div className="text-sm md:text-md text-[#1A3E58] font-medium">
-          <Link
-            target="_blank"
-            className="flex flex-row items-center gap-2 hover:text-gray-300 "
-            href="mailto:meetnatnaelkebede@gmail.com"
-          >
-            <p className="underline cursor-pointer">Website made by Yafet A. </p>
-          </Link>
-        </div>
       </div>
     </footer>
   );
