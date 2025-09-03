@@ -79,7 +79,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 
     return (
         <div className="px-0 lg:px-10">
-        	<h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic my-5">Add Question</h1>
+        	<h1 className="text-black text-xl lg:text-4xl font-bold text-center italic my-5">Add Question</h1>
         	<Formik initialValues={initialValues} onSubmit={handleSubmit}>
 			    {({ values, handleSubmit }) => (
 			        <Form onSubmit={handleSubmit}>
@@ -87,7 +87,7 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                    <Multiselect
 		                        displayValue="ClassName"
 		                        placeholder = "Class"
-		                        className="z-50 mb-5 w-full px-1 lg:px-3 text-md lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+		                        className="z-50 mb-5 w-full px-1 lg:px-3 text-md lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none    focus:outline-none focus:ring-0 focus:border-blue-500 peer"
 		                        onKeyPressFn={function noRefCheck(){}}
 		                        onRemove={function noRefCheck(){}}
 		                        onSearch={function noRefCheck(){}}
@@ -154,14 +154,14 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 		                            id="timedisplay" 
 		                            type={typechange ? "text" : "date"} 
 		                            required
-		                            className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+		                            className="block w-full px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
 		                            value={timedisplay}
 		                            onChange={(e) => settimedisplay(e.target.value)}
 		                            onClick = {()=> settypechange(false)}
 		                        />
 		                        <label 
 		                            htmlFor="floating_outlined" 
-		                            className="absolute text-md lg:text-lg text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+		                            className="absolute text-md lg:text-lg text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
 		                        >
 		                            Answered Viewed Date
 		                        </label>
@@ -174,40 +174,40 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 					                {values.questions.map((question, questionIndex) => (
 					                  	<div key={questionIndex}>
 					                    	<label>
-					                      		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
+					                      		<span className="text-black text-lg lg:text-xl font-bold text-center italic">
 					                      			Question {questionIndex + 1}:
 					                      		</span>
 						                      	<Field
 						                        	type="text"
 						                        	name={`questions.${questionIndex}.question`}
-						                        	className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
+						                        	className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
 						                        	placeholder=" "
 						                      	/>
 					                    	</label>
 
 					                    	<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:pl-10 my-5 w-full">
 					                    		<label className="w-full lg:pr-5">
-						                    		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
+						                    		<span className="text-black text-lg lg:text-xl font-bold text-center italic">
 									                    points
 									                </span>
 	                      							
 							                      	<Field
 							                        	type="text"
 							                        	name={`questions.${questionIndex}.points`}
-							                        	className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
+							                        	className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
 									                    placeholder=" "
 							                      	/>
 							                    </label>
 
 						                    	<label className="w-full lg:pl-5">
-						                    		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
+						                    		<span className="text-black text-lg lg:text-xl font-bold text-center italic">
 									                    Correct Answer:
 									                </span>
 	                      							
 							                      	<Field
 							                        	type="text"
 							                        	name={`questions.${questionIndex}.correctAnswer`}
-							                        	className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
+							                        	className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
 									                    placeholder=" "
 							                      	/>
 							                    </label>
@@ -219,13 +219,13 @@ export function AddQuestion({Allclasses,Alltypes,Allsubjects,teacherId}) {
 					                          			{question.answers.map((answer, answerIndex) => (
 					                            			<div key={answerIndex} className="">
 								                              	<label>
-								                              		<span className="text-black dark:text-white text-lg lg:text-xl font-bold text-center italic">
+								                              		<span className="text-black text-lg lg:text-xl font-bold text-center italic">
 								                                		Choice {answerIndex + 1}:
 								                                	</span>
 								                                	<Field
 								                                  		type="text"
 								                                  		name={`questions.${questionIndex}.answers.${answerIndex}.answer`}
-								                                  		className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
+								                                  		className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" 
 								                                  		placeholder=" "
 								                                	/>
 								                              	</label>

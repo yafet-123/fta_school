@@ -68,7 +68,7 @@ export default function Subjects({subjects}) {
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Student SUbject" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
+      <div className="flex bg-[#e6e6e6] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
           <div className="py-10 px-5 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">

@@ -73,7 +73,7 @@ export default function Type({Allquestiontype}) {
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Students" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
+      <div className="flex bg-[#e6e6e6] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className='w-full px-2 lg:px-32 h-full pt-20 pb-96'>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

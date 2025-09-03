@@ -78,7 +78,7 @@ export default function Class({classes}) {
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Teacher Class" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
+      <div className="flex bg-[#e6e6e6] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
           <ClassList classes={classes} />

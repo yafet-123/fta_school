@@ -188,7 +188,7 @@ const Question = ({Allquestion,questionlength,classes,type,studentId, SubjectId,
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Students" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
+      <div className="flex bg-[#e6e6e6] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         {Allquestion.length == 0 ? (
           <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20">

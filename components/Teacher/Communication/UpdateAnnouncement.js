@@ -48,23 +48,23 @@ export function UpdateAnnouncement({
     }
 
 	return(
-		<div className="bg-gray-200 dark:bg-slate-800 opacity-95 fixed inset-0 z-50   ">
+		<div className="bg-gray-200 opacity-95 fixed inset-0 z-50   ">
             <div className="flex h-screen justify-center items-center ">
-                <div className="flex-col justify-center bg-white dark:bg-slate-500 py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
-                    <div className="flex text-center text-xl text-zinc-600 font-bold mb-10 dark:text-white" >Update Announcement</div>
+                <div className="flex-col justify-center bg-white py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
+                    <div className="flex text-center text-xl text-zinc-600 font-bold mb-10" >Update Announcement</div>
                     <div className="flex flex-col justify-between items-center">
                         <div className="flex flex-col justify-between items-center gap-5">
                             <div className="w-full relative mb-5">
                                 <input 
                                     id="Title" 
                                     type="text" 
-                                    className="block w-full px-3 text-xl text-black dark:text-white bg-transparent py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+                                    className="block w-full px-3 text-xl text-black bg-transparent py-4 border-2 border-black rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
                                     value={updatetitle}
                                     onChange={(e) => setupdatetitle(e.target.value)}
                                 />
                                 <label 
                                     htmlFor="floating_outlined" 
-                                    className="absolute text-2xl text-black dark:text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-slate-500 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                                    className="absolute text-2xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                                 >
                                     Title
                                 </label>
@@ -74,7 +74,7 @@ export function UpdateAnnouncement({
                                 <textarea
                                     value={updatecontent}
                                     onChange={(e) => setupdatecontent(e.target.value)} 
-                                    className="block w-full px-3 text-xl text-black dark:text-white bg-transparent py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+                                    className="block w-full px-3 text-xl text-black bg-transparent py-4 border-2 border-black rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
                                     id="w3review" 
                                     name="w3review" 
                                     rows="4" 
@@ -82,7 +82,7 @@ export function UpdateAnnouncement({
                                 />
                                 <label 
                                     htmlFor="floating_outlined" 
-                                    className="absolute text-2xl text-black dark:text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-slate-500 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                                    className="absolute text-2xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                                 >
                                     Content
                                 </label>

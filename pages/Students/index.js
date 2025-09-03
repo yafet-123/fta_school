@@ -117,7 +117,7 @@ export default function Admin({serverdate, tasks, studentId, Allstudents, announ
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Students" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10 w-full">
+      <div className="flex bg-[#e6e6e6] pt-10 w-full">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
           <div className="flex flex-col lg:flex-row justify-between items-center px-0 lg:px-10 mb-5">

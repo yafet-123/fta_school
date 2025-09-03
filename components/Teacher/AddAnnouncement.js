@@ -44,14 +44,14 @@ export function AddAnnouncement({Allclasses,teacherId}) {
 
     return (
         <div className="px-0 lg:px-10">
-        	<h1 className="text-black dark:text-white text-xl lg:text-4xl font-bold text-center italic my-5">Add Announcement</h1>
+        	<h1 className="text-black text-xl lg:text-4xl font-bold text-center italic my-5">Add Announcement</h1>
     
 			    <form onSubmit={handleSubmit}>
 			    	<div className="w-full mt-5">
 		                <Multiselect
 		                    displayValue="ClassName"
 		                    placeholder = "Class"
-		                    className="z-50 mb-5 w-full px-1 lg:px-3 text-md lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+		                    className="z-50 mb-5 w-full px-1 lg:px-3 text-md lg:text-xl text-black bg-white py-2 border-2 border-black rounded-xl appearance-none    focus:outline-none focus:ring-0 focus:border-blue-500 peer"
 		                    onKeyPressFn={function noRefCheck(){}}
 		                    onRemove={function noRefCheck(){}}
 		                    onSearch={function noRefCheck(){}}
@@ -71,12 +71,12 @@ export function AddAnnouncement({Allclasses,teacherId}) {
 		                        type="text" 
 		                        value={title}
 		                        required
-		                        className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+		                        className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
 		                        onChange={(e) => settitle(e.target.value)}
 		                    />
 		                    <label 
 		                        htmlFor="floating_outlined" 
-		                        className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+		                        className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
 		                    >
 		                        Title
 		                    </label>
@@ -88,12 +88,12 @@ export function AddAnnouncement({Allclasses,teacherId}) {
 		                  	    type="text" 
 		                  	    value={content}
 		                  	    required
-		                  	    className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+		                  	    className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
 		                  	    onChange={(e) => setcontent(e.target.value)}
 		                  	/>
 		                  	<label 
 		                  	    htmlFor="floating_outlined" 
-		                  	    className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+		                  	    className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
 		                  	>
 		                  	    Content
 		                  	</label>

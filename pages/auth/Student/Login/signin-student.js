@@ -47,7 +47,7 @@ export default function SignIn({ csrfToken }) {
                 >
                     {(formik) => (
                       <form onSubmit={formik.handleSubmit}>
-                        <div className="bg-gray-100 dark:bg-slate-700 flex flex-col items-center justify-center min-h-screen py-2 shadow-lg">
+                        <div className="bg-gray-100  flex flex-col items-center justify-center min-h-screen py-2 shadow-lg">
                             <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                                 <input name="csrfToken" type="hidden" defaultValue={csrfToken}/>
                                 <div className="text-red-400 text-md text-center rounded p-2">

@@ -32,13 +32,13 @@ export default async function handleforgotpassword(req, res){
 	var transporter = nodemailer.createTransport({
 	  	service: "gmail",
 	    auth: {
-	     	user: "hulumedia12@gmail.com",
+	     	user: "MatricMate@gmail.com",
 	     	pass: "mkhvelqnhlpkznji",
 	    },
 	});
 
 	var mailOptions = {
-	  from: "hulumedia12@gmail.com",
+	  from: "MatricMate@gmail.com",
 	  to: email,
 	  subject: "Password Reset",
 	  text: link,

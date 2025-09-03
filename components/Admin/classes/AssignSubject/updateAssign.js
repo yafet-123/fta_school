@@ -37,10 +37,10 @@ export function UpdateAssign({setupdateModalOn, updateassignid, updateclassId, u
     };
 
 	return(
-		<div className="bg-gray-200 dark:bg-slate-800 opacity-95 fixed inset-0 z-50   ">
+		<div className="bg-gray-200 opacity-95 fixed inset-0 z-50   ">
             <div className="flex h-screen justify-center items-center ">
-                <div className="flex-col justify-center bg-white dark:bg-slate-500 py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
-                    <div className="flex text-center text-xl text-zinc-600 font-bold mb-20 dark:text-white" >Update Subject Assigne To Question Category</div>
+                <div className="flex-col justify-center bg-white py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
+                    <div className="flex text-center text-xl text-zinc-600 font-bold mb-20" >Update Subject Assigne To Question Category</div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 my-10">
 
                         <div className="relative z-0 w-full">

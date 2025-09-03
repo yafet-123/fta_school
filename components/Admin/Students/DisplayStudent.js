@@ -29,28 +29,28 @@ export function DisplayStudent({students}) {
             <div className="p-2 lg:p-5">
                 <div className="overflow-auto rounded-lg shadow hidden md:block">
                     <table className="w-full">
-                        <thead className="bg-neutral-100 dark:bg-slate-800 border-b-2 border-gray-200">
+                        <thead className="bg-neutral-100 border-b-2 border-gray-200">
                             <tr>
-                              <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Id</th>
-                              <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
-                              <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Email</th>
-                              <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Class</th>
-                              <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
-                              <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
+                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Id</th>
+                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
+                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Email</th>
+                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Class</th>
+                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
+                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
                             {students.map((data,index)=>(
-                                <tr key={index} className="even:bg-neutral-300 odd:bg-neutral-200 even:dark:bg-gray-900 odd:dark:bg-gray-800 w-full">
+                                <tr key={index} className="even:bg-neutral-300 odd:bg-neutral-200  w-full">
                                     <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        <p className="font-bold text-gray-700 dark:text-white hover:underline">{data.students_id}</p>
+                                        <p className="font-bold text-gray-700 hover:underline">{data.students_id}</p>
                                     </td>
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                         {data.UserName}
                                     </td>
 
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
-                                        <h1 className="text-black dark:text-white flex justify-between my-5 font-bold text-lg md:text-xl">
+                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
+                                        <h1 className="text-black flex justify-between my-5 font-bold text-lg md:text-xl">
                                             <span className={ `font-normal font-medium ${data.email ? " " : "text-red-800"}`}>
                                                 { data.email ? data.email : "No Email Address" }
                                             </span>
@@ -58,18 +58,18 @@ export function DisplayStudent({students}) {
                                     </td>
 
 
-                                     <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                     <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                         {data.ClassName}
                                     </td>
 
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                         {moment(data.createDate).utc().format('YYYY-MM-DD')}
                                     </td>
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                         {moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}
                                     </td>
 
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                         <button
                                             onClick={() => {
                                                 clickedForupdate()
@@ -82,7 +82,7 @@ export function DisplayStudent({students}) {
                                         </button>
                                     </td>
 
-                                    <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                         <button 
                                             onClick={() => {
                                                 clickedFordelete()
@@ -100,39 +100,39 @@ export function DisplayStudent({students}) {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:hidden">
                     {students.map((data,index)=>(
-                        <div key={index} className=" bg-neutral-200 dark:bg-slate-800 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
+                        <div key={index} className=" bg-neutral-200 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
                             <div>
-                                <p className="text-blue-500 dark:text-white font-bold hover:underline">
+                                <p className="text-blue-500 font-bold hover:underline">
                                     <span className="text-lg">Id : </span> 
                                     <span className="text-sm ">{data.students_id}</span>
                                 </p>
                             </div>
-                            <div className="text-gray-700 dark:text-white font-bold">
+                            <div className="text-gray-700 font-bold">
                                 <span className="text-lg">User Name : </span>
                                 <span className="text-md">{data.UserName} </span>
                             </div>
 
-                            <div className="text-md lg:text-lg text-gray-700 dark:text-white font-bold break-words ">
+                            <div className="text-md lg:text-lg text-gray-700 font-bold break-words ">
                                 Email : <span className={ `font-normal font-medium ${data.email ? " " : "text-red-800"}`}>
                                     { data.email ? data.email : "No Email Address" }
                                 </span>
                             </div>
 
-                            <div className="text-md lg:text-lg text-gray-700 dark:text-white font-bold break-words ">
+                            <div className="text-md lg:text-lg text-gray-700 font-bold break-words ">
                                 Email : <span className={ `font-normal font-medium ${data.ClassName ? " " : "text-red-800"}`}>
                                     { data.ClassName ? data.ClassName : "No Class" }
                                 </span>
                             </div>
 
-                            <div className="text-gray-700 dark:text-white font-bold">
+                            <div className="text-gray-700 font-bold">
                                 <span className="text-lg">Class : </span>
                                 <span className="text-md">{data.ClassName} </span>
                             </div>
-                            <div className="text-black font-bold dark:text-white">
+                            <div className="text-black font-bold">
                               <span className="text-lg">createDate : </span>
                               <span className="text-sm">{moment(data.createDate).utc().format('YYYY-MM-DD')}</span>
                             </div>
-                            <div className="text-black font-bold dark:text-white">
+                            <div className="text-black font-bold">
                               <span className="text-lg">Modified Date : </span>
                               <span className="text-sm">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</span>
                             </div>

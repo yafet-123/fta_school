@@ -8,7 +8,7 @@ export default function Error () {
   return(
     <React.Fragment>
       <MainHeader title="Authentication Error Page" />
-      <div className="w-full h-screen bg-gray-100 dark:bg-slate-700 pt-24 grid justify-center content-center ">
+      <div className="w-full h-screen bg-gray-100  pt-24 grid justify-center content-center ">
         <div className="flex flex-col justify-center items-center px-5 lg:px-32">
           <p className="text-center text-md lg:text-4xl font-bold">
               Oops! It seems there was an issue accessing this page.

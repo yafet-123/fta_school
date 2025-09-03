@@ -101,7 +101,7 @@ export default function Add({Allclasses,Alltypes,Allsubjects,teacherId}) {
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Add Question" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
+      <div className="flex bg-[#e6e6e6] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
           <AddQuestion Allclasses={Allclasses} Alltypes={Alltypes} Allsubjects={Allsubjects} teacherId={teacherId} />

@@ -63,7 +63,7 @@ export default function Teacher({serverdate, Allteachers}){
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Teacher" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
+      <div className="flex bg-[#e6e6e6] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">
           <div className="flex flex-col lg:flex-row justify-between items-center px-5 lg:px-10 mb-5">

@@ -116,13 +116,13 @@ export function DashBoard({categories}) {
                         <input 
                             id="search" 
                             type="text" 
-                            className="block w-full px-2 lg:px-3 text-md lg:text-xl text-black dark:text-white bg-white py-4 border-2 border-black rounded-xl appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#009688] focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
+                            className="block w-full px-2 lg:px-3 text-md lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
                             value={getSearchValue}
                             onChange={(e) => setgetSearchValue(e.target.value)}
                         />
                         <label 
                             htmlFor="floating_outlined" 
-                            className="absolute text-md lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#009688] peer-focus:dark:text-[#009688] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+                            className="absolute text-md lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#009688] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
                         >
                             Search
                         </label>
@@ -161,7 +161,7 @@ export function DashBoard({categories}) {
             { error == "" ? 
                 <div>
                     { searchValue == "" ? 
-                        <h1 className="text-black dark:text-white text-md lg:text-xl font-bold text-center italic">
+                        <h1 className="text-black text-md lg:text-xl font-bold text-center italic">
                             No data can be found
                         </h1>
                         :
@@ -170,34 +170,34 @@ export function DashBoard({categories}) {
                                 <div className="my-5">
                                     <div className="overflow-auto rounded-lg shadow hidden md:block">
                                         <table className="w-full">
-                                            <thead className="bg-neutral-100 dark:bg-slate-800 border-b-2 border-gray-200">
+                                            <thead className="bg-neutral-100 border-b-2 border-gray-200">
                                                 <tr>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">User Id</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Email</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">User Id</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Email</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-100">
                                                 {searchValue.map((data,index)=>(
-                                                    <tr key={index} className="even:bg-neutral-100 odd:bg-neutral-300 even:dark:bg-gray-900 odd:dark:bg-gray-800 w-full">
+                                                    <tr key={index} className="even:bg-neutral-100 odd:bg-neutral-300 w-full">
                                                         <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                                            <p className="font-bold text-[#009688] dark:text-white hover:underline">{data.user_id}</p>
+                                                            <p className="font-bold text-[#009688] hover:underline">{data.user_id}</p>
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {data.UserName}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {data.email}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {moment(data.createDate).utc().format('YYYY-MM-DD')}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             <button
                                                                 onClick={() => {
                                                                     clickedForupdateforuser()
@@ -210,7 +210,7 @@ export function DashBoard({categories}) {
                                                             </button>
                                                         </td>
 
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             <button 
                                                                 onClick={() => {
                                                                     clickedFordeleteforuser()
@@ -228,29 +228,29 @@ export function DashBoard({categories}) {
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
                                         {searchValue.map((data,index)=>(
-                                            <div key={index} className="bg-neutral-100 dark:bg-slate-800 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
+                                            <div key={index} className="bg-neutral-100 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
                                                 <div>
-                                                    <p className="text-[#009688] dark:text-white font-bold hover:underline">
+                                                    <p className="text-[#009688] font-bold hover:underline">
                                                         <span className="text-lg">Id : </span> 
                                                         <span className="text-sm ">{data.user_id}</span>
                                                     </p>
                                                 </div>
-                                                <div className="text-gray-700 dark:text-white font-bold">
+                                                <div className="text-gray-700 font-bold">
                                                     <span className="text-lg">User Name : </span>
                                                     <span className="text-md">{data.UserName} </span>
                                                 </div>
 
-                                                <div className="text-md lg:text-lg text-gray-700 dark:text-white font-bold break-words ">
+                                                <div className="text-md lg:text-lg text-gray-700 font-bold break-words ">
                                                     Email : <span className={ `font-normal font-medium ${data.email ? " " : "text-red-800"}`}>
                                                         { data.email ? data.email : "No Email Address" }
                                                     </span>
                                                 </div>
 
-                                                <div className="text-black font-bold dark:text-white">
+                                                <div className="text-black font-bold">
                                                   <span className="text-lg">createDate : </span>
                                                   <span className="text-sm">{moment(data.createDate).utc().format('YYYY-MM-DD')}</span>
                                                 </div>
-                                                <div className="text-black font-bold dark:text-white">
+                                                <div className="text-black font-bold">
                                                   <span className="text-lg">Modified Date : </span>
                                                   <span className="text-sm">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</span>
                                                 </div>
@@ -286,34 +286,34 @@ export function DashBoard({categories}) {
                                 <div className="my-5">
                                     <div className="overflow-auto rounded-lg shadow hidden md:block">
                                         <table className="w-full">
-                                            <thead className="bg-neutral-100 dark:bg-slate-800 border-b-2 border-gray-200">
+                                            <thead className="bg-neutral-100 border-b-2 border-gray-200">
                                                 <tr>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Student Id</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Email</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Student Id</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Email</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-100">
                                                 {searchValue.map((data,index)=>(
-                                                    <tr key={index} className="even:bg-neutral-100 odd:bg-neutral-300 even:dark:bg-gray-900 odd:dark:bg-gray-800 w-full">
+                                                    <tr key={index} className="even:bg-neutral-100 odd:bg-neutral-300 w-full">
                                                         <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                                            <p className="font-bold text-[#009688] dark:text-white hover:underline">{data.students_id}</p>
+                                                            <p className="font-bold text-[#009688] hover:underline">{data.students_id}</p>
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {data.UserName}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {data.email}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {moment(data.createDate).utc().format('YYYY-MM-DD')}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             <button
                                                                 onClick={() => {
                                                                     clickedForupdateforuser()
@@ -326,7 +326,7 @@ export function DashBoard({categories}) {
                                                             </button>
                                                         </td>
 
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             <button 
                                                                 onClick={() => {
                                                                     clickedFordeleteforuser()
@@ -344,29 +344,29 @@ export function DashBoard({categories}) {
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
                                         {searchValue.map((data,index)=>(
-                                            <div key={index} className="bg-neutral-100 dark:bg-slate-800 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
+                                            <div key={index} className="bg-neutral-100 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
                                                 <div>
-                                                    <p className="text-[#009688] dark:text-white font-bold hover:underline">
+                                                    <p className="text-[#009688] font-bold hover:underline">
                                                         <span className="text-lg">Id : </span> 
                                                         <span className="text-sm ">{data.user_id}</span>
                                                     </p>
                                                 </div>
-                                                <div className="text-gray-700 dark:text-white font-bold">
+                                                <div className="text-gray-700 font-bold">
                                                     <span className="text-lg">User Name : </span>
                                                     <span className="text-md">{data.UserName} </span>
                                                 </div>
 
-                                                <div className="text-md lg:text-lg text-gray-700 dark:text-white font-bold break-words ">
+                                                <div className="text-md lg:text-lg text-gray-700 font-bold break-words ">
                                                     Email : <span className={ `font-normal font-medium ${data.email ? " " : "text-red-800"}`}>
                                                         { data.email ? data.email : "No Email Address" }
                                                     </span>
                                                 </div>
 
-                                                <div className="text-black font-bold dark:text-white">
+                                                <div className="text-black font-bold">
                                                   <span className="text-lg">createDate : </span>
                                                   <span className="text-sm">{moment(data.createDate).utc().format('YYYY-MM-DD')}</span>
                                                 </div>
-                                                <div className="text-black font-bold dark:text-white">
+                                                <div className="text-black font-bold">
                                                   <span className="text-lg">Modified Date : </span>
                                                   <span className="text-sm">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</span>
                                                 </div>
@@ -402,34 +402,34 @@ export function DashBoard({categories}) {
                                 <div className="my-5">
                                     <div className="overflow-auto rounded-lg shadow hidden md:block">
                                         <table className="w-full">
-                                            <thead className="bg-neutral-100 dark:bg-slate-800 border-b-2 border-gray-200">
+                                            <thead className="bg-neutral-100 border-b-2 border-gray-200">
                                                 <tr>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Teacher Id</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Email</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
-                                                  <th className="text-black dark:text-white p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Teacher Id</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Email</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
+                                                  <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-gray-100">
                                                 {searchValue.map((data,index)=>(
-                                                    <tr key={index} className="even:bg-neutral-100 odd:bg-neutral-300 even:dark:bg-gray-900 odd:dark:bg-gray-800 w-full">
+                                                    <tr key={index} className="even:bg-neutral-100 odd:bg-neutral-300 w-full">
                                                         <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                                            <p className="font-bold text-[#009688] dark:text-white hover:underline">{data.teacher_id}</p>
+                                                            <p className="font-bold text-[#009688] hover:underline">{data.teacher_id}</p>
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {data.UserName}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {data.email}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {moment(data.createDate).utc().format('YYYY-MM-DD')}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             {moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}
                                                         </td>
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             <button
                                                                 onClick={() => {
                                                                     clickedForupdateForTeacher()
@@ -442,7 +442,7 @@ export function DashBoard({categories}) {
                                                             </button>
                                                         </td>
 
-                                                        <td className="p-3 text-lg text-gray-700 dark:text-white whitespace-nowrap">
+                                                        <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
                                                             <button 
                                                                 onClick={() => {
                                                                     clickedFordeleteForTeacher()
@@ -460,29 +460,29 @@ export function DashBoard({categories}) {
                                     </div>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
                                         {searchValue.map((data,index)=>(
-                                            <div key={index} className="bg-neutral-100 dark:bg-slate-800 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
+                                            <div key={index} className="bg-neutral-100 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
                                                 <div>
-                                                    <p className="text-[#009688] dark:text-white font-bold hover:underline">
+                                                    <p className="text-[#009688] font-bold hover:underline">
                                                         <span className="text-lg">Id : </span> 
                                                         <span className="text-sm ">{data.teacher_id}</span>
                                                     </p>
                                                 </div>
-                                                <div className="text-gray-700 dark:text-white font-bold">
+                                                <div className="text-gray-700 font-bold">
                                                     <span className="text-lg">User Name : </span>
                                                     <span className="text-md">{data.UserName} </span>
                                                 </div>
 
-                                                <div className="text-md lg:text-lg text-gray-700 dark:text-white font-bold break-words ">
+                                                <div className="text-md lg:text-lg text-gray-700 font-bold break-words ">
                                                     Email : <span className={ `font-normal font-medium ${data.email ? " " : "text-red-800"}`}>
                                                         { data.email ? data.email : "No Email Address" }
                                                     </span>
                                                 </div>
 
-                                                <div className="text-black font-bold dark:text-white">
+                                                <div className="text-black font-bold">
                                                   <span className="text-lg">createDate : </span>
                                                   <span className="text-sm">{moment(data.createDate).utc().format('YYYY-MM-DD')}</span>
                                                 </div>
-                                                <div className="text-black font-bold dark:text-white">
+                                                <div className="text-black font-bold">
                                                   <span className="text-lg">Modified Date : </span>
                                                   <span className="text-sm">{moment(data.Modteacher_idifiedDate).utc().format('YYYY-MM-DD')}</span>
                                                 </div>
@@ -518,7 +518,7 @@ export function DashBoard({categories}) {
                     }
                 </div>
                 :
-                <h1 className="text-black dark:text-white text-md lg:text-xl font-bold text-center italic">{error}</h1>
+                <h1 className="text-black text-md lg:text-xl font-bold text-center italic">{error}</h1>
             }
 
             {deletemodalOnforUser && 

@@ -165,7 +165,7 @@ const Add = ({Allclasses,Allsubjects,teacherId,Allstudents,Allcommunications}) =
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Add Communication" />
-      <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
+      <div className="flex bg-[#e6e6e6] w-full h-full pt-10">
         <VerticalNavbar />
         <div className="w-full flex flex-col pt-20">
           <AddGroup Allclasses={Allclasses} Allstudents={Allstudents} Allsubjects={Allsubjects} teacherId={teacherId} />

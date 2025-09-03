@@ -8,7 +8,7 @@ export default function Error () {
   return(
     <React.Fragment>
       <MainHeader title="SignIn Error Page" />
-      <div className="w-full h-screen bg-gray-100 dark:bg-slate-700 pt-24 grid justify-center content-center ">
+      <div className="w-full h-screen bg-gray-100  pt-24 grid justify-center content-center ">
         <div className="flex flex-col">
           <p className="text-center text-md lg:text-4xl font-bold">Error : {error}</p>
           <button 
