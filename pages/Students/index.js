@@ -116,7 +116,7 @@ export default function Admin({serverdate, tasks, studentId, Allstudents, announ
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Students" />
+      <MainHeader title="MatricMate : Students" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10 w-full">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">

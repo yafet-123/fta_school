@@ -20,7 +20,7 @@ export default function Hero({classes,type}) {
           />
         </div>
         <h1 className="font-bold text-3xl md:text-5xl text-right italic">
-          Future Talent Academy
+          MatricMate
         </h1>
       </div>
       <h1 className="font-bold text-xl md:text-4xl text-center w-full px-20">

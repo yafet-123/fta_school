@@ -65,7 +65,7 @@ export default function Subjects({subjects}) {
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Student SUbject" />
+      <MainHeader title="MatricMate : Student SUbject" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">

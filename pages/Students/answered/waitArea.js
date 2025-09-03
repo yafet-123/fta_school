@@ -18,7 +18,7 @@ export default function WaitArea(){
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Students" />
+      <MainHeader title="MatricMate : Students" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="bg-[#E6E6E6] w-full px-2 lg:px-10 h-full py-20 flex flex-col justify-center items-center">

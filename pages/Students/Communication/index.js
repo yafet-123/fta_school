@@ -120,7 +120,7 @@ const Communication = ({Allcommunications, Allteachers}) => {
   
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Communication" />
+      <MainHeader title="MatricMate : Communication" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar />
         <div className="w-full flex flex-col pt-20">

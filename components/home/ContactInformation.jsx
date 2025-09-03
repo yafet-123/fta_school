@@ -16,7 +16,7 @@ export default function ContactInformation (){
 					</p>
 
 					<p className="md:text-lg text-base text-left my-5 w-full lg:w-[90%]">
-							{`Curious to learn more about Future Talent Academy? Feel free to get in touch with us! 
+							{`Curious to learn more about MatricMate? Feel free to get in touch with us! 
 							Whether you have inquiries about our programs, admissions, or simply want to explore how 
 							we can nurture your child's potential, our friendly team is here to assist. Connect with 
 							us today and embark on a journey towards educational excellence and a future filled with 

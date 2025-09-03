@@ -128,7 +128,7 @@ export default function Add({Allclasses,teacherId,Allannouncements}) {
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Add Announcement" />
+      <MainHeader title="MatricMate : Add Announcement" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] w-full h-full pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full flex flex-col pt-20">

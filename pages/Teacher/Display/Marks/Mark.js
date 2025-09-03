@@ -104,7 +104,7 @@ const Display = ({questiontype,studentsByClass, marks}) => {
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Teacher" />
+      <MainHeader title="MatricMate : Teacher" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-5">
         <VerticalNavbar data={data} />
         <DisplayMarks questiontype={questiontype} studentsByClass={studentsByClass} marks={marks} />

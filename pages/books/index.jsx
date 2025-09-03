@@ -5,7 +5,7 @@ import {useRouter} from 'next/router'
 export default function Book() {
   return (
     <div className="">
-      <MainHeader title="Future Talent Academy : Books" />
+      <MainHeader title="MatricMate : Books" />
       <div className="flex flex-col">
         <Category />
       </div>

@@ -62,7 +62,7 @@ export default function Teacher({serverdate, Allteachers}){
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Future Talent Academy : Teacher" />
+      <MainHeader title="MatricMate : Teacher" />
       <div className="flex bg-[#e6e6e6] dark:bg-[#02201D] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full pt-20">

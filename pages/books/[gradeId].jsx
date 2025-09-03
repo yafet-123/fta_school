@@ -6,7 +6,7 @@ export default function BookGradeDetail({ grades, all_grade_books }) {
   console.log(grades);
   return (
     <div className="antialiased bg-gradient-to-r">
-      <MainHeader title={`Future Talent Academy`} />
+      <MainHeader title={`MatricMate`} />
       <GradeSpecifiedBooks grades={grades} />
     </div>
   );

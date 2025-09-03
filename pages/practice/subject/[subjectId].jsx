@@ -5,7 +5,7 @@ import Subject from "../../../components/practice/Subject";
 export default function BookGradeDetail({ subjects, all_subjects }) {
   return (
     <div className="antialiased bg-gradient-to-r">
-      <MainHeader title={`Future Talent Academy`} />
+      <MainHeader title={`MatricMate`} />
       <Subject AllGradesubject={subjects} />
     </div>
   );

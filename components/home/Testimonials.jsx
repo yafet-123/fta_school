@@ -9,21 +9,21 @@ export default function Testimonials() {
 			job:"student",
       		image: "/Testimonals/cherishe.jpg",
       		star:5,
-      		description:"Enrolling our child in Future Talent Academy was one of the best decisions we made for their education. The personalized attention and innovative teaching methods have truly made a positive impact on our child's academic performance and overall development.",
+      		description:"Enrolling our child in MatricMate was one of the best decisions we made for their education. The personalized attention and innovative teaching methods have truly made a positive impact on our child's academic performance and overall development.",
 		},
 		{
 			name: 'David M',
 			job:"student",
       		image: "/Testimonals/maleone.jpg",
       		star:5,
-      		description:"Future Talent Academy is not just a school; it's a place where learning becomes an exciting adventure. The engaging curriculum and supportive teachers have made my educational journey both enjoyable and enriching. ",
+      		description:"MatricMate is not just a school; it's a place where learning becomes an exciting adventure. The engaging curriculum and supportive teachers have made my educational journey both enjoyable and enriching. ",
 		},
 		{
 			name: 'Liya A',
 			job:"student",
       		image: "/Testimonals/maletwo.jpg",
       		star:5,
-      		description:"Reflecting on my time at Future Talent Academy, I am immensely thankful for the strong educational foundation it provided. The school's commitment to academic excellence, coupled with a focus on character development, has played a pivotal role in my success beyond the classroom.",
+      		description:"Reflecting on my time at MatricMate, I am immensely thankful for the strong educational foundation it provided. The school's commitment to academic excellence, coupled with a focus on character development, has played a pivotal role in my success beyond the classroom.",
 		},
 	]
 	var settings = {
