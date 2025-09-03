@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
   if (userRole !== 'teacher') {
     return {
       redirect: {
-        destination: '/auth/error', // Redirect to the error page for unauthorized access
+        destination: '/auth/Teacher/Login/signin-teacher', // Redirect to the error page for unauthorized access
         permanent: false,
       },
     };
