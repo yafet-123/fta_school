@@ -6,7 +6,21 @@ import {DisplayQuestionCategory } from "../../../components/Admin/QuestionCatego
 import { useSession } from "next-auth/react";
 import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
-export async function getServerSideProps(){
+import { getSession } from "next-auth/react";
+
+export async function getServerSideProps(context){
+  const session = await getSession(context);
+  const serverdate = new Date();
+  const userRole = session?.user?.role;
+  if (userRole !== 'admin') {
+    return {
+      redirect: {
+        destination: '/auth/Admin/Login/signin-user',
+        permanent: false,
+      },
+    };
+  }
+  
   const QuestionCategory = await prisma.QuestionCategory.findMany({
     orderBy : {ModifiedDate:'desc'},
     include:{

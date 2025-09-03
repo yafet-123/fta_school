@@ -21,7 +21,7 @@ export default NextAuth({
                     username: credentials.username,
                     password: credentials.password,
                 };
-                    
+                     
                 let user
                 console.log(payload)
                 const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/login`,{
@@ -98,7 +98,7 @@ export default NextAuth({
     ],
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        signIn: '/auth/signin',
+        signIn: '/auth/Admin/Login/signin-user',
         error:`/auth/login-error`
     },
     callbacks: {

@@ -8,7 +8,7 @@ import { MainHeader } from '../../../../components/common/MainHeader';
 import React from 'react'
 import Link from 'next/link'
 import { getSession } from "next-auth/react";
-
+ 
 export default function SignIn({ csrfToken }) {
     const router = useRouter();
     const [error, setError] = useState(null);

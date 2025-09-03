@@ -6,10 +6,20 @@ import { useRouter } from 'next/router'
 import { MainHeader } from '../../components/common/MainHeader';
 import React from 'react'
 import { prisma } from '../../util/db.server.js'
+import { getSession } from "next-auth/react";
 
-export async function getServerSideProps(){
-  
-
+export async function getServerSideProps(context){
+  const session = await getSession(context);
+  const serverdate = new Date();
+  const userRole = session?.user?.role;
+  if (userRole !== 'admin') {
+    return {
+      redirect: {
+        destination: '/auth/Admin/Login/signin-user',
+        permanent: false,
+      },
+    };
+  }
   return{
     props:{
       
