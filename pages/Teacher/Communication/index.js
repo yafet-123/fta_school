@@ -138,7 +138,7 @@ export async function getServerSideProps(context) {
 
   const Allstudents = students.map((data)=>({
     students_id:data.students_id,
-    name:data.firstName,
+    name:data.firstName + " " + data.lastName,
     UserName:data.UserName,
     email:data.email,
     class_id:data.Class.class_id
@@ -155,13 +155,14 @@ export async function getServerSideProps(context) {
       Allsubjects,
       teacherId,
       Allstudents,
-      Allcommunications
+      Allcommunications,
+      students
     }, // will be passed to the page component as props
   }
 }
 
-const Add = ({Allclasses,Allsubjects,teacherId,Allstudents,Allcommunications}) => {
-  
+const Add = ({Allclasses,Allsubjects,teacherId,Allstudents,Allcommunications, students}) => {
+  console.log(students)
   return (
     <React.Fragment>
       <MainHeader title="MatricMate : Add Communication" />
