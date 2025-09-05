@@ -53,28 +53,32 @@ export default function SignIn({ csrfToken }) {
                                     {error}
                                 </div>
                                 <div className="mb-4">
-                                    <Field
-                                        name="username"
-                                        aria-label="enter your username"
-                                        aria-required="true"
-                                        type="text"
-                                        placeholder="Enter a Username"
-                                        className="w-full px-5 py-3 mb-4 bg-white text-[#000] border border-blue-500 rounded focus:outline-none focus:border-blue-400 transition"
-                                    />
+                                    <label htmlFor="username" className="uppercase text-sm text-gray-600 font-bold">
+                                        User Name
+                                        <Field
+                                            name="username"
+                                            aria-label="enter your username"
+                                            aria-required="true"
+                                            type="text"
+                                            className="w-full bg-gray-300 text-gray-900 mt-2 p-3"
+                                        />
+                                    </label>
 
                                     <div className="text-red-600 text-sm">
                                         <ErrorMessage name="username" />
                                     </div>
                                 </div>
                                 <div className="mb-6">
-                                    <Field
-                                        name="password"
-                                        aria-label="enter your password"
-                                        aria-required="true"
-                                        type="password"
-                                        placeholder="Enter a Password"
-                                        className="w-full px-5 py-3 mb-2 bg-white text-[#000] border border-blue-500 rounded focus:outline-none focus:border-blue-400 transition"
-                                    />
+                                    <label htmlFor="password" className="uppercase text-sm text-gray-600 font-bold">
+                                        password
+                                        <Field
+                                            name="password"
+                                            aria-label="enter your password"
+                                            aria-required="true"
+                                            type="password"
+                                            className="w-full bg-gray-300 text-gray-900 mt-2 p-3"
+                                        />
+                                    </label>
 
                                     <div className="text-red-600 text-sm">
                                         <ErrorMessage name="password" />
