@@ -46,8 +46,8 @@ export default function SignIn({ csrfToken }) {
                 >
                     {(formik) => (
                       <form onSubmit={formik.handleSubmit}>
-                        <div className="bg-gray-900 flex flex-col items-center justify-center min-h-screen py-10 shadow-lg ">
-                            <div className="w-80 p-6 bg-gray-800 text-white rounded-lg shadow-lg customShadow animateBg">
+                        <div className="bg-gray-100  flex flex-col items-center justify-center min-h-screen py-2 shadow-lg">
+                            <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                                 <input name="csrfToken" type="hidden" defaultValue={csrfToken}/>
                                 <div className="text-red-400 text-md text-center rounded p-2">
                                     {error}
@@ -59,7 +59,7 @@ export default function SignIn({ csrfToken }) {
                                         aria-required="true"
                                         type="text"
                                         placeholder="Enter a Username"
-                                        className="w-full px-5 py-3 mb-4 bg-white border border-blue-500 rounded focus:outline-none focus:border-blue-400 transition"
+                                        className="w-full px-5 py-3 mb-4 bg-white text-[#000] border border-blue-500 rounded focus:outline-none focus:border-blue-400 transition"
                                     />
 
                                     <div className="text-red-600 text-sm">
@@ -73,7 +73,7 @@ export default function SignIn({ csrfToken }) {
                                         aria-required="true"
                                         type="password"
                                         placeholder="Enter a Password"
-                                        className="w-full px-5 py-3 mb-2 bg-white border border-blue-500 rounded focus:outline-none focus:border-blue-400 transition"
+                                        className="w-full px-5 py-3 mb-2 bg-white text-[#000] border border-blue-500 rounded focus:outline-none focus:border-blue-400 transition"
                                     />
 
                                     <div className="text-red-600 text-sm">
