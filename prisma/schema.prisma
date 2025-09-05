@@ -81,7 +81,7 @@ model Announcement {
   ClassAnnouncement ClassAnnouncement[]
 }
  
-model Students{
+model Students{ 
   students_id         Int           @id @default(autoincrement())
   firstName           String?       @db.VarChar(255)
   lastName            String?       @db.VarChar(255)

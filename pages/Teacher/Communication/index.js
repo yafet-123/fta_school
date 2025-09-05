@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
   const teacher = await prisma.Teacher.findUnique({
     where:{ teacher_id: Number(session.user.user_id) },
     
-  });
+  }); 
 
   if (teacher === null) {
     return {
@@ -138,7 +138,7 @@ export async function getServerSideProps(context) {
 
   const Allstudents = students.map((data)=>({
     students_id:data.students_id,
-    name:data.firstName + " " + data.lastName,
+    name:data.firstName,
     UserName:data.UserName,
     email:data.email,
     class_id:data.Class.class_id
