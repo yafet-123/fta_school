@@ -105,65 +105,6 @@ export function AddStudent({classes}) {
                             Last Name
                         </label>
                     </div>
-
-                    <div className="relative">
-                        <input 
-                            id="password" 
-                            required
-                            type={typepassword}
-                            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                            value={password}
-                            onChange={(e) => setpassword(e.target.value)}
-                        />
-                        <div className="absolute right-10 text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-1/2">
-                            {typepassword==="password"?(
-                                <span className='icon-span' onClick={()=>setTypepassword("text")}>
-                                  <FiEye size={30} />
-                                </span>
-                            ):(
-                                <span className='icon-span' onClick={()=>setTypepassword("password")}>
-                                  <FiEyeOff size={30} />
-                                </span>
-                            )}
-                        </div>
-                        <label 
-                            htmlFor="floating_outlined" 
-                            className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                            Password
-                        </label>
-                    </div>
-
-                    <div className="relative">
-                        <input 
-                            id="ConfirmPassword" 
-                            required
-                            type={typepasswordconfirm}
-                            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        <div className="absolute right-10 text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-1/2">
-                            {typepasswordconfirm==="password"?(
-                                <span className='icon-span' onClick={()=>setTypepasswordconfirm("text")}>
-                                  <FiEye size={30} />
-                                </span>
-                            ):(
-                                <span className='icon-span' onClick={()=>setTypepasswordconfirm("password")}>
-                                  <FiEyeOff size={30} />
-                                </span>
-                            )}
-                        </div>
-                        <label 
-                            htmlFor="floating_outlined" 
-                            className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                            Confirm Password
-                        </label>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 my-10 mx-2">
                     <div className="relative">
                         <input 
                             id="username" 
