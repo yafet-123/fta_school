@@ -136,7 +136,8 @@ export default function QuizPage({gradeId}) {
       {step === "quiz" && (
         <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
           <div className="text-right text-red-600 mb-2">
-            Time left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
+            Time left: {Math.floor(timeLeft / 60)}:
+            {String(timeLeft % 60).padStart(2, "0")}
           </div>
           <h3 className="text-lg font-bold mb-4">
             Q{currentQ + 1}: {questions[currentQ].q}
@@ -151,25 +152,47 @@ export default function QuizPage({gradeId}) {
                   setAnswers(newAns);
                 }}
                 className={`px-4 py-2 rounded border ${
-                  answers[currentQ] === i ? "bg-blue-100 border-blue-500" : "bg-gray-50"
+                  answers[currentQ] === i
+                    ? "bg-blue-100 border-blue-500"
+                    : "bg-gray-50"
                 }`}
               >
                 {opt}
               </button>
             ))}
           </div>
+
+          {/* Error message if user tries to skip without answering */}
+          {showError && (
+            <div className="text-red-600 mt-3 text-sm">
+              ⚠️ You did not select an answer.
+            </div>
+          )}
+
           <div className="flex justify-between mt-6">
             <button
               disabled={currentQ === 0}
-              onClick={() => setCurrentQ((q) => q - 1)}
+              onClick={() => {
+                setShowError(false);
+                setCurrentQ((q) => q - 1);
+              }}
               className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
             >
               Back
             </button>
             <button
-              onClick={() =>
-                currentQ === questions.length - 1 ? setStep("results") : setCurrentQ((q) => q + 1)
-              }
+              onClick={() => {
+                if (answers[currentQ] === null) {
+                  setShowError(true);
+                  return;
+                }
+                setShowError(false);
+                if (currentQ === questions.length - 1) {
+                  setStep("results");
+                } else {
+                  setCurrentQ((q) => q + 1);
+                }
+              }}
               className="px-4 py-2 bg-blue-600 text-white rounded"
             >
               {currentQ === questions.length - 1 ? "Submit" : "Next"}
@@ -178,68 +201,68 @@ export default function QuizPage({gradeId}) {
         </div>
       )}
 
+
       {step === "results" && (
-  <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-    <h2 className="text-xl font-bold text-blue-700 mb-4">Your Score</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
+          <h2 className="text-xl font-bold text-blue-700 mb-4">Your Score</h2>
 
-    {/* Calculate total correct and incorrect */}
-    {(() => {
-      const totalAnswered = answers.filter(a => a !== null).length;
-      const totalCorrect = answers.reduce(
-        (acc, a, i) => (a === questions[i].answer ? acc + 1 : acc),
-        0
-      );
-      const totalIncorrect = totalAnswered - totalCorrect;
-      const percent = totalAnswered ? Math.round((totalCorrect / questions.length) * 100) : 0;
-      return (
-        <div className="mb-4">
-          <div className="text-2xl font-semibold mb-2">
-            {totalCorrect} / {questions.length} ({percent}%)
+          {/* Calculate total correct and incorrect */}
+          {(() => {
+            const totalAnswered = answers.filter(a => a !== null).length;
+            const totalCorrect = answers.reduce(
+              (acc, a, i) => (a === questions[i].answer ? acc + 1 : acc),
+              0
+            );
+            const totalIncorrect = totalAnswered - totalCorrect;
+            const percent = totalAnswered ? Math.round((totalCorrect / questions.length) * 100) : 0;
+            return (
+              <div className="mb-4">
+                <div className="text-2xl font-semibold mb-2">
+                  {totalCorrect} / {questions.length} ({percent}%)
+                </div>
+                <div className="flex gap-4">
+                  <div className="bg-green-100 text-green-700 px-3 py-1 rounded">
+                    Got: {totalCorrect}
+                  </div>
+                  <div className="bg-red-100 text-red-700 px-3 py-1 rounded">
+                    Lost: {totalIncorrect}
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+
+          <div className="flex flex-col gap-2 max-h-60 overflow-y-auto">
+            {questions.map((q, i) => (
+              <div key={i} className="p-2 border rounded">
+                <strong>Q{i + 1}:</strong> {q.q} <br />
+                Your answer:{" "}
+                <span className={answers[i] === q.answer ? "text-green-600" : "text-red-600"}>
+                  {answers[i] !== null ? q.options[answers[i]] : "No Answer"}
+                </span>{" "}
+                | Correct: <span className="text-green-600">{q.options[q.answer]}</span>
+              </div>
+            ))}
           </div>
-          <div className="flex gap-4">
-            <div className="bg-green-100 text-green-700 px-3 py-1 rounded">
-              Got: {totalCorrect}
-            </div>
-            <div className="bg-red-100 text-red-700 px-3 py-1 rounded">
-              Lost: {totalIncorrect}
-            </div>
+
+          <div className="flex gap-3 mt-4">
+            <button
+              onClick={() => {
+                setAnswers(Array(questions.length).fill(null));
+                setCurrentQ(0);
+                setTimeLeft(5 * 60);
+                setStep("quiz");
+              }}
+              className="px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              Retake
+            </button>
+            <button onClick={() => setStep("explanation")} className="px-4 py-2 bg-blue-600 text-white rounded">
+              Review Answers
+            </button>
           </div>
         </div>
-      );
-    })()}
-
-    <div className="flex flex-col gap-2 max-h-60 overflow-y-auto">
-      {questions.map((q, i) => (
-        <div key={i} className="p-2 border rounded">
-          <strong>Q{i + 1}:</strong> {q.q} <br />
-          Your answer:{" "}
-          <span className={answers[i] === q.answer ? "text-green-600" : "text-red-600"}>
-            {answers[i] !== null ? q.options[answers[i]] : "No Answer"}
-          </span>{" "}
-          | Correct: <span className="text-green-600">{q.options[q.answer]}</span>
-        </div>
-      ))}
-    </div>
-
-    <div className="flex gap-3 mt-4">
-      <button
-        onClick={() => {
-          setAnswers(Array(questions.length).fill(null));
-          setCurrentQ(0);
-          setTimeLeft(5 * 60);
-          setStep("quiz");
-        }}
-        className="px-4 py-2 bg-blue-600 text-white rounded"
-      >
-        Retake
-      </button>
-      <button onClick={() => setStep("explanation")} className="px-4 py-2 bg-blue-600 text-white rounded">
-        Review Answers
-      </button>
-    </div>
-  </div>
-)}
-
+      )}
 
       {/* Step 6: Explanation */}
       {step === "explanation" && (
