@@ -2,22 +2,23 @@ import { useState, useEffect } from "react";
 
 const subjectsData = {
   natural: [
-    { name: "Math", img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=60" },
-    { name: "Biology", img: "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=400&q=60" },
-    { name: "Physics", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=60" },
-    { name: "Chemistry", img: "https://images.unsplash.com/photo-1581091870623-44d9b9e8d8de?auto=format&fit=crop&w=400&q=60" },
-    { name: "English", img: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=60" },
-    { name: "SAT", img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=400&q=60" },
+    { name: "Math", img: "https://images.unsplash.com/photo-1533025785648-a1a3afae1c8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "Biology", img: "https://images.unsplash.com/photo-1614935151651-7f42e1c8b512?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "Physics", img: "https://images.unsplash.com/photo-1581090700227-4c4f50a69a44?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "Chemistry", img: "https://images.unsplash.com/photo-1581091870623-44d9b9e8d8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "English", img: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "SAT", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
   ],
   social: [
-    { name: "Geography", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=60" },
-    { name: "History", img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=60" },
-    { name: "Math", img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=60" },
-    { name: "Economics", img: "https://images.unsplash.com/photo-1486308510493-cb09fcaaf77a?auto=format&fit=crop&w=400&q=60" },
-    { name: "English", img: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=60" },
-    { name: "SAT", img: "https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=400&q=60" },
+    { name: "Geography", img: "https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "History", img: "https://images.unsplash.com/photo-1524492449090-1a065f7e4ec6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "Math", img: "https://images.unsplash.com/photo-1621619850292-97f6e6b7965a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "Economics", img: "https://images.unsplash.com/photo-1581091012184-5c8c1f6e0ef2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "English", img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
+    { name: "SAT", img: "https://images.unsplash.com/photo-1504274066651-8d31a536b11a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
   ],
 };
+
 
 
 const questions = [
