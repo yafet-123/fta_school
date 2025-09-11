@@ -1,5 +1,6 @@
 import { MainHeader } from "../../components/common/MainHeader";
 import Grade from '../../components/practice/Grade.jsx';
+import QuizPage from '../../components/practice/QuizPage.jsx';
 import {useRouter} from 'next/router'
 
 export default function Book() {

@@ -1,49 +1,21 @@
 import { MainHeader } from "../../../components/common/MainHeader";
 import { getAllSubjects, getSubjectById } from "../../../data/SubjectData.jsx";
 import Subject from "../../../components/practice/Subject";
+import QuizPage from '../../../components/practice/QuizPage.jsx';
 
-export default function BookGradeDetail({ subjects, all_subjects }) {
+export default function BookGradeDetail({subjectId}) {
   return (
     <div className="antialiased bg-gradient-to-r">
       <MainHeader title={`MatricMate`} />
-      <Subject AllGradesubject={subjects} />
+      <QuizPage gradeId={subjectId} />
     </div>
   );
 }
  
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const subjectId = context.params.subjectId;
-  const subjects = getSubjectById(subjectId);
-  const all_subjects = getAllSubjects();
-
-  if (!all_subjects) {
-    return {
-      notFound: true,
-    };
-  }
-
-  if (!subjects) {
-    return {
-      notFound: true,
-    };
-  }
-
+  console.log(subjectId)
   return {
-    props: { subjects: subjects, all_subjects: all_subjects },
-    revalidate: 3600,
+    props: { subjectId: subjectId },
   };
-};
-
-export const getStaticPaths = async (context) => {
-  const subjects = getAllSubjects();
-  //   console.log(context)
-
-  // Get the paths we want to pre-render based on subjects
-  const paths = subjects.map((subject) => ({
-    params: { subjectId: subject.id },
-  }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths: paths, fallback: false };
 };

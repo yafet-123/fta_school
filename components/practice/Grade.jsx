@@ -6,25 +6,15 @@ import { FaFolder } from "react-icons/fa6";
 
 export default function Grade() {
   const grades = [
-    { id: 1, name: "Grade 1" },
-    { id: 2, name: "Grade 2" },
-    { id: 3, name: "Grade 3" },
-    { id: 4, name: "Grade 4" },
-    { id: 5, name: "Grade 5" },
-    { id: 6, name: "Grade 6" },
-    { id: 7, name: "Grade 7" },
-    { id: 8, name: "Grade 8" },
-    { id: 9, name: "Grade 9" },
-    { id: 10, name: "Grade 10" },
-    { id: 11, name: "Grade 11 Natural" },
-    { id: 12, name: "Grade 11 Social" },
-    { id: 13, name: "Grade 12 Natural" },
-    { id: 13, name: "Grade 12 Social" },
+    { id: 9, name: "Grade 9", slug : "grade_9" },
+    { id: 10, name: "Grade 10", slug : "grade_10" },
+    { id: 11, name: "Grade 11", slug : "grade_11" },
+    { id: 12, name: "Grade 12", slug : "grade_12" },
   ];
 
   return ( 
     <div className="px-5 md:px-10 lg:px-20 py-32">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {grades.map((grade, index) => (
           <div
             key={grade.id}
@@ -32,7 +22,7 @@ export default function Grade() {
             hover:bg-[#0041e1] hover:text-[#fff]`}
           >
             <Link 
-              href={`/practice/subject/${grade.name}`}
+              href={`/practice/subject/${grade.slug}`}
             >
               <a className="flex justify-center items-center">
                 <h1>
