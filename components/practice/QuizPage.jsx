@@ -54,6 +54,7 @@ const questions = [
 ];
 
 export default function QuizPage({gradeId}) {
+  const [showError, setShowError] = useState(false);
   // If grade is in gradesWithoutCategories → skip home and go directly to subject
   const gradesWithoutCategories = ["grade_9", "grade_10"];
   const initialStep = gradesWithoutCategories.includes(gradeId) ? "subject" : "home";
