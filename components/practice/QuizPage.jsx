@@ -54,16 +54,15 @@ const questions = [
 ];
 
 export default function QuizPage({gradeId}) {
+  // If grade is in gradesWithoutCategories → skip home and go directly to subject
+  const initialStep = gradesWithoutCategories.includes(gradeId) ? "subject" : "home";
+  const [step, setStep] = useState(initialStep);
   const [category, setCategory] = useState(null);
   const [subject, setSubject] = useState(null);
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const [timeLeft, setTimeLeft] = useState(5 * 60);
-  const gradesWithoutCategories = ["grade_9", "grade_10"];
 
-  // If grade is in gradesWithoutCategories → skip home and go directly to subject
-  const initialStep = gradesWithoutCategories.includes(gradeId) ? "subject" : "home";
-  const [step, setStep] = useState(initialStep);
   // Timer
   useEffect(() => {
     if (step === "quiz" && timeLeft > 0) {
@@ -74,6 +73,7 @@ export default function QuizPage({gradeId}) {
   }, [step, timeLeft]);
 
   const score = answers.filter((a, i) => a === questions[i].answer).length;
+
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-slate-100 text-gray-800 pt-24">
