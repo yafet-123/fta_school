@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Image from "next/image"
 
 const subjectsData = {
   natural: [
@@ -18,8 +19,6 @@ const subjectsData = {
     { name: "SAT", img: "https://images.unsplash.com/photo-1504274066651-8d31a536b11a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
   ],
 };
-
-
 
 const questions = [
   {
@@ -114,7 +113,7 @@ export default function QuizPage({gradeId}) {
             Subjects
           </h2>
           <div className="grid grid-cols-3 gap-6 w-full">
-            {["Math", "Physics", "Biology", "History", "Geography", "Economics"].map(
+            {natural.map(
               (subject) => (
                 <div
                   key={subject}
@@ -122,11 +121,11 @@ export default function QuizPage({gradeId}) {
                   className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:-translate-y-1 transition p-4 flex flex-col items-center"
                 >
                   <img
-                    src="/placeholder.jpg"
-                    alt={subject}
+                    src={subject.img}
+                    alt={subject.name}
                     className="w-full h-32 object-cover border-b-2 border-blue-500"
                   />
-                  <p className="mt-2 text-blue-700 font-semibold">{subject}</p>
+                  <p className="mt-2 text-blue-700 font-semibold">{subject.name}</p>
                 </div>
               )
             )}
