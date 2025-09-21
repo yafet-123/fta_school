@@ -366,7 +366,149 @@ const quizData = {
       },
     ],
   },
-
+  grade12: {
+    biology: [
+      {
+        question: "What is the process by which plants lose water through leaves?",
+        options: ["Transpiration", "Photosynthesis", "Respiration", "Osmosis"],
+        answer: 0,
+      },
+      {
+        question: "Which blood cells help fight infections?",
+        options: ["Red blood cells", "White blood cells", "Platelets", "Plasma"],
+        answer: 1,
+      },
+      {
+        question: "DNA is made up of units called?",
+        options: ["Nucleotides", "Amino acids", "Proteins", "Lipids"],
+        answer: 0,
+      },
+    ],
+    chemistry: [
+      {
+        question: "Which gas is produced when an acid reacts with a metal?",
+        options: ["Oxygen", "Hydrogen", "Carbon dioxide", "Nitrogen"],
+        answer: 1,
+      },
+      {
+        question: "What is the molar mass of water (H2O)?",
+        options: ["18 g/mol", "20 g/mol", "16 g/mol", "22 g/mol"],
+        answer: 0,
+      },
+      {
+        question: "Which element is most reactive in the halogen group?",
+        options: ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+        answer: 0,
+      },
+    ],
+    physics: [
+      {
+        question: "What is the SI unit of energy?",
+        options: ["Newton", "Joule", "Watt", "Pascal"],
+        answer: 1,
+      },
+      {
+        question: "The slope of a velocity-time graph gives?",
+        options: ["Displacement", "Speed", "Acceleration", "Force"],
+        answer: 2,
+      },
+      {
+        question: "Which phenomenon explains the bending of light as it passes from one medium to another?",
+        options: ["Reflection", "Refraction", "Diffraction", "Interference"],
+        answer: 1,
+      },
+    ],
+    english: [
+      {
+        question: "Identify the correct sentence:",
+        options: [
+          "He don't like apples.",
+          "He doesn't likes apples.",
+          "He doesn't like apples.",
+          "He not like apples.",
+        ],
+        answer: 2,
+      },
+      {
+        question: "Choose the antonym of 'abundant'.",
+        options: ["Plentiful", "Scarce", "Many", "Numerous"],
+        answer: 1,
+      },
+      {
+        question: "Select the adverb in the sentence: 'She sings beautifully.'",
+        options: ["She", "Sings", "Beautifully", "None"],
+        answer: 2,
+      },
+    ],
+    math: [
+      {
+        question: "Solve: 2x² - 8 = 0",
+        options: ["x = ±2", "x = ±4", "x = ±1", "x = ±3"],
+        answer: 0,
+      },
+      {
+        question: "Derivative of x² is?",
+        options: ["x", "2x", "x²", "2"],
+        answer: 1,
+      },
+      {
+        question: "Integral of 2x dx is?",
+        options: ["x² + C", "2x + C", "x + C", "x²/2 + C"],
+        answer: 0,
+      },
+    ],
+    history: [
+      {
+        question: "Which emperor of Ethiopia modernized the country in the early 20th century?",
+        options: ["Menelik II", "Haile Selassie", "Tewodros II", "Yekuno Amlak"],
+        answer: 1,
+      },
+      {
+        question: "The Derg regime in Ethiopia started in which year?",
+        options: ["1974", "1975", "1980", "1960"],
+        answer: 0,
+      },
+      {
+        question: "Who led the Battle of Adwa against Italy?",
+        options: ["Menelik II", "Haile Selassie", "Tewodros II", "Yekuno Amlak"],
+        answer: 0,
+      },
+    ],
+    geography: [
+      {
+        question: "Which is the highest mountain in Africa?",
+        options: ["Mount Kenya", "Mount Kilimanjaro", "Atlas Mountains", "Simien Mountains"],
+        answer: 1,
+      },
+      {
+        question: "Which country has the largest population in Africa?",
+        options: ["Nigeria", "Ethiopia", "Egypt", "South Africa"],
+        answer: 0,
+      },
+      {
+        question: "The Great Rift Valley passes through which country?",
+        options: ["Ethiopia", "Kenya", "Tanzania", "All of the above"],
+        answer: 3,
+      },
+    ],
+    citizenship: [
+      {
+        question: "What is the main responsibility of a citizen in a democratic country?",
+        options: ["Obey laws", "Vote", "Pay taxes", "All of the above"],
+        answer: 3,
+      },
+      {
+        question: "Which is a fundamental right in a democratic society?",
+        options: ["Freedom of speech", "Right to education", "Right to vote", "All of the above"],
+        answer: 3,
+      },
+      {
+        question: "Which institution interprets the constitution?",
+        options: ["Executive", "Legislature", "Judiciary", "Military"],
+        answer: 2,
+      },
+    ],
+  },
 
 };
 
