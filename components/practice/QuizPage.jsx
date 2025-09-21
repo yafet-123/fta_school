@@ -1,294 +1,484 @@
-import { useState, useEffect } from "react";
-import Image from "next/image"
+import React, { useState } from "react";
 
-const subjectsData = {
-  natural: [
-    { name: "Math", img: "https://images.unsplash.com/photo-1533025785648-a1a3afae1c8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "Biology", img: "https://images.unsplash.com/photo-1614935151651-7f42e1c8b512?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "Physics", img: "https://images.unsplash.com/photo-1581090700227-4c4f50a69a44?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "Chemistry", img: "https://images.unsplash.com/photo-1581091870623-44d9b9e8d8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "English", img: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "SAT", img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-  ],
-  social: [
-    { name: "Geography", img: "https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "History", img: "https://images.unsplash.com/photo-1524492449090-1a065f7e4ec6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "Math", img: "https://images.unsplash.com/photo-1621619850292-97f6e6b7965a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "Economics", img: "https://images.unsplash.com/photo-1581091012184-5c8c1f6e0ef2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "English", img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-    { name: "SAT", img: "https://images.unsplash.com/photo-1504274066651-8d31a536b11a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60" },
-  ],
+const quizData = {
+  grade9: {
+    biology: [
+      {
+        question: "Which organelle is known as the powerhouse of the cell?",
+        options: ["Nucleus", "Mitochondria", "Chloroplast", "Ribosome"],
+        answer: 1,
+      },
+      {
+        question: "Which part of the plant is responsible for photosynthesis?",
+        options: ["Root", "Stem", "Leaf", "Flower"],
+        answer: 2,
+      },
+      {
+        question: "What is the basic unit of life?",
+        options: ["Tissue", "Organ", "Cell", "System"],
+        answer: 2,
+      },
+      {
+        question: "Which blood cells fight infections?",
+        options: ["Red blood cells", "White blood cells", "Platelets", "Plasma"],
+        answer: 1,
+      },
+      {
+        question: "Where does digestion begin in the human body?",
+        options: ["Stomach", "Small intestine", "Mouth", "Esophagus"],
+        answer: 2,
+      },
+    ],
+    chemistry: [
+      {
+        question: "What is the chemical symbol for Oxygen?",
+        options: ["O", "Ox", "Og", "On"],
+        answer: 0,
+      },
+      {
+        question: "Which gas is essential for combustion?",
+        options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+        answer: 0,
+      },
+      {
+        question: "What is the pH of a neutral solution?",
+        options: ["0", "7", "14", "1"],
+        answer: 1,
+      },
+      {
+        question: "What is H2O commonly known as?",
+        options: ["Oxygen", "Hydrogen", "Water", "Salt"],
+        answer: 2,
+      },
+      {
+        question: "Which metal is liquid at room temperature?",
+        options: ["Mercury", "Iron", "Aluminum", "Copper"],
+        answer: 0,
+      },
+    ],
+    physics: [
+      {
+        question: "Which of the following is a unit of force?",
+        options: ["Joule", "Watt", "Newton", "Pascal"],
+        answer: 2,
+      },
+      {
+        question: "What is the speed of light in vacuum?",
+        options: ["3 × 10^8 m/s", "1.5 × 10^8 m/s", "3 × 10^6 m/s", "9.8 m/s²"],
+        answer: 0,
+      },
+      {
+        question: "What is the acceleration due to gravity on Earth?",
+        options: ["8.9 m/s²", "9.8 m/s²", "10.8 m/s²", "12 m/s²"],
+        answer: 1,
+      },
+      {
+        question: "What type of energy is possessed by a moving object?",
+        options: ["Potential energy", "Kinetic energy", "Thermal energy", "Nuclear energy"],
+        answer: 1,
+      },
+      {
+        question: "Which device is used to measure electric current?",
+        options: ["Voltmeter", "Ammeter", "Barometer", "Thermometer"],
+        answer: 1,
+      },
+    ],
+    // same format for English, Math, History, Geography, Citizenship
+  },
+  grade10: {
+    biology: [
+      {
+        question: "Which organ pumps blood in the human body?",
+        options: ["Lungs", "Brain", "Heart", "Kidney"],
+        answer: 2,
+      },
+      {
+        question: "What is the process of cell division in body cells called?",
+        options: ["Meiosis", "Mitosis", "Fertilization", "Fusion"],
+        answer: 1,
+      },
+      {
+        question: "Which blood group is the universal donor?",
+        options: ["A", "B", "AB", "O"],
+        answer: 3,
+      },
+    ],
+    chemistry: [
+      {
+        question: "What is the chemical symbol of Iron?",
+        options: ["Ir", "In", "Fe", "I"],
+        answer: 2,
+      },
+      {
+        question: "Which element has the atomic number 1?",
+        options: ["Oxygen", "Hydrogen", "Helium", "Carbon"],
+        answer: 1,
+      },
+      {
+        question: "Which type of bond involves sharing of electrons?",
+        options: ["Ionic", "Covalent", "Metallic", "Hydrogen"],
+        answer: 1,
+      },
+    ],
+    physics: [
+      {
+        question: "What is the SI unit of power?",
+        options: ["Joule", "Newton", "Watt", "Ampere"],
+        answer: 2,
+      },
+      {
+        question: "Which energy source is renewable?",
+        options: ["Coal", "Petroleum", "Wind", "Natural gas"],
+        answer: 2,
+      },
+      {
+        question: "What type of lens is used in magnifying glasses?",
+        options: ["Concave", "Convex", "Plane", "Cylindrical"],
+        answer: 1,
+      },
+    ],
+    english: [
+      {
+        question: "Choose the correct sentence:",
+        options: [
+          "She go to school daily.",
+          "She goes to school daily.",
+          "She going to school daily.",
+          "She gone to school daily.",
+        ],
+        answer: 1,
+      },
+      {
+        question: "What is the antonym of 'strong'?",
+        options: ["Weak", "Powerful", "Mighty", "Tough"],
+        answer: 0,
+      },
+      {
+        question: "Identify the verb in: 'The cat sleeps on the sofa.'",
+        options: ["Cat", "Sleeps", "Sofa", "The"],
+        answer: 1,
+      },
+    ],
+    math: [
+      {
+        question: "Solve: 12 ÷ 3 + 4",
+        options: ["8", "6", "7", "9"],
+        answer: 3,
+      },
+      {
+        question: "Find the value of 2² + 3²",
+        options: ["9", "10", "12", "13"],
+        answer: 3,
+      },
+      {
+        question: "Simplify: (x + 2)(x - 2)",
+        options: ["x² - 4", "x² + 4", "x² + 2x - 2", "x² - 2x + 2"],
+        answer: 0,
+      },
+    ],
+    history: [
+      {
+        question: "Who was Ethiopia’s last emperor?",
+        options: ["Tewodros II", "Haile Selassie", "Menelik II", "Yohannes IV"],
+        answer: 1,
+      },
+      {
+        question: "In which year did Italy first invade Ethiopia?",
+        options: ["1889", "1896", "1935", "1941"],
+        answer: 2,
+      },
+      {
+        question: "Which empire built the castles in Gondar?",
+        options: ["Axumite", "Zagwe", "Solomonic", "Gondarine"],
+        answer: 3,
+      },
+    ],
+    geography: [
+      {
+        question: "Which line divides the Earth into Northern and Southern hemispheres?",
+        options: ["Equator", "Prime Meridian", "Tropic of Cancer", "Arctic Circle"],
+        answer: 0,
+      },
+      {
+        question: "Which is the largest desert in the world?",
+        options: ["Sahara", "Kalahari", "Gobi", "Arabian"],
+        answer: 0,
+      },
+      {
+        question: "Which country is called the 'Horn of Africa'?",
+        options: ["Ethiopia", "Somalia", "Kenya", "Djibouti"],
+        answer: 1,
+      },
+    ],
+    citizenship: [
+      {
+        question: "Which branch of government makes laws?",
+        options: ["Executive", "Legislative", "Judiciary", "Military"],
+        answer: 1,
+      },
+      {
+        question: "What is the supreme law of Ethiopia?",
+        options: ["The Bible", "The Constitution", "The Parliament", "The Courts"],
+        answer: 1,
+      },
+      {
+        question: "Which quality is essential for good citizenship?",
+        options: ["Obedience", "Responsibility", "Participation", "All of the above"],
+        answer: 3,
+      },
+    ],
+  },
+  grade11: {
+    biology: [
+      {
+        question: "What is the basic unit of life?",
+        options: ["Atom", "Molecule", "Cell", "Organ"],
+        answer: 2,
+      },
+      {
+        question: "Which organelle is responsible for photosynthesis?",
+        options: ["Mitochondria", "Chloroplast", "Nucleus", "Ribosome"],
+        answer: 1,
+      },
+      {
+        question: "What type of reproduction involves only one parent?",
+        options: ["Sexual", "Asexual", "Fertilization", "Pollination"],
+        answer: 1,
+      },
+    ],
+    chemistry: [
+      {
+        question: "Which gas is released during photosynthesis?",
+        options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+        answer: 0,
+      },
+      {
+        question: "What is the pH of pure water?",
+        options: ["7", "0", "14", "1"],
+        answer: 0,
+      },
+      {
+        question: "Which element is most abundant in the Earth’s crust?",
+        options: ["Oxygen", "Iron", "Silicon", "Aluminium"],
+        answer: 0,
+      },
+    ],
+    physics: [
+      {
+        question: "What is the formula for speed?",
+        options: ["s = v × t", "v = s / t", "a = v / t", "F = m × a"],
+        answer: 1,
+      },
+      {
+        question: "Which of these is a scalar quantity?",
+        options: ["Velocity", "Acceleration", "Speed", "Force"],
+        answer: 2,
+      },
+      {
+        question: "What is the acceleration due to gravity on Earth?",
+        options: ["9.8 m/s²", "10 m/s²", "9.8 km/s²", "8 m/s²"],
+        answer: 0,
+      },
+    ],
+    english: [
+      {
+        question: "Choose the correct past tense form: 'She ___ to the market yesterday.'",
+        options: ["go", "gone", "went", "going"],
+        answer: 2,
+      },
+      {
+        question: "Select the synonym of 'happy'.",
+        options: ["Sad", "Joyful", "Angry", "Tired"],
+        answer: 1,
+      },
+      {
+        question: "Identify the adjective: 'The quick brown fox jumps over the lazy dog.'",
+        options: ["Fox", "Jumps", "Quick", "Dog"],
+        answer: 2,
+      },
+    ],
+    math: [
+      {
+        question: "Solve: 3x + 5 = 20",
+        options: ["x = 5", "x = 10", "x = 15", "x = 8"],
+        answer: 0,
+      },
+      {
+        question: "What is the value of log₁₀ 1000?",
+        options: ["2", "3", "4", "10"],
+        answer: 1,
+      },
+      {
+        question: "Simplify: 2(x + 3) + 4",
+        options: ["2x + 10", "2x + 6", "2x + 4", "x + 7"],
+        answer: 0,
+      },
+    ],
+    history: [
+      {
+        question: "Who was the first emperor of Ethiopia?",
+        options: ["Menelik II", "Haile Selassie", "Yekuno Amlak", "Tewodros II"],
+        answer: 2,
+      },
+      {
+        question: "In which year did Ethiopia resist Italian invasion successfully at Adwa?",
+        options: ["1896", "1935", "1890", "1900"],
+        answer: 0,
+      },
+      {
+        question: "Which dynasty ruled Ethiopia before the 20th century?",
+        options: ["Zagwe", "Solomonic", "Axumite", "Oromo"],
+        answer: 1,
+      },
+    ],
+    geography: [
+      {
+        question: "Which continent is the Sahara Desert located in?",
+        options: ["Asia", "Africa", "Australia", "South America"],
+        answer: 1,
+      },
+      {
+        question: "Which river is the longest in the world?",
+        options: ["Amazon", "Nile", "Yangtze", "Mississippi"],
+        answer: 1,
+      },
+      {
+        question: "Which ocean is the largest by area?",
+        options: ["Atlantic", "Indian", "Arctic", "Pacific"],
+        answer: 3,
+      },
+    ],
+    citizenship: [
+      {
+        question: "Which branch of government interprets laws?",
+        options: ["Legislative", "Executive", "Judiciary", "Military"],
+        answer: 2,
+      },
+      {
+        question: "Which of the following is a civic duty?",
+        options: ["Voting", "Obeying laws", "Paying taxes", "All of the above"],
+        answer: 3,
+      },
+      {
+        question: "What is the national flag a symbol of?",
+        options: ["Unity", "Sovereignty", "Identity", "All of the above"],
+        answer: 3,
+      },
+    ],
+  },
+
+
 };
 
-const questions = [
-  {
-    q: "What is the derivative of x²?",
-    options: ["2", "x", "2x", "x²"],
-    answer: 2,
-    explanation: "The derivative of x² with respect to x is 2x.",
-  },
-  {
-    q: "What is the value of √(16)?",
-    options: ["2", "4", "8", "16"],
-    answer: 1,
-    explanation: "√16 = 4",
-  },
-  {
-    q: "Solve for x: 2x + 3 = 7",
-    options: ["1", "2", "3", "4"],
-    answer: 1,
-    explanation: "2x+3=7 → 2x=4 → x=2",
-  },
-  {
-    q: "What is the area of a triangle with base 4 and height 3?",
-    options: ["6", "12", "7", "9"],
-    answer: 0,
-    explanation: "Area = ½ × base × height = 6.",
-  },
-  {
-    q: "What is 5 factorial (5!)?",
-    options: ["25", "60", "120", "720"],
-    answer: 2,
-    explanation: "5! = 5×4×3×2×1 = 120.",
-  },
-];
 
-export default function QuizPage({gradeId}) {
-  const [showError, setShowError] = useState(false);
-  // If grade is in gradesWithoutCategories → skip home and go directly to subject
-  const gradesWithoutCategories = ["grade_9", "grade_10"];
-  const initialStep = gradesWithoutCategories.includes(gradeId) ? "subject" : "home";
-  const [step, setStep] = useState(initialStep);
-  const [category, setCategory] = useState(null);
-  const [subject, setSubject] = useState(null);
+export default function QuizPage() {
+  const [grade, setGrade] = useState("");
+  const [subject, setSubject] = useState("");
   const [currentQ, setCurrentQ] = useState(0);
-  const [answers, setAnswers] = useState(Array(questions.length).fill(null));
-  const [timeLeft, setTimeLeft] = useState(5 * 60);
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
 
-  // Timer
-  useEffect(() => {
-    if (step === "quiz" && timeLeft > 0) {
-      const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
-      return () => clearInterval(timer);
+  const questions =
+    grade && subject ? quizData[grade][subject] || [] : [];
+
+  const handleAnswer = (i) => {
+    if (i === questions[currentQ].answer) {
+      setScore(score + 1);
     }
-    if (timeLeft === 0) setStep("results");
-  }, [step, timeLeft]);
 
-  const score = answers.filter((a, i) => a === questions[i].answer).length;
+    if (currentQ + 1 < questions.length) {
+      setCurrentQ(currentQ + 1);
+    } else {
+      setShowResult(true);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-slate-100 text-gray-800 pt-24">
-      {/* Step 1: Practice Home (Natural / Social buttons) */}
-      {step === "home" && (
-        <div className="mt-12 flex gap-8">
-          <div
-            onClick={() => setStep("subject")}
-            className="bg-blue-600 text-white font-bold text-xl px-12 py-16 rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition"
+    <div className="p-6 max-w-2xl mx-auto mt-20">
+      {/* Select Grade */}
+      <div className="mb-4">
+        <label className="block mb-2 font-semibold">Select Grade:</label>
+        <select
+          value={grade}
+          onChange={(e) => {
+            setGrade(e.target.value);
+            setSubject("");
+            setCurrentQ(0);
+            setShowResult(false);
+            setScore(0);
+          }}
+          className="border p-2 rounded w-full"
+        >
+          <option value="">-- Choose Grade --</option>
+          <option value="grade9">Grade 9</option>
+          <option value="grade10">Grade 10</option>
+          <option value="grade11">Grade 11</option>
+          <option value="grade12">Grade 12</option>
+        </select>
+      </div>
+
+      {/* Select Subject */}
+      {grade && (
+        <div className="mb-4">
+          <label className="block mb-2 font-semibold">Select Subject:</label>
+          <select
+            value={subject}
+            onChange={(e) => {
+              setSubject(e.target.value);
+              setCurrentQ(0);
+              setShowResult(false);
+              setScore(0);
+            }}
+            className="border p-2 rounded w-full"
           >
-            Natural Science
-          </div>
-          <div
-            onClick={() => setStep("subject")}
-            className="bg-blue-600 text-white font-bold text-xl px-12 py-16 rounded-2xl shadow-lg cursor-pointer hover:scale-105 transition"
-          >
-            Social Science
-          </div>
+            <option value="">-- Choose Subject --</option>
+            {Object.keys(quizData[grade]).map((sub) => (
+              <option key={sub} value={sub}>
+                {sub.charAt(0).toUpperCase() + sub.slice(1)}
+              </option>
+            ))}
+          </select>
         </div>
       )}
 
-      {/* Step 2: Subject Selection */}
-      {step === "subject" && (
-        <div className="max-w-4xl w-full mt-12 flex flex-col items-center">
-          {/* Show Back button only if grade has categories */}
-          {!gradesWithoutCategories.includes(gradeId) && (
-            <button
-              onClick={() => setStep("home")}
-              className="mb-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-            >
-              ← Back to Categories
-            </button>
-          )}
-
-          <h2 className="text-blue-600 text-2xl font-semibold mb-6">
-            Subjects
+      {/* Quiz Section */}
+      {subject && questions.length > 0 && !showResult && (
+        <div>
+          <h2 className="text-xl font-semibold mb-3">
+            Q{currentQ + 1}: {questions[currentQ].question}
           </h2>
-          <div className="grid grid-cols-3 gap-6 w-full">
-            {natural.map(
-              (subject) => (
-                <div
-                  key={subject}
-                  onClick={() => setStep("quiz")}
-                  className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:-translate-y-1 transition p-4 flex flex-col items-center"
-                >
-                  <img
-                    src={subject.img}
-                    alt={subject.name}
-                    className="w-full h-32 object-cover border-b-2 border-blue-500"
-                  />
-                  <p className="mt-2 text-blue-700 font-semibold">{subject.name}</p>
-                </div>
-              )
-            )}
-          </div>
-        </div>
-      )}
 
-      {/* Step 3: Quiz Page */}
-      {step === "quiz" && (
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-          <div className="text-right text-red-600 mb-2">
-            Time left: {Math.floor(timeLeft / 60)}:
-            {String(timeLeft % 60).padStart(2, "0")}
-          </div>
-          <h3 className="text-lg font-bold mb-4">
-            Q{currentQ + 1}: {questions[currentQ].q}
-          </h3>
           <div className="flex flex-col gap-2">
             {questions[currentQ].options.map((opt, i) => (
               <button
                 key={i}
-                onClick={() => {
-                  const newAns = [...answers];
-                  newAns[currentQ] = i;
-                  setAnswers(newAns);
-                }}
-                className={`px-4 py-2 rounded border ${
-                  answers[currentQ] === i
-                    ? "bg-blue-100 border-blue-500"
-                    : "bg-gray-50"
-                }`}
+                onClick={() => handleAnswer(i)}
+                className="p-2 border rounded hover:bg-green-100"
               >
                 {opt}
               </button>
             ))}
           </div>
-
-          {/* Error message if user tries to skip without answering */}
-          {showError && (
-            <div className="text-red-600 mt-3 text-sm">
-              ⚠️ You did not select an answer.
-            </div>
-          )}
-
-          <div className="flex justify-between mt-6">
-            <button
-              disabled={currentQ === 0}
-              onClick={() => {
-                setShowError(false);
-                setCurrentQ((q) => q - 1);
-              }}
-              className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
-            >
-              Back
-            </button>
-            <button
-              onClick={() => {
-                if (answers[currentQ] === null) {
-                  setShowError(true);
-                  return;
-                }
-                setShowError(false);
-                if (currentQ === questions.length - 1) {
-                  setStep("results");
-                } else {
-                  setCurrentQ((q) => q + 1);
-                }
-              }}
-              className="px-4 py-2 bg-blue-600 text-white rounded"
-            >
-              {currentQ === questions.length - 1 ? "Submit" : "Next"}
-            </button>
-          </div>
         </div>
       )}
 
-
-      {step === "results" && (
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-          <h2 className="text-xl font-bold text-blue-700 mb-4">Your Score</h2>
-
-          {/* Calculate total correct and incorrect */}
-          {(() => {
-            const totalAnswered = answers.filter(a => a !== null).length;
-            const totalCorrect = answers.reduce(
-              (acc, a, i) => (a === questions[i].answer ? acc + 1 : acc),
-              0
-            );
-            const totalIncorrect = totalAnswered - totalCorrect;
-            const percent = totalAnswered ? Math.round((totalCorrect / questions.length) * 100) : 0;
-            return (
-              <div className="mb-4">
-                <div className="text-2xl font-semibold mb-2">
-                  {totalCorrect} / {questions.length} ({percent}%)
-                </div>
-                <div className="flex gap-4">
-                  <div className="bg-green-100 text-green-700 px-3 py-1 rounded">
-                    Got: {totalCorrect}
-                  </div>
-                  <div className="bg-red-100 text-red-700 px-3 py-1 rounded">
-                    Lost: {totalIncorrect}
-                  </div>
-                </div>
-              </div>
-            );
-          })()}
-
-          <div className="flex flex-col gap-2 max-h-60 overflow-y-auto">
-            {questions.map((q, i) => (
-              <div key={i} className="p-2 border rounded">
-                <strong>Q{i + 1}:</strong> {q.q} <br />
-                Your answer:{" "}
-                <span className={answers[i] === q.answer ? "text-green-600" : "text-red-600"}>
-                  {answers[i] !== null ? q.options[answers[i]] : "No Answer"}
-                </span>{" "}
-                | Correct: <span className="text-green-600">{q.options[q.answer]}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex gap-3 mt-4">
-            <button
-              onClick={() => {
-                setAnswers(Array(questions.length).fill(null));
-                setCurrentQ(0);
-                setTimeLeft(5 * 60);
-                setStep("quiz");
-              }}
-              className="px-4 py-2 bg-blue-600 text-white rounded"
-            >
-              Retake
-            </button>
-            <button onClick={() => setStep("explanation")} className="px-4 py-2 bg-blue-600 text-white rounded">
-              Review Answers
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Step 6: Explanation */}
-      {step === "explanation" && (
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl">
-          <h2 className="text-lg font-bold mb-4">Explanations</h2>
-          <div>
-            <h3>
-              Q{currentQ + 1}: {questions[currentQ].q}
-            </h3>
-            <p>Your answer: {answers[currentQ] !== null ? questions[currentQ].options[answers[currentQ]] : "No Answer"}</p>
-            <p>Correct answer: {questions[currentQ].options[questions[currentQ].answer]}</p>
-            <p className="text-sm text-gray-600 mt-2">{questions[currentQ].explanation}</p>
-          </div>
-          <div className="flex justify-between mt-6">
-            <button onClick={() => setStep("home")} className="px-4 py-2 bg-gray-300 rounded">
-              Back to Home
-            </button>
-            <button
-              onClick={() => setCurrentQ((q) => Math.min(q + 1, questions.length - 1))}
-              disabled={currentQ === questions.length - 1}
-              className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+      {/* Result */}
+      {showResult && (
+        <div className="mt-6">
+          <h2 className="text-2xl font-bold text-green-700">Quiz Completed!</h2>
+          <p className="mt-2">
+            You scored <b>{score}</b> out of <b>{questions.length}</b>.
+          </p>
+          <button
+            onClick={() => {
+              setCurrentQ(0);
+              setScore(0);
+              setShowResult(false);
+            }}
+            className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+            Restart Quiz
+          </button>
         </div>
       )}
     </div>
