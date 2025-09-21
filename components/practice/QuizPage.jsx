@@ -536,7 +536,7 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-6 max-w-2xl mx-auto mt-24">
       <h1 className="text-3xl font-bold mb-4 text-green-700">Makeda Tour Quiz</h1>
 
       {/* Select Grade */}
