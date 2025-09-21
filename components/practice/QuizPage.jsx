@@ -1,6 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Image from "next/image";
 
-const quizData = {
+// ✅ Subjects data (with icons/images)
+const subjectsData = [
+  { name: "Math", image: "/icons/math.png" },
+  { name: "English", image: "/icons/english.png" },
+  { name: "Physics", image: "/icons/physics.png" },
+  { name: "Chemistry", image: "/icons/chemistry.png" },
+  { name: "Biology", image: "/icons/biology.png" },
+  { name: "History", image: "/icons/history.png" },
+];
+
+
+const questionsByGradeAndSubject = {
   grade9: {
     biology: [
       {
@@ -512,116 +524,131 @@ const quizData = {
 
 };
 
-
 export default function QuizPage() {
-  const [grade, setGrade] = useState("");
-  const [subject, setSubject] = useState("");
+  const [grade, setGrade] = useState("grade_9");
+  const [subject, setSubject] = useState(null);
   const [currentQ, setCurrentQ] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showResult, setShowResult] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
 
+  // ✅ Get the questions for selected grade & subject
   const questions =
-    grade && subject ? quizData[grade][subject] || [] : [];
-
-  const handleAnswer = (i) => {
-    if (i === questions[currentQ].answer) {
-      setScore(score + 1);
-    }
-
-    if (currentQ + 1 < questions.length) {
-      setCurrentQ(currentQ + 1);
-    } else {
-      setShowResult(true);
-    }
-  };
+    subject && questionsByGradeAndSubject[grade][subject]
+      ? questionsByGradeAndSubject[grade][subject]
+      : [];
 
   return (
-    <div className="p-6 max-w-2xl mx-auto mt-20">
+    <div className="p-6 max-w-3xl mx-auto">
       {/* Select Grade */}
-      <div className="mb-4">
-        <label className="block mb-2 font-semibold">Select Grade:</label>
+      <div className="mb-6">
+        <h2 className="text-xl font-bold mb-2">Choose Grade</h2>
         <select
           value={grade}
           onChange={(e) => {
             setGrade(e.target.value);
-            setSubject("");
+            setSubject(null);
             setCurrentQ(0);
-            setShowResult(false);
-            setScore(0);
           }}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded"
         >
-          <option value="">-- Choose Grade --</option>
-          <option value="grade9">Grade 9</option>
-          <option value="grade10">Grade 10</option>
-          <option value="grade11">Grade 11</option>
-          <option value="grade12">Grade 12</option>
+          <option value="grade_9">Grade 9</option>
+          <option value="grade_10">Grade 10</option>
         </select>
       </div>
 
       {/* Select Subject */}
-      {grade && (
-        <div className="mb-4">
-          <label className="block mb-2 font-semibold">Select Subject:</label>
-          <select
-            value={subject}
-            onChange={(e) => {
-              setSubject(e.target.value);
-              setCurrentQ(0);
-              setShowResult(false);
-              setScore(0);
-            }}
-            className="border p-2 rounded w-full"
-          >
-            <option value="">-- Choose Subject --</option>
-            {Object.keys(quizData[grade]).map((sub) => (
-              <option key={sub} value={sub}>
-                {sub.charAt(0).toUpperCase() + sub.slice(1)}
-              </option>
-            ))}
-          </select>
+      <div className="mb-6">
+        <h2 className="text-xl font-bold mb-2">Choose Subject</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {subjectsData.map((subj) => (
+            <button
+              key={subj.name}
+              onClick={() => {
+                setSubject(subj.name);
+                setCurrentQ(0);
+                setSelectedAnswer(null);
+              }}
+              className={`border rounded p-4 flex flex-col items-center hover:bg-green-100 ${
+                subject === subj.name ? "bg-green-200 border-green-500" : ""
+              }`}
+            >
+              <Image
+                src={subj.image}
+                alt={subj.name}
+                width={50}
+                height={50}
+              />
+              <span className="mt-2 font-semibold">{subj.name}</span>
+            </button>
+          ))}
         </div>
-      )}
+      </div>
 
-      {/* Quiz Section */}
-      {subject && questions.length > 0 && !showResult && (
-        <div>
-          <h2 className="text-xl font-semibold mb-3">
-            Q{currentQ + 1}: {questions[currentQ].question}
-          </h2>
+      {/* Show Questions */}
+      {subject && questions.length > 0 ? (
+        <div className="border p-4 rounded-lg shadow">
+          <h3 className="text-lg font-bold mb-4">
+            Q{currentQ + 1}: {questions[currentQ].q}
+          </h3>
 
           <div className="flex flex-col gap-2">
             {questions[currentQ].options.map((opt, i) => (
               <button
                 key={i}
-                onClick={() => handleAnswer(i)}
-                className="p-2 border rounded hover:bg-green-100"
+                onClick={() => setSelectedAnswer(i)}
+                className={`p-2 rounded border text-left ${
+                  selectedAnswer === i
+                    ? "bg-green-500 text-white"
+                    : "bg-white hover:bg-gray-100"
+                }`}
               >
                 {opt}
               </button>
             ))}
           </div>
-        </div>
-      )}
 
-      {/* Result */}
-      {showResult && (
-        <div className="mt-6">
-          <h2 className="text-2xl font-bold text-green-700">Quiz Completed!</h2>
-          <p className="mt-2">
-            You scored <b>{score}</b> out of <b>{questions.length}</b>.
-          </p>
-          <button
-            onClick={() => {
-              setCurrentQ(0);
-              setScore(0);
-              setShowResult(false);
-            }}
-            className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-            Restart Quiz
-          </button>
+          {/* Feedback */}
+          {selectedAnswer !== null && (
+            <p
+              className={`mt-3 font-semibold ${
+                selectedAnswer === questions[currentQ].answer
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              {selectedAnswer === questions[currentQ].answer
+                ? "✅ Correct!"
+                : "❌ Wrong, try again!"}
+            </p>
+          )}
+
+          {/* Navigation */}
+          <div className="flex justify-between mt-4">
+            <button
+              disabled={currentQ === 0}
+              onClick={() => {
+                setCurrentQ(currentQ - 1);
+                setSelectedAnswer(null);
+              }}
+              className="px-4 py-2 border rounded disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <button
+              disabled={currentQ === questions.length - 1}
+              onClick={() => {
+                setCurrentQ(currentQ + 1);
+                setSelectedAnswer(null);
+              }}
+              className="px-4 py-2 border rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
         </div>
+      ) : subject ? (
+        <p>No questions available for this subject and grade yet.</p>
+      ) : (
+        <p className="text-gray-500">Please select a subject to begin.</p>
       )}
     </div>
   );
