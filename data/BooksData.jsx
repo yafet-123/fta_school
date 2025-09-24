@@ -231,6 +231,42 @@ const BooksSummaryArray = [
     units: "",
     pages:"",
   },
+  {
+    id: "Grade 11 Social",
+    name: "Grade 11 Social",
+    grade: "Grade 11 Social",
+    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
+    file: "/pdfs/grade4-arts.pdf",
+    units: "",
+    pages:"",
+  },
+  {
+    id: "Grade 11 Natural",
+    name: "Grade 11 Natural",
+    grade: "Grade 11 Natural",
+    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
+    file: "/pdfs/grade4-arts.pdf",
+    units: "",
+    pages:"",
+  },
+  {
+    id: "Grade 12 Social",
+    name: "Grade 12 Social",
+    grade: "Grade 12 Social",
+    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
+    file: "/pdfs/grade4-arts.pdf",
+    units: "",
+    pages:"",
+  },
+  {
+    id: "Grade 12 Social",
+    name: "Grade 12 Social",
+    grade: "Grade 12 Social",
+    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
+    file: "/pdfs/grade4-arts.pdf",
+    units: "",
+    pages:"",
+  },
 ];
 
 export function getFeaturedBooks() {
