@@ -259,9 +259,9 @@ const BooksSummaryArray = [
     pages:"",
   },
   {
-    id: "Grade 12 Social",
-    name: "Grade 12 Social",
-    grade: "Grade 12 Social",
+    id: "Grade 12 Natural",
+    name: "Grade 12 Natural",
+    grade: "Grade 12 Natural",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
     units: "",
