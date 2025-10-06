@@ -11,15 +11,15 @@ import { getSession } from "next-auth/react";
 export async function getServerSideProps(context){
   const session = await getSession(context);
   const serverdate = new Date();
-  // const userRole = session?.user?.role;
-  // if (userRole !== 'admin') {
-  //   return {
-  //     redirect: {
-  //       destination: '/auth/Admin/Login/signin-user',
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  const userRole = session?.user?.role;
+   if (userRole !== 'admin') {
+     return {
+       redirect: {
+         destination: '/auth/Admin/Login/signin-user',
+         permanent: false,
+       },
+     };
+   }
   return{
     props:{
       
