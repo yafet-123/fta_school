@@ -16,13 +16,19 @@ export default function Subject({subjects}) {
             >
               {/* Image Section */}
               <div className="relative w-full h-64 overflow-hidden rounded-xl">
-                <Image
-                  src={subject.svg}
-                  alt={subject.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-xl group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                />
+                {subject.svg ? (
+                  <Image
+                    src={subject.svg}
+                    alt={subject.name}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-xl group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center">
+                    <FaFolder className="text-white w-20 h-20 opacity-70" />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
