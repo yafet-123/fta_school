@@ -89,10 +89,9 @@ export default function DefinitionSheetDetail({ sheet }) {
           <div className="mt-10">
             <Link
               href={`/study/definitionSheet/subject/${sheet.Subject.id}`}
-            > 
-              <a className="inline-block px-6 py-3 bg-[#9234eb] text-white rounded-lg hover:bg-[#c99bf4] hover:text-[#000] transition">
-                Back to Definition Sheets
-              </a>
+              className="inline-block px-6 py-3 bg-[#9234eb] text-white rounded-lg hover:bg-[#c99bf4] hover:text-[#000] transition"
+            >
+              Back to Definition Sheets
             </Link>
           </div>
         </div>

@@ -16,10 +16,9 @@ export default function BookDetail({ quizzes, subjectId }) {
                 <Link
                   key={quiz.id}
                   href={`/study/practice-quizzes/${quiz.Subject.name}/question/${quiz.id}`}
+                  className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition-shadow duration-300 block"
                 >
-                  <a className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition-shadow duration-300">
                     <h3 className="text-lg font-semibold mb-2">{quiz.title}</h3>
-                  </a>
                 </Link>
               ))}
             </div>

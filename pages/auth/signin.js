@@ -104,10 +104,8 @@ export default function SignIn({ csrfToken }) {
                     </Field>
                   </label>
                 </div>
-                <Link href={`/${formik.values.type}/Forgotpassword`}>
-                  <a className="font-bold flex justify-end text-lg lg:text-xl text-red-600 mb-5">
-                    Forgot password?
-                  </a>
+                <Link href={`/${formik.values.type}/Forgotpassword`} className="font-bold flex justify-end text-lg lg:text-xl text-red-600 mb-5">
+                  Forgot password?
                 </Link>
                 <div className="flex items-center justify-center">
                   <button

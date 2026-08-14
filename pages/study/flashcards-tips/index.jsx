@@ -83,10 +83,8 @@ export default function FlashcardsTips({subjects}) {
             Boost your memory, master concepts, and study efficiently with
             interactive flashcards and proven techniques.
           </p>
-          <Link href="#flashcards">
-            <button className="bg-white text-yellow-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
-              Start Learning
-            </button>
+          <Link href="#flashcards" className="bg-white text-yellow-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+            Start Learning
           </Link>
           
         </section>

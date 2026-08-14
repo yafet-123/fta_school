@@ -65,10 +65,8 @@ export default function ResetPassword() {
     return(
       <div className="flex flex-col justify-center items-center h-screen w-full bg-[#e6e6e6]" >
         <p className="mb-5 text-black text-xl font-bold">Your password has been successfully reset password.</p>
-        <Link href="/auth/Teacher/Login/signin-teacher">
-          <a className="w-32 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl p-4">
+        <Link href="/auth/Teacher/Login/signin-teacher" className="w-32 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xl p-4">
             Login
-          </a>
         </Link>
 
       </div>

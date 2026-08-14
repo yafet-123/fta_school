@@ -20,10 +20,9 @@ export default function BookDetail({ worksheetes, subjectId }) {
                   <Link
                     key={worksheet.id}
                     href={`/study/worksheet/${worksheet.Subject.name}/question/${worksheet.id}`}
+                    className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition-shadow duration-300 block"
                   >
-                    <a className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition-shadow duration-300">
                       <h3 className="text-lg font-semibold mb-2">{worksheet.title}</h3>
-                    </a>
                   </Link>
                 ))}
               </div>

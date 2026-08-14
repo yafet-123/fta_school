@@ -65,10 +65,8 @@ export default function Articles({subjects}) {
           <p className="text-lg md:text-xl mb-8">
             Access curated articles, guides, and educational content to enhance your learning experience.
           </p>
-          <Link href="#Article"> 
-            <a className="bg-white text-purple-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
-              Browse Articles
-            </a>
+          <Link href="#Article" className="bg-white text-purple-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+            Browse Articles
           </Link>
         </section>
 

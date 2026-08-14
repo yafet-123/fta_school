@@ -9,10 +9,8 @@ export default function ArticleDetail({ article }) {
         <MainHeader title="Aceit : Article Slug Page" />
         <div className="py-32 px-5 lg:px-20 text-center">
           <h2 className="text-2xl font-bold">Article not found</h2>
-          <Link href="/study/books/article">
-            <button className="mt-6 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+          <Link href="/study/books/article" className="inline-block mt-6 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
               Back to Articles
-            </button>
           </Link>
         </div>
       </div>
@@ -65,10 +63,8 @@ export default function ArticleDetail({ article }) {
 
             {/* Back Button */}
             <div className="mt-8">
-              <Link href={`/study/books/article/subject/${article.Subject.id}`}>
-                <button className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+              <Link href={`/study/books/article/subject/${article.Subject.id}`} className="inline-block px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
                   Back to Articles
-                </button>
               </Link>
             </div>
           </div>

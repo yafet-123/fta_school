@@ -14,13 +14,13 @@ export default function BookGradeDetail({ topics }) {
         {topics.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {topics.map((flash) => (
-              <Link key={flash.title} href={`/study/flashcards-tips/${flash.Subject.name}/flashcard/${flash.id}`}>
-                <a className="flex flex-col items-center gap-3 p-4 rounded-xl bg-[#ededf2] shadow hover:shadow-lg transition text-left">
+              <Link key={flash.title} href={`/study/flashcards-tips/${flash.Subject.name}/flashcard/${flash.id}`}
+                className="flex flex-col items-center gap-3 p-4 rounded-xl bg-[#ededf2] shadow hover:shadow-lg transition text-left"
+              >
                   <span className="text-2xl text-indigo-500">
                     <FaBook />
                   </span>
                   <span className="font-medium">{flash.title}</span>
-                </a>
               </Link>
             ))}
           </div>

@@ -102,10 +102,8 @@ export default function Books() {
           <p className="text-lg md:text-xl mb-8">
             Access curated digital books, guides, and textbooks to enrich your learning experience.
           </p>
-          <Link href="#Book">
-            <button className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+          <Link href="#Book" className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
               Browse Books
-            </button>
           </Link>
 
         </section>
@@ -175,14 +173,13 @@ export default function Books() {
               <Link
                 key={feature.id}
                 href={feature.path}
+                className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
               >
-                <a className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4">
                   <div className="flex justify-center mb-4">{feature.icon}</div>
                   <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600 text-center">{feature.description}</p>
-                </a>
               </Link>
             ))}
           </div>

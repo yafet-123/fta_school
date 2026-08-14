@@ -71,9 +71,7 @@ export default function ForgotPassword() {
             </button>
 
             <p className="text-center text-gray-500 text-sm mt-6">
-              Remembered your password? <Link href="/auth/Admin/Login/signin-user">
-              <a className="text-blue-600 hover:underline">Login</a>
-              </Link>
+              Remembered your password? <Link href="/auth/Admin/Login/signin-user" className="text-blue-600 hover:underline">Login</Link>
             </p>
           </div>
         </div>
