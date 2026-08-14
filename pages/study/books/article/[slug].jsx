@@ -1,7 +1,6 @@
 import { MainHeader } from "../../../../components/common/MainHeader";
 import { prisma } from "../../../../util/db.server";
 import Link from "next/link";
-import React from "react";
 
 export default function ArticleDetail({ article }) {
   if (!article) {
@@ -19,7 +18,7 @@ export default function ArticleDetail({ article }) {
       </div>
     );
   }
-  
+
   return (
     <div>
       <MainHeader title="Aceit : Article Slug Page" />
@@ -83,7 +82,7 @@ export default function ArticleDetail({ article }) {
 export async function getServerSideProps(context) {
   const { slug } = context.params; // get slug from the URL
 
-  try { 
+  try {
     const article = await prisma.Article.findUnique({
       where: { slug: slug },
       include: {
