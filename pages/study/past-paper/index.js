@@ -97,11 +97,6 @@ export async function getServerSideProps() {
   try {
     const subjects = await prisma.Subject.findMany({
       orderBy: { id: "asc" },
-      where: {
-        PastPaperTopic: {
-          some: {}, // only subjects that have at least one PastPaperTopic
-        },
-      },
       include: {
         PastPaperTopic: true,
       },
