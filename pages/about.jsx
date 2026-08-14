@@ -8,8 +8,6 @@ import {
   FaChartLine,
   FaRegLightbulb,
   FaTwitter,
-  FaFacebookF,
-  FaInstagram,
 } from "react-icons/fa";
 
 export default function AboutPage() {
