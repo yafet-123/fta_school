@@ -1,21 +1,12 @@
-<<<<<<< HEAD
 const BooksSummaryArray = [ 
-=======
-const BooksSummaryArray = [
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   {
     id: "Grade 1 Amharic Book",
     name: "Grade 1 Amharic Book",
     grade: "Grade 1",
     description: "Introduces young learners to the Amharic alphabet, basic words, and reading skills.",
     file: "/pdfs/grade1-amharic.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 1 English Book",
@@ -23,13 +14,8 @@ const BooksSummaryArray = [
     grade: "Grade 1",
     description: "Basic English letters, vocabulary, and simple sentence structures for beginners.",
     file: "/pdfs/grade1-english.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 1 Environmental Science Book",
@@ -37,13 +23,8 @@ const BooksSummaryArray = [
     grade: "Grade 1",
     description: "Helps students explore nature, environment, and healthy living practices.",
     file: "/pdfs/grade1-environmental.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 1 Mathematics Book",
@@ -51,13 +32,8 @@ const BooksSummaryArray = [
     grade: "Grade 1",
     description: "Covers counting, addition, subtraction, shapes, and basic problem-solving.",
     file: "/pdfs/grade1-math.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 1 የክወናና የዕይታ ጥበባት",
@@ -65,13 +41,8 @@ const BooksSummaryArray = [
     grade: "Grade 1",
     description: "Creative arts and physical education activities for Grade 1 students.",
     file: "/pdfs/grade1-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 2 Amharic Book",
@@ -79,13 +50,8 @@ const BooksSummaryArray = [
     grade: "Grade 2",
     description: "Strengthens reading comprehension, vocabulary, and writing in Amharic.",
     file: "/pdfs/grade2-amharic.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 2 English Book",
@@ -93,13 +59,8 @@ const BooksSummaryArray = [
     grade: "Grade 2",
     description: "Expands vocabulary, grammar, and basic reading comprehension in English.",
     file: "/pdfs/grade2-english.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 2 Environmental Science Book",
@@ -107,13 +68,8 @@ const BooksSummaryArray = [
     grade: "Grade 2",
     description: "Explores plants, animals, and community roles in the environment.",
     file: "/pdfs/grade2-environmental.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 2 Mathematics Book",
@@ -121,13 +77,8 @@ const BooksSummaryArray = [
     grade: "Grade 2",
     description: "Builds on counting with multiplication, division, and simple fractions.",
     file: "/pdfs/grade2-math.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 2 የክወናና የዕይታ ጥበባት",
@@ -135,13 +86,8 @@ const BooksSummaryArray = [
     grade: "Grade 2",
     description: "Engages learners with drawing, painting, music, and physical activities.",
     file: "/pdfs/grade2-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 3 Amharic Book",
@@ -149,13 +95,8 @@ const BooksSummaryArray = [
     grade: "Grade 3",
     description: "Enhances storytelling, grammar, and reading fluency in Amharic.",
     file: "/pdfs/grade3-amharic.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 3 English Book",
@@ -163,13 +104,8 @@ const BooksSummaryArray = [
     grade: "Grade 3",
     description: "Develops reading comprehension, writing short stories, and vocabulary.",
     file: "/pdfs/grade3-english.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 3 Environmental Science Book",
@@ -177,13 +113,8 @@ const BooksSummaryArray = [
     grade: "Grade 3",
     description: "Introduces ecosystems, weather, and community health awareness.",
     file: "/pdfs/grade3-environmental.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 3 Mathematics Book",
@@ -191,13 +122,8 @@ const BooksSummaryArray = [
     grade: "Grade 3",
     description: "Focuses on multiplication, division, fractions, and measurements.",
     file: "/pdfs/grade3-math.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 3 የክወናና የዕይታ ጥበባት",
@@ -205,13 +131,8 @@ const BooksSummaryArray = [
     grade: "Grade 3",
     description: "Creative arts, music, and sports activities for well-rounded development.",
     file: "/pdfs/grade3-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 4 Amharic Book",
@@ -219,13 +140,8 @@ const BooksSummaryArray = [
     grade: "Grade 4",
     description: "Improves reading comprehension, grammar, and Amharic literature skills.",
     file: "/pdfs/grade4-amharic.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 4 English Book",
@@ -233,13 +149,8 @@ const BooksSummaryArray = [
     grade: "Grade 4",
     description: "Introduces more advanced grammar, essays, and story analysis in English.",
     file: "/pdfs/grade4-english.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 4 Environmental Science Book",
@@ -247,11 +158,8 @@ const BooksSummaryArray = [
     grade: "Grade 4",
     description: "Explores renewable resources, energy, and protecting the environment.",
     file: "/pdfs/grade4-environmental.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 4 Mathematics Book",
@@ -259,13 +167,8 @@ const BooksSummaryArray = [
     grade: "Grade 4",
     description: "Teaches decimals, fractions, geometry, and word problem-solving.",
     file: "/pdfs/grade4-math.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 4 የክወናና የዕይታ ጥበባት",
@@ -273,13 +176,8 @@ const BooksSummaryArray = [
     grade: "Grade 4",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
   {
     id: "Grade 5 ",
@@ -287,13 +185,8 @@ const BooksSummaryArray = [
     grade: "Grade 5",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
     {
     id: "Grade 6",
@@ -301,13 +194,8 @@ const BooksSummaryArray = [
     grade: "Grade 6",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
     {
     id: "Grade 7 ",
@@ -315,13 +203,8 @@ const BooksSummaryArray = [
     grade: "Grade 7",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
     {
     id: "Grade 8",
@@ -329,13 +212,8 @@ const BooksSummaryArray = [
     grade: "Grade 8",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
     {
     id: "Grade 9",
@@ -343,13 +221,8 @@ const BooksSummaryArray = [
     grade: "Grade 9",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
     {
     id: "Grade 10",
@@ -357,7 +230,6 @@ const BooksSummaryArray = [
     grade: "Grade 10",
     description: "Focus on creativity, physical health, and teamwork through arts & PE.",
     file: "/pdfs/grade4-arts.pdf",
-<<<<<<< HEAD
     unit: "",
     page:"",
   },
@@ -396,46 +268,6 @@ const BooksSummaryArray = [
     file: "/pdfs/grade4-arts.pdf",
     unit: "",
     page:"",
-=======
-    units: "",
-    pages:"",
-  },
-  {
-    id: "Grade 11 Social",
-    name: "Grade 11 Social",
-    grade: "Grade 11 Social",
-    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
-    file: "/pdfs/grade4-arts.pdf",
-    units: "",
-    pages:"",
-  },
-  {
-    id: "Grade 11 Natural",
-    name: "Grade 11 Natural",
-    grade: "Grade 11 Natural",
-    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
-    file: "/pdfs/grade4-arts.pdf",
-    units: "",
-    pages:"",
-  },
-  {
-    id: "Grade 12 Social",
-    name: "Grade 12 Social",
-    grade: "Grade 12 Social",
-    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
-    file: "/pdfs/grade4-arts.pdf",
-    units: "",
-    pages:"",
-  },
-  {
-    id: "Grade 12 Natural",
-    name: "Grade 12 Natural",
-    grade: "Grade 12 Natural",
-    description: "Focus on creativity, physical health, and teamwork through arts & PE.",
-    file: "/pdfs/grade4-arts.pdf",
-    units: "",
-    pages:"",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
 ];
 

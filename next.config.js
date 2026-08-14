@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-<<<<<<< HEAD
   swcMinify: false, // Disable SWC minification
   compiler: {
     // Disable SWC compiler completely
@@ -15,11 +14,6 @@ const nextConfig = {
       };
     }
     return config;
-=======
-  swcMinify: true,
-  images:{
-    domains:['res.cloudinary.com', "images.unsplash.com"]
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   },
 }
 

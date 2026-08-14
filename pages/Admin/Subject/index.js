@@ -7,11 +7,7 @@ import { useSession } from "next-auth/react";
 import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { getSession } from "next-auth/react";
-<<<<<<< HEAD
    
-=======
-
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
 export async function getServerSideProps(context){
   const session = await getSession(context);
   const serverdate = new Date();
@@ -26,19 +22,11 @@ export async function getServerSideProps(context){
   }
   
   const subjectes = await prisma.Subject.findMany({
-<<<<<<< HEAD
     orderBy : {modifiedAt:'desc'},
     include:{
       User:{
         select:{
           name:true
-=======
-    orderBy : {ModifiedDate:'desc'},
-    include:{
-      User:{
-        select:{
-          UserName:true
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
         }
       }
       
@@ -47,7 +35,6 @@ export async function getServerSideProps(context){
   });
   console.log(subjectes)
   const Allsujectes = subjectes.map((data)=>({
-<<<<<<< HEAD
       id:data.id,
       SubjectName:data.name,
       description: data.description,
@@ -55,13 +42,6 @@ export async function getServerSideProps(context){
       svg:data.svg,
       ModifiedDate:data.modifiedAt,
       User:data.User?.name,
-=======
-      subject_id:data.subject_id,
-      SubjectName:data.SubjectName,
-      CreatedDate:data.CreatedDate,
-      ModifiedDate:data.ModifiedDate,
-      User:data.User?.UserName,
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   }))
   
   return{
@@ -75,7 +55,6 @@ export default function Students({subjectes}) {
     const { status, data } = useSession();
     return (
     	<React.Fragment>
-<<<<<<< HEAD
       	<MainHeader title="Subject Dashboard" />
       	<section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
           <div className='w-full h-full flex flex-row'>
@@ -89,19 +68,3 @@ export default function Students({subjectes}) {
       </React.Fragment> 
     );
 }
-=======
-      		<MainHeader title="Subject Dashboard" />
-      		<section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
-				    <div className='w-full h-full flex flex-row'>
-		        	<VerticalNavbar data={data} />
-		        	<div className="w-full">
-            			<AddSubject />
-            			<DisplaySubject subjectes={subjectes} />
-        			</div>
-		        </div> 
-			     </section>
-      	</React.Fragment>
-        
-    );
-}
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a

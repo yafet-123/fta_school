@@ -7,19 +7,13 @@ export default async function handler(req, res) {
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-<<<<<<< HEAD
       user: process.env.NODEMAILER_USER,
       pass: process.env.NODEMAILER_PASSWORD,
-=======
-      user: "MatricMate@gmail.com",
-      pass: "mkhvelqnhlpkznji",
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
     },
   });
  
   // Define the email options
   const mailOptions = {
-<<<<<<< HEAD
     from: "addisuyafet321@gmail.com",
     to: "yafetaddisu123@gmail.com",
     subject: "New Contact Form Submission",
@@ -29,12 +23,6 @@ export default async function handler(req, res) {
           <p><strong>Phone:</strong> ${phone || "N/A"}</p>
           <p><strong>Message:</strong><br/> ${message}</p>
         `,
-=======
-    from: "MatricMate@gmail.com",
-    to: "yafetaddisu123@gmail.com",
-    subject: "New Contact Form Submission From HelenZeray.com",
-    text: `Name: ${name} \nEmail: ${email} \nphone: ${phone} \nMessage: ${message}`,
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   };
   console.log(mailOptions);
   try {

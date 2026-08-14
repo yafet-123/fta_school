@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { MainHeader } from '../components/common/MainHeader';
 import React from 'react'
 import Link from "next/link"
@@ -293,26 +292,6 @@ function TestimonialCard({ name, text }) {
     <div className="bg-purple-50 p-6 rounded-xl shadow-sm hover:shadow-lg transition">
       <p className="italic text-gray-700 mb-4">“{text}”</p>
       <h4 className="font-semibold text-[#417094]">{name}</h4>
-=======
-import { MainHeader } from "../components/common/MainHeader";
-import Hero from '../components/home/Hero.jsx';
-import ImageGallery from "../components/home/ImageGallery"
-import Testimonials from "../components/home/Testimonials"
-import ContactInformation from "../components/home/ContactInformation"
-import NewsEvents from "../components/home/NewsEvents"
-import {useRouter} from 'next/router'
-
-export default function Home() {
-  return (
-    <div className="">
-      <MainHeader title="Matrick Mate : Home" />
-      <div className="flex flex-col">
-        <Hero  
-          Tag="Empowering minds and shaping futures at MatricMate - where excellence meets opportunity."
-          Welcome_Message="At MatricMate, we take pride in fostering an environment where every student is empowered to unleash their potential. Our commitment lies in the holistic development of young minds, providing a dynamic platform where academic excellence meets individualized opportunities."
-        />
-      </div>
->>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
     </div>
   );
 }
