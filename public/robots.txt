@@ -3,7 +3,14 @@ User-agent: *
 Allow: /
 
 # Host
+<<<<<<< HEAD
 Host: https://aceit23.com/
 
 # Sitemaps
 Sitemap: https://aceit23.com/sitemap.xml
+=======
+Host: https://undiscoveredethiopia.com
+
+# Sitemaps
+Sitemap: https://undiscoveredethiopia.com/sitemap.xml
+>>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a

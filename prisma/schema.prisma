@@ -3,11 +3,16 @@ generator client {
 }
 
 datasource db {
+<<<<<<< HEAD
   provider = "mysql"
+=======
+  provider = "postgresql"
+>>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   url      = env("DATABASE_URL")
 }
 
 model User {
+<<<<<<< HEAD
   id              Int               @id @default(autoincrement())
   name            String            @unique(map: "name") @db.VarChar(255)
   email           String            @unique(map: "email") @db.VarChar(255)
@@ -440,4 +445,342 @@ model YoutubeLinkTopic {
   YoutubeLink   YoutubeLink @relation(fields: [youtubeLinkId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "YoutubeLinkTopic_yt_fkey")
 
   @@index([youtubeLinkId], map: "idx_yt_topic")
+=======
+  user_id                 Int                       @id @default(autoincrement())
+  UserName                String                    @unique @db.VarChar(255)
+  email                   String?                   @unique @db.VarChar(255)
+  resetToken              String?                   @unique @db.VarChar(255)
+  Password                String                    @db.VarChar(255)
+  role                    String?                   @db.VarChar(255)
+  CreatedDate             DateTime?                 @default(now()) @db.Timestamptz(6)
+  ModifiedDate            DateTime?                 @default(now()) @db.Timestamptz(6)
+  Answer                  Answer[]
+  Class                   Class[]
+  ClassSubject            ClassSubject[]
+  ClassTeacher            ClassTeacher[]
+  Quarter                 Quarter[]
+  QuarterQuestionCategory QuarterQuestionCategory[]
+  QuestionCategory        QuestionCategory[]
+  QuestionType            QuestionType[]
+  QuestionTypeQuestion    QuestionTypeQuestion[]
+  Students                Students[]
+  Subject                 Subject[]
+  SubjectQuestionCategory SubjectQuestionCategory[]
+  Teacher                 Teacher[]
+}
+
+model Class {
+  class_id              Int                     @id @default(autoincrement())
+  ClassName             String                  @db.VarChar(255)
+  user_id               Int?
+  CreatedDate           DateTime?               @default(now()) @db.Timestamptz(6)
+  ModifiedDate          DateTime?               @default(now()) @db.Timestamptz(6)
+  User                  User?                   @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  ClassAnnouncement     ClassAnnouncement[]
+  ClassQuestion         ClassQuestion[]
+  ClassSubject          ClassSubject[]
+  ClassTeacher          ClassTeacher[]
+  CommunicationRelation CommunicationRelation[]
+  Students              Students[]
+}
+
+model Teacher {
+  teacher_id            Int                     @id @default(autoincrement())
+  firstName             String?                 @db.VarChar(255)
+  lastName              String?                 @db.VarChar(255)
+  age                   Int?
+  UserName              String                  @unique @db.VarChar(255)
+  email                 String?                 @unique @db.VarChar(255)
+  resetToken            String?                 @unique @db.VarChar(255)
+  Password              String                  @db.VarChar(255)
+  role                  String?                 @db.VarChar(255)
+  CreatedDate           DateTime?               @default(now()) @db.Timestamptz(6)
+  ModifiedDate          DateTime?               @default(now()) @db.Timestamptz(6)
+  user_id               Int?
+  Announcement          Announcement[]
+  ClassQuestion         ClassQuestion[]
+  ClassTeacher          ClassTeacher[]
+  CommunicationRelation CommunicationRelation[]
+  Question              Question[]
+  User                  User?                   @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Announcement {
+  announcement_id   Int                 @id @default(autoincrement())
+  title             String
+  content           String
+  teacher_id        Int
+  CreatedDate       DateTime?           @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime?           @default(now()) @db.Timestamptz(6)
+  teacher           Teacher             @relation(fields: [teacher_id], references: [teacher_id])
+  ClassAnnouncement ClassAnnouncement[]
+}
+
+model Students {
+  students_id           Int                     @id @default(autoincrement())
+  firstName             String?                 @db.VarChar(255)
+  lastName              String?                 @db.VarChar(255)
+  age                   Int?
+  UserName              String                  @unique @db.VarChar(255)
+  email                 String?                 @unique @db.VarChar(255)
+  resetToken            String?                 @unique @db.VarChar(255)
+  Password              String                  @db.VarChar(255)
+  role                  String?                 @db.VarChar(255)
+  CreatedDate           DateTime?               @default(now()) @db.Timestamptz(6)
+  ModifiedDate          DateTime?               @default(now()) @db.Timestamptz(6)
+  class_id              Int?
+  user_id               Int?
+  CommunicationRelation CommunicationRelation[]
+  Mark                  Mark[]
+  Class                 Class?                  @relation(fields: [class_id], references: [class_id], onUpdate: NoAction)
+  User                  User?                   @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  Task                  Task[]
+  UserAnswer            UserAnswer[]
+}
+
+model ClassAnnouncement {
+  class_announcement_id Int          @id @default(autoincrement())
+  class_id              Int
+  announcement_id       Int
+  CreatedDate           DateTime?    @default(now()) @db.Timestamptz(6)
+  ModifiedDate          DateTime?    @default(now()) @db.Timestamptz(6)
+  Announcement          Announcement @relation(fields: [announcement_id], references: [announcement_id])
+  Class                 Class        @relation(fields: [class_id], references: [class_id])
+}
+
+model Communication {
+  communication_id      Int                     @id @default(autoincrement())
+  title                 String?                 @db.VarChar(255)
+  content               String?
+  isStudent             Boolean?                @default(false)
+  CreatedDate           DateTime?               @default(now()) @db.Timestamptz(6)
+  ModifiedDate          DateTime?               @default(now()) @db.Timestamptz(6)
+  CommunicationRelation CommunicationRelation[]
+}
+
+model CommunicationRelation {
+  communication_relation_id Int            @id @default(autoincrement())
+  class_id                  Int?
+  teacher_id                Int?
+  subject_id                Int?
+  students_id               Int?
+  communication_id          Int?
+  CreatedDate               DateTime?      @default(now()) @db.Timestamptz(6)
+  ModifiedDate              DateTime?      @default(now()) @db.Timestamptz(6)
+  Class                     Class?         @relation(fields: [class_id], references: [class_id], onDelete: Cascade)
+  Communication             Communication? @relation(fields: [communication_id], references: [communication_id], onDelete: Cascade)
+  Students                  Students?      @relation(fields: [students_id], references: [students_id], onDelete: Cascade)
+  Subject                   Subject?       @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade)
+  Teacher                   Teacher?       @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade)
+}
+
+model ClassTeacher {
+  teacher_class_id Int       @id @default(autoincrement())
+  user_id          Int?
+  class_id         Int
+  teacher_id       Int
+  subject_id       Int
+  CreatedDate      DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate     DateTime? @default(now()) @db.Timestamptz(6)
+  Class            Class     @relation(fields: [class_id], references: [class_id], onDelete: Cascade)
+  Subject          Subject   @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade)
+  Teacher          Teacher   @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade)
+  User             User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Subject {
+  subject_id              Int                       @id @default(autoincrement())
+  SubjectName             String                    @db.VarChar(255)
+  user_id                 Int?
+  CreatedDate             DateTime?                 @default(now()) @db.Timestamptz(6)
+  ModifiedDate            DateTime?                 @default(now()) @db.Timestamptz(6)
+  ClassSubject            ClassSubject[]
+  ClassTeacher            ClassTeacher[]
+  CommunicationRelation   CommunicationRelation[]
+  Mark                    Mark[]
+  Question                Question[]
+  User                    User?                     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  SubjectQuestionCategory SubjectQuestionCategory[]
+  UserAnswer              UserAnswer[]
+}
+
+model ClassSubject {
+  class_subject_id Int       @id @default(autoincrement())
+  user_id          Int?
+  class_id         Int
+  subject_id       Int
+  CreatedDate      DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate     DateTime? @default(now()) @db.Timestamptz(6)
+  Class            Class     @relation(fields: [class_id], references: [class_id], onDelete: Cascade)
+  Subject          Subject   @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade)
+  User             User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model QuestionCategory {
+  question_category_id    Int                       @id @default(autoincrement())
+  user_id                 Int?
+  questioncategoryName    String                    @db.VarChar(255)
+  CreatedDate             DateTime?                 @default(now()) @db.Timestamptz(6)
+  ModifiedDate            DateTime?                 @default(now()) @db.Timestamptz(6)
+  QuarterQuestionCategory QuarterQuestionCategory[]
+  User                    User?                     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  SubjectQuestionCategory SubjectQuestionCategory[]
+  QuestionType            QuestionType[]            @relation("QuestionCategoryToQuestionType")
+}
+
+model Quarter {
+  quarter_id              Int                       @id @default(autoincrement())
+  user_id                 Int?
+  quarterName             String                    @db.VarChar(255)
+  CreatedDate             DateTime?                 @default(now()) @db.Timestamptz(6)
+  ModifiedDate            DateTime?                 @default(now()) @db.Timestamptz(6)
+  Mark                    Mark[]
+  User                    User?                     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuarterQuestionCategory QuarterQuestionCategory[]
+  UserAnswer              UserAnswer[]
+}
+
+model SubjectQuestionCategory {
+  subject_category_id  Int              @id @default(autoincrement())
+  user_id              Int?
+  subject_id           Int
+  question_category_id Int
+  CreatedDate          DateTime?        @default(now()) @db.Timestamptz(6)
+  ModifiedDate         DateTime?        @default(now()) @db.Timestamptz(6)
+  QuestionCategory     QuestionCategory @relation(fields: [question_category_id], references: [question_category_id], onDelete: Cascade)
+  Subject              Subject          @relation(fields: [subject_id], references: [subject_id], onDelete: Cascade)
+  User                 User?            @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuestionType         QuestionType[]   @relation("QuestionTypeToSubjectQuestionCategory")
+}
+
+model QuarterQuestionCategory {
+  quarter_category_id  Int              @id @default(autoincrement())
+  user_id              Int?
+  quarter_id           Int
+  question_category_id Int
+  CreatedDate          DateTime?        @default(now()) @db.Timestamptz(6)
+  ModifiedDate         DateTime?        @default(now()) @db.Timestamptz(6)
+  Quarter              Quarter          @relation(fields: [quarter_id], references: [quarter_id], onDelete: Cascade)
+  QuestionCategory     QuestionCategory @relation(fields: [question_category_id], references: [question_category_id], onDelete: Cascade)
+  User                 User?            @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuestionType         QuestionType[]   @relation("QuarterQuestionCategoryToQuestionType")
+}
+
+model Question {
+  question_id          Int                    @id @default(autoincrement())
+  question             String
+  correctAnswer        String
+  teacher_id           Int?
+  answer               String[]
+  points               Int?
+  subject_id           Int?
+  question_type_id     Int?
+  timedisplay          DateTime?
+  CreatedDate          DateTime?              @default(now()) @db.Timestamptz(6)
+  ModifiedDate         DateTime?              @default(now()) @db.Timestamptz(6)
+  Answer               Answer[]
+  ClassQuestion        ClassQuestion[]
+  QuestionType         QuestionType?          @relation(fields: [question_type_id], references: [question_type_id], onUpdate: NoAction)
+  Subject              Subject?               @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
+  Teacher              Teacher?               @relation(fields: [teacher_id], references: [teacher_id], onUpdate: NoAction)
+  QuestionTypeQuestion QuestionTypeQuestion[]
+  UserAnswer           UserAnswer[]
+}
+
+model ClassQuestion {
+  class_question_id Int       @id @default(autoincrement())
+  teacher_id        Int?
+  question_id       Int
+  class_id          Int
+  CreatedDate       DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate      DateTime? @default(now()) @db.Timestamptz(6)
+  Class             Class     @relation(fields: [class_id], references: [class_id], onDelete: Cascade)
+  Question          Question  @relation(fields: [question_id], references: [question_id], onDelete: Cascade)
+  Teacher           Teacher?  @relation(fields: [teacher_id], references: [teacher_id], onUpdate: NoAction)
+}
+
+model QuestionType {
+  question_type_id        Int                       @id @default(autoincrement())
+  user_id                 Int?
+  question_category_id    Int?
+  question_id             Int?
+  questiontypeName        String                    @db.VarChar(255)
+  CreatedDate             DateTime?                 @default(now()) @db.Timestamptz(6)
+  ModifiedDate            DateTime?                 @default(now()) @db.Timestamptz(6)
+  Mark                    Mark[]
+  Question                Question[]
+  User                    User?                     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+  QuestionTypeQuestion    QuestionTypeQuestion[]
+  UserAnswer              UserAnswer[]
+  QuarterQuestionCategory QuarterQuestionCategory[] @relation("QuarterQuestionCategoryToQuestionType")
+  QuestionCategory        QuestionCategory[]        @relation("QuestionCategoryToQuestionType")
+  SubjectQuestionCategory SubjectQuestionCategory[] @relation("QuestionTypeToSubjectQuestionCategory")
+}
+
+model QuestionTypeQuestion {
+  question_type_question_id Int          @id @default(autoincrement())
+  user_id                   Int?
+  question_type_id          Int
+  question_id               Int
+  CreatedDate               DateTime?    @default(now()) @db.Timestamptz(6)
+  ModifiedDate              DateTime?    @default(now()) @db.Timestamptz(6)
+  Question                  Question     @relation(fields: [question_id], references: [question_id], onDelete: Cascade)
+  QuestionType              QuestionType @relation(fields: [question_type_id], references: [question_type_id], onDelete: Cascade)
+  User                      User?        @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model UserAnswer {
+  user_answer_id   Int          @id @default(autoincrement())
+  students_id      Int
+  subject_id       Int
+  question_type_id Int
+  quarter_id       Int
+  question_id      Int
+  user_answer      String
+  points           Int?
+  CreatedDate      DateTime     @default(now()) @db.Timestamptz(6)
+  ModifiedDate     DateTime     @default(now()) @db.Timestamptz(6)
+  Quarter          Quarter      @relation(fields: [quarter_id], references: [quarter_id], onUpdate: NoAction)
+  Question         Question     @relation(fields: [question_id], references: [question_id], onUpdate: NoAction)
+  QuestionType     QuestionType @relation(fields: [question_type_id], references: [question_type_id], onUpdate: NoAction)
+  Students         Students     @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
+  Subject          Subject      @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
+}
+
+model Mark {
+  mark_id          Int          @id @default(autoincrement())
+  students_id      Int
+  subject_id       Int?
+  quarter_id       Int
+  question_type_id Int
+  mark             Int
+  CreatedDate      DateTime     @default(now()) @db.Timestamptz(6)
+  ModifiedDate     DateTime     @default(now()) @db.Timestamptz(6)
+  Quarter          Quarter      @relation(fields: [quarter_id], references: [quarter_id], onUpdate: NoAction)
+  QuestionType     QuestionType @relation(fields: [question_type_id], references: [question_type_id], onUpdate: NoAction)
+  Students         Students     @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
+  Subject          Subject?     @relation(fields: [subject_id], references: [subject_id], onUpdate: NoAction)
+}
+
+model Answer {
+  answer_id    Int       @id @default(autoincrement())
+  answer       String
+  question_id  Int
+  user_id      Int?
+  isCorrect    Boolean
+  CreatedDate  DateTime? @default(now()) @db.Timestamptz(6)
+  ModifiedDate DateTime? @default(now()) @db.Timestamptz(6)
+  question     Question  @relation(fields: [question_id], references: [question_id])
+  User         User?     @relation(fields: [user_id], references: [user_id], onUpdate: NoAction)
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  text        String
+  students_id Int
+  completed   Boolean
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime @default(now()) @db.Timestamptz(6)
+  Students    Students @relation(fields: [students_id], references: [students_id], onUpdate: NoAction)
+>>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { MainHeader } from '../components/common/MainHeader';
 import React from "react";
 import Link from "next/link"
@@ -224,5 +225,20 @@ export default function AboutPage() {
         </section>
       </div>
     </React.Fragment>
+=======
+import { MainHeader } from "../components/common/MainHeader";
+import AboutDetail from "../components/about/aboutDetail"
+import AboutHeroSection from "../components/about/AboutHeroSection"
+
+export default function About() {
+  return ( 
+    <div className="">
+      <MainHeader title="Matrick Mate : About" />
+      <div className="flex flex-col pt-20 bg-[#5790ab]">
+        <AboutHeroSection />
+        <AboutDetail />
+      </div>
+    </div>
+>>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
   );
 }

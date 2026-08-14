@@ -23,7 +23,11 @@ export default function GradeSpecifiedBooks({grades}) {
                 </h1>
             </div>
 
+<<<<<<< HEAD
             <Link href={`/study/books/government/book/${grade.id}`}>
+=======
+            <Link href={`/books/grade/${grade.id}`}>
+>>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
             	<a className="bg-[#3699ff] hover:bg-[#002244] px-3 py-2 border rounded-2xl text-md md:text-lg font-bold">
             		View Detail
             	</a>

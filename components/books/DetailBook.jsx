@@ -30,11 +30,19 @@ export default function DetailBook({books}) {
         </div>
         <div className="flex text-lg lg:text-xl font-caveat mb-3">
           <h3 className="font-bold">Total Units : </h3>
+<<<<<<< HEAD
           <h3 className="pl-2">{books.unit}</h3>
         </div>
         <div className="flex text-lg lg:text-xl font-caveat mb-3">
           <h3 className="font-bold">Total Pages : </h3>
           <h3 className="pl-2">{books.page}</h3>
+=======
+          <h3 className="pl-2">{books.units}</h3>
+        </div>
+        <div className="flex text-lg lg:text-xl font-caveat mb-3">
+          <h3 className="font-bold">Total Pages : </h3>
+          <h3 className="pl-2">{books.pages}</h3>
+>>>>>>> 0306f37bdbd9c29dc14158fb38dab803e1b3073a
         </div>
       </div>
       <div className="flex justify-center items-center">
