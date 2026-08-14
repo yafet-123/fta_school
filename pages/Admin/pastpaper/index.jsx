@@ -32,20 +32,16 @@ export async function getServerSideProps(context) {
     orderBy: { createdAt: "desc" },
   });
 
-  // Map to flat paper list (each paper shows its single topic) for easier rendering
+  // Group papers under their topic (one topic can contain many papers)
   const formattedSubjects = subjects.map(sub => ({
     id: sub.id,
     name: sub.name,
     description: sub.description,
-    PastPaper: sub.PastPaperTopic.flatMap(topic =>
-      topic.Papers.map(paper => ({
-        id: paper.id,
-        title: paper.title,
-        paperFile: paper.paperFile,
-        year: paper.year,
-        PastPaperTopic: [{ id: topic.id, title: topic.title }],
-      }))
-    ),
+    Topics: sub.PastPaperTopic.map(topic => ({
+      id: topic.id,
+      title: topic.title,
+      papers: topic.Papers,
+    })),
   }));
 
   return {

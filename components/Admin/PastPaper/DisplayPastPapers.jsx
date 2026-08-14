@@ -5,7 +5,6 @@ import { DeletePastPaper } from "./DeletePastPaper";
 
 export function DisplayPastPapers({ subjects, onRefresh }) {
   const [selectedPaper, setSelectedPaper] = useState(null);
-  const [subjectId, setSubjectId] = useState(null);
   const [updateModalOn, setUpdateModalOn] = useState(false);
   const [deleteModalOn, setDeleteModalOn] = useState(false);
 
@@ -24,64 +23,74 @@ export function DisplayPastPapers({ subjects, onRefresh }) {
             {subject.name}
           </h2>
 
-          {subject.PastPaper?.length > 0 ? (
-            subject.PastPaper.map((paper) => (
+          {subject.Topics?.length > 0 ? (
+            subject.Topics.map((topic) => (
               <div
-                key={paper.id}
+                key={topic.id}
                 className="bg-gray-50 rounded-2xl shadow-sm p-6 mb-6 hover:shadow-md transition-shadow border border-gray-100"
               >
-                {/* Header: Paper Name + Link */}
-                <div className="flex justify-between items-center mb-4 border-b pb-3">
-                  <h3 className="text-2xl font-semibold text-gray-800">
-                    {paper.title} {paper.year && <span className="text-lg text-gray-500">({paper.year})</span>}
-                  </h3>
-                  {paper.paperFile ? (
-                    <a
-                      href={paper.paperFile}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-md shadow-sm transition"
+                {/* Topic Title (one topic can hold many papers) */}
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                  Topic: {topic.title}
+                                </h3>
+
+                {/* Papers inside this topic */}
+                {topic.papers?.length > 0 ? (
+                  topic.papers.map((paper) => (
+                    <div
+                      key={paper.id}
+                      className="flex justify-between items-center mb-3 last:mb-0 bg-white rounded-xl p-4 shadow-sm border border-gray-100"
                     >
-                      View Paper
-                    </a>
-                  ) : (
-                    <span className="text-gray-400 italic">No link provided</span>
-                  )}
-                </div>
+                      <div className="flex-1">
+                        <p className="text-lg font-medium text-gray-800">
+                          {paper.title}{" "}
+                          {paper.year && (
+                            <span className="text-sm text-gray-500">
+                              ({paper.year})
+                            </span>
+                          )}
+                        </p>
+                        {paper.paperFile ? (
+                          <a
+                            href={paper.paperFile}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline text-sm"
+                          >
+                            View Paper
+                          </a>
+                        ) : (
+                          <span className="text-gray-400 italic text-sm">
+                            No link provided
+                          </span>
+                        )}
+                      </div>
 
-                {/* Topics List */}
-                {paper.PastPaperTopic?.length > 0 && (
-                  <ul className="mb-4 list-disc ml-6">
-                    {paper.PastPaperTopic.map((topic) => (
-                      <li key={topic.id} className="text-gray-700 mb-1">
-                        {topic.title}
-                      </li>
-                    ))}
-                  </ul>
+                      <div className="flex justify-end gap-3 ml-3">
+                        <button
+                          onClick={() => {
+                            setSelectedPaper(paper);
+                            setUpdateModalOn(true);
+                          }}
+                          className="bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-md shadow-md transition"
+                        >
+                          <FiEdit2 />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedPaper(paper);
+                            setDeleteModalOn(true);
+                          }}
+                          className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md shadow-md transition"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-400 italic">No papers added yet.</p>
                 )}
-
-                {/* Action Buttons */}
-                <div className="flex justify-end gap-3 mt-3">
-                  <button
-                    onClick={() => {
-                      setSelectedPaper(paper);
-                      setSubjectId(subject.id);
-                      setUpdateModalOn(true);
-                    }}
-                    className="bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-md shadow-md transition"
-                  >
-                    <FiEdit2 />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSelectedPaper(paper);
-                      setDeleteModalOn(true);
-                    }}
-                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md shadow-md transition"
-                  >
-                    <FiTrash2 />
-                  </button>
-                </div>
               </div>
             ))
           ) : (
@@ -90,9 +99,10 @@ export function DisplayPastPapers({ subjects, onRefresh }) {
             </p>
           )}
         </div>
-      ))}
+            ))}
 
       {/* Update & Delete Modals */}
+
       {updateModalOn && selectedPaper && (
         <UpdatePastPaper
           paper={selectedPaper}
