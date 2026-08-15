@@ -85,29 +85,29 @@ model Task {
 }
 
 model Subject {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  description     String?           @db.Text
-  svg             String?           @db.Text
-  createdBy       Int
-  createdAt       DateTime?         @default(now()) @db.DateTime(0)
-  modifiedAt      DateTime?         @default(now()) @updatedAt @db.DateTime(0)
-  approved        Boolean?          @default(false)
-  Article         Article[]
-  Book            Book[]
-  DefinitionSheet DefinitionSheet[]
-  Exams           Exam[]
-  ExamPreparation ExamPreparation[]
-  Topics          FlashcardTopic[]
-  FormulaSheet    FormulaSheet[]
-  Notes           Note[]
-  PastPaperTopic  PastPaperTopic[]
-  Quizzes         Quiz[]
-  RevisionNote    RevisionNote[]
-  User            User              @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Subject_ibfk_1")
-  Topic           Topic[]
-  Worksheets      Worksheet[]
-  YoutubeLink     YoutubeLink[]
+  id                        Int                        @id @default(autoincrement())
+  name                      String                     @db.VarChar(255)
+  description               String?                    @db.Text
+  svg                       String?                    @db.Text
+  createdBy                 Int
+  createdAt                 DateTime?                  @default(now()) @db.DateTime(0)
+  modifiedAt                DateTime?                  @default(now()) @updatedAt @db.DateTime(0)
+  approved                  Boolean?                   @default(false)
+  Article                   Article[]
+  BookCategory              BookCategory[]
+  DefinitionSheet           DefinitionSheet[]
+  Exams                     Exam[]
+  ExamPreparationCategory   ExamPreparationCategory[]
+  Topics                    FlashcardTopic[]
+  FormulaSheet              FormulaSheet[]
+  Notes                     Note[]
+  PastPaperTopic            PastPaperTopic[]
+  Quizzes                   Quiz[]
+  RevisionNote              RevisionNote[]
+  User                      User                       @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Subject_ibfk_1")
+  Topic                     Topic[]
+  Worksheets                Worksheet[]
+  YoutubeLink               YoutubeLink[]
 
   @@index([createdBy], map: "createdBy")
 }
@@ -355,15 +355,15 @@ model OptionTable {
 }
 
 model ExamPreparation {
-  id         Int                    @id @default(autoincrement())
-  nameOfBook String                 @db.VarChar(255)
-  bookFile   String                 @db.Text
-  subjectId  Int
-  subject    Subject                @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "ExamPreparation_ibfk_1")
-  topics     ExamPreparationTopic[]
+  id                        Int                       @id @default(autoincrement())
+  nameOfBook                String                    @db.VarChar(255)
+  bookFile                  String                    @db.Text
+  examPreparationCategoryId Int
+  examPreparationCategory   ExamPreparationCategory   @relation(fields: [examPreparationCategoryId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "ExamPreparation_category_fkey")
+  topics                    ExamPreparationTopic[]
 
   @@index([nameOfBook], map: "idx_nameOfBook")
-  @@index([subjectId], map: "idx_subjectId")
+  @@index([examPreparationCategoryId], map: "idx_examPreparation_categoryId")
 }
 
 model ExamPreparationTopic {
@@ -375,16 +375,38 @@ model ExamPreparationTopic {
   @@index([examPrepId], map: "idx_examPrepId")
 }
 
-model Book {
-  id        Int         @id @default(autoincrement())
-  title     String      @db.VarChar(255)
-  bookFile  String      @db.Text
-  subjectId Int
-  Subject   Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Book_subject_fkey")
-  BookTopic BookTopic[]
+model ExamPreparationCategory {
+  id               Int               @id @default(autoincrement())
+  title            String            @db.VarChar(255)
+  subjectId        Int
+  Subject          Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "ExamPreparationCategory_subject_fkey")
+  ExamPreparations ExamPreparation[]
 
-  @@index([subjectId], map: "idx_book_subjectId")
+  @@index([subjectId], map: "idx_examPreparationCategory_subjectId")
+  @@index([title], map: "idx_examPreparationCategory_title")
+}
+
+model Book {
+  id               Int          @id @default(autoincrement())
+  title            String       @db.VarChar(255)
+  bookFile         String       @db.Text
+  bookCategoryId   Int
+  BookCategory     BookCategory @relation(fields: [bookCategoryId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Book_category_fkey")
+  BookTopic        BookTopic[]
+
+  @@index([bookCategoryId], map: "idx_book_categoryId")
   @@index([title], map: "idx_book_title")
+}
+
+model BookCategory {
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  subjectId Int
+  Subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "BookCategory_subject_fkey")
+  Books     Book[]
+
+  @@index([subjectId], map: "idx_bookCategory_subjectId")
+  @@index([title], map: "idx_bookCategory_title")
 }
 
 model BookTopic {
