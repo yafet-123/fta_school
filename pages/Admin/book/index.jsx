@@ -20,30 +20,38 @@ export async function getServerSideProps(context) {
     };
   }
 
-  // Fetch all subjects with books and topics
-  const subjects = await prisma.Subject.findMany({
+  // Fetch subjects → BookCategories → Books → BookTopics
+  const subjects = await prisma.subject.findMany({
     include: {
-      Book: {
+      BookCategory: {
         include: {
-          BookTopic: true,
+          Books: {
+            include: {
+              BookTopic: true,
+            },
+          },
         },
       },
     },
     orderBy: { createdAt: "desc" },
   });
 
-  // Map for easier client-side rendering
   const formattedSubjects = subjects.map(sub => ({
     id: sub.id,
     name: sub.name,
     description: sub.description,
-    Book: sub.Book.map(book => ({
-      id: book.id,
-      title: book.title,
-      bookFile: book.bookFile,
-      BookTopic: book.BookTopic.map(topic => ({
-        id: topic.id,
-        title: topic.title,
+    BookCategory: sub.BookCategory.map(cat => ({
+      id: cat.id,
+      title: cat.title,
+      Books: cat.Books.map(book => ({
+        id: book.id,
+        title: book.title,
+        bookFile: book.bookFile,
+        bookCategoryId: book.bookCategoryId,
+        BookTopic: book.BookTopic.map(topic => ({
+          id: topic.id,
+          title: topic.title,
+        })),
       })),
     })),
   }));

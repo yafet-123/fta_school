@@ -8,6 +8,7 @@ export function AddBook({ subjects }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
+  const [bookCategoryId, setBookCategoryId] = useState("");
   const [topicTitle, setTopicTitle] = useState("");
 
   // books list
@@ -18,6 +19,10 @@ export function AddBook({ subjects }) {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  // Derive categories from selected subject
+  const selectedSubject = subjects.find(s => String(s.id) === String(subjectId));
+  const categories = selectedSubject?.BookCategory || [];
 
   const addBook = () => {
     if (!currentBook.name || !currentBook.link) {
@@ -44,8 +49,8 @@ export function AddBook({ subjects }) {
         ? [...books, currentBook]
         : books;
 
-    if (!subjectId || !topicTitle || allBooks.length === 0) {
-      setError("Please fill all fields and add at least one book.");
+    if (!bookCategoryId || !topicTitle || allBooks.length === 0) {
+      setError("Please select a category, enter a topic title, and add at least one book.");
       return;
     }
 
@@ -53,14 +58,15 @@ export function AddBook({ subjects }) {
     setLoadingModalIsOpen(true);
 
     try {
-      const res = await axios.post("/api/book/add", {
-        subjectId,
+      await axios.post("/api/book/add", {
+        bookCategoryId,
         topicTitle,
         books: allBooks,
       });
 
       setSuccess("Books added successfully!");
       setSubjectId("");
+      setBookCategoryId("");
       setTopicTitle("");
       setBooks([]);
       setCurrentBook({ name: "", link: "" });
@@ -87,7 +93,10 @@ export function AddBook({ subjects }) {
             <label className="block text-gray-700 font-medium mb-2">Subject</label>
             <select
               value={subjectId}
-              onChange={(e) => setSubjectId(e.target.value)}
+              onChange={(e) => {
+                setSubjectId(e.target.value);
+                setBookCategoryId(""); // reset category on subject change
+              }}
               required
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#673ab7]"
             >
@@ -98,6 +107,28 @@ export function AddBook({ subjects }) {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* Book Category */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Book Category</label>
+            <select
+              value={bookCategoryId}
+              onChange={(e) => setBookCategoryId(e.target.value)}
+              required
+              disabled={!subjectId}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#673ab7] disabled:bg-gray-100 disabled:text-gray-400"
+            >
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.title}
+                </option>
+              ))}
+            </select>
+            {subjectId && categories.length === 0 && (
+              <p className="text-sm text-orange-500 mt-1">No categories found for this subject. Please add a book category first.</p>
+            )}
           </div>
 
           {/* Topic */}

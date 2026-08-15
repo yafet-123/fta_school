@@ -5,7 +5,7 @@ import { DeleteBook } from "./DeleteBook";
 
 export function DisplayBooks({ subjects, onRefresh }) {
   const [selectedBook, setSelectedBook] = useState(null);
-  const [subjectId, setSubjectId] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [updateModalOn, setUpdateModalOn] = useState(false);
   const [deleteModalOn, setDeleteModalOn] = useState(false);
 
@@ -24,81 +24,91 @@ export function DisplayBooks({ subjects, onRefresh }) {
             {subject.name}
           </h2>
 
-          {subject.Book?.length > 0 ? (
-            subject.Book.map((book) => (
-              <div
-                key={book.id}
-                className="bg-gray-50 rounded-2xl shadow-sm p-6 mb-6 hover:shadow-md transition-shadow border border-gray-100"
-              >
-                {/* Header: Book Name + Link */}
-                <div className="flex justify-between items-center mb-4 border-b pb-3">
-                  <h3 className="text-2xl font-semibold text-gray-800">
-                    {book.title}
-                  </h3>
-                  {book.bookFile ? (
-                    <a
-                      href={book.bookFile}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-md shadow-sm transition"
+          {subject.BookCategory?.length > 0 ? (
+            subject.BookCategory.map((category) => (
+              <div key={category.id} className="mb-8">
+                <h3 className="text-xl font-semibold text-gray-700 mb-4 bg-purple-50 px-4 py-2 rounded-xl">
+                  📂 {category.title}
+                </h3>
+
+                {category.Books?.length > 0 ? (
+                  category.Books.map((book) => (
+                    <div
+                      key={book.id}
+                      className="bg-gray-50 rounded-2xl shadow-sm p-6 mb-4 hover:shadow-md transition-shadow border border-gray-100"
                     >
-                      View Book
-                    </a>
-                  ) : (
-                    <span className="text-gray-400 italic">No link provided</span>
-                  )}
-                </div>
+                      {/* Header: Book Name + Link */}
+                      <div className="flex justify-between items-center mb-4 border-b pb-3">
+                        <h4 className="text-xl font-semibold text-gray-800">
+                          {book.title}
+                        </h4>
+                        {book.bookFile ? (
+                          <a
+                            href={book.bookFile}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-md shadow-sm transition"
+                          >
+                            View Book
+                          </a>
+                        ) : (
+                          <span className="text-gray-400 italic">No link provided</span>
+                        )}
+                      </div>
 
-                {/* Topics List */}
-                {book.BookTopic?.length > 0 && (
-                  <ul className="mb-4 list-disc ml-6">
-                    {book.BookTopic.map((topic) => (
-                      <li key={topic.id} className="text-gray-700 mb-1">
-                        {topic.title}
-                      </li>
-                    ))}
-                  </ul>
+                      {/* Topics List */}
+                      {book.BookTopic?.length > 0 && (
+                        <ul className="mb-4 list-disc ml-6">
+                          {book.BookTopic.map((topic) => (
+                            <li key={topic.id} className="text-gray-700 mb-1">
+                              {topic.title}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {/* Action Buttons */}
+                      <div className="flex justify-end gap-3 mt-3">
+                        <button
+                          onClick={() => {
+                            setSelectedBook(book);
+                            setSelectedCategory(category);
+                            setUpdateModalOn(true);
+                          }}
+                          className="bg-purple-500 hover:bg-purple-600 text-white p-2 rounded-md shadow-md transition"
+                        >
+                          <FiEdit2 />
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedBook(book);
+                            setDeleteModalOn(true);
+                          }}
+                          className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md shadow-md transition"
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-400 italic ml-4">No books in this category.</p>
                 )}
-
-                {/* Action Buttons */}
-                <div className="flex justify-end gap-3 mt-3">
-                  <button
-                    onClick={() => {
-                      setSelectedBook(book);
-                      setSubjectId(subject.id);
-                      setUpdateModalOn(true);
-                    }}
-                    className="bg-purple-500 hover:bg-purple-600 text-white p-2 rounded-md shadow-md transition"
-                  >
-                    <FiEdit2 />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSelectedBook(book);
-                      setDeleteModalOn(true);
-                    }}
-                    className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md shadow-md transition"
-                  >
-                    <FiTrash2 />
-                  </button>
-                </div>
               </div>
             ))
           ) : (
-            <p className="text-gray-500 italic">
-              No books added for this subject yet.
-            </p>
+            <p className="text-gray-500 italic">No categories added for this subject yet.</p>
           )}
         </div>
       ))}
 
       {/* Update & Delete Modals */}
-      {updateModalOn && selectedBook && (
+      {updateModalOn && selectedBook && selectedCategory && (
         <UpdateBook
           book={selectedBook}
+          category={selectedCategory}
           setUpdateModalOn={setUpdateModalOn}
           subjects={subjects}
-          subjectId={subjectId}
           onRefresh={onRefresh}
         />
       )}
