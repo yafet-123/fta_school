@@ -1,4 +1,4 @@
-import { prisma } from '../../../../util/db.server';
+import { prisma } from '../../../util/db.server';
 
 export default async function handler(req, res) {
   const { id } = req.query;
