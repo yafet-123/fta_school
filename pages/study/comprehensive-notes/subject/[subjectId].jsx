@@ -12,7 +12,11 @@ export async function getServerSideProps(context) {
 
   try { 
     const notes = await prisma.Note.findMany({
-      where: { subjectId: Number(subjectId) },
+      where: {
+        NoteCategory: {
+          subjectId: Number(subjectId),
+        },
+      },
       select: {
         id: true,
         title: true,

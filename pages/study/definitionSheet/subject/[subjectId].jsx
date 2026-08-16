@@ -1,72 +1,90 @@
-// pages/definition-sheets/[subjectId].js
-import { useRouter } from "next/router";
 import { prisma } from "../../../../util/db.server";
 import React from "react";
 import { MainHeader } from "../../../../components/common/MainHeader";
+import { FaLightbulb } from "react-icons/fa";
+import Link from "next/link";
 
 export async function getServerSideProps(context) {
   const { subjectId } = context.params;
 
+  let subject = null;
   try {
-    const sheets = await prisma.DefinitionSheet.findMany({
-      where: { subjectId: Number(subjectId) },
-      select: {
-        id: true,
-        title: true,
-        createdAt: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
+    subject = await prisma.subject.findUnique({
+      where: { id: Number(subjectId) },
+      select: { id: true, name: true },
     });
-
-    return {
-      props: {
-        sheets: JSON.parse(JSON.stringify(sheets)),
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching definition sheets:", error);
-    return {
-      props: {
-        sheets: [],
-        error: "Failed to load definition sheets.",
-      },
-    };
+  } catch (err) {
+    console.error("Subject fetch error:", err.message);
   }
+
+  let definitions = [];
+  try {
+    definitions = await prisma.definition.findMany({
+      where: { subjectId: Number(subjectId) },
+      orderBy: { id: "asc" },
+    });
+  } catch (err) {
+    console.error("Definitions fetch error:", err.message);
+    definitions = [];
+  }
+
+  return {
+    props: {
+      subject: JSON.parse(JSON.stringify(subject)),
+      definitions: JSON.parse(JSON.stringify(definitions)),
+    },
+  };
 }
 
-export default function SubjectDefinitionSheets({ sheets }) {
-  const router = useRouter();
-
-  const goToSheetDetail = (sheetId) => {
-    router.push(`/study/definitionSheet/${sheetId}`);
-  };
-
+export default function DefinitionsBySubject({ subject = null, definitions = [] }) {
   return (
-    <div className="py-32 px-5 lg:px-20">
-      <MainHeader title="Aceit : Definition Sheet Subject Page" />
-      <div>
-        {sheets.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {sheets.map((sheet) => (
-              <div
-                key={sheet.id}
-                className="cursor-pointer bg-gradient-to-r from-teal-500 to-green-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
-                onClick={() => goToSheetDetail(sheet.id)}
-              >
-                <h2 className="font-bold text-xl md:text-2xl">{sheet.title}</h2>
-                <p className="mt-2 text-sm md:text-base opacity-80">
-                  Click to view full definitions
-                </p>
+    <div className="py-32 px-5 lg:px-20 bg-gray-50 min-h-screen">
+      <MainHeader title={`Aceit : ${subject?.name || "Definitions"}`} />
+
+      <h1 className="text-3xl font-bold mb-2 text-gray-800">
+        {subject?.name || "Definitions"}
+      </h1>
+      <p className="text-gray-500 mb-10">
+        {definitions?.length ?? 0} definition{(definitions?.length ?? 0) !== 1 ? "s" : ""} available
+      </p>
+
+      {definitions.length === 0 ? (
+        <div className="text-center py-16">
+          <FaLightbulb className="mx-auto text-gray-300 text-6xl mb-4" />
+          <p className="text-gray-500 text-lg">No definitions available for this subject yet.</p>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {definitions.map((def) => (
+            <div
+              key={def.id}
+              className="flex justify-between items-center bg-white py-5 px-6 rounded-2xl hover:bg-amber-50 border border-gray-100 shadow-sm transition"
+            >
+              <div className="flex items-center gap-4">
+                <FaLightbulb size={36} className="text-amber-500 flex-shrink-0" />
+                <div>
+                  <h2 className="text-gray-800 font-bold text-lg">{def.name}</h2>
+                  <p className="text-xs text-gray-400 truncate max-w-xs">{def.link}</p>
+                </div>
               </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-gray-600 text-lg">
-            There are currently no Definition Sheet available for this subject. Please check back later.
-          </p>
-        )}
+
+              <a
+                href={def.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex-shrink-0 ml-4"
+              >
+                Open
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-10">
+        <Link href="/study/definitionSheet" className="text-amber-500 hover:underline text-sm">
+          ← Back to all subjects
+        </Link>
       </div>
     </div>
   );

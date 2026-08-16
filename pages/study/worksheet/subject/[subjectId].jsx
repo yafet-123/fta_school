@@ -1,78 +1,57 @@
-import { MainHeader } from "../../../../components/common/MainHeader";
-import React from "react";
-import Link from "next/link"
-import { prisma } from "../../../../util/db.server";
+import React from 'react';
+import { prisma } from '../../../../util/db.server';
+import { MainHeader } from '../../../../components/common/MainHeader';
+import { useRouter } from 'next/router';
 
-
-export default function BookDetail({ worksheetes, subjectId }) {
-  console.log(worksheetes)
-  return (
-    <React.Fragment>
-      <MainHeader title="Aceit : Worksheet Subject Page" />
-      <div className="antialiased bg-[#ededf2]">
-        <MainHeader title={`MatricMate`} />
-        <section className="px-4 py-32 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4 text-center">Worksheet</h2>
-          <div>
-            {worksheetes.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {worksheetes.map((worksheet) => (
-                  <Link
-                    key={worksheet.id}
-                    href={`/study/worksheet/${worksheet.Subject.name}/question/${worksheet.id}`}
-                    className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition-shadow duration-300 block"
-                  >
-                      <h3 className="text-lg font-semibold mb-2">{worksheet.title}</h3>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-gray-600 text-lg">
-                There are currently no worksheet available for this subject. Please check back later.
-              </p>
-            )}
-          </div>
-        </section>
-      </div>
-    </React.Fragment>
-  );
-}
- 
 export async function getServerSideProps(context) {
   const { subjectId } = context.params;
-
   try {
-    const worksheetes = await prisma.Worksheet.findMany({
-      where: {
-        subjectId: Number(subjectId), // 🔹 Replace with your subjectId
-      },
-      include: {
-        Subject: {
-          select: { name: true, id: true },
-        },
-        Questions: true,
-      },
+    const topics = await prisma.worksheetTopic.findMany({
+      where: { subjectId: Number(subjectId) },
+      include: { Worksheets: true },
+      orderBy: { id: 'desc' },
     });
-
-
-    if (!worksheetes.length) {
-      return {
-        notFound: false,
-        props: { worksheetes: [], subjectId },
-      };
-    }
-    console.log(worksheetes)
+    const subject = await prisma.subject.findUnique({ where: { id: Number(subjectId) } });
     return {
       props: {
-        worksheetes: JSON.parse(JSON.stringify(worksheetes)),
-        subjectId
+        topics: JSON.parse(JSON.stringify(topics)),
+        subjectName: subject?.name || '',
       },
     };
   } catch (error) {
-    console.error("Error fetching flashcard worksheetes:", error);
-    return {
-      props: { worksheetes: [], error: "Failed to load flashcard worksheetes." },
-    };
+    return { props: { topics: [], subjectName: '' } };
   }
 }
 
+export default function WorksheetBySubject({ topics, subjectName }) {
+  const router = useRouter();
+  return (
+    <div className="py-32 px-5 lg:px-20 min-h-screen bg-gray-50">
+      <MainHeader title={`Aceit: ${subjectName} Worksheets`} />
+      <div className="max-w-5xl mx-auto mb-8">
+        <h1 className="text-3xl font-bold text-gray-800">{subjectName} — Worksheets</h1>
+        <p className="text-gray-500 text-sm mt-1">{topics.length} topic{topics.length !== 1 ? 's' : ''}</p>
+      </div>
+      <div className="max-w-5xl mx-auto">
+        {topics.length === 0 ? (
+          <p className="text-center text-gray-600 text-lg py-12">No worksheet topics available for this subject.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {topics.map((topic) => (
+              <div
+                key={topic.id}
+                className="cursor-pointer bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
+                onClick={() => router.push(`/study/worksheet/topic/${topic.id}`)}
+              >
+                <h2 className="font-bold text-xl md:text-2xl">{topic.title}</h2>
+                <p className="mt-2 text-sm opacity-90">
+                  {topic.Worksheets?.length || 0} worksheet{topic.Worksheets?.length !== 1 ? 's' : ''}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

@@ -1,4 +1,3 @@
-// UpdateNote.js
 import React, { useState } from "react";
 import axios from "axios";
 import ReactModal from "react-modal";
@@ -10,21 +9,46 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
 export function UpdateNote({ note, subjects, setUpdateModalOn }) {
-  console.log(note)
   const [title, setTitle] = useState(note.title);
-  const [subjectId, setSubjectId] = useState(note.subjectId);
+  const [selectedSubjectId, setSelectedSubjectId] = useState(() => {
+    // Find subject ID that owns the category
+    for (const sub of subjects) {
+      if (sub.NoteCategory?.some(c => String(c.id) === String(note.noteCategoryId))) {
+        return String(sub.id);
+      }
+    }
+    return "";
+  });
+  const [selectedCategoryId, setSelectedCategoryId] = useState(String(note.noteCategoryId || ""));
   const [content, setContent] = useState(note.content);
   const [loading, setLoading] = useState(false);
   const [loadingModal, setLoadingModal] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const selectedSubject = subjects.find(s => String(s.id) === String(selectedSubjectId));
+  const availableCategories = selectedSubject?.NoteCategory || [];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); setSuccess(""); setLoading(true); setLoadingModal(true);
+    setError(""); 
+    setSuccess(""); 
+    setLoading(true); 
+    setLoadingModal(true);
+
+    if (!selectedCategoryId) {
+      setError("Please select a category.");
+      setLoading(false);
+      setLoadingModal(false);
+      return;
+    }
 
     try {
-      await axios.patch(`/api/note/update-note/${note.id}`, { title, subjectId, content });
+      await axios.patch(`/api/note/update-note/${note.id}`, { 
+        title, 
+        noteCategoryId: Number(selectedCategoryId), 
+        content 
+      });
       setSuccess("Note updated successfully!");
       setTimeout(() => window.location.reload(), 1000);
     } catch (err) {
@@ -51,11 +75,15 @@ export function UpdateNote({ note, subjects, setUpdateModalOn }) {
               required
             />
           </div>
+
           <div>
             <label className="block mb-1 font-medium">Subject</label>
             <select
-              value={subjectId}
-              onChange={(e) => setSubjectId(e.target.value)}
+              value={selectedSubjectId}
+              onChange={(e) => {
+                setSelectedSubjectId(e.target.value);
+                setSelectedCategoryId("");
+              }}
               className="w-full border px-4 py-2 rounded-xl focus:ring-2 focus:ring-[#6b21a8]"
               required
             >
@@ -65,6 +93,23 @@ export function UpdateNote({ note, subjects, setUpdateModalOn }) {
               ))}
             </select>
           </div>
+
+          <div>
+            <label className="block mb-1 font-medium">Note Category</label>
+            <select
+              value={selectedCategoryId}
+              onChange={(e) => setSelectedCategoryId(e.target.value)}
+              disabled={!selectedSubjectId}
+              className="w-full border px-4 py-2 rounded-xl focus:ring-2 focus:ring-[#6b21a8] disabled:bg-gray-100"
+              required
+            >
+              <option value="">Select Category</option>
+              {availableCategories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.title}</option>
+              ))}
+            </select>
+          </div>
+
           <div>
             <label className="block mb-1 font-medium">Content</label>
             <ReactQuill

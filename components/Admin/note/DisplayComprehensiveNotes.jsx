@@ -41,8 +41,10 @@ export function DisplayComprehensiveNotes({ notes, subjects }) {
                   {note.title}
                 </h2>
                 <p className="text-sm text-gray-500">
-                  Subject:{" "}
-                  <span className="font-semibold">{note.subject}</span>
+                  Subject: <span className="font-semibold">{note.subject}</span>
+                </p>
+                <p className="text-sm text-gray-500">
+                  Category: <span className="font-semibold">{note.categoryTitle || "No Category"}</span>
                 </p>
                 <p className="text-xs text-gray-400">
                   Created on: {moment(note.createdAt).format("YYYY-MM-DD")}

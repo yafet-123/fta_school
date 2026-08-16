@@ -18,14 +18,11 @@ model User {
   resetToken      String?           @db.VarChar(255)
   Announcement    Announcement[]
   Article         Article[]
-  DefinitionSheet DefinitionSheet[]
   Exams           Exam[]
   Flashcards      Flashcard[]
-  FormulaSheet    FormulaSheet[]
   Notes           Note[]
   RevisionNote    RevisionNote[]
   Subjects        Subject[]
-  Worksheets      Worksheet[]
 }
 
 model Announcement {
@@ -95,18 +92,20 @@ model Subject {
   approved                  Boolean?                   @default(false)
   Article                   Article[]
   BookCategory              BookCategory[]
-  DefinitionSheet           DefinitionSheet[]
+  Definition                Definition[]
   Exams                     Exam[]
   ExamPreparationCategory   ExamPreparationCategory[]
-  Topics                    FlashcardTopic[]
+  FlashcardTopic            FlashcardTopic[]
   FormulaSheet              FormulaSheet[]
+  NoteCategory              NoteCategory[]
   Notes                     Note[]
   PastPaperTopic            PastPaperTopic[]
   Quizzes                   Quiz[]
   RevisionNote              RevisionNote[]
-  User                      User                       @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Subject_ibfk_1")
+  Syllablus                 Syllablus[]
   Topic                     Topic[]
-  Worksheets                Worksheet[]
+  User                      User                       @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Subject_ibfk_1")
+  WorksheetTopic            WorksheetTopic[]
   YoutubeLink               YoutubeLink[]
 
   @@index([createdBy], map: "createdBy")
@@ -129,75 +128,66 @@ model Article {
   @@index([subjectId], map: "Article_ibfk_2")
 }
 
-model DefinitionSheet {
-  id          Int          @id @default(autoincrement())
-  title       String       @db.VarChar(255)
-  description String?      @db.Text
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime?    @default(now()) @db.DateTime(0)
-  updatedAt   DateTime?    @default(now()) @updatedAt @db.DateTime(0)
-  Definitions Definition[]
-  Subject     Subject      @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "DefinitionSheet_ibfk_1")
-  User        User         @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "DefinitionSheet_ibfk_2")
-
-  @@index([subjectId], map: "DefinitionSheet_ibfk_1")
-  @@index([createdBy], map: "DefinitionSheet_ibfk_2")
-}
-
 model Definition {
-  id              Int             @id @default(autoincrement())
-  term            String          @db.VarChar(255)
-  meaning         String          @db.Text
-  example         String?         @db.Text
-  sheetId         Int
-  DefinitionSheet DefinitionSheet @relation(fields: [sheetId], references: [id], onUpdate: Restrict, map: "Definition_ibfk_1")
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(255)
+  link       String    @db.Text
+  subjectId  Int?
+  createdAt  DateTime? @default(now()) @db.DateTime(0)
+  modifiedAt DateTime? @default(now()) @updatedAt @db.DateTime(0)
+  Subject    Subject?  @relation(fields: [subjectId], references: [id], onDelete: SetNull, onUpdate: Restrict, map: "Definition_subject_fkey")
 
-  @@index([sheetId], map: "Definition_ibfk_1")
+  @@index([subjectId], map: "idx_definition_subjectId")
 }
 
 model FormulaSheet {
-  id          Int       @id @default(autoincrement())
-  title       String    @db.VarChar(255)
-  description String?   @db.Text
-  formula     String    @db.Text
-  topicId     Int
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime? @default(now()) @db.DateTime(0)
-  updatedAt   DateTime? @default(now()) @updatedAt @db.DateTime(0)
-  Topic       Topic     @relation(fields: [topicId], references: [id], onUpdate: Restrict, map: "FormulaSheet_ibfk_1")
-  Subject     Subject   @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "FormulaSheet_ibfk_2")
-  User        User      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "FormulaSheet_ibfk_3")
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  link      String    @db.Text
+  subjectId Int?
+  createdAt DateTime? @default(now()) @db.DateTime(0)
+  updatedAt DateTime? @default(now()) @updatedAt @db.DateTime(0)
+  Subject   Subject?  @relation(fields: [subjectId], references: [id], onDelete: SetNull, onUpdate: Restrict, map: "FormulaSheet_subject_fkey")
 
-  @@index([topicId], map: "FormulaSheet_ibfk_1")
-  @@index([subjectId], map: "FormulaSheet_ibfk_2")
-  @@index([createdBy], map: "FormulaSheet_ibfk_3")
+  @@index([subjectId], map: "idx_formulaSheet_subjectId")
 }
 
 model Topic {
-  id           Int            @id @default(autoincrement())
-  name         String         @db.VarChar(255)
-  subjectId    Int
-  FormulaSheet FormulaSheet[]
-  Subject      Subject        @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Topic_ibfk_1")
+  id        Int     @id @default(autoincrement())
+  name      String  @db.VarChar(255)
+  subjectId Int
+  Subject   Subject @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Topic_ibfk_1")
 
   @@index([subjectId], map: "Topic_ibfk_1")
 }
 
 model Note {
-  id         Int       @id @default(autoincrement())
-  title      String    @db.VarChar(255)
-  content    String    @db.Text
-  subjectId  Int
-  createdBy  Int
-  createdAt  DateTime? @default(now()) @db.DateTime(0)
-  modifiedAt DateTime? @default(now()) @updatedAt @db.DateTime(0)
-  Subject    Subject   @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Note_ibfk_1")
-  User       User      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Note_ibfk_2")
+  id               Int           @id @default(autoincrement())
+  title            String        @db.VarChar(255)
+  content          String        @db.Text
+  subjectId        Int?
+  noteCategoryId   Int?
+  createdBy        Int?
+  createdAt        DateTime?     @default(now()) @db.DateTime(0)
+  modifiedAt       DateTime?     @default(now()) @updatedAt @db.DateTime(0)
+  Subject          Subject?      @relation(fields: [subjectId], references: [id], onDelete: SetNull, onUpdate: Restrict, map: "Note_ibfk_1")
+  NoteCategory     NoteCategory? @relation(fields: [noteCategoryId], references: [id], onDelete: SetNull, onUpdate: Restrict, map: "Note_ibfk_3")
+  User             User?         @relation(fields: [createdBy], references: [id], onDelete: SetNull, onUpdate: Restrict, map: "Note_ibfk_2")
 
   @@index([subjectId], map: "Note_ibfk_1")
   @@index([createdBy], map: "Note_ibfk_2")
+  @@index([noteCategoryId], map: "Note_ibfk_3")
+}
+
+model NoteCategory {
+  id        Int     @id @default(autoincrement())
+  title     String  @db.VarChar(255)
+  subjectId Int
+  Subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "NoteCategory_subject_fkey")
+  Notes     Note[]
+
+  @@index([subjectId], map: "idx_noteCategory_subjectId")
+  @@index([title], map: "idx_noteCategory_title")
 }
 
 model RevisionNote {
@@ -281,41 +271,27 @@ model ExamOption {
   @@index([examQuestionId], map: "examQuestionId")
 }
 
+model WorksheetTopic {
+  id        Int         @id @default(autoincrement())
+  title     String      @db.VarChar(255)
+  subjectId Int
+  Subject   Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "WorksheetTopic_subject_fkey")
+  Worksheets Worksheet[]
+
+  @@index([subjectId], map: "idx_worksheetTopic_subjectId")
+  @@index([title], map: "idx_worksheetTopic_title")
+}
+
 model Worksheet {
-  id         Int                 @id @default(autoincrement())
-  title      String              @db.VarChar(255)
-  subjectId  Int
-  createdBy  Int
-  createdAt  DateTime?           @default(now()) @db.DateTime(0)
-  modifiedAt DateTime?           @default(now()) @updatedAt @db.DateTime(0)
-  Subject    Subject             @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Worksheet_ibfk_1")
-  User       User                @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Worksheet_ibfk_2")
-  Questions  WorksheetQuestion[]
+  id               Int            @id @default(autoincrement())
+  title            String         @db.VarChar(255)
+  link             String         @db.Text
+  worksheetTopicId Int
+  createdAt        DateTime?      @default(now()) @db.DateTime(0)
+  updatedAt        DateTime?      @default(now()) @updatedAt @db.DateTime(0)
+  WorksheetTopic   WorksheetTopic @relation(fields: [worksheetTopicId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Worksheet_topic_fkey")
 
-  @@index([subjectId], map: "Worksheet_ibfk_1")
-  @@index([createdBy], map: "Worksheet_ibfk_2")
-}
-
-model WorksheetQuestion {
-  id            Int               @id @default(autoincrement())
-  question      String            @db.Text
-  correctAnswer String            @db.Text
-  worksheetId   Int
-  createdAt     DateTime?         @default(now()) @db.DateTime(0)
-  modifiedAt    DateTime?         @default(now()) @updatedAt @db.DateTime(0)
-  Options       WorksheetOption[]
-  Worksheet     Worksheet         @relation(fields: [worksheetId], references: [id], onUpdate: Restrict, map: "WorksheetQuestion_ibfk_1")
-
-  @@index([worksheetId], map: "WorksheetQuestion_ibfk_1")
-}
-
-model WorksheetOption {
-  id                  Int               @id @default(autoincrement())
-  optionText          String            @db.Text
-  worksheetQuestionId Int
-  WorksheetQuestion   WorksheetQuestion @relation(fields: [worksheetQuestionId], references: [id], onUpdate: Restrict, map: "WorksheetOption_ibfk_1")
-
-  @@index([worksheetQuestionId], map: "WorksheetOption_ibfk_1")
+  @@index([worksheetTopicId], map: "idx_worksheet_topicId")
 }
 
 model FlashcardTopic {
@@ -462,4 +438,16 @@ model YoutubeLinkTopic {
   YoutubeLink   YoutubeLink @relation(fields: [youtubeLinkId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "YoutubeLinkTopic_yt_fkey")
 
   @@index([youtubeLinkId], map: "idx_yt_topic")
+}
+
+model Syllablus {
+  id               Int       @id @default(autoincrement())
+  title            String    @db.VarChar(255)
+  content          String    @db.Text
+  subjectId        Int
+  createdAt        DateTime? @default(now()) @db.DateTime(0)
+  modifiedAt       DateTime? @default(now()) @updatedAt @db.DateTime(0)
+  Subject          Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Syllablus_subject_fkey")
+
+  @@index([subjectId], map: "idx_syllablus_subjectId")
 }

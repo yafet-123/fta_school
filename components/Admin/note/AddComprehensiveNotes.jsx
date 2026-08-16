@@ -15,29 +15,40 @@ export function AddComprehensiveNotes({ subjects, userId }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
+  const [noteCategoryId, setNoteCategoryId] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  // Get categories for selected subject
+  const selectedSubject = subjects.find(s => String(s.id) === String(subjectId));
+  const categories = selectedSubject?.NoteCategory || [];
 
   // Handle form submission
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
     setSuccess("");
+
+    if (!noteCategoryId || !title || !content) {
+      setError("Please select a category, enter a title, and provide content.");
+      return;
+    }
+
     setLoading(true);
     setLoadingModalIsOpen(true);
 
     try {
       await axios.post("/api/note/add-note", {
-        subjectId,
+        noteCategoryId,
         title,
         content,
-        createdBy: userId,
       });
 
       setSuccess("Note added successfully!");
       setSubjectId("");
+      setNoteCategoryId("");
       setTitle("");
       setContent("");
     } catch (err) {
@@ -64,7 +75,10 @@ export function AddComprehensiveNotes({ subjects, userId }) {
             <select
               required
               value={subjectId}
-              onChange={(e) => setSubjectId(e.target.value)}
+              onChange={(e) => {
+                setSubjectId(e.target.value);
+                setNoteCategoryId("");
+              }}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
             >
               <option value="">Select Subject</option>
@@ -74,6 +88,28 @@ export function AddComprehensiveNotes({ subjects, userId }) {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* Select Note Category */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">Note Category</label>
+            <select
+              required
+              disabled={!subjectId}
+              value={noteCategoryId}
+              onChange={(e) => setNoteCategoryId(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688] disabled:bg-gray-100 disabled:text-gray-400"
+            >
+              <option value="">Select Category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+            {subjectId && categories.length === 0 && (
+              <p className="text-sm text-orange-500 mt-1">No note categories found for this subject. Please add one first.</p>
+            )}
           </div>
 
           {/* Note Title */}

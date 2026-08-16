@@ -66,16 +66,28 @@ export async function getServerSideProps(context) {
     const notes = await prisma.Note.findUnique({
       where: { id: Number(noteId) },
       include: {
-        Subject: true, // Include related subject
+        NoteCategory: {
+          include: {
+            Subject: true,
+          },
+        },
       },
     });
 
-
     console.log("Fetched notes:", notes);
+
+    if (!notes) {
+      return { notFound: true };
+    }
+
+    const adaptedNotes = {
+      ...notes,
+      Subject: notes.NoteCategory?.Subject || null,
+    };
 
     return {
       props: {
-        notes: JSON.parse(JSON.stringify(notes)), // serialize for Next.js
+        notes: JSON.parse(JSON.stringify(adaptedNotes)), // serialize for Next.js
       },
     };
   } catch (error) {

@@ -37,6 +37,7 @@ export function VerticalNavbar() {
     { link: "/Admin/Subject", icon: <MdSubject size={20} />, name: "Subject" },
     { link: "/Admin/Flashcard", icon: <BsCardText size={20} />, name: "FlashCard" },
     { link: "/Admin/note", icon: <FaStickyNote size={20} />, name: "Comprehensive Notes" },
+    { link: "/Admin/syllablus", icon: <FiBookOpen size={20} />, name: "Syllabus" },
   ];
   const renderLinks = () =>
     SideBarList.map((item, idx) => (

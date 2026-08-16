@@ -1,79 +1,91 @@
-import { useRouter } from "next/router";
 import { prisma } from "../../../../util/db.server";
-import { MainHeader } from "../../../../components/common/MainHeader";
 import React from "react";
+import { MainHeader } from "../../../../components/common/MainHeader";
+import { FaFlask } from "react-icons/fa";
+import Link from "next/link";
 
-// Fetch formula sheets by subjectId
 export async function getServerSideProps(context) {
   const { subjectId } = context.params;
 
+  let subject = null;
   try {
-    const formulaSheets = await prisma.FormulaSheet.findMany({
-      where: { subjectId: Number(subjectId) },
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        createdAt: true,
-        formula: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
+    subject = await prisma.subject.findUnique({
+      where: { id: Number(subjectId) },
+      select: { id: true, name: true },
     });
-
-    return {
-      props: {
-        formulaSheets: JSON.parse(JSON.stringify(formulaSheets)),
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching formula sheets:", error);
-    return {
-      props: {
-        formulaSheets: [],
-        error: "Failed to load formula sheets.",
-      },
-    };
+  } catch (err) {
+    console.error("Subject fetch error:", err.message);
   }
+
+  let formulas = [];
+  try {
+    formulas = await prisma.formulaSheet.findMany({
+      where: { subjectId: Number(subjectId) },
+      orderBy: { id: "asc" },
+    });
+  } catch (err) {
+    console.error("Formula sheets fetch error:", err.message);
+    formulas = [];
+  }
+
+  return {
+    props: {
+      subject: JSON.parse(JSON.stringify(subject)),
+      formulas: JSON.parse(JSON.stringify(formulas)),
+    },
+  };
 }
 
-export default function FormulaSheetPage({ formulaSheets }) {
-  const router = useRouter();
-
+export default function FormulaSheetsBySubject({ subject = null, formulas = [] }) {
   return (
-    <div className="py-32 px-5 lg:px-20">
-      <MainHeader title={`Formula Sheets`} />
-      {formulaSheets.length === 0 ? (
-        <p className="text-center text-gray-600 mt-10">
-          No formula sheets found for this subject.
-        </p>
+    <div className="py-32 px-5 lg:px-20 bg-gray-50 min-h-screen">
+      <MainHeader title={`Aceit : ${subject?.name || "Formula Sheets"}`} />
+
+      <h1 className="text-3xl font-bold mb-2 text-gray-800">
+        {subject?.name || "Formula Sheets"}
+      </h1>
+      <p className="text-gray-500 mb-10">
+        {formulas?.length ?? 0} formula sheet{(formulas?.length ?? 0) !== 1 ? "s" : ""} available
+      </p>
+
+      {formulas.length === 0 ? (
+        <div className="text-center py-16">
+          <FaFlask className="mx-auto text-gray-300 text-6xl mb-4" />
+          <p className="text-gray-500 text-lg">No formula sheets available for this subject yet.</p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {formulaSheets.map((sheet, index) => (
+        <div className="flex flex-col gap-4">
+          {formulas.map((f) => (
             <div
-              key={sheet.id}
-              className={`cursor-pointer bg-gradient-to-r ${
-                index % 3 === 0
-                  ? "from-teal-500 to-cyan-600"
-                  : index % 3 === 1
-                  ? "from-purple-500 to-indigo-600"
-                  : "from-pink-500 to-rose-500"
-              } text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform`}
+              key={f.id}
+              className="flex justify-between items-center bg-white py-5 px-6 rounded-2xl hover:bg-blue-50 border border-gray-100 shadow-sm transition"
             >
-              <h2 className="font-bold text-xl md:text-2xl mb-2">{sheet.title}</h2>
-              <p className="font-normal text-lg md:text-xl mb-2"> {sheet.description} </p>
-              <div
-                className="prose prose-purple max-w-none text-white text-lg lg:text-xl font-bold"
-                dangerouslySetInnerHTML={{ __html: sheet.formula }}
-              />
-              <p className="mt-3 text-xs opacity-70">
-                Added on: {new Date(sheet.createdAt).toLocaleDateString()}
-              </p>
+              <div className="flex items-center gap-4">
+                <FaFlask size={36} className="text-blue-500 flex-shrink-0" />
+                <div>
+                  <h2 className="text-gray-800 font-bold text-lg">{f.name}</h2>
+                  <p className="text-xs text-gray-400 truncate max-w-xs">{f.link}</p>
+                </div>
+              </div>
+
+              <a
+                href={f.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition flex-shrink-0 ml-4"
+              >
+                Open
+              </a>
             </div>
           ))}
         </div>
       )}
+
+      <div className="mt-10">
+        <Link href="/study/formulaSheet" className="text-blue-500 hover:underline text-sm">
+          ← Back to all subjects
+        </Link>
+      </div>
     </div>
   );
 }

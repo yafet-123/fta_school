@@ -10,7 +10,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   const userRole = session?.user?.role;
 
-  // Optionally redirect non-admins
+  // Redirect non-admins
   if (userRole !== 'admin') {
     return {
       redirect: {
@@ -21,15 +21,22 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    
-
-    // Fetch all notes with related subjects
+    // Fetch all notes with category and subject
     const notes = await prisma.Note.findMany({
-      include: { Subject: true },
+      include: {
+        NoteCategory: {
+          include: {
+            Subject: true,
+          },
+        },
+      },
       orderBy: { createdAt: "desc" }
     });
 
     const subjects = await prisma.Subject.findMany({
+      include: {
+        NoteCategory: true,
+      },
       orderBy: { createdAt: "desc" }
     });
 
@@ -37,26 +44,28 @@ export async function getServerSideProps(context) {
       id: note.id,
       title: note.title,
       content: note.content,
-      subject: note.Subject ? note.Subject.name : "No subject",
-      subjectId: note.subjectId,
+      subject: note.NoteCategory?.Subject ? note.NoteCategory.Subject.name : "No subject",
+      categoryTitle: note.NoteCategory ? note.NoteCategory.title : "No category",
+      noteCategoryId: note.noteCategoryId,
       createdAt: note.createdAt
     }));
-    console.log(formattedNotes)
-    // Format subjects for client
+
     const formattedSubjects = subjects.map(sub => ({
       id: sub.id,
       name: sub.name,
       description: sub.description,
-      svg: sub.svg
+      svg: sub.svg,
+      NoteCategory: sub.NoteCategory.map(cat => ({
+        id: cat.id,
+        title: cat.title,
+      })),
     }));
-
-    console.log(formattedNotes)
 
     return {
       props: {
         subjects: JSON.parse(JSON.stringify(formattedSubjects)),
         notes: JSON.parse(JSON.stringify(formattedNotes)),
-        userId: session?.user?.user_id
+        userId: session?.user?.user_id || null
       }
     };
   } catch (error) {
@@ -76,15 +85,12 @@ export default function FlashcardsPage({ subjects, notes, userId }) {
   
   return (
     <React.Fragment>
-      <MainHeader title="Compressive Note Dashboard" />
+      <MainHeader title="Comprehensive Note Dashboard" />
       <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
         <div className='w-full h-full flex flex-row'>
           <VerticalNavbar data={data} />
           <div className="w-full px-6">
-            {/* Add Topic & Flashcards Form */}
             <AddComprehensiveNotes subjects={subjects} userId={userId} />
-
-            {/* Display Existing Topics & Flashcards */}
             <DisplayComprehensiveNotes notes={notes} subjects={subjects} />
           </div>
         </div>

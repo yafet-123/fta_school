@@ -6,9 +6,9 @@ export default async function handleAddNote(req, res) {
   }
 
   try {
-    const { subjectId, title, content, createdBy } = req.body;
+    const { noteCategoryId, title, content } = req.body;
 
-    if (!subjectId || !title || !content || !createdBy) {
+    if (!noteCategoryId || !title || !content) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
@@ -16,8 +16,7 @@ export default async function handleAddNote(req, res) {
       data: {
         title,
         content,
-        subjectId: Number(subjectId),
-        createdBy: Number(createdBy), // ✅ ensure it's a number
+        noteCategoryId: Number(noteCategoryId),
       },
     });
 

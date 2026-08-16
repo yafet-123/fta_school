@@ -1,86 +1,48 @@
-// pages/worksheets.js
-import { FaBookOpen, FaPenFancy, FaCheckDouble } from "react-icons/fa";
-import Image from "next/image";
-import WorksheetSubject from "../../../components/books/WorksheetSubject";
-import { prisma } from "../../../util/db.server";
-import { MainHeader } from '../../../components/common/MainHeader';
+import { FaBook, FaClipboardList, FaStar } from "react-icons/fa";
 import React from "react";
+import { prisma } from "../../../util/db.server";
+import { MainHeader } from "../../../components/common/MainHeader";
+import Link from "next/link";
+import Image from "next/image";
 
 const reasons = [
   {
     id: 1,
-    icon: <FaBookOpen className="text-blue-500 w-8 h-8" />,
-    title: "Structured Practice",
-    description:
-      "Access well-organized worksheets by topic to reinforce understanding step by step.",
+    icon: <FaClipboardList className="text-green-500 w-8 h-8" />,
+    title: "Practice Worksheets",
+    description: "Access topic worksheets organized by subject.",
   },
   {
     id: 2,
-    icon: <FaPenFancy className="text-green-500 w-8 h-8" />,
-    title: "Master Key Skills",
-    description:
-      "Strengthen core exam techniques and apply knowledge effectively through guided questions.",
+    icon: <FaBook className="text-blue-500 w-8 h-8" />,
+    title: "Study Easily",
+    description: "All your required worksheets in one convenient place.",
   },
   {
     id: 3,
-    icon: <FaCheckDouble className="text-yellow-500 w-8 h-8" />,
-    title: "Prepare for Exams",
-    description:
-      "Revise efficiently with targeted worksheets designed by expert teachers to match your syllabus.",
-  },
-];
-
-const steps = [
-  {
-    id: 1,
-    title: "Choose Your Subject",
-    description:
-      "Select a subject that you want to focus on, from Math to Science or Languages.",
-    image: "https://images.unsplash.com/photo-1584697964354-3c22b379fb53?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 2,
-    title: "Download or Practice Online",
-    description:
-      "Access printable or digital worksheets tailored for different exam boards and levels.",
-    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 3,
-    title: "Work Through Step-by-Step Questions",
-    description:
-      "Follow a gradual difficulty curve that helps you build confidence in each topic.",
-    image: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: 4,
-    title: "Check Answers and Learn",
-    description:
-      "Use detailed solutions to understand mistakes and learn how to write perfect answers.",
-    image: "https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=1200&q=80",
+    icon: <FaStar className="text-yellow-500 w-8 h-8" />,
+    title: "Boost Your Grades",
+    description: "Use structured worksheets to reinforce your understanding.",
   },
 ];
 
 export default function Worksheets({ subjects }) {
   return (
     <React.Fragment>
-      <MainHeader title="Aceit : Worksheet Page" />
+      <MainHeader title="Aceit: Worksheets" />
       <div className="bg-gray-50 min-h-screen py-20">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-32 text-center px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Worksheets for Every Subject
-          </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            Practice with structured worksheets that simplify complex topics and
-            help you prepare confidently for exams.
+        <section className="bg-gradient-to-r from-green-500 to-emerald-600 text-white py-32 text-center px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Worksheets</h1>
+          <p className="text-lg md:text-xl mb-8">
+            Practice worksheets organized by subject and topic.
           </p>
         </section>
 
         {/* Why Use Worksheets */}
         <section className="py-16 px-6 max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Why Use Our Worksheets?
+            Why Use Worksheets?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {reasons.map((reason) => (
@@ -98,49 +60,51 @@ export default function Worksheets({ subjects }) {
           </div>
         </section>
 
-        {/* How to Use Worksheets */}
-        {/* <section className="py-16 px-6 bg-gray-50">
+        {/* Subjects Grid */}
+        <section className="py-16 px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-            How to Make the Most of Worksheets
+            All Worksheets by Subject
           </h2>
 
           <div className="max-w-6xl mx-auto">
-            {steps.map((step, index) => (
-              <div
-                key={step.id}
-                className={`flex flex-col md:flex-row items-center mb-16 ${
-                  index % 2 !== 0 ? "md:flex-row-reverse" : ""
-                }`}
-              >
-            
-                <div className="relative w-full lg:w-1/2 h-[25rem]">
-                  <Image
-                    src={step.image}
-                    alt={step.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-2xl shadow-md"
-                  />
-                </div>
+            {subjects.length === 0 ? (
+              <p className="text-center text-gray-500 text-lg">No subjects found.</p>
+            ) : (
+              <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                {subjects.map((subject) => (
+                  <Link href={`/study/worksheet/subject/${subject.id}`} key={subject.id}>
+                    <div className="group bg-gradient-to-b from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col items-center text-center p-6">
+                      {/* Image Section */}
+                      {subject.svg ? (
+                        <div className="relative w-full h-48 overflow-hidden rounded-xl mb-4">
+                          <Image
+                            src={subject.svg}
+                            alt={subject.name}
+                            layout="fill"
+                            objectFit="cover"
+                            className="rounded-xl group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </div>
+                      ) : (
+                        <div className="w-full h-48 bg-gradient-to-br from-green-100 to-emerald-200 rounded-xl mb-4 flex items-center justify-center">
+                          <FaClipboardList className="text-green-500 w-16 h-16" />
+                        </div>
+                      )}
 
-          
-                <div className="lg:w-1/2 w-full md:px-12 mt-6 md:mt-0">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 text-lg">{step.description}</p>
-                </div>
+                      <h2 className="mt-2 text-2xl font-bold text-gray-800 group-hover:text-green-600 transition-colors duration-300">
+                        {subject.name}
+                      </h2>
+                      <p className="text-sm text-gray-500 mt-1">
+                        {subject.topicCount} topic{subject.topicCount !== 1 ? "s" : ""}
+                      </p>
+                      <div className="mt-4 w-16 h-1 bg-green-500 rounded-full group-hover:w-24 transition-all duration-500"></div>
+                    </div>
+                  </Link>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        </section> */}
-
-        {/* Browse Section */}
-        <section className="py-16 max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-5 text-gray-800">
-            Browse Worksheets by Subject
-          </h2>
-          <WorksheetSubject subjects={subjects} />
         </section>
       </div>
     </React.Fragment>
@@ -149,19 +113,35 @@ export default function Worksheets({ subjects }) {
 
 export async function getServerSideProps() {
   try {
-    const subjects = await prisma.Subject.findMany({
+    const subjects = await prisma.subject.findMany({
       orderBy: { id: "asc" },
+      include: { WorksheetTopic: true },
     });
 
-    return {
-      props: {
-        subjects: JSON.parse(JSON.stringify(subjects)),
-      },
-    };
+    const formatted = subjects.map((sub) => ({
+      id: sub.id,
+      name: sub.name,
+      svg: sub.svg || null,
+      topicCount: sub.WorksheetTopic?.length || 0,
+    }));
+
+    return { props: { subjects: JSON.parse(JSON.stringify(formatted)) } };
   } catch (error) {
-    console.error("Error fetching subjects:", error);
-    return {
-      props: { subjects: [], error: "Failed to load subjects." },
-    };
+    console.error("Error loading worksheets:", error);
+    try {
+      const subjects = await prisma.subject.findMany({
+        orderBy: { id: "asc" },
+        select: { id: true, name: true, svg: true },
+      });
+      const formatted = subjects.map((sub) => ({
+        id: sub.id,
+        name: sub.name,
+        svg: sub.svg || null,
+        topicCount: 0,
+      }));
+      return { props: { subjects: JSON.parse(JSON.stringify(formatted)) } };
+    } catch (e) {
+      return { props: { subjects: [] } };
+    }
   }
 }

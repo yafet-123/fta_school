@@ -1,20 +1,17 @@
-// /pages/api/notes/update-note/[noteId].js
 import { prisma } from "../../../../util/db.server.js";
 
 export default async function handler(req, res) {
   const { noteId } = req.query;
-  console.log(req.query)
   if (req.method === "PATCH") {
-    const { title, subjectId, content } = req.body;
-    console.log(req.body)
-    if (!title || !subjectId || !content) {
+    const { title, noteCategoryId, content } = req.body;
+    if (!title || !noteCategoryId || !content) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     try {
       const updatedNote = await prisma.note.update({
         where: { id: Number(noteId) },
-        data: { title, subjectId: Number(subjectId), content },
+        data: { title, noteCategoryId: Number(noteCategoryId), content },
       });
       res.status(200).json({ success: true, data: updatedNote });
     } catch (error) {
